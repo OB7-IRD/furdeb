@@ -1,0 +1,12 @@
+#'@title toolbox package
+#'@section toolbox functions :
+#'\itemize{
+#' \item{\code{\link{access_dbconnection}}}
+#' \item{\code{\link{avdth_position_conversion_dec}}}
+#' \item{\code{\link{configuration_file}}}
+#' \item{\code{\link{db_connection}}}
+#' \item{\code{\link{mdb2Sqlite3}}}
+#' }
+#' @docType package
+#' @name ToolBox
+"_PACKAGE"
