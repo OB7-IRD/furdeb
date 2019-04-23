@@ -231,6 +231,26 @@ configuration_file <- function(configtype) {
         configfile <- c(configfile,
                         "observe_port" = observe_port)
       }
+      if (exists("balbaya_user")) {
+        configfile <- c(configfile,
+                        "balbaya_user" = balbaya_user)
+      }
+      if (exists("balbaya_password")) {
+        configfile <- c(configfile,
+                        "balbaya_password" = balbaya_password)
+      }
+      if (exists("balbaya_dbname")) {
+        configfile <- c(configfile,
+                        "balbaya_dbname" = balbaya_dbname)
+      }
+      if (exists("balbaya_host")) {
+        configfile <- c(configfile,
+                        "balbaya_host" = balbaya_host)
+      }
+      if (exists("balbaya_port")) {
+        configfile <- c(configfile,
+                        "balbaya_port" = balbaya_port)
+      }
       return(configfile)
     } else {
       # Without a configuration file ----
