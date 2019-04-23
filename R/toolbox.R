@@ -8,5 +8,5 @@
 #' \item{\code{\link{mdb2Sqlite3}}}
 #' }
 #' @docType package
-#' @name ToolBox
+#' @name toolbox
 "_PACKAGE"
