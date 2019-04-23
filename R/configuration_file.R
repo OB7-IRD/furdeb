@@ -135,6 +135,27 @@ configuration_file <- function(configtype) {
         if (length(as.character(tmp[which(tmp[, 2] == "observe_port"), 3])) != 0) {
           observe_port <- as.character(tmp[which(tmp[, 2] == "observe_port"), 3])
         }
+        #Connexion with balbaya database ----
+        #DB balbaya identification
+        if (length(as.character(tmp[which(tmp[, 2] == "balbaya_user_id"), 3])) != 0) {
+          balbaya_user <- as.character(tmp[which(tmp[, 2] == "balbaya_user_id"), 3])
+        }
+        #DB balbaya password identification
+        if (length(as.character(tmp[which(tmp[, 2] == "balbaya_password_id"), 3])) != 0) {
+          balbaya_password <- as.character(tmp[which(tmp[, 2] == "balbaya_password_id"), 3])
+        }
+        #DB balbaya database name
+        if (length(as.character(tmp[which(tmp[, 2] == "balbaya_dbname"), 3])) != 0) {
+          balbaya_dbname <- as.character(tmp[which(tmp[, 2] == "balbaya_dbname"), 3])
+        }
+        #DB balbaya host identification
+        if (length(as.character(tmp[which(tmp[, 2] == "balbaya_host"), 3])) != 0) {
+          balbaya_host <- as.character(tmp[which(tmp[, 2] == "balbaya_host"), 3])
+        }
+        #DB balbaya host identification
+        if (length(as.character(tmp[which(tmp[, 2] == "balbaya_port"), 3])) != 0) {
+          balbaya_port <- as.character(tmp[which(tmp[, 2] == "balbaya_port"), 3])
+        }
       }
       # Error list identification ----
       if (length(error_list) != 0) {
@@ -426,6 +447,48 @@ configuration_file <- function(configtype) {
           tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
           observe_port <- tmpnew[dim(tmpnew)[1], 3]
         }
+        # Connexion with balbaya database ----
+        cat("Do you want to establish a connexion with the balbaya database ?", "\n")
+        cat("(yes, no)", "\n")
+        balbaya_answer <- readLines(n = 1)
+        while (!(balbaya_answer %in% c("yes", "no"))) {
+          cat("Be careful! Your answer is not correct", "\n")
+          cat("Do you want to establish a connexion with the balbaya database ?", "\n")
+          cat("(yes, no)", "\n")
+          balbaya_answer <- readLines(n = 1)
+        }
+        if (balbaya_answer == "yes") {
+          #DB balbaya user identification
+          cat("balbaya user login", "\n")
+          tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_balbaya_db"
+          tmpnew[dim(tmpnew)[1], 2] <- "balbaya_user_id"
+          tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+          balbaya_user <- tmpnew[dim(tmpnew)[1], 3]
+          #DB balbaya password identification
+          cat("balbaya password", "\n")
+          tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_balbaya_db"
+          tmpnew[dim(tmpnew)[1], 2] <- "balbaya_password_id"
+          tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+          balbaya_password <- tmpnew[dim(tmpnew)[1], 3]
+          #DB balbaya database name
+          cat("balbaya database name", "\n")
+          tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_balbaya_db"
+          tmpnew[dim(tmpnew)[1], 2] <- "balbaya_dbname"
+          tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+          balbaya_dbname <- tmpnew[dim(tmpnew)[1], 3]
+          #DB balbaya host identification
+          cat("balbaya host identification", "\n")
+          tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_balbaya_db"
+          tmpnew[dim(tmpnew)[1], 2] <- "balbaya_host"
+          tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+          balbaya_host <- tmpnew[dim(tmpnew)[1], 3]
+          #DB balbaya port identification
+          cat("balbaya port identification", "\n")
+          tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_balbaya_db"
+          tmpnew[dim(tmpnew)[1], 2] <- "balbaya_port"
+          tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+          balbaya_port <- tmpnew[dim(tmpnew)[1], 3]
+        }
       }
       # Extract configuration file informations ----
       cat("Do you want to export the configuration file ?", "\n")
@@ -518,6 +581,26 @@ configuration_file <- function(configtype) {
       if (exists("observe_port")) {
         configfile <- c(configfile,
                         "observe_port" = observe_port)
+      }
+      if (exists("balbaya_user")) {
+        configfile <- c(configfile,
+                        "balbaya_user" = balbaya_user)
+      }
+      if (exists("balbaya_password")) {
+        configfile <- c(configfile,
+                        "balbaya_password" = balbaya_password)
+      }
+      if (exists("balbaya_dbname")) {
+        configfile <- c(configfile,
+                        "balbaya_dbname" = balbaya_dbname)
+      }
+      if (exists("balbaya_host")) {
+        configfile <- c(configfile,
+                        "balbaya_host" = balbaya_host)
+      }
+      if (exists("balbaya_port")) {
+        configfile <- c(configfile,
+                        "balbaya_port" = balbaya_port)
       }
       return(configfile)
     }
