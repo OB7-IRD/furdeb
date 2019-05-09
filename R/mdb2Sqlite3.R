@@ -42,7 +42,7 @@ mdb2Sqlite3 <- function(access_con,
   if (sysname == "Windows") {
 
     mdb.conn <- access_con
-    sqlite.conn <- SQLite::dbConnect(RSQLite::SQLite(),
+    sqlite.conn <- RSQLite::dbConnect(RSQLite::SQLite(),
                                      dbname = sqlite_file_path)
     tables <- as.vector(t(RJDBC::dbGetQuery(mdb.conn, "SELECT Name
                                                       FROM MsysObjects
