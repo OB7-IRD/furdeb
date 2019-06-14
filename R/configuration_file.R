@@ -247,8 +247,22 @@ configuration_file <- function(new_configtype=TRUE,
     cat("Selection of working directory", "\n")
     tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_for_r_environnement"
     tmpnew[dim(tmpnew)[1], 2] <- "location_of_working_directory"
-    tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = getwd(),
-                                            caption = "Select working directory")
+    if (as.character(Sys.info()['sysname']) == "Windows") {
+      tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = getwd(),
+                                              caption = "Select working directory")
+    } else {
+      if (as.character(Sys.info()['sysname']) == "Darwin") {
+        choose.dir <- function() {
+          system("osascript -e 'tell app \"R\" to POSIX path of (choose folder with prompt \"Choose Folder:\")' > /tmp/R_folder",
+                 intern = FALSE, ignore.stderr = TRUE)
+          p <- system("cat /tmp/R_folder && rm -f /tmp/R_folder", intern = TRUE)
+          return(ifelse(length(p), p, NA))
+        }
+        tmpnew[dim(tmpnew)[1], 3] <- choose.dir()
+      } else {
+        stop("Your OS is not supported yet")
+      }
+    }
     work_path <- tmpnew[dim(tmpnew)[1], 3]
     # Location of output directory ----
     cat("Do you need an output directory?", "\n")
@@ -264,8 +278,22 @@ configuration_file <- function(new_configtype=TRUE,
       cat("Selection of output directory", "\n")
       tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_for_r_environnement"
       tmpnew[dim(tmpnew)[1], 2] <- "location_of_output_directory"
-      tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = work_path,
-                                              caption = "Select output directory")
+      if (as.character(Sys.info()['sysname']) == "Windows") {
+        tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = work_path,
+                                                caption = "Select output directory")
+      } else {
+        if (as.character(Sys.info()['sysname']) == "Darwin") {
+          choose.dir <- function() {
+            system("osascript -e 'tell app \"R\" to POSIX path of (choose folder with prompt \"Choose Folder:\")' > /tmp/R_folder",
+                   intern = FALSE, ignore.stderr = TRUE)
+            p <- system("cat /tmp/R_folder && rm -f /tmp/R_folder", intern = TRUE)
+            return(ifelse(length(p), p, NA))
+          }
+          tmpnew[dim(tmpnew)[1], 3] <- choose.dir()
+        } else {
+          stop("Your OS is not supported yet")
+        }
+      }
       output_loc <- tmpnew[dim(tmpnew)[1], 3]
     }
     # Location of functions directory ----
@@ -282,8 +310,22 @@ configuration_file <- function(new_configtype=TRUE,
       cat("Selection of functions directory", "\n")
       tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_for_r_environnement"
       tmpnew[dim(tmpnew)[1], 2] <- "location_of_functions_directory"
-      tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = work_path,
-                                              caption = "Select functions directory")
+      if (as.character(Sys.info()['sysname']) == "Windows") {
+        tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = work_path,
+                                                caption = "Select functions directory")
+      } else {
+        if (as.character(Sys.info()['sysname']) == "Darwin") {
+          choose.dir <- function() {
+            system("osascript -e 'tell app \"R\" to POSIX path of (choose folder with prompt \"Choose Folder:\")' > /tmp/R_folder",
+                   intern = FALSE, ignore.stderr = TRUE)
+            p <- system("cat /tmp/R_folder && rm -f /tmp/R_folder", intern = TRUE)
+            return(ifelse(length(p), p, NA))
+          }
+          tmpnew[dim(tmpnew)[1], 3] <- choose.dir()
+        } else {
+          stop("Your OS is not supported yet")
+        }
+      }
       functions_loc <- tmpnew[dim(tmpnew)[1], 3]
     }
     # Location of turbobat file ----
@@ -327,8 +369,22 @@ configuration_file <- function(new_configtype=TRUE,
         cat("Selection of queries directory", "\n")
         tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_for_r_environnement"
         tmpnew[dim(tmpnew)[1], 2] <- "location_of_queries_directory"
-        tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = work_path,
-                                                caption = "Select functions directory")
+        if (as.character(Sys.info()['sysname']) == "Windows") {
+          tmpnew[dim(tmpnew)[1], 3] <- choose.dir(default = work_path,
+                                                  caption = "Select functions directory")
+        } else {
+          if (as.character(Sys.info()['sysname']) == "Darwin") {
+            choose.dir <- function() {
+              system("osascript -e 'tell app \"R\" to POSIX path of (choose folder with prompt \"Choose Folder:\")' > /tmp/R_folder",
+                     intern = FALSE, ignore.stderr = TRUE)
+              p <- system("cat /tmp/R_folder && rm -f /tmp/R_folder", intern = TRUE)
+              return(ifelse(length(p), p, NA))
+            }
+            tmpnew[dim(tmpnew)[1], 3] <- choose.dir()
+          } else {
+            stop("Your OS is not supported yet")
+          }
+        }
         queries_loc <- tmpnew[dim(tmpnew)[1], 3]
       }
       # Define memory allowed for java ----
@@ -345,7 +401,21 @@ configuration_file <- function(new_configtype=TRUE,
       cat("Selection of java folder", "\n")
       tmpnew[dim(tmpnew)[1] + 1, 1] <- "configuration_for_java"
       tmpnew[dim(tmpnew)[1], 2] <- "location_of_java_folder"
-      tmpnew[dim(tmpnew)[1], 3] <- choose.dir(caption = "Select java folder")
+      if (as.character(Sys.info()['sysname']) == "Windows") {
+        tmpnew[dim(tmpnew)[1], 3] <- choose.dir(caption = "Select java folder")
+      } else {
+        if (as.character(Sys.info()['sysname']) == "Darwin") {
+          choose.dir <- function() {
+            system("osascript -e 'tell app \"R\" to POSIX path of (choose folder with prompt \"Choose Folder:\")' > /tmp/R_folder",
+                   intern = FALSE, ignore.stderr = TRUE)
+            p <- system("cat /tmp/R_folder && rm -f /tmp/R_folder", intern = TRUE)
+            return(ifelse(length(p), p, NA))
+          }
+          tmpnew[dim(tmpnew)[1], 3] <- choose.dir()
+        } else {
+          stop("Your OS is not supported yet")
+        }
+      }
       Sys.setenv(JAVA_HOME = as.character(tmpnew[dim(tmpnew)[1], 3]))
       # Connexion with Access database ----
       cat("Do you want to establish a connexion with an Access database?", "\n")
