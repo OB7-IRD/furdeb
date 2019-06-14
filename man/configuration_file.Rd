@@ -4,32 +4,25 @@
 \alias{configuration_file}
 \title{Configuration file}
 \usage{
-configuration_file(configtype)
+configuration_file(new_configtype = TRUE, path_configtype)
 }
 \arguments{
-\item{configtype}{Vector of character. For details see below the specification section.}
+\item{new_configtype}{A logical vector: TRUE, FALSE, T or F. Provide false value is you want to use an existing configuration file. By default, the function create a new configuration file (=TRUE).}
+
+\item{path_configtype}{Path (character) of the configuration file that you want to use.}
 }
 \value{
-The function returns a list of configuration objects. If none configuration file has been provided at the beginning, you can export your own configuration file (.csv format).
+The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").
 }
 \description{
 Apply several options to R from a configuration file (able to create one if necessary).
 }
-\section{Specification}{
-
-You can specify two kinds of configurations:
-\itemize{
-\item{"base" for a base configuration without a database's connection}
-\item{"db" for an advanced configuration with a database's connection}
-}
-}
-
 \examples{
-#If you want to use basic configuration without a database's connection
-configuration_file("base")
-
-#If you want to use advanced configuration with a database's connection
-configuration_file("db")
+# If you want to create a new configuration file
+configuration_file()
+# If you want to use an existing configuration file
+configuration_file(new_configtype = FALSE,
+                   path_configtype = "path_of_your_own_configuration_file")
 }
 \references{
 \url{https://github.com/OB7-IRD/toolbox}
