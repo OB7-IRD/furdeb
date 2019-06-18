@@ -97,6 +97,7 @@ fao_area_overlay <- function (data,
     tmp_sub <- tmp[tmp$F_LEVEL == step, ]
     tmp1 <- sp::over(data,
                      tmp_sub[,as.character(accuracy[step])])
+    tmp1[,1] <- as.character(tmp1[,1])
     data@data <- cbind(data@data,
                        tmp1)
   }
