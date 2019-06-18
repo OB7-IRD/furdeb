@@ -93,15 +93,17 @@ fao_area_overlay <- function (data,
       }
     }
   }
-  for (step in names(accuracy)) {
-    tmp_sub <- tmp[tmp$F_LEVEL == step, ]
+  for (step1 in names(accuracy)) {
+    tmp_sub <- tmp[tmp$F_LEVEL == step1, ]
     tmp1 <- sp::over(data,
-                     tmp_sub[,as.character(accuracy[step])])
+                     tmp_sub[,as.character(accuracy[step1])])
     data@data <- cbind(data@data,
-                       tmp1,
-                       stringsAsFactors = FALSE)
+                       tmp1, stringsAsFactors=F)
   }
   data <- as.data.frame(data)
+  for (step2 in as.character(accuracy)) {
+    data[, step2] <- as.character(data[, step2])
+  }
   names(data) <- tolower(names(data))
   return(data)
 }
