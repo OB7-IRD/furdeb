@@ -4,7 +4,7 @@
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Consistent spatial fao area overlay for points, grids and polygons.
 #' @param data R dataframe, with at least to columns with longitude and latitude values.
-#' @param overlay_level Maximum fao area level of accuarcy that you want for classified your data (character value). Check the section details below.
+#' @param overlay_level Maximum fao area level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
 #' @references \url{https://github.com/OB7-IRD/toolbox}
