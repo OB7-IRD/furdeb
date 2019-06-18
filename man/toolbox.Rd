@@ -17,6 +17,7 @@ Useful functions and processes on R in the context of fisheries data collection
 \item{\code{\link{db_connection}}}
 \item{\code{\link{mdb2Sqlite3}}}
 \item{\code{\link{sql_inset}}}
+\item{\code{\link{fao_area_overlay}}}
 }
 }
 
