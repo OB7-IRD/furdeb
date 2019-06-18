@@ -54,7 +54,11 @@ fao_area_overlay <- function (data,
                 "\n",
                 "Please correct it before running the function."))
   }
-  cat("Be careful!", "\n", "You're spatial coordinates have to be in WGS84 projection")
+  cat("Be careful!",
+      "\n",
+      "You're spatial coordinates have to be in WGS84 projection",
+      "\n",
+      "Be patient! The function could be long")
   # Fao area shapefile importation ----
   tmp <- rgdal::readOGR(dsn = system.file("fao_area",
                                           "FAO_AREAS.shp",
