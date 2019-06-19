@@ -3,7 +3,7 @@
 #' @author Antoine Duparc, \email{antoine.duparc@@ird.fr}
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Consistent spatial fao area overlay for points, grids and polygons.
-#' @param data R dataframe, with at least to columns with longitude and latitude values.
+#' @param data R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
 #' @param overlay_level Maximum fao area level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
@@ -28,7 +28,7 @@
 #'                         latitude_name = "latitude")
 #' @export
 fao_area_overlay <- function (data,
-                              overlay_level = "subarea",
+                              overlay_level = "major",
                               longitude_name,
                               latitude_name) {
   # Arguments checking ----
@@ -93,14 +93,28 @@ fao_area_overlay <- function (data,
       }
     }
   }
+  tmp2 <- data.frame(matrix(NA, nrow = length(data), ncol = 0))
   for (step1 in names(accuracy)) {
     tmp_sub <- tmp[tmp$F_LEVEL == step1, ]
     tmp1 <- sp::over(data,
                      tmp_sub[,as.character(accuracy[step1])])
-    data@data <- cbind(data@data,
-                       tmp1, stringsAsFactors=F)
+    if (class(data) == "SpatialPointsDataFrame") {
+      data@data <- cbind(data@data,
+                         tmp1, stringsAsFactors=F)
+      if (step1 == names(accuracy)[length(accuracy)]) {
+        data <- as.data.frame(data)
+      }
+    } else {
+      if (class(data) == "SpatialPoints") {
+        tmp2 <- cbind(tmp2, tmp1)
+        if (step1 == names(accuracy)[length(accuracy)]) {
+          data <- cbind(as.data.frame(data),
+                        tmp2)
+        }
+      }
+    }
+
   }
-  data <- as.data.frame(data)
   for (step2 in as.character(accuracy)) {
     data[, step2] <- as.character(data[, step2])
   }

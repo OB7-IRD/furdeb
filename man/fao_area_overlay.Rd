@@ -4,13 +4,13 @@
 \alias{fao_area_overlay}
 \title{Consistent spatial fao area overlay}
 \usage{
-fao_area_overlay(data, overlay_level = "subarea", longitude_name,
+fao_area_overlay(data, overlay_level = "major", longitude_name,
   latitude_name)
 }
 \arguments{
-\item{data}{R dataframe, with at least to columns with longitude and latitude values.}
+\item{data}{R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.}
 
-\item{overlay_level}{Maximum fao area level of accuarcy that you want for classified your data (character value). Check the section details below.}
+\item{overlay_level}{Maximum fao area level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.}
 
 \item{longitude_name}{Longitude column name in your data (character value).}
 
