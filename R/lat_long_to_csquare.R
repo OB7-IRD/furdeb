@@ -34,6 +34,32 @@ lat_long_to_csquare <- function (data,
                                  latitude_name,
                                  longitude_name,
                                  boundary_ajustement_factor = 0.000001) {
+  # Arguments checking ----
+  if (missing(data) || ! is.data.frame(data)) {
+    stop(paste0("Missing argument \"data\" or not a data frame.",
+                "\n",
+                "Please correct it before running the function."))
+  }
+  if (missing(grid_square) || ! is.numeric(grid_square)) {
+    stop(paste0("Missing argument \"grid_square\" or not numerical value.",
+                "\n",
+                "Please correct it before running the function."))
+  }
+  if (missing(latitude_name) || ! is.character(latitude_name)) {
+    stop(paste0("Missing argument \"latitude_name\" or not character value.",
+                "\n",
+                "Please correct it before running the function."))
+  }
+  if (missing(longitude_name) || ! is.character(longitude_name)) {
+    stop(paste0("Missing argument \"longitude_name\" or not character value.",
+                "\n",
+                "Please correct it before running the function."))
+  }
+  if (! is.numeric(boundary_ajustement_factor)) {
+    stop(paste0("Argument \"boundary_ajustement_factor\" is not a numerical value.",
+                "\n",
+                "Please correct it before running the function."))
+  }
   tmp <- as.data.frame(data)
   # Boundary case ajustement
   tmp$boundary_aju_lat <- trunc(x = (abs(tmp[,c(latitude_name)]) + 10) / 100) * boundary_ajustement_factor

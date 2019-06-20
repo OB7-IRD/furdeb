@@ -8,7 +8,7 @@ fao_area_overlay(data, overlay_level = "major", longitude_name,
   latitude_name)
 }
 \arguments{
-\item{data}{R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.}
+\item{data}{R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.}
 
 \item{overlay_level}{Maximum fao area level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.}
 
