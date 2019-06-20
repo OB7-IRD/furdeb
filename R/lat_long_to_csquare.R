@@ -40,7 +40,7 @@ lat_long_to_csquare <- function (data,
                 "\n",
                 "Please correct it before running the function."))
   }
-  if (missing(grid_square) || ! is.numeric(grid_square)) {
+  if (missing(grid_square) || ! grid_square %in% c(10, 5, 1, 0.5, 0.1, 0.05, 0.01)) {
     stop(paste0("Missing argument \"grid_square\" or not numerical value.",
                 "\n",
                 "Please correct it before running the function."))
