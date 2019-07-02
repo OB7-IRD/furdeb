@@ -142,6 +142,27 @@ configuration_file <- function(new_configtype=TRUE,
     if (length(as.character(tmp[which(tmp[, 2] == "balbaya_port"), 3])) != 0) {
       balbaya_port <- as.character(tmp[which(tmp[, 2] == "balbaya_port"), 3])
     }
+    #Connexion with sardara database ----
+    #DB sardara identification
+    if (length(as.character(tmp[which(tmp[, 2] == "sardara_user_id"), 3])) != 0) {
+      sardara_user <- as.character(tmp[which(tmp[, 2] == "sardara_user_id"), 3])
+    }
+    #DB sardara password identification
+    if (length(as.character(tmp[which(tmp[, 2] == "sardara_password_id"), 3])) != 0) {
+      sardara_password <- as.character(tmp[which(tmp[, 2] == "sardara_password_id"), 3])
+    }
+    #DB sardara database name
+    if (length(as.character(tmp[which(tmp[, 2] == "sardara_dbname"), 3])) != 0) {
+      sardara_dbname <- as.character(tmp[which(tmp[, 2] == "sardara_dbname"), 3])
+    }
+    #DB sardara host identification
+    if (length(as.character(tmp[which(tmp[, 2] == "sardara_host"), 3])) != 0) {
+      sardara_host <- as.character(tmp[which(tmp[, 2] == "sardara_host"), 3])
+    }
+    #DB sardara host identification
+    if (length(as.character(tmp[which(tmp[, 2] == "sardara_port"), 3])) != 0) {
+      sardara_port <- as.character(tmp[which(tmp[, 2] == "sardara_port"), 3])
+    }
     # Error list identification ----
     if (length(error_list) != 0) {
       stop("Be careful! Your configuration file is incomplete", "\n", "Please check this or these missing arguments :", "\n", error_list, call. = FALSE)
@@ -235,6 +256,26 @@ configuration_file <- function(new_configtype=TRUE,
     if (exists("balbaya_port")) {
       configfile <- c(configfile,
                       "balbaya_port" = balbaya_port)
+    }
+    if (exists("balbaya_user")) {
+      configfile <- c(configfile,
+                      "balbaya_user" = balbaya_user)
+    }
+    if (exists("balbaya_password")) {
+      configfile <- c(configfile,
+                      "balbaya_password" = balbaya_password)
+    }
+    if (exists("sardara_dbname")) {
+      configfile <- c(configfile,
+                      "sardara_dbname" = sardara_dbname)
+    }
+    if (exists("sardara_host")) {
+      configfile <- c(configfile,
+                      "sardara_host" = sardara_host)
+    }
+    if (exists("sardara_port")) {
+      configfile <- c(configfile,
+                      "sardara_port" = sardara_port)
     }
     return(configfile)
   } else {
@@ -573,6 +614,48 @@ configuration_file <- function(new_configtype=TRUE,
         tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
         balbaya_port <- tmpnew[dim(tmpnew)[1], 3]
       }
+      # Connexion with sardara database ----
+      cat("Do you want to establish a connexion with the sardara database?", "\n")
+      cat("(yes, no)", "\n")
+      sardara_answer <- readLines(n = 1)
+      while (!(sardara_answer %in% c("yes", "no"))) {
+        cat("Be careful! Your answer is not correct", "\n")
+        cat("Do you want to establish a connexion with the sardara database?", "\n")
+        cat("(yes, no)", "\n")
+        sardara_answer <- readLines(n = 1)
+      }
+      if (sardara_answer == "yes") {
+        #DB sardara user identification
+        cat("sardara user login", "\n")
+        tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_sardara_db"
+        tmpnew[dim(tmpnew)[1], 2] <- "sardara_user_id"
+        tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+        sardara_user <- tmpnew[dim(tmpnew)[1], 3]
+        #DB sardara password identification
+        cat("sardara password", "\n")
+        tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_sardara_db"
+        tmpnew[dim(tmpnew)[1], 2] <- "sardara_password_id"
+        tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+        sardara_password <- tmpnew[dim(tmpnew)[1], 3]
+        #DB sardara database name
+        cat("sardara database name", "\n")
+        tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_sardara_db"
+        tmpnew[dim(tmpnew)[1], 2] <- "sardara_dbname"
+        tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+        sardara_dbname <- tmpnew[dim(tmpnew)[1], 3]
+        #DB sardara host identification
+        cat("sardara host identification", "\n")
+        tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_sardara_db"
+        tmpnew[dim(tmpnew)[1], 2] <- "sardara_host"
+        tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+        sardara_host <- tmpnew[dim(tmpnew)[1], 3]
+        #DB sardara port identification
+        cat("sardara port identification", "\n")
+        tmpnew[dim(tmpnew)[1] + 1, 1] <- "parameters_of_sardara_db"
+        tmpnew[dim(tmpnew)[1], 2] <- "sardara_port"
+        tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)
+        sardara_port <- tmpnew[dim(tmpnew)[1], 3]
+      }
     }
     # Extract configuration file informations ----
     cat("Do you want to export the configuration file?", "\n")
@@ -685,6 +768,26 @@ configuration_file <- function(new_configtype=TRUE,
     if (exists("balbaya_port")) {
       configfile <- c(configfile,
                       "balbaya_port" = balbaya_port)
+    }
+    if (exists("sardara_user")) {
+      configfile <- c(configfile,
+                      "sardara_user" = sardara_user)
+    }
+    if (exists("sardara_password")) {
+      configfile <- c(configfile,
+                      "sardara_password" = sardara_password)
+    }
+    if (exists("sardara_dbname")) {
+      configfile <- c(configfile,
+                      "sardara_dbname" = sardara_dbname)
+    }
+    if (exists("sardara_host")) {
+      configfile <- c(configfile,
+                      "sardara_host" = sardara_host)
+    }
+    if (exists("sardara_port")) {
+      configfile <- c(configfile,
+                      "sardara_port" = sardara_port)
     }
     return(configfile)
   }
