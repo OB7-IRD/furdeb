@@ -257,13 +257,13 @@ configuration_file <- function(new_configtype=TRUE,
       configfile <- c(configfile,
                       "balbaya_port" = balbaya_port)
     }
-    if (exists("balbaya_user")) {
+    if (exists("sardara_user")) {
       configfile <- c(configfile,
-                      "balbaya_user" = balbaya_user)
+                      "sardara_user" = sardara_user)
     }
-    if (exists("balbaya_password")) {
+    if (exists("sardara_password")) {
       configfile <- c(configfile,
-                      "balbaya_password" = balbaya_password)
+                      "sardara_password" = sardara_password)
     }
     if (exists("sardara_dbname")) {
       configfile <- c(configfile,
