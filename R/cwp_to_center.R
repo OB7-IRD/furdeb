@@ -1,5 +1,5 @@
-#' @name cpw_to_center
-#' @title Conversion of CWP to latitude and longitude (related to cwp centroid)
+#' @name cwp_to_center
+#' @title Conversion of cwp to latitude and longitude (related to cwp centroid)
 #' @author Antoine Duparc, \email{antoie.duparc@@ird.fr}
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Conversion of CWP to latitude and longitude (in decimal degrees). Be careful, latitude and longitude are related to the cwp centroid.
@@ -7,9 +7,9 @@
 #' @param cwp_name Column name of data data in text format.
 #' @param cwp_length Length of cwp. For example, for a square of 1°x1° enter 1.
 #' @references \url{https://github.com/OB7-IRD/toolbox}
-#' @return This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.
+#' @return This function add four columns to the input data frame: cwp, quadrat, longitude_dec and latitude_dec (with longitude and latitude data in decimal format).
 #' @export
-cpw_to_center <- function(data,
+cwp_to_center <- function(data,
                           cwp_name,
                           cwp_length)
                         {
@@ -26,7 +26,7 @@ cpw_to_center <- function(data,
       || ! is.numeric(cwp_length)) {
     stop("Missing argument \"cwp_length\" or invalid format (numeric expected)\nPlease correct it before continuing")
   }
-  tmp <-data.frame(cwp = data[, cwp_name]) %>%
+  tmp <- unique(data.frame(cwp = data[, cwp_name])) %>%
     rowwise() %>%
     mutate(quadrat = as.numeric(substring(cwp,
                                           first = 1,
@@ -45,7 +45,7 @@ cpw_to_center <- function(data,
                                   as.numeric(substring(cwp,
                                                        first = 4,
                                                        last = 6)) + (cwp_length / 2))) %>%
-    select(latitude_dec, longitude_dec) %>%
-    cbind(data)
+    right_join(data,
+               by = c("cwp" = cwp_name))
   return(tmp)
 }

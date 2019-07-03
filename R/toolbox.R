@@ -9,8 +9,8 @@
 #' \item{\code{\link{sql_inset}}}
 #' \item{\code{\link{fao_area_overlay}}}
 #' \item{\code{\link{lat_long_to_csquare}}}
-#' \item{\code{\link{cpw_to_center}}}
-#' \item{\code{\link{cpw_to_lat_lon}}}
+#' \item{\code{\link{cwp_to_center}}}
+#' \item{\code{\link{cwp_to_lat_lon}}}
 #' }
 #' @docType package
 #' @name toolbox
