@@ -19,8 +19,8 @@ Useful functions and processes on R in the context of fisheries data collection
 \item{\code{\link{sql_inset}}}
 \item{\code{\link{fao_area_overlay}}}
 \item{\code{\link{lat_long_to_csquare}}}
-\item{\code{\link{cpw2latlon}}}
-\item{\code{\link{cpw2center}}}
+\item{\code{\link{cpw_to_center}}}
+\item{\code{\link{cpw_to_lat_lon}}}
 }
 }
 

@@ -1,4 +1,4 @@
-#' @name cwp2latlon
+#' @name cpw_to_lat_lon
 #' @title Conversion of CWP to latitude and longitude (related to cwp corner)
 #' @author Antoine Duparc, \email{antoie.duparc@@ird.fr}
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
@@ -8,8 +8,8 @@
 #' @references \url{https://github.com/OB7-IRD/toolbox}
 #' @return This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.
 #' @export
-cwp2latlon <- function(data,
-                       cwp_name) {
+cpw_to_lat_lon <- function(data,
+                           cwp_name) {
   if (missing(data)
       || ! is.data.frame(data)) {
     stop("Missing argument \"data\" or invalid format (data frame expected)\nPlease correct it before continuing")

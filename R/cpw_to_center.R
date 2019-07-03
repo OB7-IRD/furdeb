@@ -1,17 +1,18 @@
-#' @name cwp2center
+#' @name cpw_to_center
 #' @title Conversion of CWP to latitude and longitude (related to cwp centroid)
 #' @author Antoine Duparc, \email{antoie.duparc@@ird.fr}
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Conversion of CWP to latitude and longitude (in decimal degrees). Be careful, latitude and longitude are related to the cwp centroid.
 #' @param data A R data frame with at least one column with cwp data.
 #' @param cwp_name Column name of data data in text format.
-#' @param cwp_length Length of cwp. For example, for a square of 1°x1° enter 1. 
+#' @param cwp_length Length of cwp. For example, for a square of 1°x1° enter 1.
 #' @references \url{https://github.com/OB7-IRD/toolbox}
 #' @return This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.
 #' @export
-cwp2center <- function(data,
-                       cwp_name,
-                       cwp_length) {
+cpw_to_center <- function(data,
+                          cwp_name,
+                          cwp_length)
+                        {
   if (missing(data)
       || ! is.data.frame(data)) {
     stop("Missing argument \"data\" or invalid format (data frame expected)\nPlease correct it before continuing")
