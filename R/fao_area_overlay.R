@@ -65,9 +65,10 @@ fao_area_overlay <- function (data,
                                           package = "toolbox"),
                         verbose = FALSE)
   # Data design ----
-  sp::coordinates(data) <- c(longitude_name,
+  tmp1 <- unique(data[, c(longitude_name, latitude_name)])
+  sp::coordinates(tmp1) <- c(longitude_name,
                              latitude_name)
-  sp::proj4string(data) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+  sp::proj4string(tmp1) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
   # Data spatial overlay
   if (overlay_level == "major") {
     accuracy <- "F_AREA"
@@ -93,30 +94,17 @@ fao_area_overlay <- function (data,
       }
     }
   }
-  tmp2 <- data.frame(matrix(NA, nrow = length(data), ncol = 0))
+  tmp2 <- as.data.frame(tmp1)
   for (step1 in names(accuracy)) {
     tmp_sub <- tmp[tmp$F_LEVEL == step1, ]
-    tmp1 <- sp::over(data,
+    tmp3 <- sp::over(tmp1,
                      tmp_sub[,as.character(accuracy[step1])])
-    if (class(data) == "SpatialPointsDataFrame") {
-      data@data <- cbind(data@data,
-                         tmp1, stringsAsFactors=F)
-      if (step1 == names(accuracy)[length(accuracy)]) {
-        data <- as.data.frame(data)
-      }
-    } else {
-      if (class(data) == "SpatialPoints") {
-        tmp2 <- cbind(tmp2, tmp1)
-        if (step1 == names(accuracy)[length(accuracy)]) {
-          data <- cbind(as.data.frame(data),
-                        tmp2)
-        }
-      }
+    tmp2 <- cbind(tmp2, tmp3)
+    if (step1 == names(accuracy)[length(accuracy)]) {
+      data <- inner_join(data,
+                         tmp2,
+                         by = c(latitude_name, longitude_name))
     }
-
-  }
-  for (step2 in as.character(accuracy)) {
-    data[, step2] <- as.character(data[, step2])
   }
   names(data) <- tolower(names(data))
   return(data)
