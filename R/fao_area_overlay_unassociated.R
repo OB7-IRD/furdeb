@@ -80,7 +80,7 @@ fao_area_overlay_unassociated <- function(data,
   tmp1 <- sp::spTransform(tmp1,
                           "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
   tmp <- sp::spTransform(tmp,
-                         proj4string(tmp1))
+                         sp::proj4string(tmp1))
   # Data spatial overlay ----
   if (overlay_level == "major") {
     accuracy <- "F_AREA"
