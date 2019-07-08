@@ -69,7 +69,7 @@ fao_area_overlay_unassociated <- function(data,
   # Fao area shapefile importation ----
   tmp <- rgdal::readOGR(dsn = system.file("fao_area",
                                           "FAO_AREAS.shp",
-                                          package = "toolbox"),
+                                          package = "furdeb"),
                         verbose = FALSE)
   # Data design ----
   tmp1 <- unique(data[, c(longitude_name, latitude_name)])
