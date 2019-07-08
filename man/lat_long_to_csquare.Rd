@@ -46,7 +46,7 @@ tmp <- lat_long_to_csquare(data = balbaya_landing_rectangle,
                            longitude_name = "longitude")
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Mathieu Depetris, \email{mathieu.depetris@ird.fr}

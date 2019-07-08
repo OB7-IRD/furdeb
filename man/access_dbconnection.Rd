@@ -21,7 +21,7 @@ The function return a R object with Access database identification of connection
 Generate a common connection with an Access database using a JDBC driver.
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Mathieu Depetris, \email{mathieu.depetris@ird.fr}

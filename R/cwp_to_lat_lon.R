@@ -5,7 +5,7 @@
 #' @description Conversion of CWP to latitude and longitude (in decimal degrees). Be careful, latitude and longitude are related to the cwp corner nearest the zero (latitude = 0 and longitude = 0).
 #' @param data A R data frame with at least one column with cwp data.
 #' @param cwp_name Column name of data data in text format.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return This function add four columns to the input data frame: cwp, quadrat, longitude_dec and latitude_dec (with longitude and latitude data in decimal format).
 #' @export
 cwp_to_lat_lon <- function(data,

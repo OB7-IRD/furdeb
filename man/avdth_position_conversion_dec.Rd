@@ -22,7 +22,7 @@ This function add two column to the input data frame, longitude_dec and latitude
 Convert position format in AVDTH to decimal format.
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Mathieu Depetris, \email{mathieu.depetris@ird.fr}

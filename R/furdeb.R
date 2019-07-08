@@ -1,5 +1,5 @@
-#'@title toolbox package
-#'@section toolbox functions :
+#'@title furdeb package
+#'@section furdeb functions:
 #'\itemize{
 #' \item{\code{\link{access_dbconnection}}}
 #' \item{\code{\link{avdth_position_conversion_dec}}}
@@ -14,5 +14,5 @@
 #' \item{\code{\link{cwp_to_lat_lon}}}
 #' }
 #' @docType package
-#' @name toolbox
+#' @name furdeb
 "_PACKAGE"

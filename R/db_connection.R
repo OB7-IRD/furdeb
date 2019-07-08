@@ -7,7 +7,7 @@
 #' @param db_dbname Name/identification of the database.
 #' @param db_host Host adress of the database.
 #' @param db_port Identification of the port.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return a format class PosstgreSQLConnection in the R's global envrionment.
 #' @export
 db_connection <- function(db_user,

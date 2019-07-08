@@ -27,7 +27,7 @@ Should work on windows and on linux (need testing for this OS). For linux the "m
 }
 
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Norbert Billet, \email{norbert.billet@ifremer.fr}

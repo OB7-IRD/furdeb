@@ -5,7 +5,7 @@
 #' @param jdbc_access_driverclass Identification of the Access driver class (for example com.hxtt.sql.access.AccessDriver).
 #' @param jdbc_access_driver_loc Location of the Access JDBC driver (for example Directory_1\%Directory_2\%Directory_X\%access_JDBCdriver.jar).
 #' @param access_db_loc Location of the Access database (for example Directory_1\%Directory_2\%Directory_X\%access_DB.mdb).
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return a R object with Access database identification of connection.
 #' @export
 access_dbconnection <- function(jdbc_access_driverclass,

@@ -25,7 +25,7 @@ configuration_file(new_configtype = FALSE,
                    path_configtype = "path_of_your_own_configuration_file")
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Mathieu Depetris, \email{mathieu.depetris@ird.fr}

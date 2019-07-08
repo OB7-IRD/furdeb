@@ -4,7 +4,7 @@
 #' @description Apply several options to R from a configuration file (able to create one if necessary).
 #' @param new_configtype A logical vector: TRUE, FALSE, T or F. Provide false value is you want to use an existing configuration file. By default, the function create a new configuration file (=TRUE).
 #' @param path_configtype Path (character) of the configuration file that you want to use.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").
 #' @examples
 #' # If you want to create a new configuration file

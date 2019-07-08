@@ -7,7 +7,7 @@
 #' @param target_dir Directory where the SQLite3 file will be created.
 #' @param target_file_name SQLite3 file name (for example: database_name.sqlite3).
 #' @param verbose Should the script be verbose.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return an SQLite3 database in the location directory. The file path of the SQLite3 file is also available.
 #' @section Specification:
 #' Should work on windows and on linux (need testing for this OS). For linux the "mdb-tools" must be installed.

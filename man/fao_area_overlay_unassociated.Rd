@@ -45,7 +45,7 @@ tmp <- fao_area_overlay(data = data,
                         tolerance = 50)
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Antoine Duparc, \email{antoine.duparc@ird.fr}

@@ -8,7 +8,7 @@
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
 #' @param tolerance Tolerance of maximum distance between coordinates and FAO area (in km, numerical value expected). By default, 500 km.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains fao area classification.
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):

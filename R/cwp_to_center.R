@@ -6,7 +6,7 @@
 #' @param data A R data frame with at least one column with cwp data.
 #' @param cwp_name Column name of data data in text format.
 #' @param cwp_length Length of cwp. For example, for a square of 1°x1° enter 1.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return This function add four columns to the input data frame: cwp, quadrat, longitude_dec and latitude_dec (with longitude and latitude data in decimal format).
 #' @export
 cwp_to_center <- function(data,

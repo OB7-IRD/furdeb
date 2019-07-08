@@ -1,10 +1,10 @@
-Package: toolbox
+Package: furdeb
 Type: Package
-Title: ToolBox package
+Title: FUnctions for R DEvelopment and Beyond
 Version: 1.0.0
 Authors@R: person("Mathieu", "Depetris", email = "mathieu.depetris@ird.fr", role = c("aut", "cre"))
 Maintainer: Mathieu Depetris <mathieu.depetris@ird.fr>
-Description: Useful functions and processes on R in the context of fisheries data collection
+Description: Functions and processes for R development
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -19,5 +19,5 @@ Imports:
     magrittr,
     dplyr (>= 0.8.1),
     rgeos (>= 0.4.3)
-URL: https://github.com/OB7-IRD/toolbox
-BugReports: https://github.com/OB7-IRD/toolbox/issues
+URL: https://github.com/OB7-IRD/furdeb
+BugReports: https://github.com/OB7-IRD/furdeb/issues

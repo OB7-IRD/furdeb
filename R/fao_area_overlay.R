@@ -7,7 +7,7 @@
 #' @param overlay_level Maximum fao area level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains fao area classification.
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):

@@ -6,7 +6,7 @@
 #' @param replacement Replacement argument for matched pattern. If you want to specify multiple arguments, use the function c().
 #' @param pattern Character string containing a string expression to be matched.
 #' @param query A character vector where matches are sought, or an object which can be coerced by as.character to a character vector.
-#' @references \url{https://github.com/OB7-IRD/toolbox}
+#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return A vector contain the query with replacement value(s).
 #' @examples
 #' final_query <- sql_inset(db_type = "access", replacement = 2017, pattern = "year_interpolate", query = intial_query)

@@ -42,7 +42,7 @@ tmp <- fao_area_overlay(data = data,
                         latitude_name = "latitude")
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Antoine Duparc, \email{antoine.duparc@ird.fr}

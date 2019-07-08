@@ -24,7 +24,7 @@ The function return a format class PosstgreSQLConnection in the R's global envri
 This function able to establish a connection with a PostgreSQL database.
 }
 \references{
-\url{https://github.com/OB7-IRD/toolbox}
+\url{https://github.com/OB7-IRD/furdeb}
 }
 \author{
 Mathieu Depetris, \email{mathieu.depetris@ird.fr}
