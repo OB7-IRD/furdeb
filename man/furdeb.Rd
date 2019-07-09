@@ -6,17 +6,29 @@
 \alias{furdeb-package}
 \title{furdeb package}
 \description{
-Functions and processes for R development
+Functions and processes for R development and beyond!
 }
-\section{furdeb functions}{
+\section{Diverse}{
+
+\itemize{
+\item{\code{\link{configuration_file}}}
+}
+}
+
+\section{Databases manipulations and connections}{
 
 \itemize{
 \item{\code{\link{access_dbconnection}}}
-\item{\code{\link{avdth_position_conversion_dec}}}
 \item{\code{\link{configuration_file}}}
 \item{\code{\link{db_connection}}}
 \item{\code{\link{mdb2Sqlite3}}}
 \item{\code{\link{sql_inset}}}
+}
+}
+
+\section{Spatial manipulations and design}{
+
+\itemize{
 \item{\code{\link{fao_area_overlay}}}
 \item{\code{\link{fao_area_overlay_unassociated}}}
 \item{\code{\link{lat_long_to_csquare}}}

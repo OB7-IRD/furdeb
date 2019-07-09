@@ -4,7 +4,7 @@ Title: FUnctions for R DEvelopment and Beyond
 Version: 1.0.0
 Authors@R: person("Mathieu", "Depetris", email = "mathieu.depetris@ird.fr", role = c("aut", "cre"))
 Maintainer: Mathieu Depetris <mathieu.depetris@ird.fr>
-Description: Functions and processes for R development
+Description: Functions and processes for R development and beyond!
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
