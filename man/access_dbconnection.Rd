@@ -4,13 +4,10 @@
 \alias{access_dbconnection}
 \title{Connection with Access database (with a JDBC driver)}
 \usage{
-access_dbconnection(jdbc_access_driverclass, jdbc_access_driver_loc,
-  access_db_loc)
+access_dbconnection(driver_name = "u_can_access", access_db_loc)
 }
 \arguments{
-\item{jdbc_access_driverclass}{Identification of the Access driver class (for example com.hxtt.sql.access.AccessDriver).}
-
-\item{jdbc_access_driver_loc}{Location of the Access JDBC driver (for example Directory_1\%Directory_2\%Directory_X\%access_JDBCdriver.jar).}
+\item{driver_name}{Access' driver name. By default "u_can_access". You can also choose the driver "access_jdbc42".}
 
 \item{access_db_loc}{Location of the Access database (for example Directory_1\%Directory_2\%Directory_X\%access_DB.mdb).}
 }
