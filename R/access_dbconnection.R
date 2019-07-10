@@ -22,8 +22,8 @@ access_dbconnection <- function(driver_name = "u_can_access",
     # Initializing Access JDBC driver ----
     access_jdbc_driver <- RJDBC::JDBC(driverClass = "com.hxtt.sql.access.AccessDriver",
                                       classPath = system.file("access_jdbc42",
+                                                              "Access_JDBC42.jar",
                                                               package = "furdeb"))
-    tmp <- dbDriver
 
     # Connection to Access database ----
     access_jdbc_connection <- RJDBC::dbConnect(access_jdbc_driver,
