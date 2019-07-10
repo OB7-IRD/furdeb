@@ -18,7 +18,9 @@ sql_inset <- function (db_type,
   type <- mode(x = replacement)
   if (type == "numeric") {
     if (length(replacement) == 1) {
-      tmp <- replacement
+      tmp <- paste0("(",
+                    replacement,
+                    ")")
     } else {
       tmp <- NULL
       for (i in 1:length(replacement)) {
@@ -40,9 +42,9 @@ sql_inset <- function (db_type,
     if (type == "character") {
       if (length(replacement) == 1) {
         if (db_type == "access") {
-          tmp <- paste0("'",
+          tmp <- paste0("('",
                         replacement,
-                        "'")
+                        "')")
         } else {
           if (db_type == "postgresql") {
             tmp <- paste0("\"",
@@ -66,6 +68,11 @@ sql_inset <- function (db_type,
                                   replacement[i],
                                   "'"),
                            sep = ', ')
+            }
+            if (i == length(replacement)) {
+              tmp <- paste0("(",
+                            tmp,
+                            ")")
             }
           }
         } else {
