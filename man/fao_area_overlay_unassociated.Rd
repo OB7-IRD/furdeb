@@ -5,7 +5,7 @@
 \title{Consistent spatial unassociated fao area overlay}
 \usage{
 fao_area_overlay_unassociated(data, overlay_level = "major",
-  longitude_name, latitude_name, tolerance = 500)
+  longitude_name, latitude_name, tolerance = 50)
 }
 \arguments{
 \item{data}{R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.}
@@ -16,7 +16,7 @@ fao_area_overlay_unassociated(data, overlay_level = "major",
 
 \item{latitude_name}{Latitude column name in your data (character value).}
 
-\item{tolerance}{Tolerance of maximum distance between coordinates and FAO area (in km, numerical value expected). By default, 500 km.}
+\item{tolerance}{Tolerance of maximum distance between coordinates and FAO area (in km, numerical value expected). By default, 50 km.}
 }
 \value{
 The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains fao area classification.
@@ -37,12 +37,12 @@ All the items above your specification (thus contain it at higher levels) will b
 If you want more informations visit http://www.fao.org/fishery/area/search/en
 }
 \examples{
-# Example for classification until division fao fishing area, with a tolerance of 50 km
+# Example for classification until division fao fishing area, with a tolerance of 10 km
 tmp <- fao_area_overlay(data = data,
                         overlay_level = "division",
                         longitude_name = "longitude",
                         latitude_name = "latitude",
-                        tolerance = 50)
+                        tolerance = 10)
 }
 \references{
 \url{https://github.com/OB7-IRD/furdeb}

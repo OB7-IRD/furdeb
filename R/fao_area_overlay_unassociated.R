@@ -7,7 +7,7 @@
 #' @param overlay_level Maximum fao area level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
-#' @param tolerance Tolerance of maximum distance between coordinates and FAO area (in km, numerical value expected). By default, 500 km.
+#' @param tolerance Tolerance of maximum distance between coordinates and FAO area (in km, numerical value expected). By default, 50 km.
 #' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains fao area classification.
 #' @details
@@ -22,18 +22,18 @@
 #' All the items above your specification (thus contain it at higher levels) will be added in the output. For example, if you select "subarea", you will also have the information about the major area concerning.
 #' If you want more informations visit http://www.fao.org/fishery/area/search/en
 #' @examples
-#' # Example for classification until division fao fishing area, with a tolerance of 50 km
+#' # Example for classification until division fao fishing area, with a tolerance of 10 km
 #' tmp <- fao_area_overlay(data = data,
 #'                         overlay_level = "division",
 #'                         longitude_name = "longitude",
 #'                         latitude_name = "latitude",
-#'                         tolerance = 50)
+#'                         tolerance = 10)
 #' @export
 fao_area_overlay_unassociated <- function(data,
                                           overlay_level = "major",
                                           longitude_name,
                                           latitude_name,
-                                          tolerance = 500) {
+                                          tolerance = 50) {
   if (missing(data) || ! is.data.frame(data)) {
     stop(paste0("Missing argument \"data\" or not a data frame.",
                 "\n",
