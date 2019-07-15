@@ -26,6 +26,8 @@ cwp_to_center <- function(data,
       || ! is.numeric(cwp_length)) {
     stop("Missing argument \"cwp_length\" or invalid format (numeric expected)\nPlease correct it before continuing")
   }
+  backup <- getOption("scipen")
+  options(scipen = 999)
   tmp <- unique(data.frame(cwp = data[, cwp_name])) %>%
     rowwise() %>%
     mutate(quadrat = as.numeric(substring(cwp,
@@ -47,5 +49,6 @@ cwp_to_center <- function(data,
                                                        last = 6)) + (cwp_length / 2))) %>%
     right_join(data,
                by = c("cwp" = cwp_name))
+  options(scipen = backup)
   return(tmp)
 }

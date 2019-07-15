@@ -19,6 +19,8 @@ cwp_to_lat_lon <- function(data,
       || ! cwp_name %in% names(data)) {
     stop("Missing argument \"cwp_name\" or invalid format (character expected) or not present in the data frame\nPlease correct it before continuing")
   }
+  backup <- getOption("scipen")
+  options(scipen = 999)
   tmp <- unique(data.frame(cwp = data[, cwp_name])) %>%
     rowwise() %>%
     mutate(quadrat = as.numeric(substring(cwp,
@@ -40,5 +42,6 @@ cwp_to_lat_lon <- function(data,
                                                        last = 6))))%>%
     right_join(data,
                by = c("cwp" = cwp_name))
+  options(scipen = backup)
   return(tmp)
 }
