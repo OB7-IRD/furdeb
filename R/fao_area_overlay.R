@@ -99,6 +99,7 @@ fao_area_overlay <- function (data,
     tmp_sub <- tmp[tmp$F_LEVEL == step1, ]
     tmp3 <- sp::over(tmp1,
                      tmp_sub[, as.character(accuracy[step1])])
+    tmp3[, 1] <- as.character(tmp3[, 1])
     tmp2 <- cbind(tmp2, tmp3)
     if (step1 == names(accuracy)[length(accuracy)]) {
       data <- dplyr::inner_join(data,
