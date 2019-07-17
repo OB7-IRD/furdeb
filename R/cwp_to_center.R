@@ -29,7 +29,7 @@ cwp_to_center <- function(data,
   backup <- getOption("scipen")
   options(scipen = 999)
   tmp <- unique(data.frame(cwp = data[, cwp_name])) %>%
-    rowwise() %>%
+    dplyr::rowwise() %>%
     mutate(quadrat = as.numeric(substring(cwp,
                                           first = 1,
                                           last = 1)),
