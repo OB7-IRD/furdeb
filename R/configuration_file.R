@@ -17,15 +17,16 @@ configuration_file <- function(new_configtype=TRUE,
                                path_configtype) {
   # Arguments verification ----
   if (! is.logical(new_configtype)) {
-    stop(paste0("Missing argument \"new_configtype\" or value inside not TRUE or FALSE.",
-                "\n",
-                "Please correct it before running the function."))
+    stop("Missing argument \"new_configtype\" or value inside not TRUE or FALSE.",
+         "\n",
+         "Please correct it before running the function.")
   }
   if (new_configtype %in% c(FALSE, F) & (missing(path_configtype) || ! is.character(path_configtype))) {
-    stop(paste0("Missing argument \"path_configtype\" or not correct path for the configuration file.",
-                "\n",
-                "Please correct it before running the function."))
+    stop("Missing argument \"path_configtype\" or not correct path for the configuration file.",
+         "\n",
+         "Please correct it before running the function.")
   }
+
   if (new_configtype %in% c(FALSE, F)) {
     # Use configuration file ----
     # Create vector of configuration error ----

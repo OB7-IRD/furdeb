@@ -7,9 +7,9 @@
 sql_inset(db_type, replacement, pattern, query)
 }
 \arguments{
-\item{db_type}{Type of database related to the query. For now, the function accepts only "access" and "postgresql" databases.}
+\item{db_type}{Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.}
 
-\item{replacement}{Replacement argument for matched pattern. If you want to specify multiple arguments, use the function c().}
+\item{replacement}{Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().}
 
 \item{pattern}{Character string containing a string expression to be matched.}
 
@@ -22,7 +22,11 @@ A vector contain the query with replacement value(s).
 Interpolate values into a SQL string query.
 }
 \examples{
-final_query <- sql_inset(db_type = "access", replacement = 2017, pattern = "year_interpolate", query = intial_query)
+For a query on an Access database
+final_query <- sql_inset(db_type = "access",
+                         replacement = 2017,
+                         pattern = "year_interpolate",
+                         query = intial_query)
 }
 \references{
 \url{https://github.com/OB7-IRD/furdeb}

@@ -2,19 +2,48 @@
 #' @description Interpolate values into a SQL string query.
 #' @name sql_inset
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
-#' @param db_type Type of database related to the query. For now, the function accepts only "access" and "postgresql" databases.
-#' @param replacement Replacement argument for matched pattern. If you want to specify multiple arguments, use the function c().
+#' @param db_type Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.
+#' @param replacement Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().
 #' @param pattern Character string containing a string expression to be matched.
 #' @param query A character vector where matches are sought, or an object which can be coerced by as.character to a character vector.
 #' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return A vector contain the query with replacement value(s).
 #' @examples
-#' final_query <- sql_inset(db_type = "access", replacement = 2017, pattern = "year_interpolate", query = intial_query)
+#' For a query on an Access database
+#' final_query <- sql_inset(db_type = "access",
+#'                          replacement = 2017,
+#'                          pattern = "year_interpolate",
+#'                          query = intial_query)
 #' @export
 sql_inset <- function (db_type,
                        replacement,
                        pattern,
                        query) {
+  # Arguments verification ----
+  if (missing(db_type) || ! db_type %in% c("access", "postgresql")) {
+    stop("Missing argument \"db_type\" or value inside not allowed.",
+         "\n",
+         "For now, the function accepts only \"access\" or \"postgresql\" databases.",
+         "\n",
+         "Please correct it before running the function.")
+  }
+  if (missing(replacement)) {
+    stop("Missing argument \"replacement\".",
+         "\n",
+         "Please correct it before running the function.")
+  }
+  if (missing(pattern) || ! is.character(pattern)) {
+    stop("Missing argument \"pattern\" or value inside not character.",
+         "\n",
+         "Please correct it before running the function.")
+  }
+  if (missing(query) || ! is.character(pattern)) {
+    stop("Missing argument \"query\" or value inside not character.",
+         "\n",
+         "Please correct it before running the function.")
+  }
+
+  # Function ----
   type <- mode(x = replacement)
   if (type == "numeric") {
     if (length(replacement) == 1) {
@@ -41,63 +70,29 @@ sql_inset <- function (db_type,
   } else {
     if (type == "character") {
       if (length(replacement) == 1) {
-        if (db_type == "access") {
-          tmp <- paste0("('",
-                        replacement,
-                        "')")
-        } else {
-          if (db_type == "postgresql") {
-            tmp <- paste0("\"",
-                          replacement,
-                          "\"")
-          } else {
-            stop("Your kind database type is not supported yet.")
-          }
-        }
+        tmp <- paste0("('",
+                      replacement,
+                      "')")
       } else {
-        if (db_type == "access") {
-          tmp <- NULL
-          for (i in 1:length(replacement)) {
-            if (is.null(tmp)) {
-              tmp <- paste0("'",
-                            replacement[i],
-                            "'")
-            } else {
-              tmp <- paste(tmp,
-                           paste0("'",
-                                  replacement[i],
-                                  "'"),
-                           sep = ', ')
-            }
-            if (i == length(replacement)) {
-              tmp <- paste0("(",
-                            tmp,
-                            ")")
-            }
-          }
-        } else {
-          if (db_type == "postgresql") {
-            tmp <- NULL
-            for (i in 1:length(replacement)) {
-              if (is.null(tmp)) {
-                tmp <- paste0("\"",
-                              replacement[i],
-                              "\"")
-              } else {
-                tmp <- paste(tmp,
-                             paste0("\"",
-                                    replacement[i],
-                                    "\""),
-                             sep = ', ')
-              }
-            }
+        tmp <- NULL
+        for (i in 1:length(replacement)) {
+          if (is.null(tmp)) {
+            tmp <- paste0("'",
+                          replacement[i],
+                          "'")
           } else {
-            stop("Your kind database type is not supported yet.")
+            tmp <- paste(tmp,
+                         paste0("'",
+                                replacement[i],
+                                "'"),
+                         sep = ', ')
+          }
+          if (i == length(replacement)) {
+            tmp <- paste0("(",
+                          tmp,
+                          ")")
           }
         }
-        tmp <- paste0("(",
-                      tmp,
-                      ")")
       }
     } else {
       stop(paste0("Be careful, replacement argument if not a numeric/character types.",
