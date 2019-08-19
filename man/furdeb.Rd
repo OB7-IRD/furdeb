@@ -13,7 +13,6 @@ Functions and processes for R development and beyond!
 \itemize{
 \item{\code{\link{configuration_file}}}
 \item{\code{\link{ocean_code_to_name}}}
-\item{\code{\link{utils-pipe}}}
 }
 }
 
