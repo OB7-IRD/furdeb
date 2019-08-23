@@ -12,7 +12,6 @@ Functions and processes for R development and beyond!
 
 \itemize{
 \item{\code{\link{configuration_file}}}
-\item{\code{\link{ocean_code_to_name}}}
 }
 }
 
@@ -43,6 +42,7 @@ Functions and processes for R development and beyond!
 \itemize{
 \item{\code{\link{fishing_mode_code_to_name}}}
 \item{\code{\link{ocean_code_to_name}}}
+\item{\code{\link{gear_code_to_name}}}
 }
 }
 

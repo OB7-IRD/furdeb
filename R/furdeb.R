@@ -2,7 +2,6 @@
 #'@section Diverse:
 #'\itemize{
 #' \item{\code{\link{configuration_file}}}
-#' \item{\code{\link{ocean_code_to_name}}}
 #' }
 #'@section Databases manipulations and connections:
 #'\itemize{
@@ -24,6 +23,7 @@
 #'\itemize{
 #' \item{\code{\link{fishing_mode_code_to_name}}}
 #' \item{\code{\link{ocean_code_to_name}}}
+#' \item{\code{\link{gear_code_to_name}}}
 #' }
 #' @docType package
 #' @name furdeb

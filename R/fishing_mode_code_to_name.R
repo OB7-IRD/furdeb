@@ -1,15 +1,14 @@
 #' @title Fishing mode(s) name(s) creation
 #' @description Fishing mode(s) name(s) creation in relation with fishing mode referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @name fishing_mode_to_name
+#' @name fishing_mode_code_to_name
 #' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @param fishing_mode_code Fishing mode code(s) code(s) in numerical values.
-#' @param detail If you want to display all the fishing modes name or a shortcut with "all fishing modes". By default TRUE.
 #' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return A character vector in relation with the fishing mode(s) code(s) provided.
 #' @export
 #' @examples
 #' tmp <- fishing_mode_to_name(ocean_code = c(1, 2, 3))
-fishing_mode_to_name <- function (fishing_mode_code) {
+fishing_mode_code_to_name <- function (fishing_mode_code) {
   # Arguments verification ----
   if (missing(fishing_mode_code) || ! is.numeric(fishing_mode_code)) {
     stop("Missing argument \"fishing_mode_code\" or not numeric value(s).",
