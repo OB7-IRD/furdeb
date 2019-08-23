@@ -8,6 +8,8 @@ fishing_mode_to_name(fishing_mode_code)
 }
 \arguments{
 \item{fishing_mode_code}{Fishing mode code(s) code(s) in numerical values.}
+
+\item{detail}{If you want to display all the fishing modes name or a shortcut with "all fishing modes". By default TRUE.}
 }
 \value{
 A character vector in relation with the fishing mode(s) code(s) provided.
