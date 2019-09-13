@@ -1,3 +1,5 @@
+![furbed_logo](furdeb_logo.png)
+
 # Package furdeb
 
 FUnctions for R DEvelopment and Beyond!
