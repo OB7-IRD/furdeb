@@ -2,20 +2,30 @@
 % Please edit documentation in R/access_dbconnection.R
 \name{access_dbconnection}
 \alias{access_dbconnection}
-\title{Connection with Access database (with a JDBC driver)}
+\title{Connection with Access database}
 \usage{
-access_dbconnection(driver_name = "u_can_access", access_db_loc)
+access_dbconnection(driver_name = "u_can_access", access_db_loc,
+  access_jdbc42_driver_loc = NULL)
 }
 \arguments{
-\item{driver_name}{Access' driver name. By default "u_can_access". You can also choose the driver "access_jdbc42".}
+\item{driver_name}{Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).}
 
 \item{access_db_loc}{Location of the Access database (for example Directory_1\%Directory_2\%Directory_X\%access_DB.mdb).}
+
+\item{access_jdbc42_driver_loc}{Location of the access_jdbc42 driver (.jar file).}
 }
 \value{
 The function return a R object with Access database identification of connection.
 }
 \description{
 Generate a common connection with an Access database using a JDBC driver.
+}
+\details{
+Difference between drivers "u_can_access" and "access_jdbc42":
+\itemize{
+ \item{"u_can_access": }{the main advantage is it's a free java JDBC driver. To understand briefly the process behind, the Access database is converted in HSQLDB system. This conversion could take a long time, especially if the database if large. Furthermore, after the conversion, queries should be faster than if there run on an Access database.}
+ \item{"access_jdbc42": }{this driver is paying. In opposition with the "u_can_access" driver, the Access database is not converted. The connection should be faster but the queries could be longer.}
+}
 }
 \references{
 \url{https://github.com/OB7-IRD/furdeb}
