@@ -13,8 +13,7 @@
 #' @section Spatial manipulations and design:
 #'\itemize{
 #' \item{\code{\link{avdth_position_conversion_dec}}}
-#' \item{\code{\link{fao_area_overlay}}}
-#' \item{\code{\link{fao_area_overlay_unassociated}}}
+#' \item{\code{\link{marine_area_overlay}}}
 #' \item{\code{\link{lat_long_to_csquare}}}
 #' \item{\code{\link{cwp_to_center}}}
 #' \item{\code{\link{cwp_to_lat_lon}}}
