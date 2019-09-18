@@ -9,7 +9,7 @@
 #' @param latitude_name Latitude column name in your data (character value).
 #' @param tolerance Tolerance of maximum distance between coordinates and area selected (in km, numerical value expected). By default no tolerance (0 km).
 #' @references \url{https://github.com/OB7-IRD/furdeb}
-#' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification.
+#' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):
 #' \itemize{
@@ -130,7 +130,7 @@ marine_area_overlay <- function(data,
     }
     tmp4 <- select(.data = tmp3, min_dist)
     names(tmp4) <- paste0(as.character(accuracy[step1]),
-                          "_NEAR")
+                          "_MAO")
     tmp2 <- cbind(tmp2,
                   tmp4)
     if (step1 == names(accuracy)[length(accuracy)]) {

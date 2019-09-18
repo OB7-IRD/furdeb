@@ -19,7 +19,7 @@ marine_area_overlay(data, overlay_level = "major", longitude_name,
 \item{tolerance}{Tolerance of maximum distance between coordinates and area selected (in km, numerical value expected). By default no tolerance (0 km).}
 }
 \value{
-The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification.
+The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 }
 \description{
 Consistent spatial marine area overlay (related to fao area) for points, grids and polygons.
