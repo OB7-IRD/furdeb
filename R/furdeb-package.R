@@ -25,5 +25,5 @@
 #' \item{\code{\link{gear_code_to_name}}}
 #' }
 #' @docType package
-#' @name furdeb
+#' @name furdeb-package
 "_PACKAGE"
