@@ -1,9 +1,11 @@
 Package: furdeb
 Type: Package
 Title: FUnctions for R DEvelopment and Beyond
-Version: 1.0.0
-Authors@R: person("Mathieu", "Depetris", email = "mathieu.depetris@ird.fr", role = c("aut", "cre"))
-Maintainer: Mathieu Depetris <mathieu.depetris@ird.fr>
+Version: 0.1.0
+Authors@R: c(person("Ob7 -", "Observatory of Exploited Tropical Pelagic Ecosystems", email = "ob7@ird.fr", role = c("cre")),
+    person("Mathieu", "Depetris", email = "mathieu.depetris@ird.fr", role = c("aut")),
+    person("Antoine", "Duparc", email = "antoine.duparc@ird.fr", role = c("ctb")),
+    person("Norbert", "Billet", email = "norbert.billet@ifremer.fr", role = c("ctb")))
 Description: Functions and processes for R development and beyond!
 License: GPL-3
 Encoding: UTF-8

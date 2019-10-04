@@ -54,6 +54,18 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Mathieu Depetris \email{mathieu.depetris@ird.fr}
+\strong{Maintainer}: Ob7 - Observatory of Exploited Tropical Pelagic Ecosystems \email{ob7@ird.fr}
+
+Authors:
+\itemize{
+  \item Mathieu Depetris \email{mathieu.depetris@ird.fr}
+}
+
+Other contributors:
+\itemize{
+  \item Antoine Duparc \email{antoine.duparc@ird.fr} [contributor]
+  \item Norbert Billet \email{norbert.billet@ifremer.fr} [contributor]
+}
 
 }
+\keyword{internal}

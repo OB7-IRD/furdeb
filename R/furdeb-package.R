@@ -24,6 +24,5 @@
 #' \item{\code{\link{ocean_code_to_name}}}
 #' \item{\code{\link{gear_code_to_name}}}
 #' }
-#' @docType package
-#' @name furdeb-package
+#' @keywords internal
 "_PACKAGE"
