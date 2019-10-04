@@ -1,13 +1,13 @@
+#' @name ocean_code_to_name
 #' @title Ocean(s) name(s) creation
 #' @description Ocean(s) name(s) creation in relation with oceans referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @name ocean_code_to_name
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @param ocean_code Ocean(s) code(s) in numerical values.
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return A character vector in relation with the ocean(s) code(s) provided.
-#' @export
 #' @examples
 #' tmp <- ocean_code_to_name(ocean_code = c(1, 2, 3))
+#' @export
+#' @importFrom dplyr last
+#' @importFrom stringr str_split
 ocean_code_to_name <- function (ocean_code) {
   # Arguments verification ----
   if (missing(ocean_code) || ! is.numeric(ocean_code)) {

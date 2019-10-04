@@ -39,17 +39,10 @@ If you want more informations visit http://www.fao.org/fishery/area/search/en
 }
 \examples{
 # Example for classification until division fao fishing area, with a tolerance of 10 km
-tmp <- fao_area_overlay(data = data,
+\dontrun{
+#' tmp <- fao_area_overlay(data = data,
                         overlay_level = "division",
                         longitude_name = "longitude",
                         latitude_name = "latitude",
-                        tolerance = 10)
-}
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Antoine Duparc, \email{antoine.duparc@ird.fr}
-
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
+                        tolerance = 10)}
 }

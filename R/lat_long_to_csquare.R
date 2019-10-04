@@ -1,13 +1,11 @@
 #' @name lat_long_to_csquare
 #' @title Latitude-longitude to c-square converter
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Latitude-longitude to c-square converter.
 #' @param data R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
 #' @param grid_square Resolution for the global grid square (numeric value). You have just to provide the first value of the resolution. Check the section details below.
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
 #' @param boundary_ajustement_factor Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return your input dataframe with one more columns filled with the c-square value (according your specification in the "grid_square" argument).
 #' @details
 #' For the argument "grid_square", you can choose between 7 modalities:
@@ -24,10 +22,11 @@
 #' If you want more informations about C-square visit http://www.cmar.csiro.au/csquares/spec1-1.htm.
 #' @examples
 #' # Example for classification until division fao fishing area
+#' \dontrun{
 #' tmp <- lat_long_to_csquare(data = balbaya_landing_rectangle,
 #'                            grid_square = 0.5,
 #'                            latitude_name = "latitude",
-#'                            longitude_name = "longitude")
+#'                            longitude_name = "longitude")}
 #' @export
 lat_long_to_csquare <- function (data,
                                  grid_square,

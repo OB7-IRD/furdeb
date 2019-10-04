@@ -1,6 +1,5 @@
 #' @name configuration_file
 #' @title Configuration file
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Apply several options to R from a configuration file (able to create one if necessary).
 #' @param new_configtype A logical vector: TRUE, FALSE, T or F. Provide false value is you want to use an existing configuration file. By default, the function create a new configuration file (=TRUE).
 #' @param path_configtype Path (character) of the configuration file that you want to use.

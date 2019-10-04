@@ -23,14 +23,9 @@ Interpolate values into a SQL string query.
 }
 \examples{
 For a query on an Access database
-final_query <- sql_inset(db_type = "access",
+\dontrun{
+#' final_query <- sql_inset(db_type = "access",
                          replacement = 2017,
                          pattern = "year_interpolate",
-                         query = intial_query)
-}
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
+                         query = intial_query)}
 }

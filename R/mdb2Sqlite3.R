@@ -1,17 +1,16 @@
 #' @name mdb2Sqlite3
 #' @title Converting an Access database to an SQLite3 database
-#' @author Norbert Billet, \email{norbert.billet@@ifremer.fr}
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Convert Access database to sqlite3 database.
 #' @param access_con Object with Access database connection identification.
 #' @param target_dir Directory where the SQLite3 file will be created.
 #' @param target_file_name SQLite3 file name (for example: database_name.sqlite3).
 #' @param verbose Should the script be verbose.
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return an SQLite3 database in the location directory. The file path of the SQLite3 file is also available.
 #' @section Specification:
 #' Should work on windows and on linux (need testing for this OS). For linux the "mdb-tools" must be installed.
 #' @export
+#' @importFrom RSQLite dbConnect SQLite dbGetQuery
+#' @importFrom DBI dbWriteTable dbDisconnect
 mdb2Sqlite3 <- function(access_con,
                         target_dir,
                         target_file_name,

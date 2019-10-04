@@ -19,11 +19,3 @@ This function add four columns to the input data frame: cwp, quadrat, longitude_
 \description{
 Conversion of CWP to latitude and longitude (in decimal degrees). Be careful, latitude and longitude are related to the cwp centroid.
 }
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Antoine Duparc, \email{antoie.duparc@ird.fr}
-
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
-}

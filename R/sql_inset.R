@@ -1,19 +1,18 @@
+#' @name sql_inset
 #' @title Interpolate values into a SQL string query
 #' @description Interpolate values into a SQL string query.
-#' @name sql_inset
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @param db_type Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.
 #' @param replacement Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().
 #' @param pattern Character string containing a string expression to be matched.
 #' @param query A character vector where matches are sought, or an object which can be coerced by as.character to a character vector.
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return A vector contain the query with replacement value(s).
 #' @examples
 #' For a query on an Access database
-#' final_query <- sql_inset(db_type = "access",
+#' \dontrun{
+#' #' final_query <- sql_inset(db_type = "access",
 #'                          replacement = 2017,
 #'                          pattern = "year_interpolate",
-#'                          query = intial_query)
+#'                          query = intial_query)}
 #' @export
 sql_inset <- function (db_type,
                        replacement,

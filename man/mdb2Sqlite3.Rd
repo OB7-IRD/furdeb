@@ -26,11 +26,3 @@ Convert Access database to sqlite3 database.
 Should work on windows and on linux (need testing for this OS). For linux the "mdb-tools" must be installed.
 }
 
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Norbert Billet, \email{norbert.billet@ifremer.fr}
-
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
-}

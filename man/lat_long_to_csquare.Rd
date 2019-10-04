@@ -40,14 +40,9 @@ If you want more informations about C-square visit http://www.cmar.csiro.au/csqu
 }
 \examples{
 # Example for classification until division fao fishing area
+\dontrun{
 tmp <- lat_long_to_csquare(data = balbaya_landing_rectangle,
                            grid_square = 0.5,
                            latitude_name = "latitude",
-                           longitude_name = "longitude")
-}
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
+                           longitude_name = "longitude")}
 }

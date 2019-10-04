@@ -1,14 +1,11 @@
 #' @name marine_area_overlay
 #' @title Consistent spatial marine area overlay (related to fao area)
-#' @author Antoine Duparc, \email{antoine.duparc@@ird.fr}
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Consistent spatial marine area overlay (related to fao area) for points, grids and polygons.
 #' @param data R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.
 #' @param overlay_level Level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.
 #' @param longitude_name Longitude column name in your data (character value).
 #' @param latitude_name Latitude column name in your data (character value).
 #' @param tolerance Tolerance of maximum distance between coordinates and area selected (in km, numerical value expected). By default no tolerance (0 km).
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):
@@ -24,12 +21,17 @@
 #' If you want more informations visit http://www.fao.org/fishery/area/search/en
 #' @examples
 #' # Example for classification until division fao fishing area, with a tolerance of 10 km
-#' tmp <- fao_area_overlay(data = data,
+#' \dontrun{
+#' #' tmp <- fao_area_overlay(data = data,
 #'                         overlay_level = "division",
 #'                         longitude_name = "longitude",
 #'                         latitude_name = "latitude",
-#'                         tolerance = 10)
+#'                         tolerance = 10)}
 #' @export
+#' @importFrom rgdal readOGR
+#' @importFrom sp coordinates proj4string spTransform
+#' @importFrom rgeos gDistance
+#' @importFrom dplyr inner_join select
 marine_area_overlay <- function(data,
                                 overlay_level = "major",
                                 longitude_name,
@@ -137,7 +139,7 @@ marine_area_overlay <- function(data,
       data <- dplyr::inner_join(data,
                                 tmp2,
                                 by = c(latitude_name, longitude_name)) %>%
-        select(-longitude_bis, -latitude_bis)
+        dplyr::select(-longitude_bis, -latitude_bis)
     }
   }
   names(data) <- tolower(names(data))

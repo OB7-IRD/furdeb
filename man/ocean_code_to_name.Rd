@@ -18,9 +18,3 @@ Ocean(s) name(s) creation in relation with oceans referential of the IRD Ob7 (Ob
 \examples{
 tmp <- ocean_code_to_name(ocean_code = c(1, 2, 3))
 }
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
-}

@@ -1,13 +1,13 @@
+#' @name gear_code_to_name
 #' @title Gear(s) name(s) creation
 #' @description Gear(s) name(s) creation in relation with gears referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @name gear_code_to_name
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @param gear_code Gear(s) code(s) in numerical values.
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return A character vector in relation with the gear(s) code(s) provided.
-#' @export
 #' @examples
-#' tmp <- gear_code_to_name(gear_code = c(1, 2, 3))
+#' gear_code_to_name(gear_code = c(1, 2, 3))
+#' @export
+#' @importFrom dplyr last
+#' @importFrom stringr str_split
 gear_code_to_name <- function(gear_code) {
   # Arguments verification ----
   if (missing(gear_code) || ! is.numeric(gear_code)) {

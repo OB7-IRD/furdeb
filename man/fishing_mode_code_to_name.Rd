@@ -16,11 +16,5 @@ A character vector in relation with the fishing mode(s) code(s) provided.
 Fishing mode(s) name(s) creation in relation with fishing mode referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
 }
 \examples{
-tmp <- fishing_mode_to_name(ocean_code = c(1, 2, 3))
-}
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
+fishing_mode_code_to_name(fishing_mode_code = c(1, 2, 3))
 }

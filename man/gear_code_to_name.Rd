@@ -16,11 +16,5 @@ A character vector in relation with the gear(s) code(s) provided.
 Gear(s) name(s) creation in relation with gears referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
 }
 \examples{
-tmp <- gear_code_to_name(gear_code = c(1, 2, 3))
-}
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
-}
-\author{
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
+gear_code_to_name(gear_code = c(1, 2, 3))
 }

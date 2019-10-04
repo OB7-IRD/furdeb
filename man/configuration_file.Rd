@@ -27,6 +27,3 @@ configuration_file(new_configtype = FALSE,
 \references{
 \url{https://github.com/OB7-IRD/furdeb}
 }
-\author{
-Mathieu Depetris, \email{mathieu.depetris@ird.fr}
-}

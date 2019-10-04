@@ -1,11 +1,9 @@
 #' @name access_dbconnection
 #' @title Connection with Access database
-#' @author Mathieu Depetris, \email{mathieu.depetris@@ird.fr}
 #' @description Generate a common connection with an Access database using a JDBC driver.
 #' @param driver_name Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).
 #' @param access_db_loc Location of the Access database (for example Directory_1\%Directory_2\%Directory_X\%access_DB.mdb).
 #' @param access_jdbc42_driver_loc Location of the access_jdbc42 driver (.jar file).
-#' @references \url{https://github.com/OB7-IRD/furdeb}
 #' @return The function return a R object with Access database identification of connection.
 #' @details
 #' Difference between drivers "u_can_access" and "access_jdbc42":
@@ -14,6 +12,8 @@
 #'  \item{"access_jdbc42": }{this driver is paying. In opposition with the "u_can_access" driver, the Access database is not converted. The connection should be faster but the queries could be longer.}
 #' }
 #' @export
+#' @importFrom RJDBC JDBC dbConnect
+#' @importFrom rJava .jinit
 access_dbconnection <- function(driver_name = "u_can_access",
                                 access_db_loc,
                                 access_jdbc42_driver_loc = NULL) {
