@@ -1,10 +1,10 @@
 #' @name mdb2Sqlite3
 #' @title Converting an Access database to an SQLite3 database
 #' @description Convert Access database to sqlite3 database.
-#' @param access_con Object with Access database connection identification.
-#' @param target_dir Directory where the SQLite3 file will be created.
-#' @param target_file_name SQLite3 file name (for example: database_name.sqlite3).
-#' @param verbose Should the script be verbose.
+#' @param access_con (JDBCConnection) Object with Access database connection identification.
+#' @param target_dir (character) Directory where the SQLite3 file will be created.
+#' @param target_file_name (character) SQLite3 file name (for example: database_name.sqlite3).
+#' @param verbose (logical) Should the script be verbose.
 #' @return The function return an SQLite3 database in the location directory. The file path of the SQLite3 file is also available.
 #' @section Specification:
 #' Should work on windows and on linux (need testing for this OS). For linux the "mdb-tools" must be installed.
@@ -14,15 +14,15 @@
 mdb2Sqlite3 <- function(access_con,
                         target_dir,
                         target_file_name,
-                        verbose = TRUE) {
+                        verbose = T) {
   if (missing(access_con)) {
-    stop("Argument access_con not found\nInvalid connection with Access database")
+    stop("invalid \"access_con\" argument")
   }
-  if (missing(target_dir)) {
-    stop("Target directory not found")
+  if (missing(target_dir) || class(target_dir) != "character") {
+    stop("invalid \"target_dir\" argument")
   }
-  if (missing(target_file_name)) {
-    stop("Name of the SQLite database not found")
+  if (missing(target_file_name) || class(target_file_name) != "character") {
+    stop("invalid \"target_file_name\" argument")
   } else {
     sqlite_file_path <- file.path(target_dir,
                                   target_file_name,
@@ -31,11 +31,7 @@ mdb2Sqlite3 <- function(access_con,
   if (file.exists(sqlite_file_path)) {
     stop(paste0("Target SQLite file ",
                 sqlite_file_path,
-                " already exist. \nPlease remove it."))
-  }
-  if (! require(RSQLite,
-                quietly = TRUE)) {
-    stop("\n***\nPlease install RSQLite library with:\ninstall.packages(\"RSQLite\")\n***")
+                " already exist.\nPlease remove it."))
   }
   sysname <- Sys.info()[['sysname']]
   if (sysname == "Windows") {

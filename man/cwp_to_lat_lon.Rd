@@ -7,9 +7,9 @@
 cwp_to_lat_lon(data, cwp_name)
 }
 \arguments{
-\item{data}{A R data frame with at least one column with cwp data.}
+\item{data}{(data.frame) A R data frame with at least one column with cwp data.}
 
-\item{cwp_name}{Column name of data data in text format.}
+\item{cwp_name}{(character) Column name of cwp data.}
 }
 \value{
 This function add four columns to the input data frame: cwp, quadrat, longitude_dec and latitude_dec (with longitude and latitude data in decimal format).

@@ -7,15 +7,15 @@
 db_connection(db_user, db_password, db_dbname, db_host, db_port)
 }
 \arguments{
-\item{db_user}{Login or username for the database connection.}
+\item{db_user}{(character) Login or username for the database connection.}
 
-\item{db_password}{Password for the database connection.}
+\item{db_password}{(character) Password for the database connection.}
 
-\item{db_dbname}{Name/identification of the database.}
+\item{db_dbname}{(character) Name/identification of the database.}
 
-\item{db_host}{Host adress of the database.}
+\item{db_host}{(character) Host adress of the database.}
 
-\item{db_port}{Identification of the port.}
+\item{db_port}{(numeric) Identification of the port.}
 }
 \value{
 The function return a format class PosstgreSQLConnection in the R's global envrionment.

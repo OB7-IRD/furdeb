@@ -1,11 +1,11 @@
 #' @name db_connection
 #' @title Connection to a PostgreSQL database
 #' @description This function able to establish a connection with a PostgreSQL database.
-#' @param db_user Login or username for the database connection.
-#' @param db_password Password for the database connection.
-#' @param db_dbname Name/identification of the database.
-#' @param db_host Host adress of the database.
-#' @param db_port Identification of the port.
+#' @param db_user (character) Login or username for the database connection.
+#' @param db_password (character) Password for the database connection.
+#' @param db_dbname (character) Name/identification of the database.
+#' @param db_host (character) Host adress of the database.
+#' @param db_port (numeric) Identification of the port.
 #' @return The function return a format class PosstgreSQLConnection in the R's global envrionment.
 #' @export
 #' @importFrom RPostgreSQL dbConnect

@@ -1,10 +1,10 @@
 #' @name avdth_position_conversion_dec
 #' @title AVDTH position conversion to decimal value
 #' @description Convert position format in AVDTH to decimal format.
-#' @param data A R data frame.
-#' @param latitude Column name of latitude data in text format.
-#' @param longitude Column name of longitude data in text format.
-#' @param quadrant Column name of quadrant data in text format.
+#' @param data (data.frame) A R data frame.
+#' @param latitude (character) Column name of latitude data.
+#' @param longitude (character) Column name of longitude data.
+#' @param quadrant (character) Column name of quadrant data.
 #' @return This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.
 #' @export
 avdth_position_conversion_dec <- function (data,
@@ -13,25 +13,25 @@ avdth_position_conversion_dec <- function (data,
                                            quadrant) {
   if (missing(data)
       || ! is.data.frame(data)) {
-    stop("Missing argument \"data\" or invalid format (data frame expected)\nPlease correct it before continuing")
+    stop("invalid \"data\" argument")
   }
 
   if (missing(latitude)
       || ! is.character(latitude)
       || ! latitude %in% names(data)) {
-    stop("Missing argument \"latitude\" or invalid format (character expected) or not present in the data frame\nPlease correct it before continuing")
+    stop("invalid \"latitude\" argument")
   }
 
   if (missing(longitude)
       || ! is.character(longitude)
       || ! longitude %in% names(data)) {
-    stop("Missing argument \"longitude\" or invalid format (character expected) or not present in the data frame\nPlease correct it before continuing")
+    stop("invalid \"longitude\" argument")
   }
 
   if (missing(quadrant)
       || ! is.character(quadrant)
       || ! quadrant %in% names(data)) {
-    stop("Missing argument \"quadrant\" or invalid format (character expected) or not present in the data frame\nPlease correct it before continuing")
+    stop("invalid \"quadrant\" argument")
   }
 
   data[, "longitude_dec"] <- ifelse(data[, quadrant] %in% c(1, 2),

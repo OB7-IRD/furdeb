@@ -4,16 +4,16 @@
 \alias{mdb2Sqlite3}
 \title{Converting an Access database to an SQLite3 database}
 \usage{
-mdb2Sqlite3(access_con, target_dir, target_file_name, verbose = TRUE)
+mdb2Sqlite3(access_con, target_dir, target_file_name, verbose = T)
 }
 \arguments{
-\item{access_con}{Object with Access database connection identification.}
+\item{access_con}{(JDBCConnection) Object with Access database connection identification.}
 
-\item{target_dir}{Directory where the SQLite3 file will be created.}
+\item{target_dir}{(character) Directory where the SQLite3 file will be created.}
 
-\item{target_file_name}{SQLite3 file name (for example: database_name.sqlite3).}
+\item{target_file_name}{(character) SQLite3 file name (for example: database_name.sqlite3).}
 
-\item{verbose}{Should the script be verbose.}
+\item{verbose}{(logical) Should the script be verbose.}
 }
 \value{
 The function return an SQLite3 database in the location directory. The file path of the SQLite3 file is also available.

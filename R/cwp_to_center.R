@@ -1,9 +1,9 @@
 #' @name cwp_to_center
 #' @title Conversion of cwp to latitude and longitude (related to cwp centroid)
 #' @description Conversion of CWP to latitude and longitude (in decimal degrees). Be careful, latitude and longitude are related to the cwp centroid.
-#' @param data A R data frame with at least one column with cwp data.
-#' @param cwp_name Column name of data data in text format.
-#' @param cwp_length Length of cwp. For example, for a square of 1°x1° enter 1.
+#' @param data (data.frame) A R data frame with at least one column with cwp data.
+#' @param cwp_name (character) Column name of cwp data.
+#' @param cwp_length (numeric) Length of cwp. For example, for a square of 1°x1° enter 1.
 #' @return This function add four columns to the input data frame: cwp, quadrat, longitude_dec and latitude_dec (with longitude and latitude data in decimal format).
 #' @export
 #' @importFrom dplyr rowwise mutate right_join
@@ -13,16 +13,16 @@ cwp_to_center <- function(data,
                         {
   if (missing(data)
       || ! is.data.frame(data)) {
-    stop("Missing argument \"data\" or invalid format (data frame expected)\nPlease correct it before continuing")
+    stop("invalid \"data\" argument")
   }
   if (missing(cwp_name)
       || ! is.character(cwp_name)
       || ! cwp_name %in% names(data)) {
-    stop("Missing argument \"cwp_name\" or invalid format (character expected) or not present in the data frame\nPlease correct it before continuing")
+    stop("invalid \"cwp_name\" argument")
   }
   if (missing(cwp_length)
       || ! is.numeric(cwp_length)) {
-    stop("Missing argument \"cwp_length\" or invalid format (numeric expected)\nPlease correct it before continuing")
+    stop("invalid \"cwp_length\" argument")
   }
   backup <- getOption("scipen")
   options(scipen = 999)

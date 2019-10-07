@@ -4,12 +4,12 @@
 \alias{configuration_file}
 \title{Configuration file}
 \usage{
-configuration_file(new_configtype = TRUE, path_configtype)
+configuration_file(new_config = T, path_config)
 }
 \arguments{
-\item{new_configtype}{A logical vector: TRUE, FALSE, T or F. Provide false value is you want to use an existing configuration file. By default, the function create a new configuration file (=TRUE).}
+\item{new_config}{(logical) Provide FALSE/F value is you want to use an existing configuration file. By default, the function create a new configuration file (TRUE/T argument value).}
 
-\item{path_configtype}{Path (character) of the configuration file that you want to use.}
+\item{path_config}{(character) Path of the configuration file that you want to use.}
 }
 \value{
 The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").
@@ -19,11 +19,10 @@ Apply several options to R from a configuration file (able to create one if nece
 }
 \examples{
 # If you want to create a new configuration file
-configuration_file()
+\dontrun{
+configuration_file()}
 # If you want to use an existing configuration file
-configuration_file(new_configtype = FALSE,
-                   path_configtype = "path_of_your_own_configuration_file")
-}
-\references{
-\url{https://github.com/OB7-IRD/furdeb}
+\dontrun{
+configuration_file(new_config = F,
+                   path_config = "path_of_your_own_configuration_file")}
 }

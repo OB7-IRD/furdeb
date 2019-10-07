@@ -1,11 +1,11 @@
 #' @name lat_long_to_csquare
 #' @title Latitude-longitude to c-square converter
 #' @description Latitude-longitude to c-square converter.
-#' @param data R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
-#' @param grid_square Resolution for the global grid square (numeric value). You have just to provide the first value of the resolution. Check the section details below.
-#' @param longitude_name Longitude column name in your data (character value).
-#' @param latitude_name Latitude column name in your data (character value).
-#' @param boundary_ajustement_factor Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.
+#' @param data (data.frame) R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
+#' @param grid_square (numeric) Resolution for the global grid square. You have just to provide the first value of the resolution. Check the section details below.
+#' @param longitude_name (character) Longitude column name in your data.
+#' @param latitude_name (character) Latitude column name in your data.
+#' @param boundary_ajustement_factor (numeric) Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.
 #' @return The function return your input dataframe with one more columns filled with the c-square value (according your specification in the "grid_square" argument).
 #' @details
 #' For the argument "grid_square", you can choose between 7 modalities:

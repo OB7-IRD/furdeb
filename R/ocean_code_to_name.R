@@ -1,19 +1,17 @@
 #' @name ocean_code_to_name
 #' @title Ocean(s) name(s) creation
 #' @description Ocean(s) name(s) creation in relation with oceans referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @param ocean_code Ocean(s) code(s) in numerical values.
+#' @param ocean_code (numeric) Ocean(s) code(s).
 #' @return A character vector in relation with the ocean(s) code(s) provided.
 #' @examples
-#' tmp <- ocean_code_to_name(ocean_code = c(1, 2, 3))
+#' ocean_code_to_name(ocean_code = c(1, 2, 3))
 #' @export
 #' @importFrom dplyr last
 #' @importFrom stringr str_split
 ocean_code_to_name <- function (ocean_code) {
   # Arguments verification ----
   if (missing(ocean_code) || ! is.numeric(ocean_code)) {
-    stop("Missing argument \"ocean_code\" or not numeric value(s).",
-         "\n",
-         "Please correct it before running the function.")
+    stop("invalid \"ocean_code\" argument")
   }
   # Function ----
   if (length(ocean_code) == 1) {

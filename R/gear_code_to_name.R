@@ -1,7 +1,7 @@
 #' @name gear_code_to_name
 #' @title Gear(s) name(s) creation
 #' @description Gear(s) name(s) creation in relation with gears referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @param gear_code Gear(s) code(s) in numerical values.
+#' @param gear_code (numeric) Gear(s) code(s).
 #' @return A character vector in relation with the gear(s) code(s) provided.
 #' @examples
 #' gear_code_to_name(gear_code = c(1, 2, 3))
@@ -11,9 +11,7 @@
 gear_code_to_name <- function(gear_code) {
   # Arguments verification ----
   if (missing(gear_code) || ! is.numeric(gear_code)) {
-    stop("Missing argument \"gear_code\" or not numeric value(s).",
-         "\n",
-         "Please correct it before running the function.")
+    stop("invalid \"gear_code\" argument")
   }
   # Function ----
   if (length(gear_code) == 1) {

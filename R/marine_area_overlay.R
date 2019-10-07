@@ -1,11 +1,11 @@
 #' @name marine_area_overlay
 #' @title Consistent spatial marine area overlay (related to fao area)
 #' @description Consistent spatial marine area overlay (related to fao area) for points, grids and polygons.
-#' @param data R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.
-#' @param overlay_level Level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.
-#' @param longitude_name Longitude column name in your data (character value).
-#' @param latitude_name Latitude column name in your data (character value).
-#' @param tolerance Tolerance of maximum distance between coordinates and area selected (in km, numerical value expected). By default no tolerance (0 km).
+#' @param data (data.frame) R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.
+#' @param overlay_level (character) Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.
+#' @param longitude_name (character)Longitude column name in your data.
+#' @param latitude_name (character)Latitude column name in your data.
+#' @param tolerance (numeric) Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).
 #' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):
@@ -38,31 +38,18 @@ marine_area_overlay <- function(data,
                                 latitude_name,
                                 tolerance = 0) {
   if (missing(data) || ! is.data.frame(data)) {
-    stop(paste0("Missing argument \"data\" or not a data frame.",
-                "\n",
-                "Please correct it before running the function."))
+    stop("invalid \"data\" argument")
   }
-  if (! overlay_level %in% c("ocean", "major", "subarea", "division", "subdivision", "subunit")) {
-    stop(paste0("Argument \"overlay_level\" not correct.",
-                "\n",
-                "Expected value: ocean, major, subarea, division, subdivision or subunit.",
-                "\n",
-                "Please correct it before running the function."))
-  }
+  overlay_level <- match.arg(arg = overlay_level,
+                             choices = c("ocean", "major", "subarea", "division", "subdivision", "subunit"))
   if (missing(longitude_name) || ! is.character(longitude_name)) {
-    stop(paste0("Missing argument \"longitude_name\" or not character value.",
-                "\n",
-                "Please correct it before running the function."))
+    stop("invalid \"longitude_name\" argument")
   }
   if (missing(latitude_name) || ! is.character(latitude_name)) {
-    stop(paste0("Missing argument \"latitude_name\" or not character value.",
-                "\n",
-                "Please correct it before running the function."))
+    stop("invalid \"latitude_name\" argument")
   }
   if (! is.numeric(tolerance)) {
-    stop(paste0("Missing argument \"tolerance\" or not numerical value.",
-                "\n",
-                "Please correct it before running the function."))
+    stop("Missing \"tolerance\" argument")
   }
   cat("Be careful!",
       "\n",

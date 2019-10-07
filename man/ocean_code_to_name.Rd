@@ -7,7 +7,7 @@
 ocean_code_to_name(ocean_code)
 }
 \arguments{
-\item{ocean_code}{Ocean(s) code(s) in numerical values.}
+\item{ocean_code}{(numeric) Ocean(s) code(s).}
 }
 \value{
 A character vector in relation with the ocean(s) code(s) provided.
@@ -16,5 +16,5 @@ A character vector in relation with the ocean(s) code(s) provided.
 Ocean(s) name(s) creation in relation with oceans referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
 }
 \examples{
-tmp <- ocean_code_to_name(ocean_code = c(1, 2, 3))
+ocean_code_to_name(ocean_code = c(1, 2, 3))
 }

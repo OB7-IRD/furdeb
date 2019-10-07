@@ -1,7 +1,7 @@
 #' @name fishing_mode_code_to_name
 #' @title Fishing mode(s) name(s) creation
 #' @description Fishing mode(s) name(s) creation in relation with fishing mode referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @param fishing_mode_code Fishing mode code(s) code(s) in numerical values.
+#' @param fishing_mode_code (numeric) Fishing mode code(s).
 #' @return A character vector in relation with the fishing mode(s) code(s) provided.
 #' @examples
 #' fishing_mode_code_to_name(fishing_mode_code = c(1, 2, 3))
@@ -11,9 +11,7 @@
 fishing_mode_code_to_name <- function (fishing_mode_code) {
   # Arguments verification ----
   if (missing(fishing_mode_code) || ! is.numeric(fishing_mode_code)) {
-    stop("Missing argument \"fishing_mode_code\" or not numeric value(s).",
-         "\n",
-         "Please correct it before running the function.")
+    stop("invalid \"fishing_mode_code\" argument")
   }
   # Function ----
   if (length(fishing_mode_code) == 1) {

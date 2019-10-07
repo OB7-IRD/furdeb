@@ -1,45 +1,34 @@
 #' @name sql_inset
 #' @title Interpolate values into a SQL string query
 #' @description Interpolate values into a SQL string query.
-#' @param db_type Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.
-#' @param replacement Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().
-#' @param pattern Character string containing a string expression to be matched.
-#' @param query A character vector where matches are sought, or an object which can be coerced by as.character to a character vector.
+#' @param db_type (character) Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.
+#' @param replacement (character) Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().
+#' @param pattern (character) String expression to be matched.
+#' @param query (character) Vector where matches are sought, or an object which can be coerced by as.character to a character vector.
 #' @return A vector contain the query with replacement value(s).
 #' @examples
 #' For a query on an Access database
 #' \dontrun{
 #' #' final_query <- sql_inset(db_type = "access",
-#'                          replacement = 2017,
-#'                          pattern = "year_interpolate",
-#'                          query = intial_query)}
+#'                             replacement = 2017,
+#'                             pattern = "year_interpolate",
+#'                             query = "intial_query")}
 #' @export
 sql_inset <- function (db_type,
                        replacement,
                        pattern,
                        query) {
   # Arguments verification ----
-  if (missing(db_type) || ! db_type %in% c("access", "postgresql")) {
-    stop("Missing argument \"db_type\" or value inside not allowed.",
-         "\n",
-         "For now, the function accepts only \"access\" or \"postgresql\" databases.",
-         "\n",
-         "Please correct it before running the function.")
-  }
+  match.arg(arg = db_type,
+            choices = c("access", "postgresql"))
   if (missing(replacement)) {
-    stop("Missing argument \"replacement\".",
-         "\n",
-         "Please correct it before running the function.")
+    stop("invalid \"replacement\" argument")
   }
   if (missing(pattern) || ! is.character(pattern)) {
-    stop("Missing argument \"pattern\" or value inside not character.",
-         "\n",
-         "Please correct it before running the function.")
+    stop("invalid \"pattern\" argument")
   }
   if (missing(query) || ! is.character(pattern)) {
-    stop("Missing argument \"query\" or value inside not character.",
-         "\n",
-         "Please correct it before running the function.")
+    stop("invalid \"query\" argument")
   }
 
   # Function ----

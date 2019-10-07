@@ -4,15 +4,15 @@
 \alias{access_dbconnection}
 \title{Connection with Access database}
 \usage{
-access_dbconnection(driver_name = "u_can_access", access_db_loc,
-  access_jdbc42_driver_loc = NULL)
+access_dbconnection(driver_name = "u_can_access", access_db_path,
+  access_jdbc42_driver_path)
 }
 \arguments{
-\item{driver_name}{Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).}
+\item{driver_name}{(character) Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).}
 
-\item{access_db_loc}{Location of the Access database (for example Directory_1\%Directory_2\%Directory_X\%access_DB.mdb).}
+\item{access_db_path}{(character) Path of the Access database.}
 
-\item{access_jdbc42_driver_loc}{Location of the access_jdbc42 driver (.jar file).}
+\item{access_jdbc42_driver_path}{(character, optional) Path of the access_jdbc42 driver (.jar file).}
 }
 \value{
 The function return a R object with Access database identification of connection.

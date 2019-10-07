@@ -1,37 +1,33 @@
 #' @name configuration_file
 #' @title Configuration file
 #' @description Apply several options to R from a configuration file (able to create one if necessary).
-#' @param new_configtype A logical vector: TRUE, FALSE, T or F. Provide false value is you want to use an existing configuration file. By default, the function create a new configuration file (=TRUE).
-#' @param path_configtype Path (character) of the configuration file that you want to use.
-#' @references \url{https://github.com/OB7-IRD/furdeb}
+#' @param new_config (logical) Provide FALSE/F value is you want to use an existing configuration file. By default, the function create a new configuration file (TRUE/T argument value).
+#' @param path_config (character) Path of the configuration file that you want to use.
 #' @return The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").
 #' @examples
 #' # If you want to create a new configuration file
-#' configuration_file()
+#' \dontrun{
+#' configuration_file()}
 #' # If you want to use an existing configuration file
-#' configuration_file(new_configtype = FALSE,
-#'                    path_configtype = "path_of_your_own_configuration_file")
+#' \dontrun{
+#' configuration_file(new_config = F,
+#'                    path_config = "path_of_your_own_configuration_file")}
 #' @export
-configuration_file <- function(new_configtype=TRUE,
-                               path_configtype) {
+configuration_file <- function(new_config = T,
+                               path_config) {
   # Arguments verification ----
-  if (! is.logical(new_configtype)) {
-    stop("Missing argument \"new_configtype\" or value inside not TRUE or FALSE.",
-         "\n",
-         "Please correct it before running the function.")
+  if (! is.logical(new_config)) {
+    stop("invalide \"new_config\" argument")
   }
-  if (new_configtype %in% c(FALSE, F) & (missing(path_configtype) || ! is.character(path_configtype))) {
-    stop("Missing argument \"path_configtype\" or not correct path for the configuration file.",
-         "\n",
-         "Please correct it before running the function.")
+  if (new_config %in% c(FALSE, F) & (missing(path_config) || ! is.character(path_config))) {
+    stop("invalide \"path_config\" argument")
   }
-
-  if (new_configtype %in% c(FALSE, F)) {
+  if (new_config %in% c(FALSE, F)) {
     # Use configuration file ----
     # Create vector of configuration error ----
     error_list <- vector()
     # Import configuration file ----
-    tmp <- read.table(file = path_configtype,
+    tmp <- read.table(file = path_config,
                       header = TRUE,
                       sep = ";")
     # Location of working directory ----

@@ -8,15 +8,15 @@ marine_area_overlay(data, overlay_level = "major", longitude_name,
   latitude_name, tolerance = 0)
 }
 \arguments{
-\item{data}{R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.}
+\item{data}{(data.frame) R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.}
 
-\item{overlay_level}{Level of accuarcy that you want for classified your data (character value). By default, major fao fishing area are selected. Check the section details below.}
+\item{overlay_level}{(character) Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.}
 
-\item{longitude_name}{Longitude column name in your data (character value).}
+\item{longitude_name}{(character)Longitude column name in your data.}
 
-\item{latitude_name}{Latitude column name in your data (character value).}
+\item{latitude_name}{(character)Latitude column name in your data.}
 
-\item{tolerance}{Tolerance of maximum distance between coordinates and area selected (in km, numerical value expected). By default no tolerance (0 km).}
+\item{tolerance}{(numeric) Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).}
 }
 \value{
 The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).

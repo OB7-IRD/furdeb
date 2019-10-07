@@ -7,7 +7,7 @@
 gear_code_to_name(gear_code)
 }
 \arguments{
-\item{gear_code}{Gear(s) code(s) in numerical values.}
+\item{gear_code}{(numeric) Gear(s) code(s).}
 }
 \value{
 A character vector in relation with the gear(s) code(s) provided.

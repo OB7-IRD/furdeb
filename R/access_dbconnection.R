@@ -1,9 +1,9 @@
 #' @name access_dbconnection
 #' @title Connection with Access database
 #' @description Generate a common connection with an Access database using a JDBC driver.
-#' @param driver_name Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).
-#' @param access_db_loc Location of the Access database (for example Directory_1\%Directory_2\%Directory_X\%access_DB.mdb).
-#' @param access_jdbc42_driver_loc Location of the access_jdbc42 driver (.jar file).
+#' @param driver_name (character) Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).
+#' @param access_db_path (character) Path of the Access database.
+#' @param access_jdbc42_driver_path (character, optional) Path of the access_jdbc42 driver (.jar file).
 #' @return The function return a R object with Access database identification of connection.
 #' @details
 #' Difference between drivers "u_can_access" and "access_jdbc42":
@@ -15,34 +15,29 @@
 #' @importFrom RJDBC JDBC dbConnect
 #' @importFrom rJava .jinit
 access_dbconnection <- function(driver_name = "u_can_access",
-                                access_db_loc,
-                                access_jdbc42_driver_loc = NULL) {
-  # Driver name verification
-  if (! driver_name %in% c("u_can_access", "access_jdbc42")) {
-    stop(paste0("Missing argument \"driver_name\" or not supported yet.",
-                "\n",
-                "You could choose between: \"u_can_access\" and \"access_jdbc42\".",
-                "\n",
-                "Please correct it before running the function."))
+                                access_db_path,
+                                access_jdbc42_driver_path) {
+  # Driver name verification ----
+  driver_name <- match.arg(arg = driver_name,
+                           choices = c("u_can_access", "access_jdbc42"))
+  # Access DB path verification ----
+  if (! is.character(access_db_path)) {
+    stop("invalid \"access_db_path\" argument")
   }
 
   if (driver_name == "access_jdbc42") {
-    # Driver path verification
-    if (is.null(access_jdbc42_driver_loc) || ! is.character(access_jdbc42_driver_loc)) {
-      stop(paste0("Argument \"access_jdbc42_driver_loc\" invalid.",
-                  "\n",
-                  "You have to provide a correct path to the driver location.",
-                  "\n",
-                  "Please correct it before running the function."))
+    # Driver path verification ----
+    if (missing(access_jdbc42_driver_path) || ! is.character(access_jdbc42_driver_path)) {
+      stop("invalid \"access_jdbc42_driver_path\" argument")
     }
     # Initializing Access JDBC driver ----
     access_jdbc_driver <- RJDBC::JDBC(driverClass = "com.hxtt.sql.access.AccessDriver",
-                                      classPath = access_jdbc42_driver_loc)
+                                      classPath = access_jdbc42_driver_path)
 
     # Connection to Access database ----
     access_jdbc_connection <- RJDBC::dbConnect(access_jdbc_driver,
                                                paste0("jdbc:access:/",
-                                                      access_db_loc))
+                                                      access_db_path))
   } else {
     if (driver_name == "u_can_access") {
       # Initializing Access JDBC driver ----
@@ -68,7 +63,7 @@ access_dbconnection <- function(driver_name = "u_can_access",
       # Connection to Access database ----
       access_jdbc_connection <- RJDBC::dbConnect(access_jdbc_driver,
                                                  paste0("jdbc:ucanaccess://",
-                                                        access_db_loc))
+                                                        access_db_path))
     }
   }
   return(access_jdbc_connection)

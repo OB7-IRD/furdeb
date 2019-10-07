@@ -7,7 +7,7 @@
 fishing_mode_code_to_name(fishing_mode_code)
 }
 \arguments{
-\item{fishing_mode_code}{Fishing mode code(s) code(s) in numerical values.}
+\item{fishing_mode_code}{(numeric) Fishing mode code(s).}
 }
 \value{
 A character vector in relation with the fishing mode(s) code(s) provided.

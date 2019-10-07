@@ -7,13 +7,13 @@
 avdth_position_conversion_dec(data, latitude, longitude, quadrant)
 }
 \arguments{
-\item{data}{A R data frame.}
+\item{data}{(data.frame) A R data frame.}
 
-\item{latitude}{Column name of latitude data in text format.}
+\item{latitude}{(character) Column name of latitude data.}
 
-\item{longitude}{Column name of longitude data in text format.}
+\item{longitude}{(character) Column name of longitude data.}
 
-\item{quadrant}{Column name of quadrant data in text format.}
+\item{quadrant}{(character) Column name of quadrant data.}
 }
 \value{
 This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.

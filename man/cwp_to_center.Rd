@@ -7,11 +7,11 @@
 cwp_to_center(data, cwp_name, cwp_length)
 }
 \arguments{
-\item{data}{A R data frame with at least one column with cwp data.}
+\item{data}{(data.frame) A R data frame with at least one column with cwp data.}
 
-\item{cwp_name}{Column name of data data in text format.}
+\item{cwp_name}{(character) Column name of cwp data.}
 
-\item{cwp_length}{Length of cwp. For example, for a square of 1°x1° enter 1.}
+\item{cwp_length}{(numeric) Length of cwp. For example, for a square of 1°x1° enter 1.}
 }
 \value{
 This function add four columns to the input data frame: cwp, quadrat, longitude_dec and latitude_dec (with longitude and latitude data in decimal format).

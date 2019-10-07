@@ -7,13 +7,13 @@
 sql_inset(db_type, replacement, pattern, query)
 }
 \arguments{
-\item{db_type}{Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.}
+\item{db_type}{(character) Type of database related to the query. For now, the function accepts only "access" or "postgresql" databases.}
 
-\item{replacement}{Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().}
+\item{replacement}{(character) Replacement argument for matched pattern (R vector). If you want to specify multiple arguments, use the function c().}
 
-\item{pattern}{Character string containing a string expression to be matched.}
+\item{pattern}{(character) String expression to be matched.}
 
-\item{query}{A character vector where matches are sought, or an object which can be coerced by as.character to a character vector.}
+\item{query}{(character) Vector where matches are sought, or an object which can be coerced by as.character to a character vector.}
 }
 \value{
 A vector contain the query with replacement value(s).
@@ -25,7 +25,7 @@ Interpolate values into a SQL string query.
 For a query on an Access database
 \dontrun{
 #' final_query <- sql_inset(db_type = "access",
-                         replacement = 2017,
-                         pattern = "year_interpolate",
-                         query = intial_query)}
+                            replacement = 2017,
+                            pattern = "year_interpolate",
+                            query = "intial_query")}
 }
