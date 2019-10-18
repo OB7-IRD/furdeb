@@ -1,7 +1,7 @@
 #' @name configuration_file
 #' @title Configuration file
 #' @description Apply several options to R from a configuration file (able to create one if necessary).
-#' @param new_config (logical) Provide FALSE/F value is you want to use an existing configuration file. By default, the function create a new configuration file (TRUE/T argument value).
+#' @param new_config (logical) Provide FALSE/F value if you want to use an existing configuration file. By default, the function creates a new configuration file (TRUE/T argument value).
 #' @param path_config (character) Path of the configuration file that you want to use.
 #' @return The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").
 #' @examples
@@ -427,7 +427,7 @@ configuration_file <- function(new_config = T,
       # Define memory allowed for java ----
       cat("Define memory allowed for java (by default 512mo)", "\n")
       cat("This step must be performed prior to loading any packages", "\n")
-      cat("For information, the value need is numeric value of memory allowed follow by unit, g (for gigabyte) or m (for megabyte)", "\n")
+      cat("For information, the value expected is a numerical value of the memory allowed follow by unit, g (for gigabyte) or m (for megabyte)", "\n")
       tmpnew[dim(tmpnew)[1] + 1, 1] <- "configuration_for_java"
       tmpnew[dim(tmpnew)[1], 2] <- "memory_allowed_for_java"
       tmpnew[dim(tmpnew)[1], 3] <- readLines(n = 1)

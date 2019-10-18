@@ -7,7 +7,7 @@
 configuration_file(new_config = T, path_config)
 }
 \arguments{
-\item{new_config}{(logical) Provide FALSE/F value is you want to use an existing configuration file. By default, the function create a new configuration file (TRUE/T argument value).}
+\item{new_config}{(logical) Provide FALSE/F value if you want to use an existing configuration file. By default, the function creates a new configuration file (TRUE/T argument value).}
 
 \item{path_config}{(character) Path of the configuration file that you want to use.}
 }
