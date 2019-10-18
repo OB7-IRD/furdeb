@@ -3,6 +3,8 @@
 #' @description An implementation of \code{\link[parallel]{mclapply}} using \code{parallel::parLapply}
 #' Windows does not support forking. This makes it impossible to use mclapply on Windows to farm out work to additional cores.
 #' This function was developped througth framework of work done by Nathan VanHoudnos (\link{https://github.com/nathanvan/parallelsugar})
+#' @import parallel
+#' @export
 mclapply_socket <- function(X,
                             FUN,
                             ...,
@@ -62,11 +64,14 @@ mclapply_socket <- function(X,
   })
 }
 
-# Overwrite the serial version of mclapply on Windows only
+#' @name mclapply
+#' @title mclapply for Windows
+#' @description Overwrite the serial version of mclapply on Windows only
+#' @export
 mclapply <- switch( Sys.info()[['sysname']],
-                    Windows = {mclapply_socket},
-                    Linux   = {mclapply},
-                    Darwin  = {mclapply})
+                    Windows = {furdeb::mclapply_socket},
+                    Linux   = {parallel::mclapply},
+                    Darwin  = {parallel::mclapply})
 
 clusterExport_function <- function(cl, FUN ) {
   # We want the enclosing environment, not the calling environment
