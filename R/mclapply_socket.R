@@ -69,7 +69,7 @@ mclapply_socket <- function(X,
 #' @description Overwrite the serial version of mclapply on Windows only
 #' @export
 mclapply <- switch( Sys.info()[['sysname']],
-                    Windows = {furdeb::mclapply_socket},
+                    Windows = {mclapply_socket},
                     Linux   = {parallel::mclapply},
                     Darwin  = {parallel::mclapply})
 
