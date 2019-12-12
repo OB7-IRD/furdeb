@@ -62,100 +62,100 @@ configuration_file <- function(new_config = T,
     if (length(as.character(tmp[which(tmp[, 2] == "location_of_java_folder"), 3])) == 0) {
       Sys.setenv(JAVA_HOME = as.character(tmp[which(tmp[, 2] == "location_of_java_folder"), 3]))
     }
-    #Connexion with Access database ----
-    #Initializing of Access JDBC driver
+    # Connexion with Access database ----
+    # Initializing of Access JDBC driver
     if (length(as.character(tmp[which(tmp[, 2] == "location_of_access_jdbc_driver"), 3])) != 0) {
       jdbc_access_driver_loc <- as.character(tmp[which(tmp[, 2] == "location_of_access_jdbc_driver"), 3])
     }
-    #Access driver's identification
+    # Access driver's identification
     if (length(as.character(tmp[which(tmp[, 2] == "access_driver_class_identification"), 3])) != 0) {
       jdbc_access_driverclass <- as.character(tmp[which(tmp[, 2] == "access_driver_class_identification"), 3])
     }
-    #Access database location
+    # Access database location
     if (length(as.character(tmp[which(tmp[, 2] == "location_of_access_db"), 3])) != 0) {
       access_db_loc <- as.character(tmp[which(tmp[, 2] == "location_of_access_db"), 3])
     }
-    #Connexion with t3+ database ----
-    #DB t3+ user identification
+    # Connexion with t3+ database ----
+    # DB t3+ user identification
     if (length(as.character(tmp[which(tmp[, 2] == "t3plus_user_id"), 3])) != 0) {
       t3plus_user <- as.character(tmp[which(tmp[, 2] == "t3plus_user_id"), 3])
     }
-    #DB t3+ password identification
+    # DB t3+ password identification
     if (length(as.character(tmp[which(tmp[, 2] == "t3plus_password_id"), 3])) != 0) {
       t3plus_password <- as.character(tmp[which(tmp[, 2] == "t3plus_password_id"), 3])
     }
-    #DB t3+ database name
+    # DB t3+ database name
     if (length(as.character(tmp[which(tmp[, 2] == "t3plus_dbname"), 3])) != 0) {
       t3plus_dbname <- as.character(tmp[which(tmp[, 2] == "t3plus_dbname"), 3])
     }
-    #DB t3+ host identification
+    # DB t3+ host identification
     if (length(as.character(tmp[which(tmp[, 2] == "t3plus_host"), 3])) != 0) {
       t3plus_host <- as.character(tmp[which(tmp[, 2] == "t3plus_host"), 3])
     }
-    #DB t3+ host identification
+    # DB t3+ host identification
     if (length(as.character(tmp[which(tmp[, 2] == "t3plus_port"), 3])) != 0) {
       t3plus_port <- as.character(tmp[which(tmp[, 2] == "t3plus_port"), 3])
     }
-    #Connexion with observe database ----
-    #DB observe identification
+    # Connexion with observe database ----
+    # DB observe identification
     if (length(as.character(tmp[which(tmp[, 2] == "observe_user_id"), 3])) != 0) {
       observe_user <- as.character(tmp[which(tmp[, 2] == "observe_user_id"), 3])
     }
-    #DB observe password identification
+    # DB observe password identification
     if (length(as.character(tmp[which(tmp[, 2] == "observe_password_id"), 3])) != 0) {
       observe_password <- as.character(tmp[which(tmp[, 2] == "observe_password_id"), 3])
     }
-    #DB observe database name
+    # DB observe database name
     if (length(as.character(tmp[which(tmp[, 2] == "observe_dbname"), 3])) != 0) {
       observe_dbname <- as.character(tmp[which(tmp[, 2] == "observe_dbname"), 3])
     }
-    #DB observe host identification
+    # DB observe host identification
     if (length(as.character(tmp[which(tmp[, 2] == "observe_host"), 3])) != 0) {
       observe_host <- as.character(tmp[which(tmp[, 2] == "observe_host"), 3])
     }
-    #DB observe host identification
+    # DB observe host identification
     if (length(as.character(tmp[which(tmp[, 2] == "observe_port"), 3])) != 0) {
       observe_port <- as.character(tmp[which(tmp[, 2] == "observe_port"), 3])
     }
-    #Connexion with balbaya database ----
-    #DB balbaya identification
+    # Connexion with balbaya database ----
+    # DB balbaya identification
     if (length(as.character(tmp[which(tmp[, 2] == "balbaya_user_id"), 3])) != 0) {
       balbaya_user <- as.character(tmp[which(tmp[, 2] == "balbaya_user_id"), 3])
     }
-    #DB balbaya password identification
+    # DB balbaya password identification
     if (length(as.character(tmp[which(tmp[, 2] == "balbaya_password_id"), 3])) != 0) {
       balbaya_password <- as.character(tmp[which(tmp[, 2] == "balbaya_password_id"), 3])
     }
-    #DB balbaya database name
+    # DB balbaya database name
     if (length(as.character(tmp[which(tmp[, 2] == "balbaya_dbname"), 3])) != 0) {
       balbaya_dbname <- as.character(tmp[which(tmp[, 2] == "balbaya_dbname"), 3])
     }
-    #DB balbaya host identification
+    # DB balbaya host identification
     if (length(as.character(tmp[which(tmp[, 2] == "balbaya_host"), 3])) != 0) {
       balbaya_host <- as.character(tmp[which(tmp[, 2] == "balbaya_host"), 3])
     }
-    #DB balbaya host identification
+    # DB balbaya host identification
     if (length(as.character(tmp[which(tmp[, 2] == "balbaya_port"), 3])) != 0) {
       balbaya_port <- as.character(tmp[which(tmp[, 2] == "balbaya_port"), 3])
     }
-    #Connexion with sardara database ----
-    #DB sardara identification
+    # Connexion with sardara database ----
+    # DB sardara identification
     if (length(as.character(tmp[which(tmp[, 2] == "sardara_user_id"), 3])) != 0) {
       sardara_user <- as.character(tmp[which(tmp[, 2] == "sardara_user_id"), 3])
     }
-    #DB sardara password identification
+    # DB sardara password identification
     if (length(as.character(tmp[which(tmp[, 2] == "sardara_password_id"), 3])) != 0) {
       sardara_password <- as.character(tmp[which(tmp[, 2] == "sardara_password_id"), 3])
     }
-    #DB sardara database name
+    # DB sardara database name
     if (length(as.character(tmp[which(tmp[, 2] == "sardara_dbname"), 3])) != 0) {
       sardara_dbname <- as.character(tmp[which(tmp[, 2] == "sardara_dbname"), 3])
     }
-    #DB sardara host identification
+    # DB sardara host identification
     if (length(as.character(tmp[which(tmp[, 2] == "sardara_host"), 3])) != 0) {
       sardara_host <- as.character(tmp[which(tmp[, 2] == "sardara_host"), 3])
     }
-    #DB sardara host identification
+    # DB sardara host identification
     if (length(as.character(tmp[which(tmp[, 2] == "sardara_port"), 3])) != 0) {
       sardara_port <- as.character(tmp[which(tmp[, 2] == "sardara_port"), 3])
     }
