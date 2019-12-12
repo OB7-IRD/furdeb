@@ -4,9 +4,17 @@
 \alias{mclapply}
 \title{mclapply for Windows}
 \usage{
-mclapply(X, FUN, ..., mc.preschedule = TRUE, mc.set.seed = TRUE,
-  mc.silent = FALSE, mc.cores = NULL, mc.cleanup = TRUE,
-  mc.allow.recursive = TRUE)
+mclapply(
+  X,
+  FUN,
+  ...,
+  mc.preschedule = TRUE,
+  mc.set.seed = TRUE,
+  mc.silent = FALSE,
+  mc.cores = NULL,
+  mc.cleanup = TRUE,
+  mc.allow.recursive = TRUE
+)
 }
 \description{
 Overwrite the serial version of mclapply on Windows only

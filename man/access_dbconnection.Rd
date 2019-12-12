@@ -4,8 +4,11 @@
 \alias{access_dbconnection}
 \title{Connection with Access database}
 \usage{
-access_dbconnection(driver_name = "u_can_access", access_db_path,
-  access_jdbc42_driver_path)
+access_dbconnection(
+  driver_name = "u_can_access",
+  access_db_path,
+  access_jdbc42_driver_path
+)
 }
 \arguments{
 \item{driver_name}{(character) Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).}

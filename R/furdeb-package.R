@@ -2,6 +2,8 @@
 #'@section Diverse:
 #'\itemize{
 #' \item{\code{\link{configuration_file}}}
+#' \item{\code{\link{mclapply_socket}}}
+#' \item{\code{\link{utils-pipe}}}
 #' }
 #'@section Databases manipulations and connections:
 #'\itemize{
