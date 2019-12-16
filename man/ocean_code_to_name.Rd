@@ -10,7 +10,7 @@ ocean_code_to_name(ocean_code)
 \item{ocean_code}{(numeric) Ocean(s) code(s).}
 }
 \value{
-A character vector in relation with the ocean(s) code(s) provided.
+A list with ocean name(s), ocean character code(s), maximum and minimum latitude and longitude of ocean(s) selected.
 }
 \description{
 Ocean(s) name(s) creation in relation with oceans referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
