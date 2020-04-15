@@ -47,6 +47,13 @@ Functions and processes for R development and beyond!
 }
 }
 
+\section{Graphics}{
+
+\itemize{
+\item{\code{\link{ggplot_corr}}}
+}
+}
+
 \seealso{
 Useful links:
 \itemize{

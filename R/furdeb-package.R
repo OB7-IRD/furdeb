@@ -26,5 +26,9 @@
 #' \item{\code{\link{ocean_code_to_name}}}
 #' \item{\code{\link{gear_code_to_name}}}
 #' }
+#' @section Graphics:
+#'\itemize{
+#' \item{\code{\link{ggplot_corr}}}
+#' }
 #' @keywords internal
 "_PACKAGE"
