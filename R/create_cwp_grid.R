@@ -68,8 +68,8 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
     stop("invalid \"longitude_max\" argument, class numeric with value between -180 and 180 expected.\n")
   } else if (class(latitude_max) != "numeric"
              || length(latitude_max) != 1
-             || latitude_max < -180
-             || latitude_max > 180) {
+             || latitude_max < -90
+             || latitude_max > 90) {
     stop("invalid \"latitude_max\" argument, class numeric with value between -90 and 90 expected.\n")
   }
   # resolution argument checking
@@ -131,8 +131,14 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
                                                          "SE" = 2L,
                                                          "SW" = 3L,
                                                          "NW" = 4L)
-                                   corner_lon <- as.integer(min(abs(sp::bbox(poly)[1L, ])))
-                                   corner_lat <- as.integer(min(abs(sp::bbox(poly)[2L, ])))
+                                   corner_lon <- ifelse(test = nchar(min(abs(sp::bbox(poly)[1L, ]))) == 2,
+                                                        yes = paste0("0", min(abs(sp::bbox(poly)[1L, ]))),
+                                                        no = ifelse(test = nchar(min(abs(sp::bbox(poly)[1L, ]))) == 1,
+                                                                    yes = paste0("00", min(abs(sp::bbox(poly)[1L, ]))),
+                                                                    no = min(abs(sp::bbox(poly)[1L, ]))))
+                                   corner_lat <- ifelse(test = nchar(x = min(abs(sp::bbox(poly)[2L, ]))) == 1,
+                                                        yes = paste0("0", min(abs(sp::bbox(poly)[2L, ]))),
+                                                        no = min(abs(sp::bbox(poly)[2L, ])))
                                    gridcode <- paste0(grid$size,
                                                       quadrant_id,
                                                       corner_lat,

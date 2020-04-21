@@ -43,7 +43,7 @@ add_vertices <- function(sp,
                                                                        out_coords <- data.frame(
                                                                          x = seq(from = i_coords[1L, 1L],
                                                                                  to = i_coords[2L, 1L],
-                                                                                 by = ifelse(i_coords[1L, 1L] <= i_coords[2L,1L],
+                                                                                 by = ifelse(i_coords[1L, 1L] <= i_coords[2L, 1L],
                                                                                              each,
                                                                                              -each)),
                                                                          y = seq(from = i_coords[1L, 2L],
