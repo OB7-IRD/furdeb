@@ -131,15 +131,15 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
                                                          "SE" = 2L,
                                                          "SW" = 3L,
                                                          "NW" = 4L)
-                                   corner_lon <- as.integer(min(abs(bbox(poly)[1L, ])))
-                                   corner_lat <- as.integer(min(abs(bbox(poly)[2L, ])))
+                                   corner_lon <- as.integer(min(abs(sp::bbox(poly)[1L, ])))
+                                   corner_lat <- as.integer(min(abs(sp::bbox(poly)[2L, ])))
                                    gridcode <- paste0(grid$size,
                                                       quadrant_id,
                                                       corner_lat,
                                                       corner_lon)
                                    cwp.idx <- NA
                                    if (grid$size < 5) {
-                                     m.bbox <- bbox(poly)
+                                     m.bbox <- sp::bbox(poly)
                                      m <- as.integer(floor(m.bbox))
                                      if (m[4] == m[2]) {
                                        m[4] <- m[4] + 1
@@ -168,8 +168,8 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
                                      pt <- sp::SpatialPoints(coords = matrix(data = labpt,
                                                                              nrow = 1,
                                                                              ncol = 2))
-                                     mr.sp.idx <- as.integer(over(pt,
-                                                                  mr.sp))
+                                     mr.sp.idx <- as.integer(sp::over(pt,
+                                                                      mr.sp))
                                      cwp.idx <- as.integer(slot(mr.sp[mr.sp.idx, ]@polygons[[1]],
                                                                 "ID"))
                                      gridcode <- paste0(gridcode,
