@@ -1,15 +1,21 @@
-#' @param data (data frame) A data frame with data
+#' @param data (data frame) A data frame with data inside.
+#' @param manipulation_process (character) A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".
 #' @param cwp_resolution (character) A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg".
+#' @param path_extern_referential_grid (character) A string path to a RData file which contains a referential grid. Inside the RData, the R object has to be a "SpatialPolygonsDataFrame" class and have a name like "grid_cwp_cwp_resolution" (where "cwp_resolution" is the same value the "cwp_resolution" argument).
 cwp_manipulation = function(data,
-                            manipulation_process,
-                            degree_format,
+                            manipulation_process = "cwp_to_lat_lon",
+                            colname_longitude = NULL,
+                            colname__latitude = NULL,
+                            colname_cwp = NULL,
+                            input_degree_format = "degree_minute",
+                            output_degree_format = "degree_minute",
                             cwp_resolution = "1deg_x_1deg",
                             path_extern_referential_grid = NULL) {
   if (class(cwp_resolution) != "character"
       || length(cwp_resolution) != 1
       || ! cwp_resolution %in% c("10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg", "30deg_x_30deg")) {
     stop("Invalid \"cwp_resolution\" argument, class character with one value inside expected.\n",
-         "Values accepted are \"10min_x_10min\", \"20min_x_20min\", \"30min_x_30min\", \"30min_x_1deg\", \"1deg_x_1deg\", \"5deg_x_5deg\", \"10deg_x_10deg\", \"20deg_x_20deg\" and \"30deg_x_30deg\".")
+         "Values accepted are \"10min_x_10min\", \"20min_x_20min\", \"30min_x_30min\", \"30min_x_1deg\", \"1deg_x_1deg\", \"5deg_x_5deg\", \"10deg_x_10deg\", \"20deg_x_20deg\" and \"30deg_x_30deg\".\n")
   }
   if (is.null(path_extern_referential_grid)) {
     if (file.exists(system.file("grids_cwp",
@@ -43,16 +49,67 @@ cwp_manipulation = function(data,
     }
   }
   if (exists(x = paste0("grid_cwp_",
-                        cwp_resolution))) {
+                        cwp_resolution),
+             envir = tmp_envir)) {
     reference_grid <- get(x = paste0("grid_cwp_",
                                      cwp_resolution),
                           envir = tmp_envir)
-    reference_grid_data <- reference_grid@data
+    if (class(reference_grid) != "SpatialPolygonsDataFrame") {
+      stop("invalid referential grid, the R object has to be a \"SpatialPolygonsDataFrame\" class.\n")
+    } else {
+      reference_grid_data <- reference_grid@data
+    }
   } else {
     stop("invalid referential grid, no R object named \"",
          paste0("grid_cwp_",
                 cwp_resolution),
          "\" available in the R environment provided.\n")
   }
-
+  if (class(manipulation_process) != "character"
+      || length(manipulation_process) != 1
+      || ! manipulation_process %in% c("cwp_to_lat_lon", "lat_lon_to_cwp")) {
+    stop("Invalid \"manipulation_process\" argument, class character with one value inside expected.\n",
+         "Values accepted are \"cwp_to_lat_lon\" or \"lat_lon_to_cwp\".\n")
+  }
+  if (class(cwp_resolution) != "character"
+             || length(cwp_resolution) != 1
+             || ! cwp_resolution %in% c("1deg_x_1deg")) {
+    stop("Invalid \"cwp_resolution\" argument, class character with one value inside expected.\n",
+         "Values accepted are \"1deg_x_1deg\".\n")
+  }
+  # process begin here ----
+  if (manipulation_process == "cwp_to_lat_lon") {
+    if (is.null(colname_cwp)
+        || class(colname_cwp) != "character"
+        || length(colname_cwp) != 1
+        || ! colname_cwp %in% colnames(data)) {
+      stop("Invalid \"colname_cwp\" argument, class character with one column name of data expected.\n")
+    } else {
+      cwp_data <- as.integer(as.character((data[, colname_cwp])))
+      cwp_data <- unique(cwp_data)
+      if (unique(sapply(X = seq_len(length.out = length(cwp_data)),
+                        FUN = function(a) {
+                          nchar(cwp_data[a])
+                        })) != 7) {
+        stop("Invalid cwp in \"data\" argument, values with 7 numbers (in format integer, numeric, character or factor) expected.\n")
+      } else {
+        longitude_data <- as.numeric()
+        latitude_data <- as.numeric()
+        for (b in seq_len(length.out = length(cwp_data))) {
+          if (! cwp_data[b] %in% reference_grid_data[, "cwp_code"]) {
+            warning("cwp not present in the reference grid, data avoided (check for \"na\" in the output).\n")
+            tmp_longitude_data <- NA
+            tmp_latitude_data <- NA
+          } else {
+            tmp_longitude_data <- reference_grid_data[reference_grid_data$cwp_code == cwp_data[b], "longitude"]
+            tmp_latitude_data <- reference_grid_data[reference_grid_data$cwp_code == cwp_data[b], "latitude"]
+          }
+          longitude_data <- append(longitude_data,
+                                   tmp_longitude_data)
+          latitude_data <- append(latitude_data,
+                                  tmp_latitude_data)
+        }
+      }
+    }
+  }
 }
