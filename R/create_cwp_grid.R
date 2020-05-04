@@ -2,10 +2,10 @@
 #' @title Creates a CWP (FAO Coordinating Working Party) grid spatial object
 #' @description Creates a CWP grid spatial object.
 #' @param resolution (character) A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg".
-#' @param longitude_min (integer) Longitude minimum value of the output grid. By default -180.
-#' @param latitude_min (integer) Latitude minimum value of the output grid. By default -90.
-#' @param longitude_max (integer) Longitude maximum value of the output grid. By default 180.
-#' @param latitude_max (integer) Latitude maximum value of the output grid. By default 90.
+#' @param longitude_min (integer) Longitude minimum value of the output grid in decimal degree. By default -180.
+#' @param latitude_min (integer) Latitude minimum value of the output grid in decimal degree. By default -90.
+#' @param longitude_max (integer) Longitude maximum value of the output grid in decimal degree. By default 180.
+#' @param latitude_max (integer) Latitude maximum value of the output grid in decimal degree. By default 90.
 #' @param parallel (logical) Run in parallel (if you have at least two processor cores). By default FALSE.
 #' @param ... Others parallel options
 #' @return Create an object of class "SpatialPolygonsDataFrame" named grid_cwp_resolution (where resolution is the function argument).
@@ -56,17 +56,20 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
       || longitude_min < -180
       || longitude_min > 180) {
     stop("invalid \"longitude_min\" argument, class numeric with value between -180 and 180 expected.\n")
-  } else if (class(latitude_min) != "numeric"
+  }
+  if (class(latitude_min) != "numeric"
              || length(latitude_min) != 1
              || latitude_min < -90
              || latitude_min > 90) {
     stop("invalid \"latitude_min\" argument, class numeric with value between -90 and 90 expected.\n")
-  } else if (class(longitude_max) != "numeric"
+  }
+  if (class(longitude_max) != "numeric"
              || length(longitude_max) != 1
              || longitude_max < -180
              || longitude_max > 180) {
     stop("invalid \"longitude_max\" argument, class numeric with value between -180 and 180 expected.\n")
-  } else if (class(latitude_max) != "numeric"
+  }
+  if (class(latitude_max) != "numeric"
              || length(latitude_max) != 1
              || latitude_max < -90
              || latitude_max > 90) {
@@ -77,7 +80,7 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
   grids <- data.frame(
     # referred as code A in the CWP Handbook
     size = c(1, 2, 3, 4, 5, 6, 7, 8, 9),
-    # in degree, minute
+    # in decimal degree
     lat = c(1/6, 1/3, 0.5, 0.5, 1, 5, 10, 20, 30),
     lon = c(1/6, 1/3, 0.5, 1, 1, 5, 10, 20, 30),
     resolution = c("10min_x_10min", "20min_x_20min","30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg", "30deg_x_30deg"))
