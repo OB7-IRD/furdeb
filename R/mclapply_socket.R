@@ -1,6 +1,6 @@
 #' @name mclapply_socket
 #' @title Define a sockets version of mclapply
-#' @description An implementation of \code{\link[parallel]{mclapply}} using \code{\link[parallel]{parLapply}}
+#' @description An implementation of mclapply function (package parallel) using parLapply function (package parallel).
 #' Windows does not support forking. This makes it impossible to use mclapply on Windows to farm out work to additional cores.
 #' This function was developped througth framework of work done by Nathan VanHoudnos. Source: https://github.com/nathanvan/parallelsugar.git
 #' @import parallel

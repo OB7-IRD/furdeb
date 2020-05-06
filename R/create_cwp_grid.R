@@ -96,6 +96,7 @@ create_cwp_grid <- function(resolution = "1deg_x_1deg",
   }
   # create grid
   eckp4s <- "+proj=eck4 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+  # +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
   llp4s <- "+init=epsg:4326"
   llcrs <- sp::CRS(llp4s)
   r <- raster::raster(raster::extent(matrix(c(longitude_min,
