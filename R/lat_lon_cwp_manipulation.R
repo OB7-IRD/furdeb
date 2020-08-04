@@ -54,20 +54,19 @@ lat_lon_cwp_manipulation = function(manipulation_process,
     if (class(path_extern_referential_grid) != "character"
         || length(path_extern_referential_grid) != 1
         || tools::file_ext(path_extern_referential_grid) != "RData") {
-      stop("invalid \"path_extern_referential_grid\" argument, class character with one value inside and a \"RData\" extension expected.\n")
+      stop("invalid \"path_extern_referential_grid\" argument, class character with one value inside linked to a \"RData\" extension expected.\n")
     } else {
       if (file.exists(path_extern_referential_grid)) {
         load(file = path_extern_referential_grid,
              envir = tmp_envir <- new.env())
       } else {
-        stop("invalid \"path_extern_referential_grid\" argument, no file available at the location.\n")
+        stop("invalid \"path_extern_referential_grid\" argument, no RData available at the location.\n")
       }
     }
   }
   if (exists(x = paste0("grid_cwp_",
                         cwp_resolution),
              envir = tmp_envir)) {
-
     reference_grid <- get(x = paste0("grid_cwp_",
                                      cwp_resolution),
                           envir = tmp_envir)
