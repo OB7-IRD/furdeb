@@ -3,6 +3,7 @@
 #'\itemize{
 #' \item{\code{\link{configuration_file}}}
 #' \item{\code{\link{mclapply_socket}}}
+#' \item{\code{\link{utils-pipe}}}
 #' }
 #'@section Databases manipulations and connections:
 #'\itemize{
@@ -16,8 +17,8 @@
 #' \item{\code{\link{avdth_position_conversion_dec}}}
 #' \item{\code{\link{marine_area_overlay}}}
 #' \item{\code{\link{lat_long_to_csquare}}}
-#' \item{\code{\link{cwp_to_center}}}
-#' \item{\code{\link{cwp_to_lat_lon}}}
+#' \item{\code{\link{create_cwp_grid}}}
+#' \item{\code{\link{lat_lon_cwp_manipulation}}}
 #' }
 #' @section Referentials:
 #'\itemize{
@@ -28,6 +29,7 @@
 #' @section Graphics:
 #'\itemize{
 #' \item{\code{\link{ggplot_corr}}}
+#' \item{\code{\link{add_vertices}}}
 #' }
 #' @keywords internal
 "_PACKAGE"

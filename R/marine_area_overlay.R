@@ -18,7 +18,7 @@
 #'  \item{subunit: }{sub-unit fao fishing area}
 #' }
 #' Specificity for fao fishing area parameters: all the items above your specification (thus contain it at higher levels) will be added in the output. For example, if you select "subarea", you will also have the information about the major area concerning.
-#' If you want more informations visit http://www.fao.org/fishery/area/search/en
+#' If you want more information visit http://www.fao.org/fishery/area/search/en
 #' @examples
 #' # Example for classification until division fao fishing area, with a tolerance of 10 km
 #' \dontrun{
@@ -55,7 +55,7 @@ marine_area_overlay <- function(data,
       "\n",
       "You're spatial coordinates have to be in WGS84 projection",
       "\n",
-      "Be patient! The function could be long")
+      "Be patient! The function could be long\n")
   # Fao area shapefile importation ----
   tmp <- rgdal::readOGR(dsn = system.file("fao_area",
                                           "FAO_AREAS.shp",
