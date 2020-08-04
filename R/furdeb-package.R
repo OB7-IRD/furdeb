@@ -3,14 +3,12 @@
 #'\itemize{
 #' \item{\code{\link{configuration_file}}}
 #' \item{\code{\link{mclapply_socket}}}
-#' \item{\code{\link{utils-pipe}}}
 #' }
 #'@section Databases manipulations and connections:
 #'\itemize{
 #' \item{\code{\link{access_dbconnection}}}
 #' \item{\code{\link{db_connection}}}
 #' \item{\code{\link{mdb2Sqlite3}}}
-#' \item{\code{\link{sql_inset}}}
 #' }
 #' @section Spatial manipulations and design:
 #'\itemize{
