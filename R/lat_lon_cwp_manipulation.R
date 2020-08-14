@@ -96,8 +96,12 @@ lat_lon_cwp_manipulation = function(manipulation_process,
       stop("Invalid \"data_cwp\" argument, class character expected.\n")
     } else {
       current_data_cwp <- unique(data_cwp)
-      if (cwp_resolution == "1deg_x_1deg") {
-        if (unique(sapply(X = seq_len(length.out = length(current_data_cwp)),
+      if (cwp_resolution %in% c("1deg_x_1deg", "5deg_x_5deg")) {
+        if (length(unique(sapply(X = seq_len(length.out = length(current_data_cwp)),
+                                 FUN = function(a) {
+                                   nchar(current_data_cwp[a])
+                                 }))) != 1
+            || unique(sapply(X = seq_len(length.out = length(current_data_cwp)),
                           FUN = function(a) {
                             nchar(current_data_cwp[a])
                           })) != 7) {

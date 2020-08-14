@@ -123,12 +123,12 @@ marine_area_overlay <- function(data,
     tmp2 <- cbind(tmp2,
                   tmp4)
     if (step1 == names(accuracy)[length(accuracy)]) {
+      names(tmp2)[5:ncol(tmp2)] <- tolower(names(tmp2)[5:ncol(tmp2)])
       data <- dplyr::inner_join(data,
                                 tmp2,
                                 by = c(latitude_name, longitude_name)) %>%
         dplyr::select(-longitude_bis, -latitude_bis)
     }
   }
-  names(data) <- tolower(names(data))
   return(data)
 }
