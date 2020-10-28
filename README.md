@@ -9,14 +9,15 @@ FUnctions for R DEvelopment and Beyond!
 You can run the following code in the R console:
 
 ```R
-# Devtools is a necessary package
-# If it is not installed, run the following line
+# devtools is a necessary package
+# if it is not installed, run the following line
 install.packages("devtools")
-# Load the package from GitHub
+# this package use rJava package as dependency. If an error occur link to this package during the install, check if you have a 32 bits and 64 bits Java environment install on your computer.
+# load the last package version from GitHub
 devtools::install_github("https://github.com/OB7-IRD/furdeb")
-# Load the library
+# load the library
 library(furdeb)
-# You can access the package documentation with the following line
+# you can access the package documentation with the following line
 ?furdeb
 # If you want the documentation of a specific package function use the same syntax, for example for the function access_dbconnection
 ?access_dbconnection
