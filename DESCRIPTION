@@ -7,6 +7,7 @@ Authors@R: c(person("Ob7 -", "Observatory of Exploited Tropical Pelagic Ecosyste
     person("Antoine", "Duparc", email = "antoine.duparc@ird.fr", role = c("ctb")),
     person("Norbert", "Billet", email = "norbert.billet@ifremer.fr", role = c("ctb")))
 Description: Functions and processes for R development and beyond!
+Depends: R (>= 4.0.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
