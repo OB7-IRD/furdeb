@@ -13,7 +13,6 @@
 #' }
 #' @export
 #' @importFrom RJDBC JDBC dbConnect
-#' @importFrom rJava .jinit
 access_dbconnection <- function(driver_name = "u_can_access",
                                 access_db_path,
                                 access_jdbc42_driver_path) {
@@ -42,24 +41,23 @@ access_dbconnection <- function(driver_name = "u_can_access",
     # function for u_can_access driver ----
     if (driver_name == "u_can_access") {
       # initializing Access JDBC driver
-      dependencies <- c(system.file("u_can_access",
-                                    "jackcess-2.1.11.jar",
-                                    package = "furdeb"),
-                        system.file("u_can_access",
-                                    "hsqldb-2.3.8-jdk6.jar",
-                                    package = "furdeb"),
-                        system.file("u_can_access",
-                                    "commons-logging-1.1.3.jar",
-                                    package = "furdeb"),
-                        system.file("u_can_access",
-                                    "commons-lang-2.6.jar",
-                                    package = "furdeb"))
-
-      rJava::.jinit(classpath = dependencies)
+      class_path <- c(system.file("u_can_access",
+                                  "jackcess-2.1.11.jar",
+                                  package = "furdeb"),
+                      system.file("u_can_access",
+                                  "hsqldb-2.3.8-jdk6.jar",
+                                  package = "furdeb"),
+                      system.file("u_can_access",
+                                  "commons-logging-1.1.3.jar",
+                                  package = "furdeb"),
+                      system.file("u_can_access",
+                                  "commons-lang-2.6.jar",
+                                  package = "furdeb"),
+                      system.file("u_can_access",
+                                  "ucanaccess-4.0.4.jar",
+                                  package = "furdeb"))
       access_jdbc_driver <- RJDBC::JDBC(driverClass = "net.ucanaccess.jdbc.UcanaccessDriver",
-                                        classPath = system.file("u_can_access",
-                                                                "ucanaccess-4.0.4.jar",
-                                                                package = "furdeb"))
+                                        classPath = class_path)
       # connection to Access database
       access_jdbc_connection <- RJDBC::dbConnect(access_jdbc_driver,
                                                  paste0("jdbc:ucanaccess://",
