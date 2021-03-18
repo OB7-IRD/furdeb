@@ -22,7 +22,9 @@ Imports:
     magrittr (>= 1.5),
     dplyr (>= 0.8.1),
     rgeos (>= 0.4.3),
-    raster (>= 3.3.13),
+    raster (>= 3.3.13),    
+    rJava (>= 0.9.10),
+    tools (>= 4.0.3),
     ggplot2 (>= 3.3.3)
 URL: https://github.com/OB7-IRD/furdeb
 BugReports: https://github.com/OB7-IRD/furdeb/issues
