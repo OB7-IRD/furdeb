@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
-# t3 package <a href='https://ob7-ird.github.io/furdeb'><img src='man/figures/logo.png' align="right" /></a>
+# furdeb package <a href='https://ob7-ird.github.io/furdeb'><img src='man/figures/logo.png' align="right" /></a>
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/furdeb)](https://cran.r-project.org/package=furdeb)
@@ -29,6 +29,12 @@ Working in progress for this section. Be patient.
 ## Installation
 
 Working in progress for this section. Be patient.
+```{r, eval = FALSE}
+# pak installs R packages from CRAN, Bioconductor, GitHub, and local files and directories. Check https://pak.r-lib.org/ for more information.
+install.packages("pak")
+pak::pkg_install("ob7-ird/furdeb")
+```
+
 
 ### Development version
 

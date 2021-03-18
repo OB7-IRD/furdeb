@@ -6,6 +6,8 @@
 \alias{furdeb-package}
 \title{furdeb package}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Functions and processes for R development and beyond!
 }
 \section{Diverse}{

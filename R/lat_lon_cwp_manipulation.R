@@ -13,7 +13,7 @@
 #' @param path_extern_referential_grid (character) A string path to a RData file which contains a referential grid. Inside the RData, the R object has to be a "SpatialPolygonsDataFrame" class and have a name like "grid_cwp_cwp_resolution" (where "cwp_resolution" is the same value than the "cwp_resolution" argument).
 #' @return Return a data.frame with 3 columns: cwp, longitude and latitude (colums names provide coordinates format).
 #' @export
-#' @importFrom tools file_ext
+#' @importFrom dplyr last
 #' @importFrom sp coordinates proj4string CRS spTransform over
 lat_lon_cwp_manipulation = function(manipulation_process,
                                     data_longitude = NULL,
@@ -53,7 +53,7 @@ lat_lon_cwp_manipulation = function(manipulation_process,
   } else {
     if (class(path_extern_referential_grid) != "character"
         || length(path_extern_referential_grid) != 1
-        || tools::file_ext(path_extern_referential_grid) != "RData") {
+        || dplyr::last(x = unlist(strsplit(x = path_extern_referential_grid, split = "[.]")))) {
       stop("invalid \"path_extern_referential_grid\" argument, class character with one value inside linked to a \"RData\" extension expected.\n")
     } else {
       if (file.exists(path_extern_referential_grid)) {
