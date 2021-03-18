@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file and click on Knit button at the end. -->
 
-# t3 package <a href='https://ob7-ird.github.io/furdeb'><img src='man/figures/logo.png' align="right" /></a>
+# furdeb package <a href='https://ob7-ird.github.io/furdeb'><img src='man/figures/logo.png' align="right" /></a>
 
 <!-- badges: start -->
 
@@ -19,14 +19,19 @@ Working in progress for this section. Be patient.
 
 Working in progress for this section. Be patient.
 
+``` r
+# pak installs R packages from CRAN, Bioconductor, GitHub, and local files and directories. Check https://pak.r-lib.org/ for more information.
+install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+pak::pkg_install("ob7-ird/furdeb")
+```
+
 ### Development version
 
 To get a bug fix or to use a feature from the development version, you
 can install the development version of furdeb from GitHub.
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("https://github.com/OB7-IRD/furdeb/tree/development")
+pak::pkg_install("ob7-ird/furdeb@development")
 ```
 
 ## Cheatsheet
@@ -37,7 +42,6 @@ Working in progress for this section. Be patient.
 
 ``` r
 library(furdeb)
-# Next steps example will be added later
 ```
 
 ## Getting help
