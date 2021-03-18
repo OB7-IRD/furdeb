@@ -1,24 +1,52 @@
-![furbed_logo](furdeb_logo.png)
 
-# Package furdeb
+<!-- README.md is generated from README.Rmd. Please edit that file and click on Knit button at the end. -->
 
-FUnctions for R DEvelopment and Beyond!
+# t3 package <a href='https://ob7-ird.github.io/furdeb'><img src='man/figures/logo.png' align="right" /></a>
 
-# Package installation
+<!-- badges: start -->
 
-You can run the following code in the R console.
-For information, this package use rJava package as dependency. If an error occur link to this package during the install, check if you have a 32 bits and 64 bits Java environment install on your computer.
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/furdeb)](https://cran.r-project.org/package=furdeb)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-```R
-# devtools is a necessary package for reach the archive from GitHub
-# if it is not installed, run the following line
-install.packages("devtools")
-# load the last package version from GitHub
-devtools::install_github("https://github.com/OB7-IRD/furdeb")
-# load the library
-library(furdeb)
-# you can access the package documentation with the following line
-?furdeb
-# If you want the documentation of a specific package function use the same syntax, for example for the function access_dbconnection
-?access_dbconnection
+<!-- badges: end -->
+
+## Overview
+
+Working in progress for this section. Be patient.
+
+## Installation
+
+Working in progress for this section. Be patient.
+
+### Development version
+
+To get a bug fix or to use a feature from the development version, you
+can install the development version of furdeb from GitHub.
+
+``` r
+# install.packages("devtools")
+devtools::install_github("https://github.com/OB7-IRD/furdeb/tree/development")
 ```
+
+## Cheatsheet
+
+Working in progress for this section. Be patient.
+
+## Usage
+
+``` r
+library(furdeb)
+# Next steps example will be added later
+```
+
+## Getting help
+
+If you encounter a clear bug, please file an issue with a minimal
+reproducible example on [GitHub issues
+page](https://github.com/OB7-IRD/furdeb/issues). This link is also
+available if you have any questions and improvement propositions.
+
+## References
+
+Working in progress for this section.
