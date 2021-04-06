@@ -3,12 +3,10 @@
 on:
   push:
     branches:
-      - doc-test-level-1
       - master
       - development
   pull_request:
     branches:
-      - doc-test-level-1
       - master
       - development
 
