@@ -2,18 +2,18 @@
 % Please edit documentation in R/avdth_position_conversion_dec.R
 \name{avdth_position_conversion_dec}
 \alias{avdth_position_conversion_dec}
-\title{AVDTH position conversion to decimal value}
+\title{AVDTH database position conversion}
 \usage{
 avdth_position_conversion_dec(data, latitude, longitude, quadrant)
 }
 \arguments{
-\item{data}{(data.frame) A R data frame.}
+\item{data}{{\link[base]{data.frame}} expected. A R data frame.}
 
-\item{latitude}{(character) Column name of latitude data.}
+\item{latitude}{{\link[base]{character}} expected. Column name of latitude data.}
 
-\item{longitude}{(character) Column name of longitude data.}
+\item{longitude}{{\link[base]{character}} expected. Column name of longitude data.}
 
-\item{quadrant}{(character) Column name of quadrant data.}
+\item{quadrant}{{\link[base]{character}} expected. Column name of quadrant data.}
 }
 \value{
 This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.

@@ -9,11 +9,11 @@ mdb2Sqlite3(access_con, target_dir, target_file_name, verbose = T)
 \arguments{
 \item{access_con}{(JDBCConnection) Object with Access database connection identification.}
 
-\item{target_dir}{(character) Directory where the SQLite3 file will be created.}
+\item{target_dir}{{\link[base]{character}} expected. Directory where the SQLite3 file will be created.}
 
-\item{target_file_name}{(character) SQLite3 file name (for example: database_name.sqlite3).}
+\item{target_file_name}{{\link[base]{character}} expected. SQLite3 file name (for example: database_name.sqlite3).}
 
-\item{verbose}{(logical) Should the script be verbose.}
+\item{verbose}{{\link[base]{logical}} expected. Should the script be verbose.}
 }
 \value{
 The function return an SQLite3 database in the location directory. The file path of the SQLite3 file is also available.

@@ -1,10 +1,10 @@
 #' @name ggplot_corr
 #' @title Correlogram function
 #' @description Correlogram function for both large/small sample size. This function if based on the working development of Kevin Liu. If you want to know, take a look on his website https://rh8liuqy.github.io/ACF_PACF_by_ggplot2.html.
-#' @param data (time series object, numeric or matrix) A univariate or multivariate (not ccf) numeric time series object or a numeric vector or matrix.
-#' @param lag_max (integer) Maximum lag at which to calculate the acf. By default 24.
-#' @param ci (as.numeric) Value for the confidence interval. By default 0.95.
-#' @param large_sample_size (logical) Specify here if you have a large sample. By default FALSE.
+#' @param data Time series object, {\link[base]{numeric}} or {\link[base]{matrix}} expected. A univariate or multivariate (not ccf) numeric time series object or a numeric vector or matrix.
+#' @param lag_max {\link[base]{integer}} expected. Maximum lag at which to calculate the acf. By default 24.
+#' @param ci {\link[base]{numeric}} expected. Value for the confidence interval. By default 0.95.
+#' @param large_sample_size {\link[base]{logical}} expected. Specify here if you have a large sample. By default FALSE.
 #' @return Return a list with two elements who contains plots, in ggplot format, of correlation and partial correlation.
 #' @export
 #' @importFrom dplyr lag select

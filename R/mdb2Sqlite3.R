@@ -2,9 +2,9 @@
 #' @title Converting an Access database to an SQLite3 database
 #' @description Convert Access database to sqlite3 database.
 #' @param access_con (JDBCConnection) Object with Access database connection identification.
-#' @param target_dir (character) Directory where the SQLite3 file will be created.
-#' @param target_file_name (character) SQLite3 file name (for example: database_name.sqlite3).
-#' @param verbose (logical) Should the script be verbose.
+#' @param target_dir {\link[base]{character}} expected. Directory where the SQLite3 file will be created.
+#' @param target_file_name {\link[base]{character}} expected. SQLite3 file name (for example: database_name.sqlite3).
+#' @param verbose {\link[base]{logical}} expected. Should the script be verbose.
 #' @return The function return an SQLite3 database in the location directory. The file path of the SQLite3 file is also available.
 #' @section Specification:
 #' Should work on windows and on linux (need testing for this OS). For linux the "mdb-tools" must be installed.

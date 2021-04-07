@@ -7,11 +7,11 @@
 add_vertices(sp, each = as.numeric(0.1), parallel = FALSE, ...)
 }
 \arguments{
-\item{sp}{(SpatialPolygonsDataFrame) An object of class "SpatialPolygonsDataFrame".}
+\item{sp}{SpatialPolygonsDataFrame expected. An object of class "SpatialPolygonsDataFrame".}
 
-\item{each}{(numeric or integer) The step value to use to create vertices. By default 0.1.}
+\item{each}{{\link[base]{numeric}} or {\link[base]{integer}} expected. The step value to use to create vertices. By default 0.1.}
 
-\item{parallel}{(logical) Run in parallel (if you have at least two processor cores). By default FALSE.}
+\item{parallel}{{\link[base]{logical}} expected. Run in parallel (if you have at least two processor cores). By default FALSE.}
 
 \item{...}{Others parallel options}
 }

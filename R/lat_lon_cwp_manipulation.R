@@ -1,16 +1,16 @@
 #' @name lat_lon_cwp_manipulation
 #' @title Conversion function for latitude, longitude and cwp item
 #' @description Conversion function for latitude, longitude and cwp item.
-#' @param manipulation_process (character) A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".
-#' @param data_longitude (character) A string vector with longitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.
-#' @param data_latitude (character) A string vector with latitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.
-#' @param data_cwp (character) A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.
-#' @param input_degree_format (character) A string matching one of the accepted input degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "lat_lon_to_cwp" process.
-#' @param output_degree_format (character) A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "cwp_to_lat_lon" process.
-#' @param output_degree_cwp_parameter (character) A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner). Mandatory for "cwp_to_lat_lon" process.
-#' @param epsg_code (integer) An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. Mandatory argument for "lat_lon_to_cwp" process. By default 4326 (+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0).
-#' @param cwp_resolution (character) A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg". By default "1deg_x_1deg".
-#' @param path_extern_referential_grid (character) A string path to a RData file which contains a referential grid. Inside the RData, the R object has to be a "SpatialPolygonsDataFrame" class and have a name like "grid_cwp_cwp_resolution" (where "cwp_resolution" is the same value than the "cwp_resolution" argument).
+#' @param manipulation_process {\link[base]{character}} expected. A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".
+#' @param data_longitude {\link[base]{character}} expected. A string vector with longitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.
+#' @param data_latitude {\link[base]{character}} expected. A string vector with latitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.
+#' @param data_cwp {\link[base]{character}} expected. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.
+#' @param input_degree_format {\link[base]{character}} expected. A string matching one of the accepted input degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "lat_lon_to_cwp" process.
+#' @param output_degree_format {\link[base]{character}} expected. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "cwp_to_lat_lon" process.
+#' @param output_degree_cwp_parameter {\link[base]{character}} expected. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner). Mandatory for "cwp_to_lat_lon" process.
+#' @param epsg_code {\link[base]{integer}} expected. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. Mandatory argument for "lat_lon_to_cwp" process. By default 4326 (+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0).
+#' @param cwp_resolution {\link[base]{character}} expected. A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg". By default "1deg_x_1deg".
+#' @param path_extern_referential_grid {\link[base]{character}} expected. A string path to a RData file which contains a referential grid. Inside the RData, the R object has to be a "SpatialPolygonsDataFrame" class and have a name like "grid_cwp_cwp_resolution" (where "cwp_resolution" is the same value than the "cwp_resolution" argument).
 #' @return Return a data.frame with 3 columns: cwp, longitude and latitude (colums names provide coordinates format).
 #' @export
 #' @importFrom dplyr last

@@ -1,7 +1,7 @@
 #' @name fishing_mode_code_to_name
 #' @title Fishing mode(s) name(s) creation
 #' @description Fishing mode(s) name(s) creation in relation with fishing mode referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
-#' @param fishing_mode_code (numeric) Fishing mode code(s).
+#' @param fishing_mode_code {\link[base]{numeric}} expected. Fishing mode code(s).
 #' @return A character vector in relation with the fishing mode(s) code(s) provided.
 #' @examples
 #' fishing_mode_code_to_name(fishing_mode_code = c(1, 2, 3))

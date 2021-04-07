@@ -1,9 +1,9 @@
 #' @name add_vertices
 #' @title Densify a spatial polygon by adding vertices
 #' @description Densify a spatial polygon by adding vertices.
-#' @param sp (SpatialPolygonsDataFrame) An object of class "SpatialPolygonsDataFrame".
-#' @param each (numeric or integer) The step value to use to create vertices. By default 0.1.
-#' @param parallel (logical) Run in parallel (if you have at least two processor cores). By default FALSE.
+#' @param sp SpatialPolygonsDataFrame expected. An object of class "SpatialPolygonsDataFrame".
+#' @param each {\link[base]{numeric}} or {\link[base]{integer}} expected. The step value to use to create vertices. By default 0.1.
+#' @param parallel {\link[base]{logical}} expected. Run in parallel (if you have at least two processor cores). By default FALSE.
 #' @param ... Others parallel options
 #' @return An object of class "SpatialPolygonsDataFrame".
 #' @references

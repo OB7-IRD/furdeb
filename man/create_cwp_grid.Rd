@@ -15,17 +15,17 @@ create_cwp_grid(
 )
 }
 \arguments{
-\item{resolution}{(character) A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg".}
+\item{resolution}{{\link[base]{character}} expected. A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg".}
 
-\item{longitude_min}{(integer) Longitude minimum value of the output grid in decimal degree. By default -180.}
+\item{longitude_min}{{\link[base]{integer}} expected. Longitude minimum value of the output grid in decimal degree. By default -180.}
 
-\item{latitude_min}{(integer) Latitude minimum value of the output grid in decimal degree. By default -90.}
+\item{latitude_min}{{\link[base]{integer}} expected. Latitude minimum value of the output grid in decimal degree. By default -90.}
 
-\item{longitude_max}{(integer) Longitude maximum value of the output grid in decimal degree. By default 180.}
+\item{longitude_max}{{\link[base]{integer}} expected. Longitude maximum value of the output grid in decimal degree. By default 180.}
 
-\item{latitude_max}{(integer) Latitude maximum value of the output grid in decimal degree. By default 90.}
+\item{latitude_max}{{\link[base]{integer}} expected. Latitude maximum value of the output grid in decimal degree. By default 90.}
 
-\item{parallel}{(logical) Run in parallel (if you have at least two processor cores). By default FALSE.}
+\item{parallel}{{\link[base]{logical}} expected. Run in parallel (if you have at least two processor cores). By default FALSE.}
 
 \item{...}{Others parallel options}
 }

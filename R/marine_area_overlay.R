@@ -1,12 +1,12 @@
 #' @name marine_area_overlay
 #' @title Consistent spatial marine area overlay (related to fao area)
 #' @description Consistent spatial marine area overlay (related to fao area) for points, grids and polygons.
-#' @param data (data.frame) R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.
-#' @param overlay_level (character) Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.
-#' @param longitude_name (character)Longitude column name in your data.
-#' @param latitude_name (character)Latitude column name in your data.
-#' @param tolerance (numeric) Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).
-#' @return The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
+#' @param data {\link[base]{data.frame}} expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.
+#' @param overlay_level {\link[base]{character}} expected. Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.
+#' @param longitude_name {\link[base]{character}} expected. Longitude column name in your data.
+#' @param latitude_name {\link[base]{character}} expected. Latitude column name in your data.
+#' @param tolerance {\link[base]{numeric}} expected. Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).
+#' @return The function return your input data frame with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):
 #' \itemize{

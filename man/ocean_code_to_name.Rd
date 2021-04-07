@@ -7,7 +7,7 @@
 ocean_code_to_name(ocean_code)
 }
 \arguments{
-\item{ocean_code}{(numeric) Ocean(s) code(s).}
+\item{ocean_code}{{\link[base]{numeric}} expected. Ocean(s) code(s).}
 }
 \value{
 A list with ocean name(s), ocean character code(s), maximum and minimum latitude and longitude of ocean(s) selected.

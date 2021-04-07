@@ -13,18 +13,18 @@ marine_area_overlay(
 )
 }
 \arguments{
-\item{data}{(data.frame) R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.}
+\item{data}{{\link[base]{data.frame}} expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.}
 
-\item{overlay_level}{(character) Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.}
+\item{overlay_level}{{\link[base]{character}} expected. Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.}
 
-\item{longitude_name}{(character)Longitude column name in your data.}
+\item{longitude_name}{{\link[base]{character}} expected. Longitude column name in your data.}
 
-\item{latitude_name}{(character)Latitude column name in your data.}
+\item{latitude_name}{{\link[base]{character}} expected. Latitude column name in your data.}
 
-\item{tolerance}{(numeric) Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).}
+\item{tolerance}{{\link[base]{numeric}} expected. Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).}
 }
 \value{
-The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
+The function return your input data frame with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 }
 \description{
 Consistent spatial marine area overlay (related to fao area) for points, grids and polygons.

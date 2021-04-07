@@ -1,9 +1,9 @@
 #' @name access_dbconnection
 #' @title Connection with Access database
 #' @description Generate a common connection with an Access database using a JDBC driver.
-#' @param driver_name (character) Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).
-#' @param access_db_path (character) Path of the Access database.
-#' @param access_jdbc42_driver_path (character, optional) Path of the access_jdbc42 driver (.jar file).
+#' @param driver_name {\link[base]{character}} expected. Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).
+#' @param access_db_path {\link[base]{character}} expected. Path of the Access database.
+#' @param access_jdbc42_driver_path {\link[base]{character}} expected. Optional. Path of the access_jdbc42 driver (.jar file).
 #' @return The function return a R object with Access database identification of connection.
 #' @details
 #' Difference between drivers "u_can_access" and "access_jdbc42":
@@ -18,7 +18,8 @@ access_dbconnection <- function(driver_name = "u_can_access",
                                 access_jdbc42_driver_path) {
   # driver name verification ----
   driver_name <- match.arg(arg = driver_name,
-                           choices = c("u_can_access", "access_jdbc42"))
+                           choices = c("u_can_access",
+                                       "access_jdbc42"))
   # access DB path verification ----
   if (! is.character(access_db_path)) {
     stop("invalid \"access_db_path\" argument")
@@ -26,7 +27,8 @@ access_dbconnection <- function(driver_name = "u_can_access",
   # function for access_jdbc42 driver ----
   if (driver_name == "access_jdbc42") {
     # driver path verification
-    if (missing(access_jdbc42_driver_path) || ! is.character(access_jdbc42_driver_path)) {
+    if (missing(access_jdbc42_driver_path)
+        || ! is.character(access_jdbc42_driver_path)) {
       stop("invalid \"access_jdbc42_driver_path\" argument")
     }
     # initializing Access JDBC driver
