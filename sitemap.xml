@@ -19,9 +19,6 @@
     <loc>https://ob7-ird.github.io/furdeb/reference/create_cwp_grid.html</loc>
   </url>
   <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/db_connection.html</loc>
-  </url>
-  <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/fishing_mode_code_to_name.html</loc>
   </url>
   <url>
@@ -56,5 +53,8 @@
   </url>
   <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://ob7-ird.github.io/furdeb/reference/postgresql_db_connection.html</loc>
   </url>
 </urlset>

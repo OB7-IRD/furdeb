@@ -150,29 +150,29 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>(data.frame) R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.</p></td>
     </tr>
     <tr>
       <th>overlay_level</th>
-      <td><p>(character) Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.</p></td>
     </tr>
     <tr>
       <th>longitude_name</th>
-      <td><p>(character)Longitude column name in your data.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Longitude column name in your data.</p></td>
     </tr>
     <tr>
       <th>latitude_name</th>
-      <td><p>(character)Latitude column name in your data.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Latitude column name in your data.</p></td>
     </tr>
     <tr>
       <th>tolerance</th>
-      <td><p>(numeric) Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).</p></td>
+      <td><p><a href='https://rdrr.io/r/base/numeric.html'>numeric</a> expected. Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function return your input dataframe with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).</p>
+    <p>The function return your input data frame with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For the argument "overlay_level", you can choose between 5 modalities (descending size classification):</p><ul>
