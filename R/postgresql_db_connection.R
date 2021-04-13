@@ -16,11 +16,11 @@ postgresql_db_connection <- function(db_user,
                                      db_host,
                                      db_port) {
   # Connection to PostgreSQL database ----
-  db_connection <- RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
-                                          user = db_user,
-                                          password = db_password,
-                                          dbname = db_dbname,
-                                          host = db_host,
-                                          port = db_port)
+  postgresql_db_connection <- RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
+                                                     user = db_user,
+                                                     password = db_password,
+                                                     dbname = db_dbname,
+                                                     host = db_host,
+                                                     port = db_port)
   return(postgresql_db_connection)
 }
