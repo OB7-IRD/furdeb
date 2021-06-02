@@ -2,20 +2,18 @@
 % Please edit documentation in R/configuration_file.R
 \name{configuration_file}
 \alias{configuration_file}
-\title{Configuration file}
+\title{Configuration file creation and management}
 \usage{
-configuration_file(new_config = T, path_config)
+configuration_file(path_file = NULL)
 }
 \arguments{
-\item{new_config}{(logical) Provide FALSE/F value if you want to use an existing configuration file. By default, the function creates a new configuration file (TRUE/T argument value).}
-
-\item{path_config}{(character) Path of the configuration file that you want to use.}
+\item{path_file}{{\link[base]{character}} expected. Path to a existent configuration file. The file need a .yml extension. By default the parameter is NULL and the function will create a new configuration file.}
 }
 \value{
-The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").
+Return a R list with several information configuration and, if you want, a YAML file.
 }
 \description{
-Apply several options to R from a configuration file (able to create one if necessary).
+Create or apply a configuration file (YAML extension).
 }
 \examples{
 # If you want to create a new configuration file
@@ -23,6 +21,5 @@ Apply several options to R from a configuration file (able to create one if nece
 configuration_file()}
 # If you want to use an existing configuration file
 \dontrun{
-configuration_file(new_config = F,
-                   path_config = "path_of_your_own_configuration_file")}
+configuration_file(path_file = "path_of_your_own_configuration_file")}
 }
