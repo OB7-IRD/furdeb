@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Configuration file — configuration_file • furdeb</title>
+<title>Configuration file creation and management — configuration_file • furdeb</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,8 +52,8 @@
 
 
 
-<meta property="og:title" content="Configuration file — configuration_file" />
-<meta property="og:description" content="Apply several options to R from a configuration file (able to create one if necessary)." />
+<meta property="og:title" content="Configuration file creation and management — configuration_file" />
+<meta property="og:description" content="Create or apply a configuration file (YAML extension)." />
 <meta property="og:image" content="https://ob7-ird.github.io/furdeb/logo.png" />
 
 
@@ -128,33 +128,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Configuration file</h1>
+    <h1>Configuration file creation and management</h1>
     <small class="dont-index">Source: <a href='https://github.com/OB7-IRD/furdeb/blob/master/R/configuration_file.R'><code>R/configuration_file.R</code></a></small>
     <div class="hidden name"><code>configuration_file.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Apply several options to R from a configuration file (able to create one if necessary).</p>
+    <p>Create or apply a configuration file (YAML extension).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>configuration_file</span><span class='op'>(</span>new_config <span class='op'>=</span> <span class='cn'>T</span>, <span class='va'>path_config</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>configuration_file</span><span class='op'>(</span>path_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>new_config</th>
-      <td><p>(logical) Provide FALSE/F value if you want to use an existing configuration file. By default, the function creates a new configuration file (TRUE/T argument value).</p></td>
-    </tr>
-    <tr>
-      <th>path_config</th>
-      <td><p>(character) Path of the configuration file that you want to use.</p></td>
+      <th>path_file</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Path to a existent configuration file. The file need a .yml extension. By default the parameter is NULL and the function will create a new configuration file.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function returns a list of configuration objects. If you have create a new configuration file, you can export your own configuration file (.csv format with separator ";").</p>
+    <p>Return a R list with several information configuration and, if you want, a YAML file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># If you want to create a new configuration file</span>
@@ -162,8 +158,7 @@
 <span class='fu'>configuration_file</span><span class='op'>(</span><span class='op'>)</span><span class='op'>}</span>
 <span class='co'># If you want to use an existing configuration file</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>configuration_file</span><span class='op'>(</span>new_config <span class='op'>=</span> <span class='cn'>F</span>,
-                   path_config <span class='op'>=</span> <span class='st'>"path_of_your_own_configuration_file"</span><span class='op'>)</span><span class='op'>}</span>
+<span class='fu'>configuration_file</span><span class='op'>(</span>path_file <span class='op'>=</span> <span class='st'>"path_of_your_own_configuration_file"</span><span class='op'>)</span><span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
