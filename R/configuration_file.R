@@ -227,7 +227,7 @@ configuration_file <- function(path_file = NULL) {
     # import existing configuration file ----
     tryCatch(
       expr = {
-        configuration_file <- yaml::yaml.load_file(input = tmp)
+        configuration_file <- yaml::yaml.load_file(input = path_file)
         cat("Configuration file correctly imported\n",
                 "Check data inside before use\n")
       },
