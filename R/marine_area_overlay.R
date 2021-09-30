@@ -6,6 +6,8 @@
 #' @param longitude_name {\link[base]{character}} expected. Longitude column name in your data.
 #' @param latitude_name {\link[base]{character}} expected. Latitude column name in your data.
 #' @param tolerance {\link[base]{numeric}} expected. Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).
+#' @param auto_selection {\link[base]{logical}} expected. Add a new column in the output with the most detailed overlay level available.
+#' @param silent {\link[base]{logical}} expected. Display or not warning information regarding projection of your spatial coordinates. By default FALSE.
 #' @return The function return your input data frame with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).
 #' @details
 #' For the argument "overlay_level", you can choose between 5 modalities (descending size classification):
@@ -36,7 +38,9 @@ marine_area_overlay <- function(data,
                                 overlay_level = "major",
                                 longitude_name,
                                 latitude_name,
-                                tolerance = 0) {
+                                tolerance = 0,
+                                auto_selection = FALSE,
+                                silent = FALSE) {
   if (missing(data) || ! is.data.frame(data)) {
     stop("invalid \"data\" argument")
   }
@@ -51,11 +55,19 @@ marine_area_overlay <- function(data,
   if (! is.numeric(tolerance)) {
     stop("Missing \"tolerance\" argument")
   }
-  cat("Be careful!",
-      "\n",
-      "You're spatial coordinates have to be in WGS84 projection",
-      "\n",
-      "Be patient! The function could be long\n")
+  if (! is.logical(silent)) {
+    stop("invalid \"silent\" argument")
+  }
+  if (! is.logical(auto_selection)) {
+    stop("invalid \"auto_selection\" argument")
+  }
+  if (silent == FALSE) {
+    cat("Be careful!",
+        "\n",
+        "You're spatial coordinates have to be in WGS84 projection",
+        "\n",
+        "Be patient! The function could be long\n")
+  }
   # Fao area shapefile importation ----
   tmp <- rgdal::readOGR(dsn = system.file("fao_area",
                                           "FAO_AREAS.shp",
@@ -69,8 +81,8 @@ marine_area_overlay <- function(data,
   tmp2 <- as.data.frame(tmp1)
   tmp1 <- sp::spTransform(tmp1,
                           "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
-  tmp <- sp::spTransform(tmp,
-                         sp::proj4string(tmp1))
+  suppressWarnings(expr = tmp <- sp::spTransform(tmp,
+                                                 sp::proj4string(tmp1)))
   # Data spatial overlay ----
   if (overlay_level == "ocean") {
     accuracy <- "OCEAN"
@@ -124,10 +136,27 @@ marine_area_overlay <- function(data,
                   tmp4)
     if (step1 == names(accuracy)[length(accuracy)]) {
       names(tmp2)[5:ncol(tmp2)] <- tolower(names(tmp2)[5:ncol(tmp2)])
+      if (auto_selection == TRUE) {
+        accuracy_position_ori = ncol(tmp2)
+        for (tmp2_id in seq_len(length.out = nrow(tmp2))) {
+          accuracy_position <- accuracy_position_ori
+          while(accuracy_position >= 5) {
+            if (tmp2[tmp2_id, accuracy_position] != "far_away"
+                | accuracy_position == 5) {
+              tmp2[tmp2_id, "best_mao"] <- tmp2[tmp2_id, accuracy_position]
+              accuracy_position <- 0
+            } else {
+              accuracy_position <- accuracy_position - 1
+            }
+          }
+        }
+      }
       data <- dplyr::inner_join(data,
                                 tmp2,
-                                by = c(latitude_name, longitude_name)) %>%
-        dplyr::select(-longitude_bis, -latitude_bis)
+                                by = c(latitude_name,
+                                       longitude_name)) %>%
+        dplyr::select(-longitude_bis,
+                      -latitude_bis)
     }
   }
   return(data)

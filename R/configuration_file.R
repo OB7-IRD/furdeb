@@ -2,6 +2,7 @@
 #' @title Configuration file creation and management
 #' @description Create or apply a configuration file (YAML extension).
 #' @param path_file {\link[base]{character}} expected. Path to a existent configuration file. The file need a .yml extension. By default the parameter is NULL and the function will create a new configuration file.
+#' @param silent {\link[base]{logical}} expected. Display or not information when you run an existing configuration file. By default FALSE.
 #' @return Return a R list with several information configuration and, if you want, a YAML file.
 #' @examples
 #' # If you want to create a new configuration file
@@ -12,7 +13,8 @@
 #' configuration_file(path_file = "path_of_your_own_configuration_file")}
 #' @importFrom yaml write_yaml yaml.load_file
 #' @export
-configuration_file <- function(path_file = NULL) {
+configuration_file <- function(path_file = NULL,
+                               silent = FALSE) {
   if (is.null(x = path_file)) {
     configuration_file <- list()
     # setup working directory ----
@@ -225,11 +227,16 @@ configuration_file <- function(path_file = NULL) {
     }
   } else {
     # import existing configuration file ----
+    if (! is.logical(silent)) {
+      stop("invalid \"silent\" argument")
+    }
     tryCatch(
       expr = {
         configuration_file <- yaml::yaml.load_file(input = path_file)
-        cat("Configuration file correctly imported\n",
-                "Check data inside before use\n")
+        if (silent == FALSE) {
+          cat("Configuration file correctly imported\n",
+              "Check data inside before use\n")
+        }
       },
       error = function(a) {
         message("Error - invalid \"path_file\" argument")

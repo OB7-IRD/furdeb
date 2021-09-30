@@ -9,7 +9,9 @@ marine_area_overlay(
   overlay_level = "major",
   longitude_name,
   latitude_name,
-  tolerance = 0
+  tolerance = 0,
+  auto_selection = FALSE,
+  silent = FALSE
 )
 }
 \arguments{
@@ -22,6 +24,10 @@ marine_area_overlay(
 \item{latitude_name}{{\link[base]{character}} expected. Latitude column name in your data.}
 
 \item{tolerance}{{\link[base]{numeric}} expected. Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).}
+
+\item{auto_selection}{{\link[base]{logical}} expected. Add a new column in the output with the most detailed overlay level available.}
+
+\item{silent}{{\link[base]{logical}} expected. Display or not warning information regarding projection of your spatial coordinates. By default FALSE.}
 }
 \value{
 The function return your input data frame with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).

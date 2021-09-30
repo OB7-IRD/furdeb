@@ -4,10 +4,12 @@
 \alias{configuration_file}
 \title{Configuration file creation and management}
 \usage{
-configuration_file(path_file = NULL)
+configuration_file(path_file = NULL, silent = FALSE)
 }
 \arguments{
 \item{path_file}{{\link[base]{character}} expected. Path to a existent configuration file. The file need a .yml extension. By default the parameter is NULL and the function will create a new configuration file.}
+
+\item{silent}{{\link[base]{logical}} expected. Display or not information when you run an existing configuration file. By default FALSE.}
 }
 \value{
 Return a R list with several information configuration and, if you want, a YAML file.
