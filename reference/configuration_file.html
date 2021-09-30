@@ -137,7 +137,7 @@
     <p>Create or apply a configuration file (YAML extension).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>configuration_file</span><span class='op'>(</span>path_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>configuration_file</span><span class='op'>(</span>path_file <span class='op'>=</span> <span class='cn'>NULL</span>, silent <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,6 +145,10 @@
     <tr>
       <th>path_file</th>
       <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Path to a existent configuration file. The file need a .yml extension. By default the parameter is NULL and the function will create a new configuration file.</p></td>
+    </tr>
+    <tr>
+      <th>silent</th>
+      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a> expected. Display or not information when you run an existing configuration file. By default FALSE.</p></td>
     </tr>
     </table>
 
