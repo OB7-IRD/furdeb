@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Consistent spatial marine area overlay (related to fao area) — marine_area_overlay • furdeb</title>
+<title>Consistent spatial marine area overlay (related to fao or eez area) — marine_area_overlay • furdeb</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,8 +52,8 @@
 
 
 
-<meta property="og:title" content="Consistent spatial marine area overlay (related to fao area) — marine_area_overlay" />
-<meta property="og:description" content="Consistent spatial marine area overlay (related to fao area) for points, grids and polygons." />
+<meta property="og:title" content="Consistent spatial marine area overlay (related to fao or eez area) — marine_area_overlay" />
+<meta property="og:description" content="Consistent spatial marine area overlay (related to fao or eez area) for points, grids and polygons." />
 <meta property="og:image" content="https://ob7-ird.github.io/furdeb/logo.png" />
 
 
@@ -128,22 +128,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Consistent spatial marine area overlay (related to fao area)</h1>
+    <h1>Consistent spatial marine area overlay (related to fao or eez area)</h1>
     <small class="dont-index">Source: <a href='https://github.com/OB7-IRD/furdeb/blob/master/R/marine_area_overlay.R'><code>R/marine_area_overlay.R</code></a></small>
     <div class="hidden name"><code>marine_area_overlay.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Consistent spatial marine area overlay (related to fao area) for points, grids and polygons.</p>
+    <p>Consistent spatial marine area overlay (related to fao or eez area) for points, grids and polygons.</p>
     </div>
 
     <pre class="usage"><span class='fu'>marine_area_overlay</span><span class='op'>(</span>
   <span class='va'>data</span>,
-  overlay_level <span class='op'>=</span> <span class='st'>"major"</span>,
+  <span class='va'>overlay_expected</span>,
   <span class='va'>longitude_name</span>,
   <span class='va'>latitude_name</span>,
-  tolerance <span class='op'>=</span> <span class='fl'>0</span>,
-  auto_selection <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>fao_area_file_path</span>,
+  fao_overlay_level <span class='op'>=</span> <span class='st'>"major"</span>,
+  auto_selection_fao <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>eez_area_file_path</span>,
+  for_fdi_use <span class='op'>=</span> <span class='cn'>NULL</span>,
   silent <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
@@ -155,8 +158,8 @@
       <td><p><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.</p></td>
     </tr>
     <tr>
-      <th>overlay_level</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Level of accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.</p></td>
+      <th>overlay_expected</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Type of overlay output. You can choose between "fao_area", "eez_area" or "fao_eez_area".</p></td>
     </tr>
     <tr>
       <th>longitude_name</th>
@@ -167,12 +170,24 @@
       <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Latitude column name in your data.</p></td>
     </tr>
     <tr>
-      <th>tolerance</th>
-      <td><p><a href='https://rdrr.io/r/base/numeric.html'>numeric</a> expected. Tolerance of maximum distance between coordinates and area selected (in km). By default no tolerance (0 km).</p></td>
+      <th>fao_area_file_path</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. File path of the fao area shape. You can provide a .shp or a .RData file.</p></td>
     </tr>
     <tr>
-      <th>auto_selection</th>
+      <th>fao_overlay_level</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Level of fao accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.</p></td>
+    </tr>
+    <tr>
+      <th>auto_selection_fao</th>
       <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a> expected. Add a new column in the output with the most detailed overlay level available.</p></td>
+    </tr>
+    <tr>
+      <th>eez_area_file_path</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. File path of the eez area shape. You can provide a .shp or a .RData file.</p></td>
+    </tr>
+    <tr>
+      <th>for_fdi_use</th>
+      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a> expected. Add a new column in the output with the FDI variable "eez_indicator".</p></td>
     </tr>
     <tr>
       <th>silent</th>
@@ -182,10 +197,10 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function return your input data frame with one or several columns (regarding specification in the argument "overlay_level") which contains area classification. For avoid conflicts, new colums ended by _MAO (for marine area overlay).</p>
+    <p>The function return your input data frame with one or several columns (regarding arguments' specification) which contains area classification.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For the argument "overlay_level", you can choose between 5 modalities (descending size classification):</p><ul>
+    <p>For the argument "fao_overlay_level", you can choose between 5 modalities (descending size classification):</p><ul>
 <li><p>ocean: ocean area</p></li>
 <li><p>major: major fao fishing area</p></li>
 <li><p>subarea: sub fao fishing area</p></li>
@@ -195,8 +210,6 @@
 </ul><p>Specificity for fao fishing area parameters: all the items above your specification (thus contain it at higher levels) will be added in the output. For example, if you select "subarea", you will also have the information about the major area concerning.
 If you want more information visit http://www.fao.org/fishery/area/search/en</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
