@@ -15,6 +15,3 @@ A list with ocean name(s), ocean character code(s), maximum and minimum latitude
 \description{
 Ocean(s) name(s) creation in relation with oceans referential of the IRD Ob7 (Observatory of Exploited Tropical Pelagic Ecosystems).
 }
-\examples{
-ocean_code_to_name(ocean_code = c(1, 2, 3))
-}
