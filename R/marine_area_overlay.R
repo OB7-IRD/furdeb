@@ -133,9 +133,10 @@ marine_area_overlay <- function(data,
     }
   }
   # data design ----
-  data_unique <- unique(data)
+  data_unique <- unique(data[, c(longitude_name,
+                                 latitude_name)])
   data_unique$data_id <- seq_len(length.out = nrow(data_unique))
-  data_sf <- sf::st_as_sf(x = unique(data_unique),
+  data_sf <- sf::st_as_sf(x = data_unique,
                           coords = c(longitude_name,
                                      latitude_name),
                           crs = 4326)
