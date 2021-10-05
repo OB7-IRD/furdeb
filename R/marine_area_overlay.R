@@ -1,8 +1,8 @@
 #' @name marine_area_overlay
-#' @title Consistent spatial marine area overlay (related to fao or eez area)
-#' @description Consistent spatial marine area overlay (related to fao or eez area) for points, grids and polygons.
+#' @title Consistent spatial marine area overlay
+#' @description Consistent spatial marine area overlay for points, grids and polygons (related to fao, eez or ices areas).
 #' @param data {\link[base]{data.frame}} expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.
-#' @param overlay_expected {\link[base]{character}} expected. Type of overlay output. You can choose between "fao_area", "eez_area" or "fao_eez_area".
+#' @param overlay_expected {\link[base]{character}} expected. Type of overlay output. You can choose between "fao_area", "eez_area", "fao_eez_area", "ices_area" or "all".
 #' @param longitude_name {\link[base]{character}} expected. Longitude column name in your data.
 #' @param latitude_name {\link[base]{character}} expected. Latitude column name in your data.
 #' @param fao_area_file_path {\link[base]{character}} expected. File path of the fao area shape. You can provide a .shp or a .RData file.
@@ -10,6 +10,7 @@
 #' @param auto_selection_fao {\link[base]{logical}} expected. Add a new column in the output with the most detailed overlay level available.
 #' @param eez_area_file_path {\link[base]{character}} expected. File path of the eez area shape. You can provide a .shp or a .RData file.
 #' @param for_fdi_use {\link[base]{logical}} expected. Add a new column in the output with the FDI variable "eez_indicator".
+#' @param ices_area_file_path {\link[base]{character}} expected. File path of the ices area shape. You can provide a .shp or a .RData file.
 #' @param silent {\link[base]{logical}} expected. Display or not warning information regarding projection of your spatial coordinates. By default FALSE.
 #' @return The function return your input data frame with one or several columns (regarding arguments' specification) which contains area classification.
 #' @details
@@ -31,21 +32,28 @@ marine_area_overlay <- function(data,
                                 overlay_expected,
                                 longitude_name,
                                 latitude_name,
-                                fao_area_file_path,
-                                fao_overlay_level = "major",
+                                fao_area_file_path = NULL,
+                                fao_overlay_level = NULL,
                                 auto_selection_fao = FALSE,
-                                eez_area_file_path,
+                                eez_area_file_path = NULL,
                                 for_fdi_use = NULL,
+                                ices_area_file_path = NULL,
                                 silent = FALSE) {
   # arguments verifications ----
   if (missing(data)
       && ! is.data.frame(data)) {
     stop("invalid \"data\" argument\n")
   }
-  overlay_expected <- match.arg(arg = overlay_expected,
-                                choices = c("fao_area",
-                                            "eez_area",
-                                            "fao_eez_area"))
+  if (missing(overlay_expected)) {
+    stop("invalid \"overlay_expected\" argument\n")
+  } else {
+    overlay_expected <- match.arg(arg = overlay_expected,
+                                  choices = c("fao_area",
+                                              "eez_area",
+                                              "ices_area",
+                                              "fao_eez_area",
+                                              "all"))
+  }
   if (missing(longitude_name)
       & ! is.character(longitude_name)) {
     stop("invalid \"longitude_name\" argument\n")
@@ -54,12 +62,11 @@ marine_area_overlay <- function(data,
       && ! is.character(latitude_name)) {
     stop("invalid \"latitude_name\" argument\n")
   }
-  if (overlay_expected %in% c("fao_area",
-                              "fao_eez_area")) {
-    if (missing(fao_area_file_path)
-        && ! is.character(fao_area_file_path)) {
-      stop("invalid \"fao_area_file_path\" argument\n")
-    }
+  if (! is.null(fao_area_file_path)
+      && ! is.character(fao_area_file_path)) {
+    stop("invalid \"fao_area_file_path\" argument\n")
+  }
+  if (! is.null(fao_overlay_level)) {
     fao_overlay_level <- match.arg(arg = fao_overlay_level,
                                    choices = c("ocean",
                                                "major",
@@ -67,18 +74,21 @@ marine_area_overlay <- function(data,
                                                "division",
                                                "subdivision",
                                                "subunit"))
-    if (! is.logical(auto_selection_fao)) {
-      stop("invalid \"auto_selection_fao\" argument")
-    }
-  } else if (overlay_expected == "eez_area") {
-    if (missing(eez_area_file_path)
-        && ! is.character(eez_area_file_path)) {
-      stop("invalid \"eez_area_file_path\" argument\n")
-    }
+  }
+  if (! is.logical(auto_selection_fao)) {
+    stop("invalid \"auto_selection_fao\" argument")
+  }
+  if (! is.null(eez_area_file_path)
+      && ! is.character(eez_area_file_path)) {
+    stop("invalid \"eez_area_file_path\" argument\n")
   }
   if (! is.null(for_fdi_use)
       && ! is.logical(for_fdi_use)) {
     stop("invalid \"for_fdi_use\" argument")
+  }
+  if (! is.null(ices_area_file_path)
+      && ! is.character(ices_area_file_path)) {
+    stop("invalid \"ices_area_file_path\" argument\n")
   }
   if (! is.logical(silent)) {
     stop("invalid \"silent\" argument")
@@ -91,7 +101,8 @@ marine_area_overlay <- function(data,
   # shapes imports ----
   # fao area
   if (overlay_expected %in% c("fao_area",
-                              "fao_eez_area")
+                              "fao_eez_area",
+                              "all")
       | (overlay_expected == "eez_area"
          & (! is.null(for_fdi_use)
             && for_fdi_use == TRUE))) {
@@ -114,7 +125,8 @@ marine_area_overlay <- function(data,
   }
   # eez area
   if (overlay_expected %in% c("eez_area",
-                              "fao_eez_area")) {
+                              "fao_eez_area",
+                              "all")) {
     eez_area_file_path_extension <- dplyr::last(x = unlist(strsplit(eez_area_file_path,
                                                                     '[.]')))
     if (eez_area_file_path_extension == "shp") {
@@ -132,6 +144,26 @@ marine_area_overlay <- function(data,
       stop("invalid \"eez_area_file_path\" argument, shp or RData extensions expected\n")
     }
   }
+  # ices area
+  if (overlay_expected %in% c("ices_area",
+                              "all")) {
+    ices_area_file_path_extension <- dplyr::last(x = unlist(strsplit(ices_area_file_path,
+                                                                    '[.]')))
+    if (ices_area_file_path_extension == "shp") {
+      ices_area <- sf::read_sf(ices_area_file_path)
+      if (! all(sf::st_is_valid(ices_area))) {
+        ices_area <- sf::st_make_valid(ices_area)
+      }
+    } else if (ices_area_file_path_extension == "RData") {
+      ices_area <- get(x = load(file = ices_area_file_path))
+      if (paste(class(ices_area),
+                collapse = " ") != "sf tbl_df tbl data.frame") {
+        stop("invalid ices shapefile, R object of class sf\n")
+      }
+    } else {
+      stop("invalid \"ices_area_file_path\" argument, shp or RData extensions expected\n")
+    }
+  }
   # data design ----
   data_unique <- unique(data[, c(longitude_name,
                                  latitude_name)])
@@ -141,7 +173,8 @@ marine_area_overlay <- function(data,
                                      latitude_name),
                           crs = 4326)
   if (overlay_expected %in% c("fao_area",
-                              "fao_eez_area")) {
+                              "fao_eez_area",
+                              "all")) {
     # fao spatial overlay ----
     if (fao_overlay_level == "ocean") {
       accuracy <- "OCEAN"
@@ -222,7 +255,8 @@ marine_area_overlay <- function(data,
   }
   # eez spatial overlay ----
   if (overlay_expected %in% c("eez_area",
-                              "fao_eez_area")) {
+                              "fao_eez_area",
+                              "all")) {
     sf_join_data_eez_area <- sf::st_join(x = data_sf,
                                          y = eez_area,
                                          join = sf::st_intersects,
@@ -278,6 +312,21 @@ marine_area_overlay <- function(data,
     data_unique <- select(.data = data_unique,
                           -iho_sea,
                           -iso_ter1)
+  }
+  # ices spatial overlay ----
+  if (overlay_expected %in% c("ices_area",
+                              "all")) {
+    sf_join_data_ices_area <- sf::st_join(x = data_sf,
+                                         y = ices_area,
+                                         join = sf::st_intersects,
+                                         left = TRUE)
+    join_data_ices_area_sub <- sf::st_drop_geometry(sf_join_data_ices_area) %>%
+      select(data_id,
+             ICESNAME) %>%
+      dplyr::rename("ices_area" = "ICESNAME")
+    data_unique <- dplyr::inner_join(x = data_unique,
+                                     y = join_data_ices_area_sub,
+                                     by = "data_id")
   }
   # merge with data ----
   data <- dplyr::inner_join(data,
