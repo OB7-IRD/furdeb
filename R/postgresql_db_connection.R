@@ -6,7 +6,7 @@
 #' @param db_dbname {\link[base]{character}} expected. Name/identification of the database.
 #' @param db_host {\link[base]{character}} expected. Host adress of the database.
 #' @param db_port {\link[base]{numeric}} expected. Identification of the port.
-#' @return The function return a format class PosstgreSQLConnection in the R's global envrionment.
+#' @return The function return a list.
 #' @export
 #' @importFrom RPostgreSQL dbConnect
 #' @importFrom DBI dbDriver
@@ -16,11 +16,12 @@ postgresql_db_connection <- function(db_user,
                                      db_host,
                                      db_port) {
   # Connection to PostgreSQL database ----
-  postgresql_db_connection <- RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
-                                                     user = db_user,
-                                                     password = db_password,
-                                                     dbname = db_dbname,
-                                                     host = db_host,
-                                                     port = db_port)
+  postgresql_db_connection <- list("database_name" <- db_dbname,
+                                   "connection_information" <- RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
+                                                                                      user = db_user,
+                                                                                      password = db_password,
+                                                                                      dbname = db_dbname,
+                                                                                      host = db_host,
+                                                                                      port = db_port))
   return(postgresql_db_connection)
 }

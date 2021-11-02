@@ -18,7 +18,7 @@ postgresql_db_connection(db_user, db_password, db_dbname, db_host, db_port)
 \item{db_port}{{\link[base]{numeric}} expected. Identification of the port.}
 }
 \value{
-The function return a format class PosstgreSQLConnection in the R's global envrionment.
+The function return a list.
 }
 \description{
 This function able to establish a connection with a PostgreSQL database.
