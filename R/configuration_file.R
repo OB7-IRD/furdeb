@@ -12,21 +12,14 @@
 #' \dontrun{
 #' configuration_file(path_file = "path_of_your_own_configuration_file")}
 #' @importFrom yaml write_yaml yaml.load_file
-#' @importFrom utils choose.dir
 #' @export
 configuration_file <- function(path_file = NULL,
                                silent = FALSE) {
   if (is.null(x = path_file)) {
     configuration_file <- list()
     # setup working directory ----
-    if (interactive()
-        && .Platform$OS.type == "windows") {
-      wd_path <- utils::choose.dir(default = getwd(),
-                            caption = "Choose your working directory")
-    } else {
-      cat("Write or paste below your working directory\n")
-      wd_path <- readLines(n = 1)
-    }
+    cat("Write or paste below your working directory\n")
+    wd_path <- readLines(n = 1)
     configuration_file <- append(configuration_file,
                                  list(wd_path = wd_path))
     # setup output directory ----
@@ -38,18 +31,10 @@ configuration_file <- function(path_file = NULL,
           "(yes, no)\n")
       output_directory_answer <- readLines(n = 1)
     }
-    if (output_directory_answer == "yes") {
-      if (interactive()
-          && .Platform$OS.type == "windows") {
-        output_path <- utils::choose.dir(default = getwd(),
-                              caption = "Choose your output directory")
-      } else {
-        cat("Write or paste below your output directory\n")
-        output_path <- readLines(n = 1)
-      }
-      configuration_file <- append(configuration_file,
-                                   list(output_path = output_path))
-    }
+    cat("Write or paste below your output directory\n")
+    output_path <- readLines(n = 1)
+    configuration_file <- append(configuration_file,
+                                 list(output_path = output_path))
     # setup java memory availability ----
     cat("Do you need to modifiy memory allowed for java? (by default 512mo)\n",
         "Warning, this step must be performed prior to loading any packages\n",
