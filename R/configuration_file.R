@@ -12,6 +12,7 @@
 #' \dontrun{
 #' configuration_file(path_file = "path_of_your_own_configuration_file")}
 #' @importFrom yaml write_yaml yaml.load_file
+#' @importFrom utils choose.dir
 #' @export
 configuration_file <- function(path_file = NULL,
                                silent = FALSE) {

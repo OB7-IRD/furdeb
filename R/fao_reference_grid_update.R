@@ -5,7 +5,6 @@
 #' @export
 #' @importFrom dplyr rowwise mutate case_when ungroup
 #' @importFrom sf st_coordinates st_centroid
-#' @importFrom rlang .data
 fao_reference_grid_update <- function(reference_grid) {
   # local binding global variables ----
   geometry <- X <- Y <- NULL

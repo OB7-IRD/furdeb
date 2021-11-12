@@ -16,16 +16,12 @@ Imports:
     RJDBC (>= 0.2.7.1),
     RPostgreSQL (>= 0.6.2),
     DBI (>= 1.0.0),
-    RSQLite (>= 2.1.1),
     magrittr (>= 1.5),
     dplyr (>= 0.8.1),
-    rJava (>= 0.9.10),
-    ggplot2 (>= 3.3.3),
     stringr (>= 1.4.0),
     sf (>= 1.0.2),
     yaml (>= 2.2.1),
     testthat (>= 3.0.4),
-    rlang (>= 0.4.12),
     utils (>= 4.0.4)
 URL: https://github.com/OB7-IRD/furdeb
 BugReports: https://github.com/OB7-IRD/furdeb/issues
