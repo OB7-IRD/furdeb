@@ -12,34 +12,19 @@ reference:
 - contents:
   - access_dbconnection
   - postgresql_db_connection
-  - mdb2Sqlite3
 - title: "Spatial design"
   desc: >
     Functions for spatial design.
 - contents:
   - avdth_position_conversion_dec
-  - create_cwp_grid
+  - fao_reference_grid_update
   - lat_lon_cwp_manipulation
   - lat_long_to_csquare
   - marine_area_overlay
-- title: "Referentials"
-  desc: >
-    Functions related to referentials.
-- contents:
-  - fishing_mode_code_to_name
-  - gear_code_to_name
-  - ocean_code_to_name
-- title: "Graphics tools"
-  desc: >
-    Functions for graphics use.
-- contents:
-  - add_vertices
-  - ggplot_corr
-- title: "Setup help"
+- title: "Setup support:"
   desc: >
     Functions for setup and R session configuration.
 - contents:
-  - mclapply_socket
   - configuration_file
 
 url: https://ob7-ird.github.io/furdeb
