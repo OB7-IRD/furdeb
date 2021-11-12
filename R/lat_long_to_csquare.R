@@ -28,11 +28,11 @@
 #'                            latitude_name = "latitude",
 #'                            longitude_name = "longitude")}
 #' @export
-lat_long_to_csquare <- function (data,
-                                 grid_square,
-                                 latitude_name,
-                                 longitude_name,
-                                 boundary_ajustement_factor = 0.000001) {
+lat_long_to_csquare <- function(data,
+                                grid_square,
+                                latitude_name,
+                                longitude_name,
+                                boundary_ajustement_factor = 0.000001) {
   # Arguments checking ----
   if (missing(data) || ! is.data.frame(data)) {
     stop(paste0("Missing argument \"data\" or not a data frame.",

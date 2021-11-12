@@ -9,37 +9,40 @@ lat_lon_cwp_manipulation(
   data_longitude = NULL,
   data_latitude = NULL,
   data_cwp = NULL,
-  input_degree_format = NULL,
-  output_degree_format = NULL,
+  referential_grid_file_path,
+  input_cwp_format = NULL,
   output_degree_cwp_parameter = NULL,
+  output_degree_format = NULL,
+  input_degree_format = NULL,
   epsg_code = as.integer(4326),
-  cwp_resolution = "1deg_x_1deg",
-  path_extern_referential_grid = NULL
+  output_cwp_format = NULL
 )
 }
 \arguments{
 \item{manipulation_process}{{\link[base]{character}} expected. A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".}
 
-\item{data_longitude}{{\link[base]{character}} expected. A string vector with longitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.}
+\item{data_longitude}{{\link[base]{character}} expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').}
 
-\item{data_latitude}{{\link[base]{character}} expected. A string vector with latitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.}
+\item{data_latitude}{{\link[base]{character}} expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').}
 
-\item{data_cwp}{{\link[base]{character}} expected. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.}
+\item{data_cwp}{{\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.}
 
-\item{input_degree_format}{{\link[base]{character}} expected. A string matching one of the accepted input degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "lat_lon_to_cwp" process.}
+\item{referential_grid_file_path}{{\link[base]{character}} expected. File path of the referential grid shape. File with .RData extension file expected.}
 
-\item{output_degree_format}{{\link[base]{character}} expected. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "cwp_to_lat_lon" process.}
+\item{input_cwp_format}{{\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. Cwp construction process related to the "centroid" or the "corner" of the square.}
 
-\item{output_degree_cwp_parameter}{{\link[base]{character}} expected. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner). Mandatory for "cwp_to_lat_lon" process.}
+\item{output_degree_cwp_parameter}{{\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner).}
 
-\item{epsg_code}{{\link[base]{integer}} expected. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. Mandatory argument for "lat_lon_to_cwp" process. By default 4326 (+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0).}
+\item{output_degree_format}{{\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".}
 
-\item{cwp_resolution}{{\link[base]{character}} expected. A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg". By default "1deg_x_1deg".}
+\item{input_degree_format}{{\link[base]{character}} expected. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".}
 
-\item{path_extern_referential_grid}{{\link[base]{character}} expected. A string path to a RData file which contains a referential grid. Inside the RData, the R object has to be a "SpatialPolygonsDataFrame" class and have a name like "grid_cwp_cwp_resolution" (where "cwp_resolution" is the same value than the "cwp_resolution" argument).}
+\item{epsg_code}{{\link[base]{integer}} expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.}
+
+\item{output_cwp_format}{{\link[base]{integer}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_11" (based on the square's centroid with a cwp on 11 characters) or "corner_11" (based on the square's corner with a cwp on 11 characters)}
 }
 \value{
-Return a data.frame with 3 columns: cwp, longitude and latitude (colums names provide coordinates format).
+Return a data.frame.
 }
 \description{
 Conversion function for latitude, longitude and cwp item.

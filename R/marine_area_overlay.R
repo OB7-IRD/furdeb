@@ -28,6 +28,7 @@
 #' @export
 #' @importFrom dplyr last inner_join rename
 #' @importFrom sf read_sf st_is_valid st_make_valid st_as_sf st_join st_intersects st_drop_geometry
+#' @importFrom utils read.csv2
 marine_area_overlay <- function(data,
                                 overlay_expected,
                                 longitude_name,
@@ -39,6 +40,8 @@ marine_area_overlay <- function(data,
                                 for_fdi_use = NULL,
                                 ices_area_file_path = NULL,
                                 silent = FALSE) {
+  # local binding global variables ----
+  data_id <- IHO_SEA <- EEZ <- ISO_TER1 <- iho_sea <- iso_ter1 <- ICESNAME <- NULL
   # arguments verifications ----
   if (missing(data)
       && ! is.data.frame(data)) {
@@ -107,7 +110,7 @@ marine_area_overlay <- function(data,
          & (! is.null(for_fdi_use)
             && for_fdi_use == TRUE))) {
     fao_area_file_path_extension <- dplyr::last(x = unlist(strsplit(fao_area_file_path,
-                                                                    '[.]')))
+                                                                    "[.]")))
     if (fao_area_file_path_extension == "shp") {
       fao_area <- sf::read_sf(fao_area_file_path)
       if (! all(sf::st_is_valid(fao_area))) {
@@ -128,7 +131,7 @@ marine_area_overlay <- function(data,
                               "fao_eez_area",
                               "all")) {
     eez_area_file_path_extension <- dplyr::last(x = unlist(strsplit(eez_area_file_path,
-                                                                    '[.]')))
+                                                                    "[.]")))
     if (eez_area_file_path_extension == "shp") {
       eez_area <- sf::read_sf(eez_area_file_path)
       if (! all(sf::st_is_valid(eez_area))) {
@@ -148,7 +151,7 @@ marine_area_overlay <- function(data,
   if (overlay_expected %in% c("ices_area",
                               "all")) {
     ices_area_file_path_extension <- dplyr::last(x = unlist(strsplit(ices_area_file_path,
-                                                                    '[.]')))
+                                                                    "[.]")))
     if (ices_area_file_path_extension == "shp") {
       ices_area <- sf::read_sf(ices_area_file_path)
       if (! all(sf::st_is_valid(ices_area))) {
@@ -236,10 +239,10 @@ marine_area_overlay <- function(data,
                                                       "_fao")
     # best fao area selection ----
     if (auto_selection_fao == TRUE) {
-      accuracy_position_ori = ncol(data_unique)
+      accuracy_position_ori <- ncol(x = data_unique)
       for (data_unique_id in seq_len(length.out = nrow(data_unique))) {
         accuracy_position <- accuracy_position_ori
-        while(accuracy_position >= 4) {
+        while (accuracy_position >= 4) {
           if (! is.na(data_unique[data_unique_id,
                                   accuracy_position])) {
             data_unique[data_unique_id,
@@ -272,12 +275,12 @@ marine_area_overlay <- function(data,
                                      by = "data_id")
     if (! is.null(for_fdi_use)
         && for_fdi_use == TRUE) {
-      eez_indicator_referential <- read.csv2(file = system.file("eez_indicator_referential.csv",
+      eez_indicator_referential <- utils::read.csv2(file = system.file("eez_indicator_referential.csv",
                                                                 package = "furdeb"))
-      eu_countries <- read.csv2(file = system.file("eu_countries.csv",
+      eu_countries <- utils::read.csv2(file = system.file("eu_countries.csv",
                                                    package = "furdeb"))
       if (! "division_fao" %in% names(data_unique)) {
-        fao_area_sub <- fao_area[fao_area$F_LEVEL == "DIVISION",]
+        fao_area_sub <- fao_area[fao_area$F_LEVEL == "DIVISION", ]
         sf_join_data_fao_area_sub <- sf::st_join(x = data_sf,
                                                  y = fao_area_sub,
                                                  join = sf::st_intersects,

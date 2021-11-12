@@ -12,6 +12,7 @@
 #' \dontrun{
 #' configuration_file(path_file = "path_of_your_own_configuration_file")}
 #' @importFrom yaml write_yaml yaml.load_file
+#' @importFrom utils choose.dir
 #' @export
 configuration_file <- function(path_file = NULL,
                                silent = FALSE) {
@@ -20,7 +21,7 @@ configuration_file <- function(path_file = NULL,
     # setup working directory ----
     if (interactive()
         && .Platform$OS.type == "windows") {
-      wd_path <- choose.dir(default = getwd(),
+      wd_path <- utils::choose.dir(default = getwd(),
                             caption = "Choose your working directory")
     } else {
       cat("Write or paste below your working directory\n")
@@ -91,16 +92,16 @@ configuration_file <- function(path_file = NULL,
       while (database_answer == "yes") {
         cat("Pre-configuration for the following databases are available (enter new if you want to make your own configuration)\n",
             paste(databases_pre_configuration,
-                  collapse = ' - ')
-            ,"\n")
+                  collapse = " - "),
+            "\n")
         database_configuration_answer <- readLines(n = 1)
         while (!(database_configuration_answer %in% c(databases_pre_configuration,
                                                       "new"))) {
           cat("Answer not correct\n",
               "Pre-configuration for the following databases are available (enter new if you want to make your own configuration)\n",
               paste(databases_pre_configuration,
-                    collapse = ' - ')
-              ,"\n")
+                    collapse = " - "),
+              "\n")
           database_configuration_answer <- readLines(n = 1)
         }
         if (database_configuration_answer %in% c("sardara_vmot5",

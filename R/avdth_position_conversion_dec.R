@@ -7,10 +7,10 @@
 #' @param quadrant {\link[base]{character}} expected. Column name of quadrant data.
 #' @return This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.
 #' @export
-avdth_position_conversion_dec <- function (data,
-                                           latitude,
-                                           longitude,
-                                           quadrant) {
+avdth_position_conversion_dec <- function(data,
+                                          latitude,
+                                          longitude,
+                                          quadrant) {
   if (missing(data)
       || ! is.data.frame(data)) {
     stop("invalid \"data\" argument")
