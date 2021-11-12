@@ -12,7 +12,6 @@
 #' \dontrun{
 #' configuration_file(path_file = "path_of_your_own_configuration_file")}
 #' @importFrom yaml write_yaml yaml.load_file
-#' @importFrom utils choose.dir
 #' @export
 configuration_file <- function(path_file = NULL,
                                silent = FALSE) {
@@ -41,7 +40,7 @@ configuration_file <- function(path_file = NULL,
     if (output_directory_answer == "yes") {
       if (interactive()
           && .Platform$OS.type == "windows") {
-        output_path <- choose.dir(default = getwd(),
+        output_path <- utils::choose.dir(default = getwd(),
                               caption = "Choose your output directory")
       } else {
         cat("Write or paste below your output directory\n")
