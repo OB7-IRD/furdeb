@@ -7,28 +7,16 @@
     <loc>https://ob7-ird.github.io/furdeb/reference/access_dbconnection.html</loc>
   </url>
   <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/add_vertices.html</loc>
-  </url>
-  <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/avdth_position_conversion_dec.html</loc>
   </url>
   <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/configuration_file.html</loc>
   </url>
   <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/create_cwp_grid.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/fishing_mode_code_to_name.html</loc>
+    <loc>https://ob7-ird.github.io/furdeb/reference/fao_reference_grid_update.html</loc>
   </url>
   <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/furdeb-package.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/gear_code_to_name.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/ggplot_corr.html</loc>
   </url>
   <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/lat_lon_cwp_manipulation.html</loc>
@@ -40,21 +28,9 @@
     <loc>https://ob7-ird.github.io/furdeb/reference/marine_area_overlay.html</loc>
   </url>
   <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/mclapply.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/mclapply_socket.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/mdb2Sqlite3.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/ocean_code_to_name.html</loc>
-  </url>
-  <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/postgresql_db_connection.html</loc>
+    <loc>https://ob7-ird.github.io/furdeb/reference/postgresql_dbconnection.html</loc>
   </url>
 </urlset>

@@ -142,12 +142,13 @@
   data_longitude <span class='op'>=</span> <span class='cn'>NULL</span>,
   data_latitude <span class='op'>=</span> <span class='cn'>NULL</span>,
   data_cwp <span class='op'>=</span> <span class='cn'>NULL</span>,
-  input_degree_format <span class='op'>=</span> <span class='cn'>NULL</span>,
-  output_degree_format <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>referential_grid_file_path</span>,
+  input_cwp_format <span class='op'>=</span> <span class='cn'>NULL</span>,
   output_degree_cwp_parameter <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output_degree_format <span class='op'>=</span> <span class='cn'>NULL</span>,
+  input_degree_format <span class='op'>=</span> <span class='cn'>NULL</span>,
   epsg_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='fl'>4326</span><span class='op'>)</span>,
-  cwp_resolution <span class='op'>=</span> <span class='st'>"1deg_x_1deg"</span>,
-  path_extern_referential_grid <span class='op'>=</span> <span class='cn'>NULL</span>
+  output_cwp_format <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -159,45 +160,49 @@
     </tr>
     <tr>
       <th>data_longitude</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string vector with longitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').</p></td>
     </tr>
     <tr>
       <th>data_latitude</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string vector with latitude value(s) (decimal in point). Mandatory argument for "lat_lon_to_cwp" process.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').</p></td>
     </tr>
     <tr>
       <th>data_cwp</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.</p></td>
     </tr>
     <tr>
-      <th>input_degree_format</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string matching one of the accepted input degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "lat_lon_to_cwp" process.</p></td>
+      <th>referential_grid_file_path</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. File path of the referential grid shape. File with .RData extension file expected.</p></td>
     </tr>
     <tr>
-      <th>output_degree_format</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree". Mandatory for "cwp_to_lat_lon" process.</p></td>
+      <th>input_cwp_format</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory argument for "cwp_to_lat_lon" process. Cwp construction process related to the "centroid" or the "corner" of the square.</p></td>
     </tr>
     <tr>
       <th>output_degree_cwp_parameter</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner). Mandatory for "cwp_to_lat_lon" process.</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner).</p></td>
+    </tr>
+    <tr>
+      <th>output_degree_format</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".</p></td>
+    </tr>
+    <tr>
+      <th>input_degree_format</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".</p></td>
     </tr>
     <tr>
       <th>epsg_code</th>
-      <td><p><a href='https://rdrr.io/r/base/integer.html'>integer</a> expected. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. Mandatory argument for "lat_lon_to_cwp" process. By default 4326 (+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0).</p></td>
+      <td><p><a href='https://rdrr.io/r/base/integer.html'>integer</a> expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.</p></td>
     </tr>
     <tr>
-      <th>cwp_resolution</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string matching one of the accepted resolution values. Accepted resolutions values are "10min_x_10min", "20min_x_20min", "30min_x_30min", "30min_x_1deg", "1deg_x_1deg", "5deg_x_5deg", "10deg_x_10deg", "20deg_x_20deg" and "30deg_x_30deg". By default "1deg_x_1deg".</p></td>
-    </tr>
-    <tr>
-      <th>path_extern_referential_grid</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> expected. A string path to a RData file which contains a referential grid. Inside the RData, the R object has to be a "SpatialPolygonsDataFrame" class and have a name like "grid_cwp_cwp_resolution" (where "cwp_resolution" is the same value than the "cwp_resolution" argument).</p></td>
+      <th>output_cwp_format</th>
+      <td><p><a href='https://rdrr.io/r/base/integer.html'>integer</a> expected. Output format of cwp. So far, you can choose between theses formats: "centroid_11" (based on the square's centroid with a cwp on 11 characters) or "corner_11" (based on the square's corner with a cwp on 11 characters)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Return a data.frame with 3 columns: cwp, longitude and latitude (colums names provide coordinates format).</p>
+    <p>Return a data.frame.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>furdeb package — furdeb-package • furdeb</title>
+<title>Specific update of the fao reference grid — fao_reference_grid_update • furdeb</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,9 +52,8 @@
 
 
 
-<meta property="og:title" content="furdeb package — furdeb-package" />
-<meta property="og:description" content="
-Functions and processes for R development and beyond!" />
+<meta property="og:title" content="Specific update of the fao reference grid — fao_reference_grid_update" />
+<meta property="og:description" content="Function for specific update of the fao reference grid." />
 <meta property="og:image" content="https://ob7-ird.github.io/furdeb/logo.png" />
 
 
@@ -129,66 +128,25 @@ Functions and processes for R development and beyond!" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>furdeb package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OB7-IRD/furdeb/blob/master/R/furdeb-package.R'><code>R/furdeb-package.R</code></a></small>
-    <div class="hidden name"><code>furdeb-package.Rd</code></div>
+    <h1>Specific update of the fao reference grid</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OB7-IRD/furdeb/blob/master/R/fao_reference_grid_update.R'><code>R/fao_reference_grid_update.R</code></a></small>
+    <div class="hidden name"><code>fao_reference_grid_update.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><img src='figures/logo.png' align='right' alt='logo' width='120' /></p>
-<p>Functions and processes for R development and beyond!</p>
+    <p>Function for specific update of the fao reference grid.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>fao_reference_grid_update</span><span class='op'>(</span><span class='va'>reference_grid</span><span class='op'>)</span></pre>
 
-
-    <h2 class="hasAnchor" id="databases-manipulations"><a class="anchor" href="#databases-manipulations"></a>Databases manipulations</h2>
-
-    
-
-<ul>
-<li><p><code><a href='access_dbconnection.html'>access_dbconnection</a></code></p></li>
-<li><p><code><a href='postgresql_dbconnection.html'>postgresql_dbconnection</a></code></p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="spatial-design"><a class="anchor" href="#spatial-design"></a>Spatial design</h2>
-
-    
-
-<ul>
-<li><p><code><a href='marine_area_overlay.html'>marine_area_overlay</a></code></p></li>
-<li><p><code><a href='lat_long_to_csquare.html'>lat_long_to_csquare</a></code></p></li>
-<li><p><code><a href='fao_reference_grid_update.html'>fao_reference_grid_update</a></code></p></li>
-<li><p><code><a href='lat_lon_cwp_manipulation.html'>lat_lon_cwp_manipulation</a></code></p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="setup-help"><a class="anchor" href="#setup-help"></a>Setup help</h2>
-
-    
-
-<ul>
-<li><p><code><a href='configuration_file.html'>configuration_file</a></code></p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://github.com/OB7-IRD/furdeb'>https://github.com/OB7-IRD/furdeb</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/OB7-IRD/furdeb/issues'>https://github.com/OB7-IRD/furdeb/issues</a></p></li>
-</ul>
-
-</div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p><strong>Maintainer</strong>: Ob7 - Observatory of Exploited Tropical Pelagic Ecosystems <a href='mailto:ob7@ird.fr'>ob7@ird.fr</a> [copyright holder]</p>
-<p>Authors:</p><ul>
-<li><p>Mathieu Depetris <a href='mailto:mathieu.depetris@ird.fr'>mathieu.depetris@ird.fr</a></p></li>
-<li><p>Antoine Duparc <a href='mailto:antoine.duparc@ird.fr'>antoine.duparc@ird.fr</a></p></li>
-</ul>
-
-<p>Other contributors:</p><ul>
-<li><p>Norbert Billet <a href='mailto:norbert.billet@ifremer.fr'>norbert.billet@ifremer.fr</a> [contributor]</p></li>
-</ul>
-
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>reference_grid</th>
+      <td><p><a href='https://r-spatial.github.io/sf/reference/sf.html'>sf</a> expected. A R object of class "sf" with data related to an official FAO cwp grid. For formated correctly the FAO shape grid use the function <a href='https://r-spatial.github.io/sf/reference/st_read.html'>read_sf</a> and <a href='https://r-spatial.github.io/sf/reference/valid.html'>st_make_valid</a>.</p></td>
+    </tr>
+    </table>
 
 
   </div>
