@@ -6,10 +6,11 @@
 #' }
 #' @section Spatial design:
 #'\itemize{
-#' \item{\code{\link{marine_area_overlay}}}
-#' \item{\code{\link{lat_long_to_csquare}}}
+#' \item{\code{\link{avdth_position_conversion_dec}}}
 #' \item{\code{\link{fao_reference_grid_update}}}
 #' \item{\code{\link{lat_lon_cwp_manipulation}}}
+#' \item{\code{\link{lat_long_to_csquare}}}
+#' \item{\code{\link{marine_area_overlay}}}
 #' }
 #'@section Setup help:
 #'\itemize{

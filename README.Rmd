@@ -31,9 +31,8 @@ Working in progress for this section. Be patient.
 
 Working in progress for this section. Be patient.
 ```{r, eval = FALSE}
-# pak installs R packages from CRAN, Bioconductor, GitHub, and local files and directories. Check https://pak.r-lib.org/ for more information.
-install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
-pak::pkg_install("ob7-ird/furdeb")
+devtools::install_github("https://github.com/OB7-IRD/furdeb",
+                         INSTALL_opts=c("--no-multiarch"))
 ```
 
 
@@ -42,7 +41,9 @@ pak::pkg_install("ob7-ird/furdeb")
 To get a bug fix or to use a feature from the development version, you can install the development version of furdeb from GitHub.
 
 ```{r, eval = FALSE}
-pak::pkg_install("ob7-ird/furdeb@development")
+devtools::install_github("https://github.com/OB7-IRD/furdeb",
+                         ref = "development",
+                         INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Cheatsheet
