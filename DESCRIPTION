@@ -19,6 +19,7 @@ Imports:
     magrittr (>= 1.5),
     dplyr (>= 0.8.1),
     stringr (>= 1.4.0),
+    rgdal (>= 1.5.27),
     sf (>= 1.0.2),
     yaml (>= 2.2.1),
     testthat (>= 3.0.4)

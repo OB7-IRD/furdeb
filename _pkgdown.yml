@@ -21,7 +21,7 @@ reference:
   - lat_lon_cwp_manipulation
   - lat_long_to_csquare
   - marine_area_overlay
-- title: "Setup support:"
+- title: "Setup support"
   desc: >
     Functions for setup and R session configuration.
 - contents:

@@ -23,6 +23,8 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 [![R-CMD-check](https://github.com/OB7-IRD/furdeb/workflows/R-CMD-check/badge.svg)](https://github.com/OB7-IRD/furdeb/actions)
 <!-- badges: end -->
 
+***FUnctions for R DEvelopment and Beyond!***
+
 ## Overview
 
 Working in progress for this section. Be patient.

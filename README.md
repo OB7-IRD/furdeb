@@ -12,6 +12,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/OB7-IRD/furdeb/workflows/R-CMD-check/badge.svg)](https://github.com/OB7-IRD/furdeb/actions)
 <!-- badges: end -->
 
+***FUnctions for R DEvelopment and Beyond!***
+
 ## Overview
 
 Working in progress for this section. Be patient.
