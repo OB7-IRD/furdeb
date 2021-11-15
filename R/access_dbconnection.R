@@ -22,14 +22,14 @@ access_dbconnection <- function(driver_name = "u_can_access",
                                        "access_jdbc42"))
   # access DB path verification ----
   if (! is.character(access_db_path)) {
-    stop("invalid \"access_db_path\" argument")
+    stop("invalid \"access_db_path\" argument.\n")
   }
   # function for access_jdbc42 driver ----
   if (driver_name == "access_jdbc42") {
     # driver path verification
     if (missing(access_jdbc42_driver_path)
         || ! is.character(access_jdbc42_driver_path)) {
-      stop("invalid \"access_jdbc42_driver_path\" argument")
+      stop("invalid \"access_jdbc42_driver_path\" argument.\n")
     }
     # initializing Access JDBC driver
     access_jdbc_driver <- RJDBC::JDBC(driverClass = "com.hxtt.sql.access.AccessDriver",
