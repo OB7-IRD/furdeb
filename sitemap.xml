@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ob7-ird.github.io/furdeb/404.html</loc>
+  </url>
+  <url>
+    <loc>https://ob7-ird.github.io/furdeb/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://ob7-ird.github.io/furdeb/authors.html</loc>
+  </url>
+  <url>
     <loc>https://ob7-ird.github.io/furdeb/index.html</loc>
   </url>
   <url>
@@ -17,6 +26,9 @@
   </url>
   <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/furdeb-package.html</loc>
+  </url>
+  <url>
+    <loc>https://ob7-ird.github.io/furdeb/reference/index.html</loc>
   </url>
   <url>
     <loc>https://ob7-ird.github.io/furdeb/reference/lat_lon_cwp_manipulation.html</loc>
