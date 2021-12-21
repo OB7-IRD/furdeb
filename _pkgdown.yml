@@ -11,7 +11,7 @@ reference:
     Functions for databases manipulations, like connection or conversion.
 - contents:
   - access_dbconnection
-  - postgresql_db_connection
+  - postgresql_dbconnection
 - title: "Spatial design"
   desc: >
     Functions for spatial design.
