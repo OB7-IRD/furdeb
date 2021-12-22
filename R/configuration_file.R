@@ -25,7 +25,8 @@ configuration_file <- function(path_file = NULL,
     # setup output directory ----
     cat("Do you need an output directory?\n(yes, no)\n")
     output_directory_answer <- readLines(n = 1)
-    while (!(output_directory_answer %in% c("yes", "no"))) {
+    while (!(output_directory_answer %in% c("yes",
+                                            "no"))) {
       cat("Answer not correct\n",
           "Do you need an output directory?\n",
           "(yes, no)\n")
@@ -70,6 +71,7 @@ configuration_file <- function(path_file = NULL,
     if (database_answer == "yes") {
       databases_pre_configuration <- c("sardara_vmot5",
                                        "balbaya_vmot5",
+                                       "observe_vmot5",
                                        "t3_prod_vmot7",
                                        "t3_process_vmot7",
                                        "access_avdth")
@@ -91,6 +93,7 @@ configuration_file <- function(path_file = NULL,
         }
         if (database_configuration_answer %in% c("sardara_vmot5",
                                                  "balbaya_vmot5",
+                                                 "observe_vmot5",
                                                  "t3_prod_vmot7",
                                                  "t3_process_vmot7",
                                                  "new")) {
@@ -104,6 +107,10 @@ configuration_file <- function(path_file = NULL,
             port <- 5432
           } else if (database_configuration_answer == "balbaya_vmot5") {
             dbname <- "balbaya"
+            host <- "vmot5-proto.ird.fr"
+            port <- 5432
+          } else if (database_configuration_answer == "observe_vmot5") {
+            dbname <- "observe"
             host <- "vmot5-proto.ird.fr"
             port <- 5432
           } else if (database_configuration_answer == "t3_prod_vmot7") {
@@ -128,11 +135,12 @@ configuration_file <- function(path_file = NULL,
                                                        host = host,
                                                        port = port))
         } else if (database_configuration_answer == "access_avdth") {
-          cat("Select location of your access database\n")
-          database_path <- file.choose()
+          cat("Write or paste below your access database path\n")
+          database_path <- readLines(n = 1)
           current_databases_configuration <- list(list(database_path = database_path))
         }
-        if (database_configuration_answer == "new") {
+        if (database_configuration_answer %in% c("new",
+                                                 "access_avdth")) {
           cat("Enter database configuration name\n")
           database_configuration_name <- readLines(n = 1)
           if (length(databases_configuration) != 0) {
@@ -151,7 +159,8 @@ configuration_file <- function(path_file = NULL,
                   "Do you want to use a specific name or use an auto-increment?\n",
                   "(specific, auto)\n")
               check_database_configuration_name_answer <- readLines(n = 1)
-              while (!(check_database_configuration_name_answer %in% c("specific", "auto"))) {
+              while (!(check_database_configuration_name_answer %in% c("specific",
+                                                                       "auto"))) {
                 cat("Answer not correct\n",
                     "Type of database configuration exist among database(s) configured\n",
                     "Do you want to use a specific name or use an auto-increment?\n",
@@ -184,7 +193,8 @@ configuration_file <- function(path_file = NULL,
         cat("Do you need to establish a connexion with another database?\n",
             "(yes, no)\n")
         database_answer <- readLines(n = 1)
-        while (!(database_answer %in% c("yes", "no"))) {
+        while (!(database_answer %in% c("yes",
+                                        "no"))) {
           cat("Answer not correct\n",
               "Do you need to establish a connexion with another database?\n",
               "(yes, no)\n")
@@ -199,7 +209,8 @@ configuration_file <- function(path_file = NULL,
     cat("Do you want to export the object in a YAML format?\n",
         "(yes, no)\n")
     export_yaml_answer <- readLines(n = 1)
-    while (!(export_yaml_answer %in% c("yes", "no"))) {
+    while (!(export_yaml_answer %in% c("yes",
+                                       "no"))) {
       cat("Answer not correct\n",
           "Do you want to export the object in a YAML format?\n",
           "(yes, no)\n")
