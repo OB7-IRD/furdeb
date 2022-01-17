@@ -25,13 +25,13 @@ save_pigz(
 
 \item{precheck}{{\link[base]{logical}} expected. Should the existence of the objects be checked before starting to.}
 
-\item{envir}{{\link[base]{envir}} expected. Environment to search for objects to be saved.}
+\item{envir}{Environment to search for objects to be saved.}
 
-\item{eval_promises}{{\link[base]{envir}} expected. Should objects which are promises be forced before saving?}
+\item{eval_promises}{{\link[base]{logical}} expected. Should objects which are promises be forced before saving?}
 }
 \description{
 Save writes an external representation of R objects to the specified file using pigz parallel implementation compression (http://www.zlib.net/pigz/).
 }
 \details{
-Under windows OS utilisation, download through this link (https://sourceforge.net/projects/pigz-for-windows/) the pigz executable file and place it in the System32 directory (C:\Windows\System32). The executable file is also available in the package directory (use the function system.file("pigz.exe", package = "furdeb") for located it).
+Under windows OS utilisation, download through this link (https://sourceforge.net/projects/pigz-for-windows/) the pigz executable file and place it in the System32 directory. The executable file is also available in the package directory (use the function system.file("pigz.zip", package = "furdeb") for located it).
 }

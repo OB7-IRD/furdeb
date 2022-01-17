@@ -6,10 +6,10 @@
 #' @param output_file_path {\link[base]{character}} expected. Path name of the file where data will be saved.
 #' @param cores_utilisation {\link[base]{character}} or {\link[base]{numeric}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).
 #' @param precheck {\link[base]{logical}} expected. Should the existence of the objects be checked before starting to.
-#' @param envir {\link[base]{envir}} expected. Environment to search for objects to be saved.
-#' @param eval_promises {\link[base]{envir}} expected. Should objects which are promises be forced before saving?
+#' @param envir Environment to search for objects to be saved.
+#' @param eval_promises {\link[base]{logical}} expected. Should objects which are promises be forced before saving?
 #' @details
-#' Under windows OS utilisation, download through this link (https://sourceforge.net/projects/pigz-for-windows/) the pigz executable file and place it in the System32 directory (C:\Windows\System32). The executable file is also available in the package directory (use the function system.file("pigz.exe", package = "furdeb") for located it).
+#' Under windows OS utilisation, download through this link (https://sourceforge.net/projects/pigz-for-windows/) the pigz executable file and place it in the System32 directory. The executable file is also available in the package directory (use the function system.file("pigz.zip", package = "furdeb") for located it).
 #' @export
 #' @importFrom parallel detectCores
 save_pigz <- function(...,
