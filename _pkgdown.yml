@@ -21,11 +21,12 @@ reference:
   - lat_lon_cwp_manipulation
   - lat_long_to_csquare
   - marine_area_overlay
-- title: "Setup support"
+- title: "Setup support and data manipulations"
   desc: >
-    Functions for setup and R session configuration.
+    Functions for setup, R session configuration and data manipulations.
 - contents:
   - configuration_file
+  - save_pigz
 
 url: https://ob7-ird.github.io/furdeb
 

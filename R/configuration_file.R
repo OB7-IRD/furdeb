@@ -32,10 +32,12 @@ configuration_file <- function(path_file = NULL,
           "(yes, no)\n")
       output_directory_answer <- readLines(n = 1)
     }
-    cat("Write or paste below your output directory\n")
-    output_path <- readLines(n = 1)
-    configuration_file <- append(configuration_file,
-                                 list(output_path = output_path))
+    if (output_directory_answer == "yes") {
+      cat("Write or paste below your output directory\n")
+      output_path <- readLines(n = 1)
+      configuration_file <- append(configuration_file,
+                                   list(output_path = output_path))
+    }
     # setup java memory availability ----
     cat("Do you need to modifiy memory allowed for java? (by default 512mo)\n",
         "Warning, this step must be performed prior to loading any packages\n",
