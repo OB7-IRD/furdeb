@@ -9,6 +9,7 @@ save_pigz(
   list = character(),
   output_file_path,
   cores_utilisation = "auto",
+  compression_level = 1L,
   precheck = TRUE,
   envir = parent.frame(),
   eval_promises = TRUE
@@ -22,6 +23,8 @@ save_pigz(
 \item{output_file_path}{{\link[base]{character}} expected. Path name of the file where data will be saved.}
 
 \item{cores_utilisation}{{\link[base]{character}} or {\link[base]{numeric}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).}
+
+\item{compression_level}{{\link[base]{integer}} expected. Compression level, 0 for no compression to 9 (maximum).}
 
 \item{precheck}{{\link[base]{logical}} expected. Should the existence of the objects be checked before starting to.}
 

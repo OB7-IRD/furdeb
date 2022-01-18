@@ -5,6 +5,7 @@
 #' @param list {\link[base]{character}} expected. A vector containing the names of objects to be saved.
 #' @param output_file_path {\link[base]{character}} expected. Path name of the file where data will be saved.
 #' @param cores_utilisation {\link[base]{character}} or {\link[base]{numeric}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).
+#' @param compression_level {\link[base]{integer}} expected. Compression level, 0 for no compression to 9 (maximum).
 #' @param precheck {\link[base]{logical}} expected. Should the existence of the objects be checked before starting to.
 #' @param envir Environment to search for objects to be saved.
 #' @param eval_promises {\link[base]{logical}} expected. Should objects which are promises be forced before saving?
@@ -16,6 +17,7 @@ save_pigz <- function(...,
                       list = character(),
                       output_file_path,
                       cores_utilisation = "auto",
+                      compression_level = 1L,
                       precheck = TRUE,
                       envir = parent.frame(),
                       eval_promises = TRUE) {
@@ -37,6 +39,11 @@ save_pigz <- function(...,
                  collapse = "_") != "character"
           && length(x = output_file_path) != 1)) {
     stop("invalid \"output_file_path\" argument\n")
+  }
+  if (paste0(class(x = compression_level),
+             collapse = "_") != "integer"
+      && length(x = compression_level) != 1) {
+    stop("invalid \"compression_level\" argument\n")
   }
   # process ----
   names <- as.character(x = substitute(list(...)))[-1L]
@@ -63,7 +70,9 @@ save_pigz <- function(...,
   }
   on.exit(close(con = con))
   con <- pipe(paste0("pigz ",
-                     paste0("--processes ",
+                     paste0("-",
+                            compression_level),
+                     paste0(" --processes ",
                             cores_number),
                      " > ",
                      output_file_path))
