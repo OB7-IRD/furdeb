@@ -43,20 +43,21 @@ access_dbconnection <- function(driver_name = "u_can_access",
     # function for u_can_access driver ----
     if (driver_name == "u_can_access") {
       # initializing Access JDBC driver
+      #access_db_path = "D://projets_themes//t3//t3_r//scripts//tests//comparaisons_t3_fortran//data//ATL_IND_2006_2009_V35.mdb"
       class_path <- c(system.file("u_can_access",
-                                  "jackcess-2.1.11.jar",
+                                  "jackcess-3.0.1.jar",
                                   package = "furdeb"),
                       system.file("u_can_access",
-                                  "hsqldb-2.3.8-jdk6.jar",
+                                  "hsqldb-2.5.0.jar",
                                   package = "furdeb"),
                       system.file("u_can_access",
-                                  "commons-logging-1.1.3.jar",
+                                  "commons-logging-1.2.jar",
                                   package = "furdeb"),
                       system.file("u_can_access",
-                                  "commons-lang-2.6.jar",
+                                  "commons-lang3-3.8.1.jar",
                                   package = "furdeb"),
                       system.file("u_can_access",
-                                  "ucanaccess-4.0.4.jar",
+                                  "ucanaccess-5.0.1.jar",
                                   package = "furdeb"))
       access_jdbc_driver <- RJDBC::JDBC(driverClass = "net.ucanaccess.jdbc.UcanaccessDriver",
                                         classPath = class_path)
