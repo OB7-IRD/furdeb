@@ -43,7 +43,6 @@ access_dbconnection <- function(driver_name = "u_can_access",
     # function for u_can_access driver ----
     if (driver_name == "u_can_access") {
       # initializing Access JDBC driver
-      #access_db_path = "D://projets_themes//t3//t3_r//scripts//tests//comparaisons_t3_fortran//data//ATL_IND_2006_2009_V35.mdb"
       class_path <- c(system.file("u_can_access",
                                   "jackcess-3.0.1.jar",
                                   package = "furdeb"),
