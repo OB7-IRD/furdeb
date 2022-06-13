@@ -13,10 +13,10 @@
 #' @param epsg_code {\link[base]{integer}} expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.
 #' @param output_cwp_format {\link[base]{character}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_7" (based on the square's centroid with a cwp on 7 characters) or "corner_7" (based on the square's corner with a cwp on 7 characters)
 #' @return Return a data.frame.
-#' @export
 #' @importFrom dplyr last tibble inner_join rowwise mutate ungroup select rename case_when left_join
 #' @importFrom sf st_coordinates st_centroid st_as_sf st_join st_intersects st_drop_geometry
 #' @importFrom stringr str_extract
+#' @export
 lat_lon_cwp_manipulation <- function(manipulation_process,
                                      data_longitude = NULL,
                                      data_latitude = NULL,

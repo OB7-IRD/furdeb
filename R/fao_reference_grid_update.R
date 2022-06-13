@@ -2,9 +2,9 @@
 #' @title Specific update of the fao reference grid
 #' @description Function for specific update of the fao reference grid.
 #' @param reference_grid {\link[sf]{sf}} expected. A R object of class "sf" with data related to an official FAO cwp grid.
-#' @export
 #' @importFrom dplyr rowwise mutate case_when ungroup
 #' @importFrom sf st_coordinates st_centroid
+#' @export
 fao_reference_grid_update <- function(reference_grid) {
   # local binding global variables ----
   geometry <- X <- Y <- NULL

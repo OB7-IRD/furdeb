@@ -11,8 +11,8 @@
 #'  \item{"u_can_access": }{the main advantage is it's a free java JDBC driver. To understand briefly the process behind, the Access database is converted in HSQLDB system. This conversion could take a long time, especially if the database if large. Furthermore, after the conversion, queries should be faster than if there run on an Access database.}
 #'  \item{"access_jdbc42": }{this driver is paying. In opposition with the "u_can_access" driver, the Access database is not converted. The connection should be faster but the queries could be longer.}
 #' }
-#' @export
 #' @importFrom RJDBC JDBC dbConnect
+#' @export
 access_dbconnection <- function(driver_name = "u_can_access",
                                 access_db_path,
                                 access_jdbc42_driver_path) {

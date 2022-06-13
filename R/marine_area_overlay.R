@@ -25,10 +25,10 @@
 #' }
 #' Specificity for fao fishing area parameters: all the items above your specification (thus contain it at higher levels) will be added in the output. For example, if you select "subarea", you will also have the information about the major area concerning.
 #' If you want more information visit http://www.fao.org/fishery/area/search/en
-#' @export
 #' @importFrom dplyr last inner_join rename
 #' @importFrom sf read_sf st_is_valid st_make_valid st_as_sf st_join st_intersects st_drop_geometry
 #' @importFrom utils read.csv2
+#' @export
 marine_area_overlay <- function(data,
                                 overlay_expected,
                                 longitude_name,

@@ -7,9 +7,9 @@
 #' @param db_host {\link[base]{character}} expected. Host adress of the database.
 #' @param db_port {\link[base]{numeric}} expected. Identification of the port.
 #' @return The function return a list.
-#' @export
 #' @importFrom RPostgreSQL dbConnect
 #' @importFrom DBI dbDriver
+#' @export
 postgresql_dbconnection <- function(db_user,
                                     db_password,
                                     db_dbname,

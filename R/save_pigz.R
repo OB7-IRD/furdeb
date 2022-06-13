@@ -11,8 +11,8 @@
 #' @param eval_promises {\link[base]{logical}} expected. Should objects which are promises be forced before saving?
 #' @details
 #' Under windows OS utilisation, download through this link (https://sourceforge.net/projects/pigz-for-windows/) the pigz executable file and place it in the System32 directory. The executable file is also available in the package directory (use the function system.file("pigz.zip", package = "furdeb") for located it).
-#' @export
 #' @importFrom parallel detectCores
+#' @export
 save_pigz <- function(...,
                       list = character(),
                       output_file_path,
