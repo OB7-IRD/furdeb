@@ -74,30 +74,53 @@
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degrees.</p></dd>
+
+
 <dt>overlay_expected</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Type of overlay output. You can choose between "fao_area", "eez_area", "fao_eez_area", "ices_area" or "all".</p></dd>
+
+
 <dt>longitude_name</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Longitude column name in your data.</p></dd>
+
+
 <dt>latitude_name</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Latitude column name in your data.</p></dd>
+
+
 <dt>fao_area_file_path</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. File path of the fao area shape. You can provide a .shp or a .RData file.</p></dd>
+
+
 <dt>fao_overlay_level</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Level of fao accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.</p></dd>
+
+
 <dt>auto_selection_fao</dt>
 <dd><p><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a> expected. Add a new column in the output with the most detailed overlay level available.</p></dd>
+
+
 <dt>eez_area_file_path</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. File path of the eez area shape. You can provide a .shp or a .RData file.</p></dd>
+
+
 <dt>for_fdi_use</dt>
 <dd><p><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a> expected. Add a new column in the output with the FDI variable "eez_indicator".</p></dd>
+
+
 <dt>ices_area_file_path</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. File path of the ices area shape. You can provide a .shp or a .RData file.</p></dd>
+
+
 <dt>silent</dt>
 <dd><p><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a> expected. Display or not warning information regarding projection of your spatial coordinates. By default FALSE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The function return your input data frame with one or several columns (regarding arguments' specification) which contains area classification.</p>
+    
+
+<p>The function return your input data frame with one or several columns (regarding arguments' specification) which contains area classification.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -123,7 +146,7 @@ If you want more information visit http://www.fao.org/fishery/area/search/en</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

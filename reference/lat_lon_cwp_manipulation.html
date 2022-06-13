@@ -74,30 +74,53 @@
     <h2>Arguments</h2>
     <dl><dt>manipulation_process</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".</p></dd>
+
+
 <dt>data_longitude</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').</p></dd>
+
+
 <dt>data_latitude</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').</p></dd>
+
+
 <dt>data_cwp</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.</p></dd>
+
+
 <dt>referential_grid_file_path</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. File path of the referential grid shape. File with .RData extension file expected.</p></dd>
+
+
 <dt>input_cwp_format</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory argument for "cwp_to_lat_lon" process. Cwp construction process related to the "centroid" or the "corner" of the square.</p></dd>
+
+
 <dt>output_degree_cwp_parameter</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner).</p></dd>
+
+
 <dt>output_degree_format</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".</p></dd>
+
+
 <dt>input_degree_format</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".</p></dd>
+
+
 <dt>epsg_code</dt>
 <dd><p><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a> expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.</p></dd>
+
+
 <dt>output_cwp_format</dt>
-<dd><p><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a> expected. Output format of cwp. So far, you can choose between theses formats: "centroid_11" (based on the square's centroid with a cwp on 11 characters) or "corner_11" (based on the square's corner with a cwp on 11 characters)</p></dd>
+<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Output format of cwp. So far, you can choose between theses formats: "centroid_7" (based on the square's centroid with a cwp on 7 characters) or "corner_7" (based on the square's corner with a cwp on 7 characters)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Return a data.frame.</p>
+    
+
+<p>Return a data.frame.</p>
     </div>
 
   </div>
@@ -112,7 +135,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

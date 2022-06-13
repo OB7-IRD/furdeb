@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 2.0.3
+pkgdown: 2.0.4
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-04-28T09:36Z
+last_built: 2022-06-13T12:02Z
 urls:
   reference: https://ob7-ird.github.io/furdeb/reference
   article: https://ob7-ird.github.io/furdeb/articles

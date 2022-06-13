@@ -68,18 +68,29 @@
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.</p></dd>
+
+
 <dt>grid_square</dt>
 <dd><p><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a> expected. Resolution for the global grid square. You have just to provide the first value of the resolution. Check the section details below.</p></dd>
+
+
 <dt>latitude_name</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Latitude column name in your data.</p></dd>
+
+
 <dt>longitude_name</dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> expected. Longitude column name in your data.</p></dd>
+
+
 <dt>boundary_ajustement_factor</dt>
 <dd><p><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a> expected. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The function return your input data frame with one more columns filled with the c-square value (according your specification in the "grid_square" argument).</p>
+    
+
+<p>The function return your input data frame with one more columns filled with the c-square value (according your specification in the "grid_square" argument).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -116,7 +127,7 @@ If you want more informations about C-square visit http://www.cmar.csiro.au/csqu
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
