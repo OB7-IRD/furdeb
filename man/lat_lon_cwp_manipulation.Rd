@@ -39,7 +39,7 @@ lat_lon_cwp_manipulation(
 
 \item{epsg_code}{{\link[base]{integer}} expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.}
 
-\item{output_cwp_format}{{\link[base]{integer}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_11" (based on the square's centroid with a cwp on 11 characters) or "corner_11" (based on the square's corner with a cwp on 11 characters)}
+\item{output_cwp_format}{{\link[base]{character}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_7" (based on the square's centroid with a cwp on 7 characters) or "corner_7" (based on the square's corner with a cwp on 7 characters)}
 }
 \value{
 Return a data.frame.

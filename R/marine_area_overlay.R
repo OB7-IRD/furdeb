@@ -295,20 +295,17 @@ marine_area_overlay <- function(data,
                                          by = "data_id")
       }
       for (data_unique_id in seq_len(length.out = nrow(data_unique))) {
-        if (is.na(data_unique[data_unique_id, "division_fao"])) {
-          data_unique[data_unique_id, "eez_indicator"] <- NA
-        } else {
-          if (data_unique[data_unique_id, "division_fao"] %in% eez_indicator_referential$sub_region) {
-            if (data_unique[data_unique_id, "iso_ter1"] %in% eu_countries$country_code) {
-              data_unique[data_unique_id, "eez_indicator"] <- "EU"
-            } else if (is.na(data_unique[data_unique_id, "eez"])) {
-              data_unique[data_unique_id, "eez_indicator"] <- "RFMO"
-            } else {
-              data_unique[data_unique_id, "eez_indicator"] <- "COAST"
-            }
+        if (data_unique[data_unique_id, "division_fao"] %in% eez_indicator_referential$sub_region
+            | data_unique[data_unique_id, "subarea_fao"] %in% eez_indicator_referential$sub_region) {
+          if (data_unique[data_unique_id, "iso_ter1"] %in% eu_countries$country_code) {
+            data_unique[data_unique_id, "eez_indicator"] <- "EU"
+          } else if (is.na(data_unique[data_unique_id, "eez"])) {
+            data_unique[data_unique_id, "eez_indicator"] <- "RFMO"
           } else {
-            data_unique[data_unique_id, "eez_indicator"] <- NA
+            data_unique[data_unique_id, "eez_indicator"] <- "COAST"
           }
+        } else {
+          data_unique[data_unique_id, "eez_indicator"] <- NA
         }
       }
     }

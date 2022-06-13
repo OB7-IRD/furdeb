@@ -11,7 +11,7 @@
 #' @param output_degree_format {\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
 #' @param input_degree_format {\link[base]{character}} expected. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
 #' @param epsg_code {\link[base]{integer}} expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.
-#' @param output_cwp_format {\link[base]{integer}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_11" (based on the square's centroid with a cwp on 11 characters) or "corner_11" (based on the square's corner with a cwp on 11 characters)
+#' @param output_cwp_format {\link[base]{character}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_7" (based on the square's centroid with a cwp on 7 characters) or "corner_7" (based on the square's corner with a cwp on 7 characters)
 #' @return Return a data.frame.
 #' @export
 #' @importFrom dplyr last tibble inner_join rowwise mutate ungroup select rename case_when left_join
@@ -28,30 +28,36 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                      input_degree_format = NULL,
                                      epsg_code = as.integer(4326),
                                      output_cwp_format = NULL) {
+  # setup
+  suppressMessages(sf::sf_use_s2(use_s2 = FALSE))
   # local binding global variables ----
   geometry <- X <- Y <- latitude <- longitude <- latitude_degree <- latitude_minute <- sign_latitude <- latitude_seconde <- longitude_degree <- longitude_minute <- sign_longitude <- longitude_seconde <- cwp <- latitude_degree_minute_seconde <- longitude_degree_minute_seconde <- data_id <- NULL
   # global arguments verifications ----
-  if (class(x = manipulation_process) != "character"
-      || length(x = manipulation_process) != 1
-      || ! manipulation_process %in% c("lat_lon_to_cwp",
-                                     "cwp_to_lat_lon")) {
-    stop("invalid \"manipulation_process\" argument.\n")
+  if (codama::r_type_checking(r_object = manipulation_process,
+                              type = "character",
+                              length = 1L,
+                              allowed_values = c("lat_lon_to_cwp",
+                                                 "cwp_to_lat_lon"),
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = manipulation_process,
+                                   type = "character",
+                                   length = 1L,
+                                   allowed_values = c("lat_lon_to_cwp",
+                                                      "cwp_to_lat_lon"),
+                                   output = "message"))
   }
-  if (class(x = referential_grid_file_path) != "character"
-      || length(x = referential_grid_file_path) != 1) {
-    stop("invalid \"referential_grid_file_path\" argument.\n")
+  if (codama::file_path_checking(file_path = referential_grid_file_path,
+                                 extension = c("RData"),
+                                 output = "logical") != TRUE) {
+    return(codama::file_path_checking(file_path = referential_grid_file_path,
+                                      extension = c("RData"),
+                                      output = "message"))
   }
   # import reference grid ----
-  referential_grid_file_path_extension <- dplyr::last(x = unlist(strsplit(referential_grid_file_path,
-                                                                          "[.]")))
-  if (referential_grid_file_path_extension == "RData") {
-    reference_grid <- get(x = load(file = referential_grid_file_path))
-    if (paste(class(reference_grid),
-              collapse = " ") != "sf tbl_df tbl data.frame") {
-      stop("invalid fao shapefile, R object of class sf.\n")
-    }
-  } else {
-    stop("invalid \"referential_grid_file_path\" argument, RData extension expected.\n")
+  reference_grid <- get(x = load(file = referential_grid_file_path))
+  if (paste(class(reference_grid),
+            collapse = " ") != "sf tbl_df tbl data.frame") {
+    stop("invalid fao shapefile, R object of class sf expected.\n")
   }
   cwp_resolution <- unique(x = reference_grid$GRIDTYPE)
   if (length(x = cwp_resolution) != 1) {
@@ -61,74 +67,96 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
   if (manipulation_process == "cwp_to_lat_lon") {
     if (is.null(data_cwp)
         || class(data_cwp) != "character"
-        || length(x = unique(sapply(X = data_cwp, FUN = nchar))) != 1
-        || (! unique(sapply(X = data_cwp, FUN = nchar)) %in% c(11))) {
+        || length(x = unique(sapply(X = data_cwp,
+                                    FUN = nchar))) != 1) {
       stop("Invalid \"data_cwp\" argument.\n")
     } else {
-      cwp_length <- unique(sapply(X = data_cwp, FUN = nchar))
+      cwp_length <- unique(sapply(X = data_cwp,
+                                  FUN = nchar))
       data_cwp <- dplyr::tibble(cwp = data_cwp)
       data_cwp_unique <- unique(x = data_cwp)
-      if (class(x = input_cwp_format) != "character"
-       || length(x = input_cwp_format) != 1
-       || ! input_cwp_format %in% c("centroid",
-                                    "corner")) {
-        stop("invalid \"input_cwp_format\" argument.\n")
+      if (codama::r_type_checking(r_object = input_cwp_format,
+                                  type = "character",
+                                  length = 1L,
+                                  allowed_values = c("centroid",
+                                                     "corner"),
+                                  output = "logical") != TRUE) {
+        return(codama::r_type_checking(r_object = input_cwp_format,
+                                       type = "character",
+                                       length = 1L,
+                                       allowed_values = c("centroid",
+                                                          "corner"),
+                                       output = "message"))
       }
-      if (class(x = output_degree_cwp_parameter) != "character"
-          || length(x = output_degree_cwp_parameter) != 1
-          || ! output_degree_cwp_parameter %in% c("centroid",
-                                                  "corner")) {
-        stop("invalid \"output_degree_cwp_parameter\" argument.\n")
+      if (codama::r_type_checking(r_object = output_degree_cwp_parameter,
+                                  type = "character",
+                                  length = 1L,
+                                  allowed_values = c("centroid",
+                                                     "corner"),
+                                  output = "logical") != TRUE) {
+        return(codama::r_type_checking(r_object = output_degree_cwp_parameter,
+                                       type = "character",
+                                       length = 1L,
+                                       allowed_values = c("centroid",
+                                                          "corner"),
+                                       output = "message"))
       }
-      if (class(x = output_degree_format) != "character"
-          || length(x = output_degree_format) != 1
-          || ! output_degree_format %in% c("decimal_degree",
-                                           "degree_minute_seconde")) {
-        stop("invalid \"output_degree_format\" argument.\n")
+      if (codama::r_type_checking(r_object = output_degree_format,
+                                  type = "character",
+                                  length = 1L,
+                                  allowed_values = c("decimal_degree",
+                                                     "degree_minute_seconde"),
+                                  output = "logical") != TRUE) {
+        return(codama::r_type_checking(r_object = output_degree_format,
+                                       type = "character",
+                                       length = 1L,
+                                       allowed_values = c("decimal_degree",
+                                                          "degree_minute_seconde"),
+                                       output = "message"))
       }
-      if (cwp_length == 11) {
+      if (cwp_length %in% c(7)) {
         if (input_cwp_format == "centroid") {
           data_cwp_unique_final <- dplyr::inner_join(x = data_cwp_unique,
                                                      y = reference_grid[, c("geometry",
-                                                                            "cwp_centroid_11")],
-                                                     by = c("cwp" = "cwp_centroid_11"))
+                                                                            "CWP_CODE")],
+                                                     by = c("cwp" = "CWP_CODE"))
         } else if (input_cwp_format == "corner") {
           data_cwp_unique_final <- dplyr::inner_join(x = data_cwp_unique,
                                                      y = reference_grid[, c("geometry",
-                                                                            "cwp_corner_11")],
-                                                     by = c("cwp" = "cwp_corner_11"))
+                                                                            "CWP_CODE")],
+                                                     by = c("cwp" = "CWP_CODE"))
         }
         if (nrow(x = data_cwp_unique_final) != 0) {
           if (output_degree_cwp_parameter == "centroid") {
-            data_cwp_unique_final <- data_cwp_unique_final %>%
-              dplyr::rowwise() %>%
-              dplyr::mutate(latitude = sprintf(fmt = "%05.2f",
-                                               (data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry))))$Y),
-                            longitude = sprintf(fmt = "%06.2f",
-                                                (data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry))))$X)) %>%
-              dplyr::ungroup() %>%
-              dplyr::select(-geometry)
+            data_cwp_unique_final <- suppressWarnings(data_cwp_unique_final %>%
+                                                        dplyr::rowwise() %>%
+                                                        dplyr::mutate(latitude = sprintf(fmt = "%02.f",
+                                                                                         as.integer(x = data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry)))$Y)),
+                                                                      longitude = sprintf(fmt = "%03.f",
+                                                                                          as.integer(x = data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry)))$X))) %>%
+                                                        dplyr::ungroup() %>%
+                                                        dplyr::select(-geometry))
           } else if (output_degree_cwp_parameter == "corner") {
-            data_cwp_unique_final <- data_cwp_unique_final %>%
-              dplyr::rowwise() %>%
-              dplyr::mutate(latitude = sprintf(fmt = "%05.2f",
-                                               (data.frame(sf::st_coordinates(x = geometry)) %>%
-                                                  mutate(X = round(x = abs(x = X),
-                                                                   digits = 2),
-                                                         Y = round(x = abs(x = Y),
-                                                                   digits = 2)) %>%
-                                                  dplyr::filter(X == min(X)) %>%
-                                                  dplyr::filter(Y == min(Y)))$Y),
-                            longitude = sprintf(fmt = "%06.2f",
-                                                (data.frame(sf::st_coordinates(x = geometry)) %>%
-                                                   mutate(X = round(x = abs(x = X),
-                                                                    digits = 2),
-                                                          Y = round(x = abs(x = Y),
-                                                                    digits = 2)) %>%
-                                                   dplyr::filter(X == min(X)) %>%
-                                                   dplyr::filter(Y == min(Y)))$X)) %>%
-              dplyr::ungroup() %>%
-              dplyr::select(-geometry)
+            data_cwp_unique_final <- suppressWarnings(data_cwp_unique_final %>%
+                                                        dplyr::rowwise() %>%
+                                                        dplyr::mutate(latitude = sprintf(fmt = "%02.f",
+                                                                                         as.integer(x = data.frame(sf::st_coordinates(x = geometry)) %>%
+                                                                                                      mutate(X = round(x = abs(x = X),
+                                                                                                                       digits = 2),
+                                                                                                             Y = round(x = abs(x = Y),
+                                                                                                                       digits = 2)) %>%
+                                                                                                      dplyr::filter(X == min(X)) %>%
+                                                                                                      dplyr::filter(Y == min(Y)))$Y),
+                                                                      longitude = sprintf(fmt = "%03.f",
+                                                                                          as.integer(x = data.frame(sf::st_coordinates(x = geometry)) %>%
+                                                                                                       mutate(X = round(x = abs(x = X),
+                                                                                                                        digits = 2),
+                                                                                                              Y = round(x = abs(x = Y),
+                                                                                                                        digits = 2)) %>%
+                                                                                                       dplyr::filter(X == min(X)) %>%
+                                                                                                       dplyr::filter(Y == min(Y)))$X)) %>%
+                                                        dplyr::ungroup() %>%
+                                                        dplyr::select(-geometry))
           }
           if (output_degree_format == "decimal_degree") {
             data_cwp_unique_final <- dplyr::rename(.data = data_cwp_unique_final,
@@ -188,7 +216,7 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
       }
     }
   } else if (manipulation_process == "lat_lon_to_cwp") {
-    if (is.null(data_longitude)
+    if (is.null(x = data_longitude)
         || class(data_longitude) != "character") {
       stop("invalid \"data_longitude\" argument, class character expected.\n")
     }
@@ -199,17 +227,31 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
     if (length(data_longitude) != length(data_latitude)) {
       stop("invalid \"data_longitude\" and \"data_latitude\" arguments, same length argument expected.\n")
     }
-    if (class(input_degree_format) != "character"
-        || length(input_degree_format) != 1
-        || ! input_degree_format %in% c("degree_minute_seconde",
-                                        "decimal_degree")) {
-      stop("invalid \"input_degree_format\" argument.\n")
+    if (codama::r_type_checking(r_object = input_degree_format,
+                                type = "character",
+                                length = 1L,
+                                allowed_values = c("degree_minute_seconde",
+                                                   "decimal_degree"),
+                                output = "logical") != TRUE) {
+      return(codama::r_type_checking(r_object = input_degree_format,
+                                     type = "character",
+                                     length = 1L,
+                                     allowed_values = c("degree_minute_seconde",
+                                                        "decimal_degree"),
+                                     output = "message"))
     }
-    if (class(output_cwp_format) != "character"
-        || length(output_cwp_format) != 1
-        || ! output_cwp_format %in% c("centroid_11",
-                                      "corner_11")) {
-      stop("invalid \"output_cwp_format\" argument.\n")
+    if (codama::r_type_checking(r_object = output_cwp_format,
+                                type = "character",
+                                length = 1L,
+                                allowed_values = c("centroid_7",
+                                                   "corner_7"),
+                                output = "logical") != TRUE) {
+      return(codama::r_type_checking(r_object = output_cwp_format,
+                                     type = "character",
+                                     length = 1L,
+                                     allowed_values = c("centroid_7",
+                                                        "corner_7"),
+                                     output = "message"))
     }
     if (input_degree_format == "decimal_degree") {
       longitude_data <- data_longitude
@@ -274,12 +316,12 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                               join = sf::st_intersects,
                                               left = TRUE)
     join_longitude_latitude <- sf::st_drop_geometry(sf_join_longitude_latitude)
-    if (output_cwp_format == "centroid_11") {
+    if (output_cwp_format == "centroid_7") {
       join_longitude_latitude <- join_longitude_latitude[, c("data_id",
-                                                             "cwp_centroid_11")]
-    } else if (output_cwp_format == "corner_11") {
+                                                             "CWP_CODE")]
+    } else if (output_cwp_format == "corner_7") {
       join_longitude_latitude <- join_longitude_latitude[, c("data_id",
-                                                             "cwp_corner_11")]
+                                                             "CWP_CODE")]
     }
     data_latitude_longitude_unique <- dplyr::inner_join(x = data_latitude_longitude_unique,
                                                         y = join_longitude_latitude,

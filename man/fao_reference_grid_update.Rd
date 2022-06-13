@@ -7,7 +7,7 @@
 fao_reference_grid_update(reference_grid)
 }
 \arguments{
-\item{reference_grid}{{\link[sf]{sf}} expected. A R object of class "sf" with data related to an official FAO cwp grid. For formated correctly the FAO shape grid use the function {\link[sf]{read_sf}} and {\link[sf]{st_make_valid}}.}
+\item{reference_grid}{{\link[sf]{sf}} expected. A R object of class "sf" with data related to an official FAO cwp grid.}
 }
 \description{
 Function for specific update of the fao reference grid.
