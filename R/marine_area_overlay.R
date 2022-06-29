@@ -151,7 +151,7 @@ marine_area_overlay <- function(data,
   if (overlay_expected %in% c("ices_area",
                               "all")) {
     ices_area_file_path_extension <- dplyr::last(x = unlist(strsplit(ices_area_file_path,
-                                                                    "[.]")))
+                                                                     "[.]")))
     if (ices_area_file_path_extension == "shp") {
       ices_area <- sf::read_sf(ices_area_file_path)
       if (! all(sf::st_is_valid(ices_area))) {
@@ -220,19 +220,23 @@ marine_area_overlay <- function(data,
     }
     for (level in seq_len(length.out = length(accuracy))) {
       fao_area_sub <- fao_area[fao_area$F_LEVEL == names(accuracy)[level], ]
-
       sf_join_data_fao_area_sub <- sf::st_join(x = data_sf,
                                                y = fao_area_sub,
                                                join = sf::st_intersects,
                                                left = TRUE)
+      if (nrow(x = data_sf) != nrow(x = sf_join_data_fao_area_sub)) {
+        cat(format(x = Sys.time(),
+                   format = "%Y-%m-%d %H:%M:%S"),
+            " - Warning: at least one position is associated with more than one fao area. Arbitrary selection of the first zone.\n",
+            sep = "")
+        sf_join_data_fao_area_sub = sf_join_data_fao_area_sub[! duplicated(x = sf_join_data_fao_area_sub$data_id),  ]
+      }
       join_data_fao_area_sub <- sf::st_drop_geometry(sf_join_data_fao_area_sub)
       join_data_fao_area_sub <- join_data_fao_area_sub[, c("data_id",
                                                            accuracy[level])]
-
       data_unique <- dplyr::inner_join(x = data_unique,
                                        y = join_data_fao_area_sub,
                                        by = "data_id")
-
     }
     names(data_unique)[4:ncol(data_unique)] <- sapply(tolower(x = names(accuracy)),
                                                       paste0,
@@ -260,10 +264,25 @@ marine_area_overlay <- function(data,
   if (overlay_expected %in% c("eez_area",
                               "fao_eez_area",
                               "all")) {
+    # setup sf
+    value_s2_sf <- sf::sf_use_s2()
+    suppressMessages(sf::sf_use_s2(use_s2 = FALSE))
     sf_join_data_eez_area <- sf::st_join(x = data_sf,
                                          y = eez_area,
                                          join = sf::st_intersects,
                                          left = TRUE)
+    if (length(unique(x = sf_join_data_eez_area$data_id)) != nrow(x = sf_join_data_eez_area)) {
+      cat(format(x = Sys.time(),
+                 format = "%Y-%m-%d %H:%M:%S"),
+          " - Warning: at least one position is associated with more than one eez area. Output eez area will be NA.\n",
+          sep = "")
+      data_id_duplicated <- unique(x = sf_join_data_eez_area[duplicated(sf_join_data_eez_area$data_id), ]$data_id)
+      sf_join_data_eez_area <- sf_join_data_eez_area[! duplicated(x = sf_join_data_eez_area$data_id), ]
+      for (data_id in data_id_duplicated) {
+        sf_join_data_eez_area[sf_join_data_eez_area$data_id == data_id, "EEZ"] <- NA
+        sf_join_data_eez_area[sf_join_data_eez_area$data_id == data_id, "ISO_TER1"] <- NA
+      }
+    }
     join_data_eez_area_sub <- sf::st_drop_geometry(sf_join_data_eez_area) %>%
       select(data_id,
              IHO_SEA,
@@ -276,9 +295,9 @@ marine_area_overlay <- function(data,
     if (! is.null(for_fdi_use)
         && for_fdi_use == TRUE) {
       eez_indicator_referential <- utils::read.csv2(file = system.file("eez_indicator_referential.csv",
-                                                                package = "furdeb"))
+                                                                       package = "furdeb"))
       eu_countries <- utils::read.csv2(file = system.file("eu_countries.csv",
-                                                   package = "furdeb"))
+                                                          package = "furdeb"))
       if (! "division_fao" %in% names(data_unique)) {
         fao_area_sub <- fao_area[fao_area$F_LEVEL == "DIVISION", ]
         sf_join_data_fao_area_sub <- sf::st_join(x = data_sf,
@@ -305,21 +324,23 @@ marine_area_overlay <- function(data,
             data_unique[data_unique_id, "eez_indicator"] <- "COAST"
           }
         } else {
-          data_unique[data_unique_id, "eez_indicator"] <- NA
+          data_unique[data_unique_id, "eez_indicator"] <- "NA"
         }
       }
     }
     data_unique <- select(.data = data_unique,
                           -iho_sea,
                           -iso_ter1)
+    # setup
+    suppressMessages(sf::sf_use_s2(use_s2 = value_s2_sf))
   }
   # ices spatial overlay ----
   if (overlay_expected %in% c("ices_area",
                               "all")) {
     sf_join_data_ices_area <- sf::st_join(x = data_sf,
-                                         y = ices_area,
-                                         join = sf::st_intersects,
-                                         left = TRUE)
+                                          y = ices_area,
+                                          join = sf::st_intersects,
+                                          left = TRUE)
     join_data_ices_area_sub <- sf::st_drop_geometry(sf_join_data_ices_area) %>%
       select(data_id,
              ICESNAME) %>%
@@ -333,6 +354,6 @@ marine_area_overlay <- function(data,
                             data_unique,
                             by = c(latitude_name,
                                    longitude_name)) %>%
-    select(-data_id)
+    dplyr::select(-data_id)
   return(data)
 }
