@@ -15,8 +15,8 @@
 #' @section Setup support and data manipulations:
 #' \itemize{
 #' \item{\code{\link{configuration_file}}}
-#' \item{\code{\link{save_pigz}}
-#' \item{\code{\link{list_logical_merge}}
+#' \item{\code{\link{save_pigz}}}
+#' \item{\code{\link{list_logical_merge}}}
 #' }
 #' @keywords internal
 "_PACKAGE"

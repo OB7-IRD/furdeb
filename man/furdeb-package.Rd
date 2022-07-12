@@ -29,11 +29,12 @@ Functions and processes for R development and beyond!
 }
 }
 
-\section{NA}{
+\section{Setup support and data manipulations}{
 
 \itemize{
-\item{\code{\link{access_dbconnection}}}
-\item{\code{\link{postgresql_dbconnection}}}
+\item{\code{\link{configuration_file}}}
+\item{\code{\link{save_pigz}}}
+\item{\code{\link{list_logical_merge}}}
 }
 }
 
