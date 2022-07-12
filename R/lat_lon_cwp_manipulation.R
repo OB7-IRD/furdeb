@@ -65,8 +65,9 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
   }
   # processes begin here ----
   if (manipulation_process == "cwp_to_lat_lon") {
-    if (is.null(data_cwp)
-        || class(data_cwp) != "character"
+    if (is.null(x = data_cwp)
+        || ! inherits(x = data_cwp,
+                      what = "character")
         || length(x = unique(sapply(X = data_cwp,
                                     FUN = nchar))) != 1) {
       stop("Invalid \"data_cwp\" argument.\n")
@@ -217,11 +218,13 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
     }
   } else if (manipulation_process == "lat_lon_to_cwp") {
     if (is.null(x = data_longitude)
-        || class(data_longitude) != "character") {
+        || ! inherits(x = data_longitude,
+                      what = "character")) {
       stop("invalid \"data_longitude\" argument, class character expected.\n")
     }
     if (is.null(data_latitude)
-        || class(data_latitude) != "character") {
+        || ! inherits(x = data_latitude,
+                      what = "character")) {
       stop("invalid \"data_latitude\" argument, class character expected.\n")
     }
     if (length(data_longitude) != length(data_latitude)) {
@@ -302,7 +305,8 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                              latitude_decimal_degree = as.numeric(latitude_data))
     data_latitude_longitude_unique <- unique(x = data_latitude_longitude)
     data_latitude_longitude_unique$data_id <- seq_len(length.out = nrow(data_latitude_longitude_unique))
-    if (class(x = epsg_code) != "integer"
+    if (! inherits(x = epsg_code,
+                   what = "integer")
         || length(x = epsg_code) != 1
         || nchar(x = epsg_code) != 4) {
       stop("invalid \"epsg_code\" argument, class integer expected with one unique value inside.\n")

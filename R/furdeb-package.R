@@ -12,6 +12,10 @@
 #' \item{\code{\link{lat_long_to_csquare}}}
 #' \item{\code{\link{marine_area_overlay}}}
 #' }
+#' @section Data manipulations:
+#' \itemize{
+#' \item{\code{\link{list_logical_merge}}}
+#' }
 #' @section Setup help:
 #' \itemize{
 #' \item{\code{\link{configuration_file}}}

@@ -29,6 +29,13 @@ Functions and processes for R development and beyond!
 }
 }
 
+\section{Data manipulations}{
+
+\itemize{
+\item{\code{\link{list_logical_merge}}}
+}
+}
+
 \section{Setup help}{
 
 \itemize{
