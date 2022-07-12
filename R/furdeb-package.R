@@ -12,13 +12,11 @@
 #' \item{\code{\link{lat_long_to_csquare}}}
 #' \item{\code{\link{marine_area_overlay}}}
 #' }
-#' @section Data manipulations:
-#' \itemize{
-#' \item{\code{\link{list_logical_merge}}}
-#' }
-#' @section Setup help:
+#' @section Setup support and data manipulations:
 #' \itemize{
 #' \item{\code{\link{configuration_file}}}
+#' \item{\code{\link{save_pigz}}
+#' \item{\code{\link{list_logical_merge}}
 #' }
 #' @keywords internal
 "_PACKAGE"

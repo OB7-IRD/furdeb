@@ -27,6 +27,7 @@ reference:
 - contents:
   - configuration_file
   - save_pigz
+  - list_logical_merge
 
 url: https://ob7-ird.github.io/furdeb
 

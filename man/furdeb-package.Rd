@@ -29,17 +29,11 @@ Functions and processes for R development and beyond!
 }
 }
 
-\section{Data manipulations}{
+\section{NA}{
 
 \itemize{
-\item{\code{\link{list_logical_merge}}}
-}
-}
-
-\section{Setup help}{
-
-\itemize{
-\item{\code{\link{configuration_file}}}
+\item{\code{\link{access_dbconnection}}}
+\item{\code{\link{postgresql_dbconnection}}}
 }
 }
 
