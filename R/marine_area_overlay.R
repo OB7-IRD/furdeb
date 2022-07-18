@@ -5,12 +5,12 @@
 #' @param overlay_expected {\link[base]{character}} expected. Type of overlay output. You can choose between "fao_area", "eez_area", "fao_eez_area", "ices_area" or "all".
 #' @param longitude_name {\link[base]{character}} expected. Longitude column name in your data.
 #' @param latitude_name {\link[base]{character}} expected. Latitude column name in your data.
-#' @param fao_area_file_path {\link[base]{character}} expected. File path of the fao area shape. You can provide a .shp or a .RData file.
+#' @param fao_area_file_path {\link[base]{character}} expected. File path of the fao area shape. You can provide a .shp or a .Rdata file.
 #' @param fao_overlay_level {\link[base]{character}} expected. Level of fao accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.
 #' @param auto_selection_fao {\link[base]{logical}} expected. Add a new column in the output with the most detailed overlay level available.
-#' @param eez_area_file_path {\link[base]{character}} expected. File path of the eez area shape. You can provide a .shp or a .RData file.
+#' @param eez_area_file_path {\link[base]{character}} expected. File path of the eez area shape. You can provide a .shp or a .Rdata file.
 #' @param for_fdi_use {\link[base]{logical}} expected. Add a new column in the output with the FDI variable "eez_indicator".
-#' @param ices_area_file_path {\link[base]{character}} expected. File path of the ices area shape. You can provide a .shp or a .RData file.
+#' @param ices_area_file_path {\link[base]{character}} expected. File path of the ices area shape. You can provide a .shp or a .Rdata file.
 #' @param silent {\link[base]{logical}} expected. Display or not warning information regarding projection of your spatial coordinates. By default FALSE.
 #' @return The function return your input data frame with one or several columns (regarding arguments' specification) which contains area classification.
 #' @details
@@ -116,14 +116,14 @@ marine_area_overlay <- function(data,
       if (! all(sf::st_is_valid(fao_area))) {
         fao_area <- sf::st_make_valid(fao_area)
       }
-    } else if (fao_area_file_path_extension == "RData") {
+    } else if (fao_area_file_path_extension == "Rdata") {
       fao_area <- get(x = load(file = fao_area_file_path))
       if (paste(class(fao_area),
                 collapse = " ") != "sf tbl_df tbl data.frame") {
         stop("invalid fao shapefile, R object of class sf\n")
       }
     } else {
-      stop("invalid \"fao_area_file_path\" argument, shp or RData extensions expected\n")
+      stop("invalid \"fao_area_file_path\" argument, shp or Rdata extensions expected\n")
     }
   }
   # eez area
@@ -137,14 +137,14 @@ marine_area_overlay <- function(data,
       if (! all(sf::st_is_valid(eez_area))) {
         eez_area <- sf::st_make_valid(eez_area)
       }
-    } else if (eez_area_file_path_extension == "RData") {
+    } else if (eez_area_file_path_extension == "Rdata") {
       eez_area <- get(x = load(file = eez_area_file_path))
       if (paste(class(eez_area),
                 collapse = " ") != "sf tbl_df tbl data.frame") {
         stop("invalid eez shapefile, R object of class sf\n")
       }
     } else {
-      stop("invalid \"eez_area_file_path\" argument, shp or RData extensions expected\n")
+      stop("invalid \"eez_area_file_path\" argument, shp or Rdata extensions expected\n")
     }
   }
   # ices area
@@ -157,14 +157,14 @@ marine_area_overlay <- function(data,
       if (! all(sf::st_is_valid(ices_area))) {
         ices_area <- sf::st_make_valid(ices_area)
       }
-    } else if (ices_area_file_path_extension == "RData") {
+    } else if (ices_area_file_path_extension == "Rdata") {
       ices_area <- get(x = load(file = ices_area_file_path))
       if (paste(class(ices_area),
                 collapse = " ") != "sf tbl_df tbl data.frame") {
         stop("invalid ices shapefile, R object of class sf\n")
       }
     } else {
-      stop("invalid \"ices_area_file_path\" argument, shp or RData extensions expected\n")
+      stop("invalid \"ices_area_file_path\" argument, shp or Rdata extensions expected\n")
     }
   }
   # data design ----

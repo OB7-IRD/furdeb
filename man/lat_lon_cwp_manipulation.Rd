@@ -27,7 +27,7 @@ lat_lon_cwp_manipulation(
 
 \item{data_cwp}{{\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.}
 
-\item{referential_grid_file_path}{{\link[base]{character}} expected. File path of the referential grid shape. File with .RData extension file expected.}
+\item{referential_grid_file_path}{{\link[base]{character}} expected. File path of the referential grid shape. File with .Rdata extension file expected.}
 
 \item{input_cwp_format}{{\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. Cwp construction process related to the "centroid" or the "corner" of the square.}
 

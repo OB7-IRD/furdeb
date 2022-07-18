@@ -5,7 +5,7 @@
 #' @param data_longitude {\link[base]{character}} expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').
 #' @param data_latitude {\link[base]{character}} expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').
 #' @param data_cwp {\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.
-#' @param referential_grid_file_path {\link[base]{character}} expected. File path of the referential grid shape. File with .RData extension file expected.
+#' @param referential_grid_file_path {\link[base]{character}} expected. File path of the referential grid shape. File with .Rdata extension file expected.
 #' @param input_cwp_format {\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. Cwp construction process related to the "centroid" or the "corner" of the square.
 #' @param output_degree_cwp_parameter {\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner).
 #' @param output_degree_format {\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
@@ -47,10 +47,10 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                    output = "message"))
   }
   if (codama::file_path_checking(file_path = referential_grid_file_path,
-                                 extension = c("RData"),
+                                 extension = c("Rdata"),
                                  output = "logical") != TRUE) {
     return(codama::file_path_checking(file_path = referential_grid_file_path,
-                                      extension = c("RData"),
+                                      extension = c("Rdata"),
                                       output = "message"))
   }
   # import reference grid ----
