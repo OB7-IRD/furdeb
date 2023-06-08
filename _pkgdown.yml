@@ -5,30 +5,6 @@ template:
       api_key: dad3d9af6ecc5fc2b59299102e7d5a23
       index_name: furedb
 
-reference:
-- title: "Databases manipulations"
-  desc: >
-    Functions for databases manipulations, like connection or conversion.
-- contents:
-  - access_dbconnection
-  - postgresql_dbconnection
-- title: "Spatial design"
-  desc: >
-    Functions for spatial design.
-- contents:
-  - avdth_position_conversion_dec
-  - fao_reference_grid_update
-  - lat_lon_cwp_manipulation
-  - lat_long_to_csquare
-  - marine_area_overlay
-- title: "Setup support and data manipulations"
-  desc: >
-    Functions for setup, R session configuration and data manipulations.
-- contents:
-  - configuration_file
-  - save_pigz
-  - list_logical_merge
-
 url: https://ob7-ird.github.io/furdeb
 
 authors:
