@@ -15,7 +15,7 @@ postgresql_dbconnection(db_user, db_password, db_dbname, db_host, db_port)
 
 \item{db_host}{{\link[base]{character}} expected. Host adress of the database.}
 
-\item{db_port}{{\link[base]{numeric}} expected. Identification of the port.}
+\item{db_port}{{\link[base]{integer}} expected. Identification of the port.}
 }
 \value{
 The function return a list.

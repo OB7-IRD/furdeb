@@ -21,11 +21,11 @@ Imports:
     stringr (>= 1.4.0),
     sf (>= 1.0.2),
     yaml (>= 2.2.1),
+    codama (>= 0.9.0),
     parallel
 URL: https://github.com/OB7-IRD/furdeb
 BugReports: https://github.com/OB7-IRD/furdeb/issues
-Suggests: 
-    codama (>= 0.9.0),
+Suggests:
     testthat (>= 3.0.4)
 Remotes: 
     OB7-IRD/codama

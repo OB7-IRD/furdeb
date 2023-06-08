@@ -22,7 +22,7 @@ save_pigz(
 
 \item{output_file_path}{{\link[base]{character}} expected. Path name of the file where data will be saved.}
 
-\item{cores_utilisation}{{\link[base]{character}} or {\link[base]{numeric}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).}
+\item{cores_utilisation}{{\link[base]{character}} or {\link[base]{integer}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).}
 
 \item{compression_level}{{\link[base]{integer}} expected. Compression level, 0 for no compression to 9 (maximum).}
 

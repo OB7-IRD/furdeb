@@ -1,11 +1,11 @@
 #' @name lat_long_to_csquare
 #' @title Latitude-longitude to c-square converter
 #' @description Latitude-longitude to c-square converter.
-#' @param data {\link[base]{data.frame}} expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
+#' @param data R data with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
 #' @param grid_square {\link[base]{numeric}} expected. Resolution for the global grid square. You have just to provide the first value of the resolution. Check the section details below.
 #' @param longitude_name {\link[base]{character}} expected. Longitude column name in your data.
 #' @param latitude_name {\link[base]{character}} expected. Latitude column name in your data.
-#' @param boundary_ajustement_factor {\link[base]{numeric}} expected. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.
+#' @param boundary_ajustement_factor {\link[base]{numeric}} expected. By default 0.000001. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.
 #' @return The function return your input data frame with one more columns filled with the c-square value (according your specification in the "grid_square" argument).
 #' @details
 #' For the argument "grid_square", you can choose between 7 modalities:
@@ -27,102 +27,150 @@
 #'                            grid_square = 0.5,
 #'                            latitude_name = "latitude",
 #'                            longitude_name = "longitude")}
+#' @importFrom codama r_type_checking
 #' @export
 lat_long_to_csquare <- function(data,
                                 grid_square,
                                 latitude_name,
                                 longitude_name,
                                 boundary_ajustement_factor = 0.000001) {
-  # Arguments checking ----
-  if (missing(data) || ! is.data.frame(data)) {
-    stop(paste0("Missing argument \"data\" or not a data frame.",
-                "\n",
-                "Please correct it before running the function."))
+  # 1 - Arguments verification ----
+  # data argument checking
+  if (missing(x = data)) {
+    return(format(x = Sys.time(),
+                  "%Y-%m-%d %H:%M:%S"),
+           " - Error, invalid \"data\" argument.\n")
   }
-  if (missing(grid_square) || ! is.numeric(grid_square) || ! grid_square %in% c(10, 5, 1, 0.5, 0.1, 0.05, 0.01)) {
-    stop(paste0("Missing argument \"grid_square\" or not numerical value.",
-                "\n",
-                "Please correct it before running the function."))
+  # grid_square argument checking
+  if (codama::r_type_checking(r_object = grid_square,
+                              type = "numeric",
+                              allowed_value = c(10, 5, 1, 0.5, 0.1, 0.05, 0.01),
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = grid_square,
+                                   type = "numeric",
+                                   allowed_value = c(10, 5, 1, 0.5, 0.1, 0.05, 0.01),
+                                   output = "message"))
   }
-  if (missing(latitude_name) || ! is.character(latitude_name)) {
-    stop(paste0("Missing argument \"latitude_name\" or not character value.",
-                "\n",
-                "Please correct it before running the function."))
+  # latitude_name argument checking
+  if (codama::r_type_checking(r_object = latitude_name,
+                              type = "character",
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = latitude_name,
+                                   type = "character",
+                                   output = "message"))
   }
-  if (missing(longitude_name) || ! is.character(longitude_name)) {
-    stop(paste0("Missing argument \"longitude_name\" or not character value.",
-                "\n",
-                "Please correct it before running the function."))
+  # longitude_name argument checking
+  if (codama::r_type_checking(r_object = longitude_name,
+                              type = "character",
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = longitude_name,
+                                   type = "character",
+                                   output = "message"))
   }
-  if (! is.numeric(boundary_ajustement_factor)) {
-    stop(paste0("Argument \"boundary_ajustement_factor\" is not a numerical value.",
-                "\n",
-                "Please correct it before running the function."))
+  # boundary_ajustement_factor argument checking
+  if (codama::r_type_checking(r_object = boundary_ajustement_factor,
+                              type = "numeric",
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = boundary_ajustement_factor,
+                                   type = "numeric",
+                                   output = "message"))
   }
-  tmp <- as.data.frame(data)
-  # Boundary case ajustement
-  tmp$boundary_aju_lat <- trunc(x = (abs(tmp[,c(latitude_name)]) + 10) / 100) * boundary_ajustement_factor
-  tmp$boundary_aju_lon <- trunc(x = (abs(tmp[,c(longitude_name)]) + 20) / 200) * boundary_ajustement_factor
-  # Absolute latitude and longtitude value
-  tmp$abs_lat <- abs(x = tmp[,c(latitude_name)]) - tmp$boundary_aju_lat
-  tmp$abs_lon <- abs(x = tmp[,c(longitude_name)]) - tmp$boundary_aju_lon
-  # First cycle
-  tmp$global_q <- 4 - (2 * trunc(x = 1 + (tmp[,c(longitude_name)] / 200)) - 1) * (2 * trunc(x = 1 + (tmp[,c(latitude_name)] / 200)) + 1)
-  tmp$c1_lat <- trunc(x = tmp$abs_lat / 10)
-  tmp$c1_lon <- trunc(x = tmp$abs_lon / 10)
-  tmp$c1_lat_remain <- round(x = tmp$abs_lat - (tmp$c1_lat * 10),
-                             7)
-  tmp$c1_lon_remain <- round(x = tmp$abs_lon - (tmp$c1_lon * 10),
-                             7)
-  tmp$c1 <- (tmp$global_q * 1000) + (tmp$c1_lat * 100) + tmp$c1_lon
-  # Second cycle
-  tmp$global_intq1 <- (2 * trunc(x = tmp$c1_lat_remain * 0.2)) + trunc(x = tmp$c1_lon_remain * 0.2) + 1
-  tmp$c2_lat <- trunc(x = tmp$c1_lat_remain)
-  tmp$c2_lon <- trunc(x = tmp$c1_lon_remain)
-  tmp$c2_lat_remain <- round(x = (tmp$c1_lat_remain - tmp$c2_lat) * 10,
-                             7)
-  tmp$c2_lon_remain <- round(x = (tmp$c1_lon_remain - tmp$c2_lon) * 10,
-                             7)
-  tmp$c2 <- (tmp$global_intq1 * 100) + (tmp$c2_lat * 10) + tmp$c2_lon
-  # Third cycle
-  tmp$global_intq2 <- (2 * trunc(x = tmp$c2_lat_remain * 0.2)) + trunc(x = tmp$c2_lon_remain * 0.2) + 1
-  tmp$c3_lat <- trunc(x = tmp$c2_lat_remain)
-  tmp$c3_lon <- trunc(x = tmp$c2_lon_remain)
-  tmp$c3_lat_remain <- round(x = (tmp$c2_lat_remain - tmp$c3_lat) * 10,
-                             digits = 7)
-  tmp$c3_lon_remain <- round(x = (tmp$c2_lon_remain - tmp$c3_lon) * 10,
-                             7)
-  tmp$c3 <- (tmp$global_intq2 * 100) + (tmp$c3_lat * 10) + tmp$c3_lon
-  # Fourth cycle
-  tmp$global_intq3 <- (2 * trunc(x = tmp$c3_lat_remain * 0.2)) + trunc(x = tmp$c3_lon_remain * 0.2) + 1
-  tmp$c4_lat <- trunc(x = tmp$c3_lat_remain)
-  tmp$c4_lon <- trunc(x = tmp$c3_lon_remain)
-  tmp$c4_lat_remain <- round(x = (tmp$c3_lat_remain - tmp$c4_lat) * 10,
-                             7)
-  tmp$c4_lon_remain <- round(x = (tmp$c3_lon_remain - tmp$c4_lon) * 10,
-                             7)
-  tmp$c4 <- (tmp$global_intq3 * 100) + (tmp$c4_lat * 10) + tmp$c4_lon
-  # C-square design
+  # 2 - Process ----
+  data <- as.data.frame(data)
+  # boundary case ajustement
+  data$boundary_aju_lat <- trunc(x = (abs(data[, c(latitude_name)]) + 10) / 100) * boundary_ajustement_factor
+  data$boundary_aju_lon <- trunc(x = (abs(data[, c(longitude_name)]) + 20) / 200) * boundary_ajustement_factor
+  # absolute latitude and longtitude value
+  data$abs_lat <- abs(x = data[, c(latitude_name)]) - data$boundary_aju_lat
+  data$abs_lon <- abs(x = data[, c(longitude_name)]) - data$boundary_aju_lon
+  # first cycle
+  data$global_q <- 4 - (2 * trunc(x = 1 + (data[, c(longitude_name)] / 200)) - 1) * (2 * trunc(x = 1 + (data[, c(latitude_name)] / 200)) + 1)
+  data$c1_lat <- trunc(x = data$abs_lat / 10)
+  data$c1_lon <- trunc(x = data$abs_lon / 10)
+  data$c1_lat_remain <- round(x = data$abs_lat - (data$c1_lat * 10),
+                              7)
+  data$c1_lon_remain <- round(x = data$abs_lon - (data$c1_lon * 10),
+                              7)
+  data$c1 <- (data$global_q * 1000) + (data$c1_lat * 100) + data$c1_lon
+  # second cycle
+  data$global_intq1 <- (2 * trunc(x = data$c1_lat_remain * 0.2)) + trunc(x = data$c1_lon_remain * 0.2) + 1
+  data$c2_lat <- trunc(x = data$c1_lat_remain)
+  data$c2_lon <- trunc(x = data$c1_lon_remain)
+  data$c2_lat_remain <- round(x = (data$c1_lat_remain - data$c2_lat) * 10,
+                              7)
+  data$c2_lon_remain <- round(x = (data$c1_lon_remain - data$c2_lon) * 10,
+                              7)
+  data$c2 <- (data$global_intq1 * 100) + (data$c2_lat * 10) + data$c2_lon
+  # third cycle
+  data$global_intq2 <- (2 * trunc(x = data$c2_lat_remain * 0.2)) + trunc(x = data$c2_lon_remain * 0.2) + 1
+  data$c3_lat <- trunc(x = data$c2_lat_remain)
+  data$c3_lon <- trunc(x = data$c2_lon_remain)
+  data$c3_lat_remain <- round(x = (data$c2_lat_remain - data$c3_lat) * 10,
+                              digits = 7)
+  data$c3_lon_remain <- round(x = (data$c2_lon_remain - data$c3_lon) * 10,
+                              7)
+  data$c3 <- (data$global_intq2 * 100) + (data$c3_lat * 10) + data$c3_lon
+  # fourth cycle
+  data$global_intq3 <- (2 * trunc(x = data$c3_lat_remain * 0.2)) + trunc(x = data$c3_lon_remain * 0.2) + 1
+  data$c4_lat <- trunc(x = data$c3_lat_remain)
+  data$c4_lon <- trunc(x = data$c3_lon_remain)
+  data$c4_lat_remain <- round(x = (data$c3_lat_remain - data$c4_lat) * 10,
+                              7)
+  data$c4_lon_remain <- round(x = (data$c3_lon_remain - data$c4_lon) * 10,
+                              7)
+  data$c4 <- (data$global_intq3 * 100) + (data$c4_lat * 10) + data$c4_lon
+  # c-square design
   if (grid_square == 10) {
-    tmp[, paste0("grid_square_", grid_square)] <- tmp$c1
+    data[, paste0("grid_square_",
+                  grid_square)] <- data$c1
   } else {
     if (grid_square == 5) {
-      tmp[, paste0("grid_square_", grid_square)] <- paste(tmp$c1, substr(tmp$c2, 1, 1), sep = ":")
+      data[, paste0("grid_square_",
+                    grid_square)] <- paste(data$c1,
+                                           substr(data$c2,
+                                                  1,
+                                                  1),
+                                           sep = ":")
     } else {
       if (grid_square == 1) {
-        tmp[, paste0("grid_square_", grid_square)] <- paste(tmp$c1, tmp$c2, sep = ":")
+        data[, paste0("grid_square_",
+                      grid_square)] <- paste(data$c1,
+                                             data$c2,
+                                             sep = ":")
       } else {
         if (grid_square == 0.5) {
-          tmp[, paste0("grid_square_", grid_square)] <- paste(tmp$c1, tmp$c2, substr(tmp$c3, 1, 1), sep = ":")
+          data[, paste0("grid_square_",
+                        grid_square)] <- paste(data$c1,
+                                               data$c2,
+                                               substr(data$c3,
+                                                      1,
+                                                      1),
+                                               sep = ":")
         } else {
           if (grid_square == 0.1) {
-            tmp[, paste0("grid_square_", grid_square)] <- paste(tmp$c1, tmp$c2, tmp$c3, sep = ":")
+            data[, paste0("grid_square_",
+                          grid_square)] <- paste(data$c1,
+                                                 data$c2,
+                                                 data$c3,
+                                                 sep = ":")
           } else {
             if (grid_square == 0.05) {
-              tmp[, paste0("grid_square_", grid_square)] <- paste(tmp$c1, tmp$c2, tmp$c3, substr(tmp$c4, 1, 1), sep = ":")
+              data[, paste0("grid_square_",
+                            grid_square)] <- paste(data$c1,
+                                                   data$c2,
+                                                   data$c3,
+                                                   substr(data$c4,
+                                                          1,
+                                                          1),
+                                                   sep = ":")
             } else {
               if (grid_square == 0.01) {
-                tmp[, paste0("grid_square_", grid_square)] <- paste(tmp$c1, tmp$c2, tmp$c3, tmp$c4, sep = ":")
+                data[, paste0("grid_square_",
+                              grid_square)] <- paste(data$c1,
+                                                     data$c2,
+                                                     data$c3,
+                                                     data$c4,
+                                                     sep = ":")
               }
             }
           }
@@ -130,6 +178,6 @@ lat_long_to_csquare <- function(data,
       }
     }
   }
-  tmp <- tmp[, -c((dim(data)[2] + 1) : (dim(tmp)[2] - 1))]
-  return(tmp)
+  data <- data[, -c((dim(data)[2] + 1) : (dim(data)[2] - 1))]
+  return(data)
 }

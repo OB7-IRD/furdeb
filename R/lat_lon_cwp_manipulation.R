@@ -16,6 +16,7 @@
 #' @importFrom dplyr last tibble inner_join rowwise mutate ungroup select rename case_when left_join
 #' @importFrom sf st_coordinates st_centroid st_as_sf st_join st_intersects st_drop_geometry
 #' @importFrom stringr str_extract
+#' @importFrom codama r_type_checking file_path_checking
 #' @export
 lat_lon_cwp_manipulation <- function(manipulation_process,
                                      data_longitude = NULL,
@@ -28,11 +29,28 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                      input_degree_format = NULL,
                                      epsg_code = as.integer(4326),
                                      output_cwp_format = NULL) {
-  # setup
+  # 1 - setup ----
   suppressMessages(sf::sf_use_s2(use_s2 = FALSE))
-  # local binding global variables ----
-  geometry <- X <- Y <- latitude <- longitude <- latitude_degree <- latitude_minute <- sign_latitude <- latitude_seconde <- longitude_degree <- longitude_minute <- sign_longitude <- longitude_seconde <- cwp <- latitude_degree_minute_seconde <- longitude_degree_minute_seconde <- data_id <- NULL
-  # global arguments verifications ----
+  # 2 - local binding global variables ----
+  geometry <- NULL
+  X <- NULL
+  Y <- NULL
+  latitude <- NULL
+  longitude <- NULL
+  latitude_degree <- NULL
+  latitude_minute <- NULL
+  sign_latitude <- NULL
+  latitude_seconde <- NULL
+  longitude_degree <- NULL
+  longitude_minute <- NULL
+  sign_longitude <- NULL
+  longitude_seconde <- NULL
+  cwp <- NULL
+  latitude_degree_minute_seconde <- NULL
+  longitude_degree_minute_seconde <- NULL
+  data_id <- NULL
+  # 3 - global arguments verifications ----
+  # manipulation_process argument checking
   if (codama::r_type_checking(r_object = manipulation_process,
                               type = "character",
                               length = 1L,
@@ -46,31 +64,39 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                                      "cwp_to_lat_lon"),
                                    output = "message"))
   }
+  # referential_grid_file_path argument checking
   if (codama::file_path_checking(file_path = referential_grid_file_path,
                                  extension = c("Rdata"),
                                  output = "logical") != TRUE) {
     return(codama::file_path_checking(file_path = referential_grid_file_path,
-                                      extension = c("Rdata"),
+                                      extension = c("Rdata",
+                                                    "RData"),
                                       output = "message"))
   }
   # import reference grid ----
   reference_grid <- get(x = load(file = referential_grid_file_path))
   if (paste(class(reference_grid),
             collapse = " ") != "sf tbl_df tbl data.frame") {
-    stop("invalid fao shapefile, R object of class sf expected.\n")
+    return(format(x = Sys.time(),
+                  "%Y-%m-%d %H:%M:%S"),
+           " - Error, invalid fao shapefile, R object of class sf expected.\n")
   }
   cwp_resolution <- unique(x = reference_grid$GRIDTYPE)
   if (length(x = cwp_resolution) != 1) {
-    stop("invalid \"reference_grid\" argument, multiple cwp resolutions inside the referential.\n")
+    return(format(x = Sys.time(),
+                  "%Y-%m-%d %H:%M:%S"),
+           "- Error, invalid \"reference_grid\" argument, multiple cwp resolutions inside the referential.\n")
   }
-  # processes begin here ----
+  # 4 - Process ----
   if (manipulation_process == "cwp_to_lat_lon") {
-    if (is.null(x = data_cwp)
-        || ! inherits(x = data_cwp,
-                      what = "character")
+    if (codama::r_type_checking(r_object = data_cwp,
+                                type = "character",
+                                output = "logical")
         || length(x = unique(sapply(X = data_cwp,
                                     FUN = nchar))) != 1) {
-      stop("Invalid \"data_cwp\" argument.\n")
+      return(format(x = Sys.time(),
+                    "%Y-%m-%d %H:%M:%S"),
+             "- Error, invalid \"data_cwp\" argument.\n")
     } else {
       cwp_length <- unique(sapply(X = data_cwp,
                                   FUN = nchar))
@@ -211,25 +237,36 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                        y = data_cwp_unique_final,
                                        by = "cwp")
       } else {
-        stop("function not developed yet for cwp of length ",
-             cwp_length,
-             ".\n")
+        return(format(x = Sys.time(),
+                      "%Y-%m-%d %H:%M:%S"),
+               " - Error, function not developed yet for cwp of length ",
+               cwp_length,
+               ".\n")
       }
     }
   } else if (manipulation_process == "lat_lon_to_cwp") {
-    if (is.null(x = data_longitude)
-        || ! inherits(x = data_longitude,
-                      what = "character")) {
-      stop("invalid \"data_longitude\" argument, class character expected.\n")
+    # data_latitude argument checking
+    if (codama::r_type_checking(r_object = data_latitude,
+                                type = "character",
+                                output = "logical") != TRUE) {
+      return(codama::r_type_checking(r_object = data_latitude,
+                                     type = "character",
+                                     output = "message"))
     }
-    if (is.null(data_latitude)
-        || ! inherits(x = data_latitude,
-                      what = "character")) {
-      stop("invalid \"data_latitude\" argument, class character expected.\n")
+    # data_longitude argument checking
+    if (codama::r_type_checking(r_object = data_longitude,
+                                type = "character",
+                                output = "logical") != TRUE) {
+      return(codama::r_type_checking(r_object = data_longitude,
+                                     type = "character",
+                                     output = "message"))
     }
-    if (length(data_longitude) != length(data_latitude)) {
-      stop("invalid \"data_longitude\" and \"data_latitude\" arguments, same length argument expected.\n")
+    if (length(x = data_longitude) != length(x = data_latitude)) {
+      return(format(x = Sys.time(),
+                    "%Y-%m-%d %H:%M:%S"),
+             " - Error, invalid \"data_longitude\" and \"data_latitude\" arguments, same length argument expected.\n")
     }
+    # input_degree_format argument checking
     if (codama::r_type_checking(r_object = input_degree_format,
                                 type = "character",
                                 length = 1L,
@@ -243,6 +280,7 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                                        "decimal_degree"),
                                      output = "message"))
     }
+    # output_cwp_format argument checking
     if (codama::r_type_checking(r_object = output_cwp_format,
                                 type = "character",
                                 length = 1L,
@@ -305,11 +343,14 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                              latitude_decimal_degree = as.numeric(latitude_data))
     data_latitude_longitude_unique <- unique(x = data_latitude_longitude)
     data_latitude_longitude_unique$data_id <- seq_len(length.out = nrow(data_latitude_longitude_unique))
-    if (! inherits(x = epsg_code,
-                   what = "integer")
-        || length(x = epsg_code) != 1
+    if (codama::r_type_checking(r_object = epsg_code,
+                                type = "integer",
+                                length = 1L,
+                                output = "logical")
         || nchar(x = epsg_code) != 4) {
-      stop("invalid \"epsg_code\" argument, class integer expected with one unique value inside.\n")
+      return(format(x = Sys.time(),
+                    "%Y-%m-%d %H:%M:%S"),
+             " - Error, invalid \"epsg_code\" argument, class integer expected with one unique value inside.\n")
     }
     longitude_latitude_sf <- sf::st_as_sf(x = data_latitude_longitude_unique,
                                           coords = c("longitude_decimal_degree",

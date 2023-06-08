@@ -6,16 +6,16 @@
 \usage{
 access_dbconnection(
   driver_name = "u_can_access",
-  access_db_path,
-  access_jdbc42_driver_path
+  access_database_file_path,
+  access_jdbc42_driver_file_path = NULL
 )
 }
 \arguments{
-\item{driver_name}{{\link[base]{character}} expected. Access' driver name. By default "u_can_access" (free driver). You can also choose the driver "access_jdbc42" (paid driver).}
+\item{driver_name}{{\link[base]{character}} expected. By default "u_can_access" (free driver). Access driver name. You can also choose the driver "access_jdbc42" (paid driver).}
 
-\item{access_db_path}{{\link[base]{character}} expected. Path of the Access database.}
+\item{access_database_file_path}{{\link[base]{character}} expected. file path of the Access database (.mdb or .accdb expected).}
 
-\item{access_jdbc42_driver_path}{{\link[base]{character}} expected. Optional. Path of the access_jdbc42 driver (.jar file).}
+\item{access_jdbc42_driver_file_path}{{\link[base]{character}} expected. By default NULL. File path of the access_jdbc42 driver (.jar file expected). Mandatory if "access_jdbc42" is selected in the argument "driver_name".}
 }
 \value{
 The function return a R object with Access database identification of connection.

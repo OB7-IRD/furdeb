@@ -27,17 +27,17 @@ marine_area_overlay(
 
 \item{latitude_name}{{\link[base]{character}} expected. Latitude column name in your data.}
 
-\item{fao_area_file_path}{{\link[base]{character}} expected. File path of the fao area shape. You can provide a .shp or a .Rdata file.}
+\item{fao_area_file_path}{{\link[base]{character}} expected. File path of the fao area shape. You can provide a .shp or a .Rdata/.RData file.}
 
 \item{fao_overlay_level}{{\link[base]{character}} expected. Level of fao accuarcy that you want for classified your data. By default, major fao fishing area are selected. Check the section details below.}
 
 \item{auto_selection_fao}{{\link[base]{logical}} expected. Add a new column in the output with the most detailed overlay level available.}
 
-\item{eez_area_file_path}{{\link[base]{character}} expected. File path of the eez area shape. You can provide a .shp or a .Rdata file.}
+\item{eez_area_file_path}{{\link[base]{character}} expected. File path of the eez area shape. You can provide a .shp or a .Rdata/.RData file.}
 
 \item{for_fdi_use}{{\link[base]{logical}} expected. Add a new column in the output with the FDI variable "eez_indicator".}
 
-\item{ices_area_file_path}{{\link[base]{character}} expected. File path of the ices area shape. You can provide a .shp or a .Rdata file.}
+\item{ices_area_file_path}{{\link[base]{character}} expected. File path of the ices area shape. You can provide a .shp or a .Rdata/.RData file.}
 
 \item{silent}{{\link[base]{logical}} expected. Display or not warning information regarding projection of your spatial coordinates. By default FALSE.}
 }

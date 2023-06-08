@@ -13,7 +13,7 @@ lat_long_to_csquare(
 )
 }
 \arguments{
-\item{data}{{\link[base]{data.frame}} expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.}
+\item{data}{R data with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.}
 
 \item{grid_square}{{\link[base]{numeric}} expected. Resolution for the global grid square. You have just to provide the first value of the resolution. Check the section details below.}
 
@@ -21,7 +21,7 @@ lat_long_to_csquare(
 
 \item{longitude_name}{{\link[base]{character}} expected. Longitude column name in your data.}
 
-\item{boundary_ajustement_factor}{{\link[base]{numeric}} expected. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.}
+\item{boundary_ajustement_factor}{{\link[base]{numeric}} expected. By default 0.000001. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.}
 }
 \value{
 The function return your input data frame with one more columns filled with the c-square value (according your specification in the "grid_square" argument).

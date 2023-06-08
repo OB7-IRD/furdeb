@@ -7,7 +7,9 @@
 #' @export
 fao_reference_grid_update <- function(reference_grid) {
   # local binding global variables ----
-  geometry <- X <- Y <- NULL
+  geometry <- NULL
+  X <- NULL
+  Y <- NULL
   # function ----
   sf::sf_use_s2(use_s2 = FALSE)
   reference_grid_udpdate <- reference_grid %>%

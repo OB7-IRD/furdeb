@@ -4,7 +4,7 @@
 #' @param ... Names of the objects to be saved (as symbols or character strings).
 #' @param list {\link[base]{character}} expected. A vector containing the names of objects to be saved.
 #' @param output_file_path {\link[base]{character}} expected. Path name of the file where data will be saved.
-#' @param cores_utilisation {\link[base]{character}} or {\link[base]{numeric}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).
+#' @param cores_utilisation {\link[base]{character}} or {\link[base]{integer}} expected. Percentage of cores to use to compress (value inferior or equal to 1 expected). Use "auto" for automatic management (number of cores minus 1).
 #' @param compression_level {\link[base]{integer}} expected. Compression level, 0 for no compression to 9 (maximum).
 #' @param precheck {\link[base]{logical}} expected. Should the existence of the objects be checked before starting to.
 #' @param envir Environment to search for objects to be saved.
@@ -21,35 +21,58 @@ save_pigz <- function(...,
                       precheck = TRUE,
                       envir = parent.frame(),
                       eval_promises = TRUE) {
+  # 1 - Arguments verification ----
   if (.Platform$OS.type != "windows") {
-    stop("function not developed yet for other systems than windows\ntake a look here for move forward https://github.com/barkasn/fastSave\n")
+    return("function not developed yet for other systems than windows\ntake a look here for move forward https://github.com/barkasn/fastSave\n")
   }
-  # arguments verifications ----
+  # cores_utilisation argument checking
+  if ((codama::r_type_checking(r_object = cores_utilisation,
+                               type = "character",
+                               length = 1L,
+                               allowed_value = "auto",
+                               output = "logical")
+       || (codama::r_type_checking(r_object = cores_utilisation,
+                                   type = "integer",
+                                   length = 1L,
+                                   output = "logical")
+           && (cores_utilisation > 0
+               & cores_utilisation <= 1))) != TRUE) {
+    return(format(x = Sys.time(),
+                  "%Y-%m-%d %H:%M:%S"),
+           " - Error, invalid \"cores_utilisation\" argument.\n")
+  }
+  # output_file_path argument checking
+  if (codama::r_type_checking(r_object = output_file_path,
+                              type = "character",
+                              length = 1L,
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = output_file_path,
+                                   type = "character",
+                                   length = 1L,
+                                   output = "message"))
+  }
+  # compression_level argument checking
+  if (codama::r_type_checking(r_object = compression_level,
+                              type = "integer",
+                              length = 1L,
+                              output = "logical") != TRUE) {
+    return(codama::r_type_checking(r_object = compression_level,
+                                   type = "integer",
+                                   length = 1L,
+                                   output = "message"))
+  }
+  # 2 - Global process ----
   if (cores_utilisation == "auto") {
     cores_number <- parallel::detectCores() - 1
-  } else if (is.numeric(x = cores_utilisation)
-             && (cores_utilisation > 0
-                 & cores_utilisation <= 1)) {
-    cores_number <- round(parallel::detectCores() * cores_utilisation)
   } else {
-    stop("invalid \"cores_utilisation\" argument\n")
+    cores_number <- round(parallel::detectCores() * cores_utilisation)
   }
-  if (missing(output_file_path)
-      && (paste0(class(x = output_file_path),
-                 collapse = "_") != "character"
-          && length(x = output_file_path) != 1)) {
-    stop("invalid \"output_file_path\" argument\n")
-  }
-  if (paste0(class(x = compression_level),
-             collapse = "_") != "integer"
-      && length(x = compression_level) != 1) {
-    stop("invalid \"compression_level\" argument\n")
-  }
-  # process ----
   names <- as.character(x = substitute(list(...)))[-1L]
   if (missing(x = list)
       && length(x = names) == 0) {
-    stop("nothing specified to be saved\n")
+    stop(format(x = Sys.time(),
+                "%Y-%m-%d %H:%M:%S"),
+         " - Error, nothing specified to be saved.\n")
   }
   list <- c(list,
             names)
