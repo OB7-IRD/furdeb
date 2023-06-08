@@ -67,7 +67,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> expected. R dataframe, with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.</p></dd>
+<dd><p>R data with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.</p></dd>
 
 
 <dt>grid_square</dt>
@@ -83,7 +83,7 @@
 
 
 <dt>boundary_ajustement_factor</dt>
-<dd><p><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a> expected. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.</p></dd>
+<dd><p><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a> expected. By default 0.000001. Boundary adjustment factor is invoked for latitude values -90/90, longitude values -180/180, i.e. the limiting cases. The value does not matter unduly, so long as it is smaller than the size of the smallest square that will be requested.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -123,11 +123,11 @@ If you want more informations about C-square visit http://www.cmar.csiro.au/csqu
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Ob7 - Observatory of Exploited Tropical Pelagic Ecosystems, Mathieu Depetris, Antoine Duparc.</p>
+  <p></p><p>Developed by Mathieu Depetris, Oceane Bouhineau, Julien Lebranchu, Clara Lerebourg, IRD - Ob7 Observatory of Exploited Tropical Pelagic Ecosystems.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
