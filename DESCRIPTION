@@ -1,17 +1,56 @@
 Package: furdeb
 Type: Package
-Title: FUnctions for R DEvelopment and Beyond
+Title: FUnctions for R DEvelopment and Beyond!
 Version: 0.9.0
-Authors@R: c(person("Ob7 -", "Observatory of Exploited Tropical Pelagic Ecosystems", email = "ob7@ird.fr", role = c("cre", "cph")),
-    person("Mathieu", "Depetris", email = "mathieu.depetris@ird.fr", role = c("aut")),
-    person("Antoine", "Duparc", email = "antoine.duparc@ird.fr", role = c("aut")),
-    person("Norbert", "Billet", email = "norbert.billet@ifremer.fr", role = c("ctb")))
+Authors@R:
+    c(person(given = "Mathieu",
+            family = "Depetris",
+            email = "mathieu.depetris@ird.fr",
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0001-8080-0531")),
+       person(given = "Boby",
+              family = "Swager",
+              email = "dude@ird.fr",
+              role = c("cre")),
+       person(given = "Antoine",
+              family = "Duparc",
+              email = "antoine.duparc@ird.fr",
+              role = c("aut"),
+              comment = c(ORCID = "0000-0001-6135-9015")),
+       person(given = "Pascal",
+              family = "Cauquil",
+              email = "pascal.cauquil@ird.fr",
+              role = c("aut"),
+              comment = c(ORCID = "0000-0003-0718-8950")),
+       person(given = "Laurent",
+              family = "Floc'h",
+              email = "laurent.floch@ird.fr",
+              role = c("aut"),
+              comment = c(ORCID = "0000-0003-4764-9766")),
+       person(given = "Julien",
+              family = "Lebranchu",
+              email = "julien.lebranchu@ird.fr",
+              role = c("aut"),
+              comment = c(ORCID = "0000-0002-7759-0534")),
+       person(given = "Norbet",
+              family = "Billet",
+              email = "norbert.billet@ifremer.fr",
+              role = c("ctb")),
+       person(given = "IRD - Ob7",
+              family = "Observatory of Exploited Tropical Pelagic Ecosystems",
+              email = "ob7@ird.fr",
+              role = c("ctb", "fnd"),
+              comment = c(ORCID = "0000-0002-4642-3418")))
 Description: Functions and processes for R development and beyond!
-Depends: R (>= 4.0.0)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
+VignetteBuilder: knitr
+URL: https://github.com/OB7-IRD/furdeb
+BugReports: https://github.com/OB7-IRD/furdeb/issues
+Depends: 
+    R (>= 4.2.0)
 Imports:
     RJDBC (>= 0.2.7.1),
     RPostgreSQL (>= 0.6.2),
@@ -23,8 +62,6 @@ Imports:
     yaml (>= 2.2.1),
     codama (>= 0.9.0),
     parallel
-URL: https://github.com/OB7-IRD/furdeb
-BugReports: https://github.com/OB7-IRD/furdeb/issues
 Suggests:
     testthat (>= 3.0.4)
 Remotes: 
