@@ -59,6 +59,8 @@ Imports:
     codama (>= 0.9.0),
     parallel
 Suggests:
-    testthat (>= 3.0.4)
+    testthat (>= 3.0.4),
+    knitr,
+    rmarkdown
 Remotes: 
     OB7-IRD/codama
