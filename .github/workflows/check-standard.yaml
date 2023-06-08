@@ -38,6 +38,10 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+        
+      - name: Install spatial dependencies
+        run: |
+        sudo apt install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
