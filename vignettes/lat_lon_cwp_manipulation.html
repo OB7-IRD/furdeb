@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Latitude/longtitude - CWP manipulation function</title>
+<style type="text/css">
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+body, .footnotes, code { font-size: .9em; }
+li li { font-size: .95em; }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+pre, img { max-width: 100%; }
+pre, pre:hover {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+pre code {
+  display: block;
+  overflow-x: auto;
+}
+code { font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace; }
+:not(pre) > code, code[class] { background-color: #F8F8F8; }
+code.language-undefined, pre > code:not([class]) {
+  background-color: inherit;
+  border: 1px solid #eee;
+}
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+blockquote {
+  color: #666;
+  margin: 0;
+  padding-left: 1em;
+  border-left: 0.5em solid #eee;
+}
+hr, .footnotes::before { border: 1px dashed #ddd; }
+.frontmatter { text-align: center; }
+#TOC .numbered li { list-style: none; }
+#TOC .numbered { padding-left: 0; }
+#TOC .numbered ul { padding-left: 1em; }
+table, .body h2 { border-bottom: 1px solid #666; }
+.body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
+.footnote-ref a::before { content: "["; }
+.footnote-ref a::after { content: "]"; }
+.footnotes::before {
+  content: "";
+  display: block;
+  max-width: 20em;
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    max-width: 100%;
+  }
+  tr, img { page-break-inside: avoid; }
+}
+@media only screen and (min-width: 992px) {
+  pre { white-space: pre; }
+}
+</style>
+</head>
+<body>
+<div class="include-before">
+</div>
+<div class="frontmatter">
+<div class="title"><h1>Latitude/longtitude - CWP manipulation function</h1></div>
+<div class="author"><h2></h2></div>
+<div class="date"><h3></h3></div>
+</div>
+<div class="body">
+<div style="text-align: justify">
+<h2 id="global-aims">Global aims</h2>
+<p>The function was developed for manage and manipulate spatial coordinates with integration of several data conversion process. You can choose between two processes (through the argument “manipulation_process”).</p>
+<ul>
+<li>
+<p>lat_lon_to_cwp: in that case you want to associate latitude and longitude data to a CWP.</p>
+</li>
+<li>
+<p>cwp_to_lat_lon: in that case you want to associate a CWP to combination of latitude and longitude.</p>
+</li>
+</ul>
+<p>Globally, information and definition of CWP methodology and process was available on the FAO website (<a href="https://www.fao.org/cwp-on-fishery-statistics/handbook/general-concepts/main-water-areas/en/#c737533">https://www.fao.org/cwp-on-fishery-statistics/handbook/general-concepts/main-water-areas/en/#c737533</a>). Furthermore, the function can manage and convert several kinds of data (for example conversion of latitude and longitude in degree/minute/seconde to decimal degree) and could use a different CWP scale grid. All the configuration process was explained below according to the two global processes cited above.</p>
+<p>Regarding the CWP grids (provide to the function through the argument “referential_grid_file_path”), you can find them into the FAO Map Catalog (<a href="https://data.apps.fao.org/map/catalog/srv/fre/catalog.search#/search?any=cwp">https://data.apps.fao.org/map/catalog/srv/fre/catalog.search#/search?any=cwp</a>). We recommend using a furdeb call “fao_cwp_shape_manipulation” the first time to optimise the shape file reading process on R and create for the second time a RData of the shape file.</p>
+<h2 id="latitude-longitude-to-cwp">Latitude/longitude to CWP</h2>
+<p>The aim of this process if to associate latitude and longitude data to a CWP. The global process is describe in the figure below.</p>
+<img style="display: block; margin-left: auto; margin-right: auto; width: 100%;" src='lat_lon_cwp_manipulation_process1.png'/>
+<p>Some time, it happen that several CWP were associated to a single coordinate, for example when the position is located on the square grid line. When it appear, the function select the “best” CWP according to the following rules:</p>
+<ul>
+<li>
+<p>if the squares are located in the same quadrant, the “best” CWP is the one closer to the position of latitude 0 and longitude 0. For the case of 4 squares concerned (the position associated is located on the square grid lines regarding latitude and longitude orientation) it’s easy to understand the selection. In the case of only 2 squares concerned (the position associated is located on the horizontal or vertical-square grid lines), the “best” CWP is the one closer to the Greenwich meridian or the equator.</p>
+</li>
+<li>
+<p>if the squares are located in several quadrant, the square associated with the first quadrant is the top priority, following by the second or the fourth.</p>
+</li>
+</ul>
+<h2 id="cwp-to-latitude-longitude">CWP to latitude/longitude</h2>
+<p>The aim of this process if to associate latitude and longitude data from a CWP. Just like before, the global process is describe in the figure below.</p>
+<img style="display: block; margin-left: auto; margin-right: auto; width: 100%;" src='lat_lon_cwp_manipulation_process2.png'/>
+</div>
+</div>
+<div class="include-after">
+</div>
+</body>
+</html>

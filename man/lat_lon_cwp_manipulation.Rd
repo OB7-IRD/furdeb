@@ -10,40 +10,34 @@ lat_lon_cwp_manipulation(
   data_latitude = NULL,
   data_cwp = NULL,
   referential_grid_file_path,
-  input_cwp_format = NULL,
-  output_degree_cwp_parameter = NULL,
   output_degree_format = NULL,
+  output_degree_parameter = NULL,
   input_degree_format = NULL,
-  epsg_code = as.integer(4326),
-  output_cwp_format = NULL
+  epsg_code = as.integer(4326)
 )
 }
 \arguments{
 \item{manipulation_process}{{\link[base]{character}} expected. A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".}
 
-\item{data_longitude}{{\link[base]{character}} expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').}
+\item{data_longitude}{{\link[base]{character}} expected. By default NULL. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx''). If values are duplicated, the function simplify the process automatically (no need to remove them before).}
 
-\item{data_latitude}{{\link[base]{character}} expected. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx'').}
+\item{data_latitude}{{\link[base]{character}} expected. By default NULL. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx''). If values are duplicated, the function simplify the process automatically (no need to remove them before).}
 
-\item{data_cwp}{{\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s). Mandatory argument for "cwp_to_lat_lon" process.}
+\item{data_cwp}{{\link[base]{character}} expected. By default NULL. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s).}
 
 \item{referential_grid_file_path}{{\link[base]{character}} expected. File path of the referential grid shape. File with .Rdata extension file expected.}
 
-\item{input_cwp_format}{{\link[base]{character}} expected. Mandatory argument for "cwp_to_lat_lon" process. Cwp construction process related to the "centroid" or the "corner" of the square.}
+\item{output_degree_format}{{\link[base]{character}} expected. By default NULL. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".}
 
-\item{output_degree_cwp_parameter}{{\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted cwp parameter. Available parameters are "centroid" (for output coordinates in relation to cwp centroid) and "corner" (for output coordinates in relation to cwp corner).}
+\item{output_degree_parameter}{{\link[base]{character}} expected. By default NULL. Mandatory for "cwp_to_lat_lon" process. You can choose between "centroid" or "corner" for display coordinates of the square according to the centroid or the corner of it.}
 
-\item{output_degree_format}{{\link[base]{character}} expected. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".}
+\item{input_degree_format}{{\link[base]{character}} expected. By default NULL. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".}
 
-\item{input_degree_format}{{\link[base]{character}} expected. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".}
-
-\item{epsg_code}{{\link[base]{integer}} expected. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.}
-
-\item{output_cwp_format}{{\link[base]{character}} expected. Output format of cwp. So far, you can choose between theses formats: "centroid_7" (based on the square's centroid with a cwp on 7 characters) or "corner_7" (based on the square's corner with a cwp on 7 characters)}
+\item{epsg_code}{{\link[base]{integer}} expected. By default 4326. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.}
 }
 \value{
-Return a data.frame.
+Return a tibble.
 }
 \description{
-Conversion function for latitude, longitude and cwp item.
+Conversion function for latitude, longitude and cwp item. For more information on the cwp format check the online document on https://www.fao.org/cwp-on-fishery-statistics/handbook/general-concepts/main-water-areas/en/#c737533.
 }

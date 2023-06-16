@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, development]
+    branches: [main, development, 6-issue-when-the-position-is-on-the-grid-line-in-lat_lon_cwp_manipulationr]
   pull_request:
-    branches: [main, development]
+    branches: [main, development, 6-issue-when-the-position-is-on-the-grid-line-in-lat_lon_cwp_manipulationr]
   release:
     types: [published]
   workflow_dispatch:
