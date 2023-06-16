@@ -1,4 +1,7 @@
-
 .Rhistory
 .Rproj.user
 docs
+.RData
+vignettes/*.html
+vignettes/*.md
+vignettes/*.R
