@@ -34,7 +34,7 @@ Regarding the CWP grids (provide to the function through the argument "referenti
 
 The aim of this process if to associate latitude and longitude data to a CWP. The global process is describe in the figure below.
 
-<img style="display: block; margin-left: auto; margin-right: auto; width: 100%;" src='lat_lon_cwp_manipulation_process1.png'/>
+<img style="display: block; margin-left: auto; margin-right: auto; width: 80%;" src='lat_lon_cwp_manipulation_process1.png'/>
 
 Some time, it happen that several CWP were associated to a single coordinate, for example when the position is located on the square grid line. When it appear, the function select the "best" CWP according to the following rules:
 
@@ -46,6 +46,6 @@ Some time, it happen that several CWP were associated to a single coordinate, fo
 
 The aim of this process if to associate latitude and longitude data from a CWP. Just like before, the global process is describe in the figure below.
 
-<img style="display: block; margin-left: auto; margin-right: auto; width: 100%;" src='lat_lon_cwp_manipulation_process2.png'/>
+<img style="display: block; margin-left: auto; margin-right: auto; width: 80%;" src='lat_lon_cwp_manipulation_process2.png'/>
         
 </div>

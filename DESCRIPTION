@@ -60,7 +60,8 @@ Imports:
     parallel
 Suggests:
     testthat (>= 3.0.4),
-    knitr,
+    markdown (>= 1.6),
+    knitr (>= 1.42),
     rmarkdown
 Remotes: 
     OB7-IRD/codama
