@@ -1,4 +1,4 @@
-#' @name lat_long_to_csquare
+#' @name latitude_longitude_to_csquare
 #' @title Latitude-longitude to c-square converter
 #' @description Latitude-longitude to c-square converter.
 #' @param data R data with at least two columns with longitude and latitude values. Be careful! Your longitude and latitude data have to be in the WGS84 projection and coordinates in decimal degree.
@@ -23,17 +23,17 @@
 #' @examples
 #' # Example for classification until division fao fishing area
 #' \dontrun{
-#' tmp <- lat_long_to_csquare(data = balbaya_landing_rectangle,
+#' tmp <- latitude_longitude_to_csquare(data = balbaya_landing_rectangle,
 #'                            grid_square = 0.5,
 #'                            latitude_name = "latitude",
 #'                            longitude_name = "longitude")}
 #' @importFrom codama r_type_checking
 #' @export
-lat_long_to_csquare <- function(data,
-                                grid_square,
-                                latitude_name,
-                                longitude_name,
-                                boundary_ajustement_factor = 0.000001) {
+latitude_longitude_to_csquare <- function(data,
+                                          grid_square,
+                                          latitude_name,
+                                          longitude_name,
+                                          boundary_ajustement_factor = 0.000001) {
   # 1 - Arguments verification ----
   # data argument checking
   if (missing(x = data)) {

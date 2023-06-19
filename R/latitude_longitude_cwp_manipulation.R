@@ -1,30 +1,30 @@
-#' @name lat_lon_cwp_manipulation
+#' @name latitude_longitude_cwp_manipulation
 #' @title Conversion function for latitude, longitude and cwp item
 #' @description Conversion function for latitude, longitude and cwp item. For more information on the cwp format check the online document on https://www.fao.org/cwp-on-fishery-statistics/handbook/general-concepts/main-water-areas/en/#c737533.
-#' @param manipulation_process {\link[base]{character}} expected. A string matching one of the accepted processes. Available processes are "cwp_to_lat_lon" or "lat_lon_to_cwp".
-#' @param data_longitude {\link[base]{character}} expected. By default NULL. Mandatory argument for "lat_lon_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx''). If values are duplicated, the function simplify the process automatically (no need to remove them before).
-#' @param data_latitude {\link[base]{character}} expected. By default NULL. Mandatory argument for "lat_lon_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx''). If values are duplicated, the function simplify the process automatically (no need to remove them before).
-#' @param data_cwp {\link[base]{character}} expected. By default NULL. Mandatory argument for "cwp_to_lat_lon" process. A string vector with cwp value(s).
+#' @param manipulation_process {\link[base]{character}} expected. A string matching one of the accepted processes. Available processes are "cwp_to_latitude_longitude" or "latitude_longitude_to_cwp".
+#' @param data_longitude {\link[base]{character}} expected. By default NULL. Mandatory argument for "latitude_longitude_to_cwp" process. A string vector with longitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx''). If values are duplicated, the function simplify the process automatically (no need to remove them before).
+#' @param data_latitude {\link[base]{character}} expected. By default NULL. Mandatory argument for "latitude_longitude_to_cwp" process. A string vector with latitude value(s). Formats allowed is decimal degree (with point separator) or in degree minute seconde format (xxdxx'xx''). If values are duplicated, the function simplify the process automatically (no need to remove them before).
+#' @param data_cwp {\link[base]{character}} expected. By default NULL. Mandatory argument for "cwp_to_latitude_longitude" process. A string vector with cwp value(s).
 #' @param referential_grid_file_path {\link[base]{character}} expected. File path of the referential grid shape. File with .Rdata extension file expected.
-#' @param output_degree_format {\link[base]{character}} expected. By default NULL. Mandatory for "cwp_to_lat_lon" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
-#' @param output_degree_parameter {\link[base]{character}} expected. By default NULL. Mandatory for "cwp_to_lat_lon" process. You can choose between "centroid" or "corner" for display coordinates of the square according to the centroid or the corner of it.
-#' @param input_degree_format {\link[base]{character}} expected. By default NULL. Mandatory for "lat_lon_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
-#' @param epsg_code {\link[base]{integer}} expected. By default 4326. Mandatory for "lat_lon_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.
+#' @param output_degree_format {\link[base]{character}} expected. By default NULL. Mandatory for "cwp_to_latitude_longitude" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
+#' @param output_degree_parameter {\link[base]{character}} expected. By default NULL. Mandatory for "cwp_to_latitude_longitude" process. You can choose between "centroid" or "corner" for display coordinates of the square according to the centroid or the corner of it.
+#' @param input_degree_format {\link[base]{character}} expected. By default NULL. Mandatory for "latitude_longitude_to_cwp" process. A string matching one of the accepted output degree format. Available formats are "degree_minute_seconde" and "decimal_degree".
+#' @param epsg_code {\link[base]{integer}} expected. By default 4326. Mandatory for "latitude_longitude_to_cwp" process. An integer (on 4 digits) of one EPSG spatial reference systems related to latitude and longitude coordinates provide. Check this web site for more informations: https://www.spatialreference.org. By default 4326.
 #' @return Return a tibble.
 #' @importFrom dplyr last tibble inner_join rowwise mutate ungroup select rename case_when left_join
 #' @importFrom sf st_coordinates st_centroid st_as_sf st_join st_intersects st_drop_geometry
 #' @importFrom stringr str_extract
 #' @importFrom codama r_type_checking file_path_checking
 #' @export
-lat_lon_cwp_manipulation <- function(manipulation_process,
-                                     data_longitude = NULL,
-                                     data_latitude = NULL,
-                                     data_cwp = NULL,
-                                     referential_grid_file_path,
-                                     output_degree_format = NULL,
-                                     output_degree_parameter = NULL,
-                                     input_degree_format = NULL,
-                                     epsg_code = as.integer(4326)) {
+latitude_longitude_cwp_manipulation <- function(manipulation_process,
+                                                data_longitude = NULL,
+                                                data_latitude = NULL,
+                                                data_cwp = NULL,
+                                                referential_grid_file_path,
+                                                output_degree_format = NULL,
+                                                output_degree_parameter = NULL,
+                                                input_degree_format = NULL,
+                                                epsg_code = as.integer(4326)) {
   # 1 - setup ----
   suppressMessages(sf::sf_use_s2(use_s2 = FALSE))
   # 2 - local binding global variables ----
@@ -57,14 +57,14 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
   if (codama::r_type_checking(r_object = manipulation_process,
                               type = "character",
                               length = 1L,
-                              allowed_value = c("lat_lon_to_cwp",
-                                                "cwp_to_lat_lon"),
+                              allowed_value = c("latitude_longitude_to_cwp",
+                                                "cwp_to_latitude_longitude"),
                               output = "logical") != TRUE) {
     return(codama::r_type_checking(r_object = manipulation_process,
                                    type = "character",
                                    length = 1L,
-                                   allowed_value = c("lat_lon_to_cwp",
-                                                     "cwp_to_lat_lon"),
+                                   allowed_value = c("latitude_longitude_to_cwp",
+                                                     "cwp_to_latitude_longitude"),
                                    output = "message"))
   }
   # referential_grid_file_path argument checking
@@ -122,7 +122,7 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                "- Error, invalid reference grid, CWP of multiple length inside the referential.\n"))
   }
   # 4 - Process ----
-  if (manipulation_process == "cwp_to_lat_lon") {
+  if (manipulation_process == "cwp_to_latitude_longitude") {
     if (codama::r_type_checking(r_object = data_cwp,
                                 type = "character",
                                 output = "logical") != TRUE) {
@@ -135,7 +135,7 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
       data_cwp <- dplyr::tibble(cwp = data_cwp)
       data_cwp_unique <- unique(x = data_cwp)
       if (cwp_length != unique(sapply(X = reference_grid$CWP_CODE,
-                                         FUN = nchar))) {
+                                      FUN = nchar))) {
         return(cat(format(x = Sys.time(),
                           "%Y-%m-%d %H:%M:%S"),
                    "- Error, dispencrecy between \"input_cwp_format\" argument and referential grid.\n"))
@@ -186,20 +186,20 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                                                         dplyr::rowwise() %>%
                                                         dplyr::mutate(latitude = sprintf(fmt = "%02.f",
                                                                                          as.integer(x = dplyr::distinct(data.frame(sf::st_coordinates(x = geometry)) %>%
-                                                                                                      mutate(X = round(x = abs(x = X),
-                                                                                                                       digits = 2),
-                                                                                                             Y = round(x = abs(x = Y),
-                                                                                                                       digits = 2)) %>%
-                                                                                                      dplyr::filter(X == min(X)) %>%
-                                                                                                      dplyr::filter(Y == min(Y))))[2]),
+                                                                                                                          mutate(X = round(x = abs(x = X),
+                                                                                                                                           digits = 2),
+                                                                                                                                 Y = round(x = abs(x = Y),
+                                                                                                                                           digits = 2)) %>%
+                                                                                                                          dplyr::filter(X == min(X)) %>%
+                                                                                                                          dplyr::filter(Y == min(Y))))[2]),
                                                                       longitude = sprintf(fmt = "%03.f",
                                                                                           as.integer(x = dplyr::distinct(data.frame(sf::st_coordinates(x = geometry)) %>%
-                                                                                                       mutate(X = round(x = abs(x = X),
-                                                                                                                        digits = 2),
-                                                                                                              Y = round(x = abs(x = Y),
-                                                                                                                        digits = 2)) %>%
-                                                                                                       dplyr::filter(X == min(X)) %>%
-                                                                                                       dplyr::filter(Y == min(Y))))[1])) %>%
+                                                                                                                           mutate(X = round(x = abs(x = X),
+                                                                                                                                            digits = 2),
+                                                                                                                                  Y = round(x = abs(x = Y),
+                                                                                                                                            digits = 2)) %>%
+                                                                                                                           dplyr::filter(X == min(X)) %>%
+                                                                                                                           dplyr::filter(Y == min(Y))))[1])) %>%
                                                         dplyr::ungroup() %>%
                                                         dplyr::select(-geometry))
           }
@@ -262,7 +262,7 @@ lat_lon_cwp_manipulation <- function(manipulation_process,
                    ".\n"))
       }
     }
-  } else if (manipulation_process == "lat_lon_to_cwp") {
+  } else if (manipulation_process == "latitude_longitude_to_cwp") {
     # data_latitude argument checking
     if (codama::r_type_checking(r_object = data_latitude,
                                 type = "character",
