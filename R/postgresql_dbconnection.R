@@ -59,11 +59,11 @@ postgresql_dbconnection <- function(db_user,
   }
   # db_port argument checking
   if (codama::r_type_checking(r_object = db_port,
-                              type = "integer",
+                              type = "character",
                               length = 1L,
                               output = "logical") != TRUE) {
     return(codama::r_type_checking(r_object = db_port,
-                                   type = "integer",
+                                   type = "character",
                                    length = 1L,
                                    output = "message"))
   }
@@ -75,6 +75,6 @@ postgresql_dbconnection <- function(db_user,
                                                                                       password = db_password,
                                                                                       dbname = db_dbname,
                                                                                       host = db_host,
-                                                                                      port = db_port))
+                                                                                      port = as.integer(x = db_port)))
   return(postgresql_db_connection)
 }
