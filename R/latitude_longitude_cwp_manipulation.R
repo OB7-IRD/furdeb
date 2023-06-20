@@ -175,31 +175,27 @@ latitude_longitude_cwp_manipulation <- function(manipulation_process,
           if (output_degree_parameter == "centroid") {
             data_cwp_unique_final <- suppressWarnings(data_cwp_unique_final %>%
                                                         dplyr::rowwise() %>%
-                                                        dplyr::mutate(latitude = sprintf(fmt = "%02.f",
-                                                                                         as.integer(x = data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry)))$Y)),
-                                                                      longitude = sprintf(fmt = "%03.f",
-                                                                                          as.integer(x = data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry)))$X))) %>%
+                                                        dplyr::mutate(latitude = as.numeric(x = data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry)))$Y),
+                                                                      longitude = as.numeric(x = data.frame(sf::st_coordinates(x = sf::st_centroid(x = geometry)))$X)) %>%
                                                         dplyr::ungroup() %>%
                                                         dplyr::select(-geometry))
           } else if (output_degree_parameter == "corner") {
             data_cwp_unique_final <- suppressWarnings(data_cwp_unique_final %>%
                                                         dplyr::rowwise() %>%
-                                                        dplyr::mutate(latitude = sprintf(fmt = "%02.f",
-                                                                                         as.integer(x = dplyr::distinct(data.frame(sf::st_coordinates(x = geometry)) %>%
-                                                                                                                          mutate(X = round(x = abs(x = X),
-                                                                                                                                           digits = 2),
-                                                                                                                                 Y = round(x = abs(x = Y),
-                                                                                                                                           digits = 2)) %>%
-                                                                                                                          dplyr::filter(X == min(X)) %>%
-                                                                                                                          dplyr::filter(Y == min(Y))))[2]),
-                                                                      longitude = sprintf(fmt = "%03.f",
-                                                                                          as.integer(x = dplyr::distinct(data.frame(sf::st_coordinates(x = geometry)) %>%
-                                                                                                                           mutate(X = round(x = abs(x = X),
-                                                                                                                                            digits = 2),
-                                                                                                                                  Y = round(x = abs(x = Y),
-                                                                                                                                            digits = 2)) %>%
-                                                                                                                           dplyr::filter(X == min(X)) %>%
-                                                                                                                           dplyr::filter(Y == min(Y))))[1])) %>%
+                                                        dplyr::mutate(latitude = as.numeric(x = dplyr::distinct(data.frame(sf::st_coordinates(x = geometry)) %>%
+                                                                                                                  mutate(X = round(x = abs(x = X),
+                                                                                                                                   digits = 2),
+                                                                                                                         Y = round(x = abs(x = Y),
+                                                                                                                                   digits = 2)) %>%
+                                                                                                                  dplyr::filter(X == min(X)) %>%
+                                                                                                                  dplyr::filter(Y == min(Y))))[2],
+                                                                      longitude = as.numeric(x = dplyr::distinct(data.frame(sf::st_coordinates(x = geometry)) %>%
+                                                                                                                   mutate(X = round(x = abs(x = X),
+                                                                                                                                    digits = 2),
+                                                                                                                          Y = round(x = abs(x = Y),
+                                                                                                                                    digits = 2)) %>%
+                                                                                                                   dplyr::filter(X == min(X)) %>%
+                                                                                                                   dplyr::filter(Y == min(Y))))[1]) %>%
                                                         dplyr::ungroup() %>%
                                                         dplyr::select(-geometry))
           }
