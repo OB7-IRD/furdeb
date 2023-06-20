@@ -106,30 +106,30 @@ configuration_file <- function(path_file = NULL,
           if (database_configuration_answer == "sardara_vmot5") {
             dbname <- "sardara"
             host <- "vmot5-proto.ird.fr"
-            port <- 5432
+            port <- as.integer(x = 5432)
           } else if (database_configuration_answer == "balbaya_vmot5") {
             dbname <- "balbaya"
             host <- "vmot5-proto.ird.fr"
-            port <- 5432
+            port <- as.integer(x = 5432)
           } else if (database_configuration_answer == "observe_vmot5") {
             dbname <- "observe"
             host <- "vmot5-proto.ird.fr"
-            port <- 5432
+            port <- as.integer(x = 5432)
           } else if (database_configuration_answer == "t3_prod_vmot7") {
             dbname <- "t3_prod"
             host <- "vmot7-proto.ird.fr"
-            port <- 5432
+            port <- as.integer(x = 5432)
           } else if (database_configuration_answer == "t3_process_vmot7") {
             dbname <- "t3_29_process"
             host <- "vmot7-proto.ird.fr"
-            port <- 5432
+            port <- as.integer(x = 5432)
           } else if (database_configuration_answer == "new") {
             cat("Enter database name\n")
             dbname <- readLines(n = 1)
             cat("Enter database host\n")
             host <- readLines(n = 1)
             cat("Enter database port\n")
-            port <- readLines(n = 1)
+            port <- as.integer(x = readLines(n = 1))
           }
           current_databases_configuration <- list(list(login = login,
                                                        password = password,

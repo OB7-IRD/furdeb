@@ -58,14 +58,17 @@ postgresql_dbconnection <- function(db_user,
                                    output = "message"))
   }
   # db_port argument checking
-  if (codama::r_type_checking(r_object = db_port,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = db_port,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
+  if ((codama::r_type_checking(r_object = db_port,
+                               type = "integer",
+                               length = 1L,
+                               output = "logical")
+       | codama::r_type_checking(r_object = db_port,
+                                 type = "numeric",
+                                 length = 1L,
+                                 output = "logical")) != TRUE) {
+    return(cat(format(x = Sys.time(),
+                      "%Y-%m-%d %H:%M:%S"),
+               " - Error, invalid \"db_port\", type integer or numeric expected.\n"))
   }
   # 2 - Global process ----
   # connection to PostgreSQL database

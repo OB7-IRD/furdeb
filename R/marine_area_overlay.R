@@ -97,7 +97,8 @@ marine_area_overlay <- function(data,
                                    output = "message"))
   }
   # fao_area_file_path checking
-  if (codama::file_path_checking(file_path =  fao_area_file_path,
+  if ((! is.null(x = fao_area_file_path))
+       && codama::file_path_checking(file_path =  fao_area_file_path,
                                  extension = c("Rdata",
                                                "RData",
                                                "shp"),
@@ -109,7 +110,8 @@ marine_area_overlay <- function(data,
                                       output = "message"))
   }
   # fao_overlay_level checking
-  if (codama::r_type_checking(r_object = fao_overlay_level,
+  if ((! is.null(x = fao_overlay_level))
+      && codama::r_type_checking(r_object = fao_overlay_level,
                               type = "character",
                               length = 1L,
                               allowed_value = c("ocean",
@@ -141,7 +143,8 @@ marine_area_overlay <- function(data,
                                    output = "message"))
   }
   # eez_area_file_path checking
-  if (codama::file_path_checking(file_path =  eez_area_file_path,
+  if ((! is.null(x = eez_area_file_path))
+      && codama::file_path_checking(file_path =  eez_area_file_path,
                                  extension = c("Rdata",
                                                "RData",
                                                "shp"),
@@ -153,7 +156,8 @@ marine_area_overlay <- function(data,
                                       output = "message"))
   }
   # for_fdi_use checking
-  if (codama::r_type_checking(r_object = for_fdi_use,
+  if ((! is.null(x = for_fdi_use))
+      && codama::r_type_checking(r_object = for_fdi_use,
                               type = "logical",
                               length = 1L,
                               output = "logical") != TRUE) {
@@ -163,7 +167,8 @@ marine_area_overlay <- function(data,
                                    output = "message"))
   }
   # ices_area_file_path checking
-  if (codama::file_path_checking(file_path =  ices_area_file_path,
+  if ((! is.null(x = ices_area_file_path))
+      && codama::file_path_checking(file_path =  ices_area_file_path,
                                  extension = c("Rdata",
                                                "RData",
                                                "shp"),

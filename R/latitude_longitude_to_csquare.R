@@ -76,6 +76,7 @@ latitude_longitude_to_csquare <- function(data,
                                    output = "message"))
   }
   # 2 - Process ----
+  initial_length <- dim(x = data)[2]
   data <- as.data.frame(data)
   # boundary case ajustement
   data$boundary_aju_lat <- trunc(x = (abs(data[, c(latitude_name)]) + 10) / 100) * boundary_ajustement_factor
@@ -178,6 +179,6 @@ latitude_longitude_to_csquare <- function(data,
       }
     }
   }
-  data <- data[, -c((dim(data)[2] + 1) : (dim(data)[2] - 1))]
-  return(data)
+  data_final <- data[, -c((initial_length + 1) : (dim(x = data)[2] - 1))]
+  return(data_final)
 }
