@@ -98,11 +98,11 @@ marine_area_overlay <- function(data,
   }
   # fao_area_file_path checking
   if ((! is.null(x = fao_area_file_path))
-       && codama::file_path_checking(file_path =  fao_area_file_path,
-                                 extension = c("Rdata",
-                                               "RData",
-                                               "shp"),
-                                 output = "logical") != TRUE) {
+      && codama::file_path_checking(file_path =  fao_area_file_path,
+                                    extension = c("Rdata",
+                                                  "RData",
+                                                  "shp"),
+                                    output = "logical") != TRUE) {
     return(codama::file_path_checking(file_path =  fao_area_file_path,
                                       extension = c("Rdata",
                                                     "RData",
@@ -112,15 +112,15 @@ marine_area_overlay <- function(data,
   # fao_overlay_level checking
   if ((! is.null(x = fao_overlay_level))
       && codama::r_type_checking(r_object = fao_overlay_level,
-                              type = "character",
-                              length = 1L,
-                              allowed_value = c("ocean",
-                                                "major",
-                                                "subarea",
-                                                "division",
-                                                "subdivision",
-                                                "subunit"),
-                              output = "logical") != TRUE) {
+                                 type = "character",
+                                 length = 1L,
+                                 allowed_value = c("ocean",
+                                                   "major",
+                                                   "subarea",
+                                                   "division",
+                                                   "subdivision",
+                                                   "subunit"),
+                                 output = "logical") != TRUE) {
     return(codama::r_type_checking(r_object = fao_overlay_level,
                                    type = "character",
                                    length = 1L,
@@ -145,10 +145,10 @@ marine_area_overlay <- function(data,
   # eez_area_file_path checking
   if ((! is.null(x = eez_area_file_path))
       && codama::file_path_checking(file_path =  eez_area_file_path,
-                                 extension = c("Rdata",
-                                               "RData",
-                                               "shp"),
-                                 output = "logical") != TRUE) {
+                                    extension = c("Rdata",
+                                                  "RData",
+                                                  "shp"),
+                                    output = "logical") != TRUE) {
     return(codama::file_path_checking(file_path =  eez_area_file_path,
                                       extension = c("Rdata",
                                                     "RData",
@@ -158,9 +158,9 @@ marine_area_overlay <- function(data,
   # for_fdi_use checking
   if ((! is.null(x = for_fdi_use))
       && codama::r_type_checking(r_object = for_fdi_use,
-                              type = "logical",
-                              length = 1L,
-                              output = "logical") != TRUE) {
+                                 type = "logical",
+                                 length = 1L,
+                                 output = "logical") != TRUE) {
     return(codama::r_type_checking(r_object = for_fdi_use,
                                    type = "logical",
                                    length = 1L,
@@ -169,10 +169,10 @@ marine_area_overlay <- function(data,
   # ices_area_file_path checking
   if ((! is.null(x = ices_area_file_path))
       && codama::file_path_checking(file_path =  ices_area_file_path,
-                                 extension = c("Rdata",
-                                               "RData",
-                                               "shp"),
-                                 output = "logical") != TRUE) {
+                                    extension = c("Rdata",
+                                                  "RData",
+                                                  "shp"),
+                                    output = "logical") != TRUE) {
     return(codama::file_path_checking(file_path =  ices_area_file_path,
                                       extension = c("Rdata",
                                                     "RData",
@@ -422,12 +422,29 @@ marine_area_overlay <- function(data,
       for (data_unique_id in seq_len(length.out = nrow(data_unique))) {
         if (data_unique[data_unique_id, "division_fao"] %in% eez_indicator_referential$sub_region
             | data_unique[data_unique_id, "subarea_fao"] %in% eez_indicator_referential$sub_region) {
-          if (data_unique[data_unique_id, "iso_ter1"] %in% eu_countries$country_code) {
-            data_unique[data_unique_id, "eez_indicator"] <- "EU"
-          } else if (is.na(data_unique[data_unique_id, "eez"])) {
-            data_unique[data_unique_id, "eez_indicator"] <- "RFMO"
+          current_eez_indicator_referential <- dplyr::filter(.data = eez_indicator_referential,
+                                                             sub_region %in% c(data_unique[data_unique_id, "division_fao"],
+                                                                               data_unique[data_unique_id, "subarea_fao"]))
+          if (nrow(x = current_eez_indicator_referential) != 1) {
+            if (data_unique[data_unique_id, "iso_ter1"] %in% eu_countries$country_code
+                && "EU" %in% current_eez_indicator_referential$eez_indicator
+                | (is.na(x = data_unique[data_unique_id, "iso_ter1"])
+                   & all(current_eez_indicator_referential$eez_indicator %in% c("EU",
+                                                                                "UK")))) {
+              data_unique[data_unique_id, "eez_indicator"] <- "EU"
+            } else if (data_unique[data_unique_id, "iso_ter1"] %in% "GBR"
+                       && "UK" %in% current_eez_indicator_referential$eez_indicator) {
+              data_unique[data_unique_id, "eez_indicator"] <- "UK"
+            } else if ((is.na(data_unique[data_unique_id, "eez"]))
+                       && "RFMO" %in% current_eez_indicator_referential$eez_indicator) {
+              data_unique[data_unique_id, "eez_indicator"] <- "RFMO"
+            } else if ("COAST" %in% current_eez_indicator_referential$eez_indicator) {
+              data_unique[data_unique_id, "eez_indicator"] <- "COAST"
+            } else {
+              data_unique[data_unique_id, "eez_indicator"] <- "NA"
+            }
           } else {
-            data_unique[data_unique_id, "eez_indicator"] <- "COAST"
+            data_unique[data_unique_id, "eez_indicator"] <- current_eez_indicator_referential$eez_indicator
           }
         } else {
           data_unique[data_unique_id, "eez_indicator"] <- "NA"
