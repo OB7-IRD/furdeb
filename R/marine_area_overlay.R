@@ -452,8 +452,8 @@ marine_area_overlay <- function(data,
       }
     }
     data_unique <- select(.data = data_unique,
-                          -iho_sea,
-                          -iso_ter1)
+                          -iho_sea) %>%
+      dplyr::rename(eez_country = iso_ter1)
     # setup
     suppressMessages(sf::sf_use_s2(use_s2 = value_s2_sf))
   }
