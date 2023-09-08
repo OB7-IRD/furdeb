@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_extraction.R
 \name{data_extraction}
 \alias{data_extraction}
-\title{Data extraction}
+\title{Function for data extraction}
 \usage{
 data_extraction(
   type,
@@ -11,33 +11,27 @@ data_extraction(
   anchor = NULL,
   column_name = NULL,
   column_type = NULL,
-  export_path = NULL
+  export_path_directory = NULL
 )
 }
 \arguments{
-\item{type}{{\link[base]{character}} expected. dabase or csv.}
+\item{type}{{\link[base]{character}} expected. Mandatory. Type of process for data extration. You can choose between "csv_txt" or "database".}
 
-\item{data_connection}{{\link[base]{list}} expected. Output of the function {\link[furdeb]{postgresql_dbconnection}}, which must be done before using the data_extraction function.}
+\item{file_path}{{\link[base]{character}} expected. Mandatory. File path of the csv, txt or sql file.}
 
-\item{sql_name}{{\link[base]{character}}. Name of the sql file, in fishi.}
+\item{database_connection}{{\link[base]{list}} expected. Mandatory for type "sql". By default NULL. Output list from the furdeb database connection functions (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).}
 
-\item{csv_path}{{\link[base]{character}}. Path of the csv.}
+\item{anchor}{{\link[base]{list}} expected. Optional for type "sql". By default NULL. List of values to interpolate in a SQL string query. Each list element have to follow this format: name_anchor = values. Be aware that the values typing format influence the writing of the sql in the query. For example, an integer or numeric value doesn't have any quote, rather than a date or string value.}
 
-\item{time_period}{{\link[base]{integer}} expected. Period identification in year.}
+\item{column_name}{{\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column name(s).}
 
-\item{country}{{\link[base]{integer}} expected. Country codes identification. [\href{https://ob7-ird.github.io/fishi/articles/Referentials.html}{Country referentials}]}
+\item{column_type}{{\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column type(s). You can use the same format that the argument "col_types" of the function {\link[readr]{read_delim}}.}
 
-\item{vessel_type}{{\link[base]{integer}} expected. Vessel type codes identification. [\href{https://ob7-ird.github.io/fishi/articles/Referentials.html}{Vessel_type referentials}]}
-
-\item{vessel_type_select}{{\link[base]{character}} expected. engin or vessel_type.}
-
-\item{ocean}{{\link[base]{integer}} expected. Ocean codes identification. [\href{https://ob7-ird.github.io/fishi/articles/Referentials.html}{Oscean referentials}]}
-
-\item{csv_output}{TRUE to obtain a csv document. FALSE by default.}
+\item{export_path_directory}{{\link[base]{character}} expected. Optional. By default NULL. Directory path associated for the export (in csv).}
 }
 \value{
-The function return ggplot R plot.
+The function return a tibble.
 }
 \description{
-Extracts a dataset from a database or csv
+Function for data extraction and design from a file (csv or txt) or a database.
 }

@@ -49,6 +49,7 @@ marine_area_overlay <- function(data,
   iho_sea <- NULL
   iso_ter1 <- NULL
   ICESNAME <- NULL
+  sub_region <- NULL
   # 1 - Arguments verifications ----
   # data argument checking
   if (missing(data)) {
