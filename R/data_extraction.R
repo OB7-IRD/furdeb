@@ -128,7 +128,6 @@ data_extraction <- function(type,
            "\".\n",
            sep = "")
     }
-    browser()
     if ((! is.null(x = column_name)
          & ! is.null(x = column_type))
         | (! is.null(x = column_name))) {
@@ -138,50 +137,47 @@ data_extraction <- function(type,
                                                           col_types = as.list(column_type),
                                                           skip = 1),
                warning = function(thug_life) {
-                 message(format(x = Sys.time(),
-                                format = "%Y-%m-%d %H:%M:%S"),
-                         " - Error, one or more parsing issues, check details below.",
-                         sep = "")
-                 data_extracted <- suppressWarnings(readr::read_delim(file = file_path,
-                                                                      show_col_types = FALSE,
-                                                                      col_names = column_name,
-                                                                      col_types = as.list(column_type),
-                                                                      skip = 1))
-                 readr::problems(data_extracted)
-                 stop()
+                 print(readr::problems(readr::read_delim(file = file_path,
+                                                         show_col_types = FALSE,
+                                                         col_names = column_name,
+                                                         col_types = as.list(column_type),
+                                                         skip = 1)))
+                 stop(format(x = Sys.time(),
+                             format = "%Y-%m-%d %H:%M:%S"),
+                      " - One or more parsing issues, check details above.",
+                      sep = "")
+
                })
     } else if (! is.null(x = column_type)) {
       tryCatch(expr = data_extracted <- readr::read_delim(file = file_path,
                                                           show_col_types = FALSE,
                                                           col_types = as.list(column_type)),
                warning = function(thug_life) {
-                 message(format(x = Sys.time(),
-                                format = "%Y-%m-%d %H:%M:%S"),
-                         " - Error, one or more parsing issues, check details below.",
-                         sep = "")
-                 data_extracted <- suppressWarnings(readr::read_delim(file = file_path,
-                                                                      show_col_types = FALSE,
-                                                                      col_types = as.list(column_type)))
-                 return(readr::problems(data_extracted))
+                 print(readr::problems(readr::read_delim(file = file_path,
+                                                         show_col_types = FALSE,
+                                                         col_types = as.list(column_type))))
+                 stop(format(x = Sys.time(),
+                             format = "%Y-%m-%d %H:%M:%S"),
+                      " - One or more parsing issues, check details above",
+                      sep = "")
                })
     } else {
       tryCatch(expr = data_extracted <- readr::read_delim(file = file_path,
                                                           show_col_types = FALSE),
                warning = function(thug_life) {
-                 message(format(x = Sys.time(),
-                                format = "%Y-%m-%d %H:%M:%S"),
-                         " - Error, one or more parsing issues, check details below.",
-                         sep = "")
-                 data_extracted <- suppressWarnings(readr::read_delim(file = file_path,
-                                                                      show_col_types = FALSE))
-                 return(readr::problems(data_extracted))
+                 print(readr::problems(readr::read_delim(file = file_path,
+                                                         show_col_types = FALSE)))
+                 stop(format(x = Sys.time(),
+                             format = "%Y-%m-%d %H:%M:%S"),
+                      " - One or more parsing issues, check details above",
+                      sep = "")
                })
     }
     if (! is.null(x = column_name)
         && (length(x = data_extracted) != length(x = column_name))) {
       message(format(x = Sys.time(),
                      format = "%Y-%m-%d %H:%M:%S"),
-              " - Warning, the number of columns provided in the \"column_name\" argument is superior to the number of variables available in the input file.",
+              " - Warning, the number of columns provided in the \"column_name\" argument is not equal to the number of variables available in the input file.",
               sep = "")
     }
     data_extracted_final <- data_extracted
