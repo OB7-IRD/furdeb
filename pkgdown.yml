@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   latitude_longitude_cwp_manipulation: latitude_longitude_cwp_manipulation.html
-last_built: 2023-08-09T13:18Z
+last_built: 2023-09-11T14:45Z
 urls:
   reference: https://ob7-ird.github.io/furdeb/reference
   article: https://ob7-ird.github.io/furdeb/articles
