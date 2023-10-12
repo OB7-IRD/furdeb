@@ -1,0 +1,122 @@
+---
+title: "Package creation, maintenance and distribution - From development to lifecycle"
+output: rmarkdown::html_vignette
+description: |
+  Description methodology, good practicies and lifecycle package creation and management".
+vignette: |
+  %\VignetteIndexEntry{Package creation, maintenance and distribution - From development to lifecycle}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<div style="text-align: justify">
+
+## 1. Package development
+
+### 1.1. Dependencies
+
+Three main types of dependencies:
+
+* `imports` - this means that we use functions from these packages and they must be installed when our pacakge is installed.
+* `suggests` - these are packages that we use in developing our package (such as [testthat](https://testthat.r-lib.org/)) or packages that provide some additional, optional functionality. These packages aren't usually installed and you need to do a check before using them.
+* `depends` - 
+
+### 1. Git and GitHub
+
+[Happy Git and GitHub for the useR ](https://happygitwithr.com/)
+
+
+### 2. Continuous Integration and Developement (CI/CD)
+
+During all the life of a package, you will be confronted several times to a special moment: you development a new function or a new piece of code and you have to integrate them in the source code. The key question here is to ask yourself if you code will does not produce regression in the developed application. The aims of the Continuous Integration (CI) and Continuous Development (CD) is to detected problems soon as possible in the development phase, automate execution of tests and verification and, in a global view, monitor and manage the progress of our software development.    
+
+### 2.1. GitHub Actions (GHA)
+
+[GitHub Actions for the R language](https://github.com/r-lib/actions/#readme)
+
+[usethis::use_github_action()](https://usethis.r-lib.org/reference/use_github_action.html)
+
+[workflows examples](https://github.com/r-lib/actions/tree/v2/examples)
+
+[check-release](https://github.com/r-lib/actions/blob/v2/examples/check-release.yaml): a "simple" workflow to check your package with the release version of R on ubuntu (latest version available).
+
+[check-standard](https://github.com/r-lib/actions/blob/v2/examples/check-standard.yaml): recommended for any package that is, or aspires to be on the CRAN. This process runs R CMD check across a few combinations of operating system and R version. In addition, the usethis process add a badge reporting the R CMD check result in the README file.
+
+[check-full](https://github.com/r-lib/actions/blob/v2/examples/check-full.yaml): the more complex verification check.
+
+[lint](https://github.com/r-lib/actions/blob/v2/examples/lint.yaml): run function lintr::lint_package() on an R package. The package [lintr](https://lintr.r-lib.org/) provides a static code analysis for R (analysis of the code without executing them, in opposition to a dynamic program analysis). It's a very useful way to check our code and identify mistakes or non-compliance of good practices.
+
+[pkgdown](https://github.com/r-lib/actions/blob/v2/examples/pkgdown.yaml): build a [pkgdown](https://pkgdown.r-lib.org/) site for an R package and deploy it to [GitHub Pages](https://pages.github.com/). Pkgdown is an R package designed to make quickly and easily a package website.
+
+### 2.2. Building package's website
+
+[usethis::use_pkgdown_github_pages()](https://usethis.r-lib.org/reference/use_github_pages.html)
+
+### 2.3. Versioning
+
+Using the good practices in package development, like use an Integrated Development Environment (IDE, like RStudio), a version control system like Git or any process of CI, is useless if you don't have a good versioning system of your package. It's more important and relevant when it comes to things like solving user issues or deploy/share your work with others peoples.
+
+For R developement, the version number follow the following format `major.minor.patch.dev`. Each part of the version represent different things:
+
+* `major` - A significant change to the package that would be expected to break users code.
+* `minor` - A minor version update means that new functionality has been added to the package. It might be new functions to improvements to existing functions that are compatible with most existing code.
+* `patch` - Patch updates are bug fixes. They solve existing issues but don’t do anything new.
+* `dev` - Dev versions are used during development and this part is missing from release versions (you will only find version number in the format `major.minor.patch`). For example you might use a dev version when you give someone a beta version to test. A package with a dev version can be expected to change rapidly or have undiscovered issues.
+
+In practice, the function `use_version()` (from the package `usethis`,  documentation associated [here](https://usethis.r-lib.org/reference/use_version.html)) can provide a clever support for updating your package version. If your package is associated with a Git repository, you can also prepare a commit for version updated.
+
+```{r use_version example, eval=FALSE, include=TRUE}
+# for interactive selection
+usethis::use_version()
+
+# for specify a level of increment. 
+# you can choose in the argument which between "major", "minor", "patch" or "dev".
+# the process will propose to you to create a commit associated with the updated version.
+# with the argument push = TRUE (by default FALSE) you can directly make a commit and push it on the repository associated.
+usethis::use_version(which = "dev",
+                     push = TRUE)
+```
+
+In addition to the update of your package version number, it's important to record what changes have been made. For that, good practices suggest to create a new markdown file, called NEWS.md, at the edge of your package directory. Another function, [`use_news_md`](https://usethis.r-lib.org/reference/use_news_md.html) can help you can create the initial file template. 
+
+```{r news file, eval=FALSE, include=TRUE}
+# creation of the NEWS.md file
+usethis::use_news_md()
+```
+
+You are free to structure your NEWS.md file like you want but we recommend at least to have this kind of structure (use only section useful for your release/dev version):
+
+```{r news file template, eval=FALSE, include=TRUE}
+# package_name major.minor.patch.dev - year-month-day
+
+## Added
+* Code added n°1
+* Code added n°x
+
+## Changed
+* Code changed n°1
+* Code changed n°x
+
+## Removed
+* Code removed n°1
+* Code removed n°x
+```
+
+## 3. Lifecyle
+
+## References
+
+This vignette was made according to the guidelines and advises provided by several resources (many thanks to them !). You will find below the identification and links (if available) associated.
+
+[R package development workshop](https://combine-australia.github.io/r-pkg-dev/)
+
+[R Packagesp](https://r-pkgs.org/)
+
+</div>
