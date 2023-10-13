@@ -113,9 +113,31 @@ From development to lifecycle</h1>
 <h2 id="package-development">1. Package development<a class="anchor" aria-label="anchor" href="#package-development"></a>
 </h2>
 <div class="section level3">
-<h3 id="dependencies">1.1. Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
+<h3 id="package-skeleton-creation">Package skeleton creation<a class="anchor" aria-label="anchor" href="#package-skeleton-creation"></a>
 </h3>
-<p>Three main types of dependencies:</p>
+</div>
+<div class="section level3">
+<h3 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
+</h3>
+<p>Using functions from other packages can save you time and effort in
+development but it might make it more difficult to maintain your
+package. Deciding which packages (and how many) to depend on is a
+difficult and philosophical choice. Some things you might want to
+consider before depending on a package are:</p>
+<ul>
+<li>How much of the functionality of the package do you want to
+use?</li>
+<li>Could you easily reproduce that functionality?</li>
+<li>How well maintained is the package?</li>
+<li>How often is it updated? Packages that change a lot are more likely
+to break your code.</li>
+<li>How many dependencies of it’s own does that package have?</li>
+<li>Are you users likely to have the package installed already?</li>
+</ul>
+<p>When it’s clear in your mind that the best solution is to use
+function(s) from other packages, you have to specify in your package
+what kind of dependency you have. There are three main types of
+dependencies:</p>
 <ul>
 <li>
 <code>imports</code> - this means that we use functions from these
@@ -127,8 +149,199 @@ or packages that provide some additional, optional functionality. These
 packages aren’t usually installed and you need to do a check before
 using them.</li>
 <li>
-<code>depends</code> -</li>
+<code>depends</code> - shouldn’t usually be used unless your package
+closely complements another package. For example, depends is necessary
+is if you package mainly operates on an object defined by another
+package.</li>
 </ul>
+<p>To declare a dependency, the best way is to use the function <a href="https://usethis.r-lib.org/reference/use_package.html" class="external-link">use_package</a>.
+In practice, we advise advice to an optionally argument of the function,
+min_version, which specify what is the minimum version of the package
+that you have to install, according to the version that you have on your
+computer. With that, you reduce the risk of incompatibility when you
+share your package to other people.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># if you want to add a package present on the CRAN</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"package_name"</span>,</span>
+<span>                     type <span class="op">=</span> <span class="st">"Imports"</span>,</span>
+<span>                     min_version <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># if you wan to add a package from an in-development package, from a Git repository for example</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_dev_package</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"package_name"</span>,</span>
+<span>                         type <span class="op">=</span> <span class="st">"Imports"</span>,</span>
+<span>                         remote <span class="op">=</span> <span class="st">"remote_path"</span><span class="op">)</span></span>
+<span><span class="co"># for the remote syntax check the documentation here: https://remotes.r-lib.org/articles/dependencies.html</span></span></code></pre></div>
+<p>When you add a dependency through this process you should have a
+message like that:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Refer to functions with <span class="st">`</span><span class="at">package_name::fun()</span><span class="st">`</span></span></code></pre></div>
+<p>In our code you have two solutions:</p>
+<ul>
+<li>when you call a function from another package, call with the syntax
+<code>package_name::function_name()</code>
+</li>
+<li>write the call of the function without package_name:: and add in
+NAMESPACE file the line
+<code>importFrom(package_name,function_name)</code>. You can add this
+line by hand in theory, but it’s highly recommended to use the
+documentation generation of roxygen2 with the syntax
+<code>#' @importFrom package_name function_name</code> (take a look to
+the section X.X dedicates to the documentation generation). If a
+function has the same name in different packages, use the first
+codification to avoid any mistake.</li>
+</ul>
+<p>If the function associated to the explanation above appear several
+time in our package, you can only import it once. It doesn’t matter
+where we put the <code>@importFrom</code> line (or how many times) it
+will still be added to <code>NAMESPACE</code>. This means we can put all
+import in a central location. The advantage of this is that they only
+appear once and are all in one place but it makes it harder to know
+which of our functions have which imports and remove them if they are no
+longer needed. Which approach you take is up to you.</p>
+</div>
+<div class="section level3">
+<h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h3>
+<p>Today, it’s impossible to find a modern package without documentation
+associated. Document your code and globally your software is an
+essential part of his development. Do without is a very dangerous way
+which may cause problems in the future, especially if you work with
+several colleagues or even if you package became complex. Historically
+painful, this process is well assisted, especially with the association
+to other packages. Furthermore, you will see that there are several
+“level” of documentation and each have specific and transversal
+aims.</p>
+<div class="section level4">
+<h4 id="documenting-functions">Documenting functions<a class="anchor" aria-label="anchor" href="#documenting-functions"></a>
+</h4>
+<p>Documenting functions is the first step of the global documentation
+process. This kind of documentation will produce user information, like
+the arguments of your function, who to specify them and some other
+specification like what your function return. The way to doing that has
+been made much easier by modern package, especilly one collaed <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a>. R help files use a
+complicated syntax similar to LaTeX that can be easy to mess up. Instead
+of writing this all ourselves using Roxygen lets us just write some
+special comments at the start of each function. This has the extra
+advantage of keeping the documentation with the code which make it
+easier to keep it up to date.</p>
+<p>Roxygen process work through tags that you will add at the begging of
+your code. Tag’s syntax begin with <code>#'</code> associated to
+<code>@something</code> for call a specific tag. For start, you can
+generate a Roxygen skeleton from your function in RStudio, by opne the
+<em>Code</em> menu and select <em>Roxygen skeleton</em>.</p>
+<p>There are a <a href="https://roxygen2.r-lib.org/reference/index.html#tags" class="external-link">lot of
+tags</a> that you can use but you will find below the “most” common and
+useful:</p>
+<ul>
+<li>
+<code>@name</code> - Define the topic name (same name as your
+function below the documentation).</li>
+<li>
+<code>@title</code> - Define the title of your documentation.</li>
+<li>
+<code>@description</code> - Describre</li>
+<li>
+<code>@param</code> - Describe a function input. Should describe
+acceptable input types and how it affects the output. The syntax is
+<code>name</code> follwing by a space and <code>description</code>. The
+description is usually one or two sentences but can be as long as
+needed. Document multiple arguments by separating their names with
+commas without spaces.</li>
+<li>
+<code>@return</code> - Describe the function’s output. Typically
+will be a 1-2 sentence description of the output type, but might also
+include discussion of important errors or warnings.</li>
+<li>
+<code>@details</code> - Additional details about the function.</li>
+<li>
+<code>@examples</code> - Executable R code that demonstrates how the
+function works. Code must run without error.</li>
+<li>
+<code>@examplesIf</code> - The syntax is <code>TRUE</code> or
+<code>FALSE</code> following on the next line by an example code. Run
+examples only when condition is <code>TRUE</code>.</li>
+<li>
+<code>@importFrom</code> - Write in the NAMESPACE file which
+function(s) you use in our code from which package(s).</li>
+<li>
+<code>@export</code> - Adding in the NAMESPACE that this is a
+function that we want to be available to the user. If we had an internal
+function that wasn’t meant to be used by the user we would leave out
+<code>@export</code>.</li>
+<li>
+<code>@keywords</code> - Initially use for increase the efficient of
+the searching process dealing with you package, if you add
+<code>@keywords internal</code> you will remove the function from the
+documentation index. It’s useful if you want to create a global
+documentation help when you write ?package_name in the R console.</li>
+</ul>
+<p>For bulding your documentation you can click on the section
+<code>Build</code> on the RStudio interface, <code>More</code> with the
+gear logo and <code>Document</code>. You can also launch the following
+code:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>It’s also advising configuring an update of the documentation when
+you compile your package. You have to configure that once through the
+<code>Configuration Build Tools</code> menu (section <code>Build</code>
+and subsection <code>More</code>) in the tab <code>Configure</code> near
+the ticked line <code>Generate documentation with Roxygen</code>.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="checking-and-testing">Checking and testing<a class="anchor" aria-label="anchor" href="#checking-and-testing"></a>
+</h3>
+<p>Verify your package is one of the thing that you have to do many and
+many time, especially if you modify the code or add new functions. Run
+the process frequently should simplify your development and corrections
+should improve your code writing in the future. Typically, there are two
+kinds of verification, the checking and the testing.</p>
+<div class="section level4">
+<h4 id="checking">Checking<a class="anchor" aria-label="anchor" href="#checking"></a>
+</h4>
+<p>Aim of this point is to check that your package don’t have any
+mistake in term of structure and syntax. This is essential if you want
+to submit your package to CRAN because you must not have any errors or
+warnings. For doing that the most easier way is to launch the following
+code in the package directory:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>You should saw several outputs with at the end a subdivision of three
+parts: errors, warnings and notes. The goals is to have 0 error or
+warning and less a possible notes. Errors happen when you code has
+broken and failed one of the checks. If errors are not fixed your
+package will not work correctly. Warnings are slightly less serious but
+should also be addressed. Your package will probably work without fixing
+thise but it is highly advised that you do. Notes are advice rather than
+problems. It can be up to you whether or not to address them but there
+is usally a good reason to. Keep in your mind that the checking process
+will stop if we encount an error. Information about the error will be
+display in the output, but the correction of it does not guarantee that
+you shouldn’t have another error occur (this is a sequential process).
+Everything work fine when you have at the end only notes or in the best
+case nothing.</p>
+</div>
+<div class="section level4">
+<h4 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a>
+</h4>
+<p>Testing your package is the section kind of verification that you can
+do. The function <code>devtools::check()</code> verify that our package
+passes standard checks, like for the typing or code/package structure,
+but we don’t verify that our functions work in the way that we expect.
+This is where unit tests highlight. One approach to writing unit tests
+is what is known as “test-driven development”. The idea here is to write
+the tests before you write a function. This way you know exactly what a
+function is supposed to do and what problems there might be. While this
+is a good principle, it can take a lot of advance planning. A more
+common approach could be called “bug-driven testing”. For this approach
+whenever we come across a bug, we write a test for it before we fix it,
+that way the same bug should never happen an again. When combined with
+some tests for obvious problems, this is a good compromise better
+testing for every possible outcome and not testing at all.</p>
+<p>There are a few ways to write unit tests for R packages but one of
+the easier way is to use the <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> package. We can set
+everything up with the following command line:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_testthat</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="git-and-github">1. Git and GitHub<a class="anchor" aria-label="anchor" href="#git-and-github"></a>
@@ -221,7 +434,7 @@ package <code>usethis</code>, documentation associated <a href="https://usethis.
 can provide a clever support for updating your package version. If your
 package is associated with a Git repository, you can also prepare a
 commit for version updated.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for interactive selection</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -236,25 +449,25 @@ important to record what changes have been made. For that, good
 practices suggest to create a new markdown file, called NEWS.md, at the
 edge of your package directory. Another function, <a href="https://usethis.r-lib.org/reference/use_news_md.html" class="external-link"><code>use_news_md</code></a>
 can help you can create the initial file template.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># creation of the NEWS.md file</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_news_md</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You are free to structure your NEWS.md file like you want but we
 recommend at least to have this kind of structure (use only section
 useful for your release/dev version):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># package_name major.minor.patch.dev - year-month-day</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Added</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°<span class="dv">1</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°x</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Changed</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°<span class="dv">1</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°x</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Removed</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°<span class="dv">1</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°x</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># package_name major.minor.patch.dev - year-month-day</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Added</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°<span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°x</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Changed</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°<span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°x</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Removed</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°<span class="dv">1</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°x</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
