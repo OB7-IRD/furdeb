@@ -20,13 +20,109 @@ knitr::opts_chunk$set(
 
 ## 1. Package development
 
-### 1.1. Dependencies
+### Package skeleton creation
 
-Three main types of dependencies:
+### Dependencies
+
+Using functions from other packages can save you time and effort in development but it might make it more difficult to maintain your package. Deciding which packages (and how many) to depend on is a difficult and philosophical choice. Some things you might want to consider before depending on a package are:
+
+* How much of the functionality of the package do you want to use?
+* Could you easily reproduce that functionality?
+* How well maintained is the package?
+* How often is it updated? Packages that change a lot are more likely to break your code.
+* How many dependencies of it’s own does that package have?
+* Are you users likely to have the package installed already?
+
+When it's clear in your mind that the best solution is to use function(s) from other packages, you have to specify in your package what kind of dependency you have. There are three main types of dependencies:
 
 * `imports` - this means that we use functions from these packages and they must be installed when our pacakge is installed.
 * `suggests` - these are packages that we use in developing our package (such as [testthat](https://testthat.r-lib.org/)) or packages that provide some additional, optional functionality. These packages aren't usually installed and you need to do a check before using them.
-* `depends` - 
+* `depends` - shouldn’t usually be used unless your package closely complements another package. For example, depends is necessary is if you package mainly operates on an object defined by another package.
+
+To declare a dependency, the best way is to use the function [use_package](https://usethis.r-lib.org/reference/use_package.html). In practice, we advise advice to an optionally argument of the function, min_version, which specify what is the minimum version of the package that you have to install, according to the version that you have on your computer. With that, you reduce the risk of incompatibility when you share your package to other people.
+
+```{r use_package, eval=FALSE, include=TRUE}
+# if you want to add a package present on the CRAN
+usethis::use_package(package = "package_name",
+                     type = "Imports",
+                     min_version = TRUE)
+# if you wan to add a package from an in-development package, from a Git repository for example
+usethis::use_dev_package(package = "package_name",
+                         type = "Imports",
+                         remote = "remote_path")
+# for the remote syntax check the documentation here: https://remotes.r-lib.org/articles/dependencies.html
+```
+
+When you add a dependency through this process you should have a message like that:
+
+```{r message use_package, eval=FALSE, include=TRUE}
+Refer to functions with `package_name::fun()`
+```
+
+In our code you have two solutions:
+
+* when you call a function from another package, call with the syntax `package_name::function_name()`
+* write the call of the function without package_name:: and add in NAMESPACE file the line `importFrom(package_name,function_name)`. You can add this line by hand in theory, but it's highly recommended to use the documentation generation of roxygen2 with the syntax `#' @importFrom package_name function_name` (take a look to the section X.X dedicates to the documentation generation). If a function has the same name in different packages, use the first codification to avoid any mistake.
+
+If the function associated to the explanation above appear several time in our package, you can only import it once. It doesn’t matter where we put the `@importFrom` line (or how many times) it will still be added to `NAMESPACE`. This means we can put all import in a central location. The advantage of this is that they only appear once and are all in one place but it makes it harder to know which of our functions have which imports and remove them if they are no longer needed. Which approach you take is up to you.
+
+### Documentation
+
+Today, it's impossible to find a modern package without documentation associated. Document your code and globally your software is an essential part of his development. Do without is a very dangerous way which may cause problems in the future, especially if you work with several colleagues or even if you package became complex. Historically painful, this process is well assisted, especially with the association to other packages. Furthermore, you will see that there are several "level" of documentation and each have specific and transversal aims.
+
+#### Documenting functions
+
+Documenting functions is the first step of the global documentation process. This kind of documentation will produce user information, like the arguments of your function, who to specify them and some other specification like what your function return. The way to doing that has been made much easier by modern package, especilly one collaed [roxygen2](https://roxygen2.r-lib.org/). R help files use a complicated syntax similar to LaTeX that can be easy to mess up. Instead of writing this all ourselves using Roxygen lets us just write some special comments at the start of each function. This has the extra advantage of keeping the documentation with the code which make it easier to keep it up to date. 
+
+Roxygen process work through tags that you will add at the begging of your code. Tag's syntax begin with `#' ` associated to `@something` for call a specific tag. For start, you can generate a Roxygen skeleton from your function in RStudio, by opne the *Code* menu and select *Roxygen skeleton*.
+
+There are a [lot of tags](https://roxygen2.r-lib.org/reference/index.html#tags) that you can use but you will find below the "most" common and useful:
+
+* `@name` - Define the topic name (same name as your function below the documentation).
+* `@title` - Define the title of your documentation. 
+* `@description` - Describre 
+* `@param` - Describe a function input. Should describe acceptable input types and how it affects the output. The syntax is `name` follwing by a space and `description`. The description is usually one or two sentences but can be as long as needed. Document multiple arguments by separating their names with commas without spaces.
+* `@return` - Describe the function's output. Typically will be a 1-2 sentence description of the output type, but might also include discussion of important errors or warnings.
+* `@details` - Additional details about the function.
+* `@examples` - Executable R code that demonstrates how the function works. Code must run without error.
+* `@examplesIf` - The syntax is `TRUE` or `FALSE` following on the next line by an example code. Run examples only when condition is `TRUE`.
+* `@importFrom` - Write in the NAMESPACE file which function(s) you use in our code from which package(s). 
+* `@export` - Adding in the NAMESPACE that this is a function that we want to be available to the user. If we had an internal function that wasn’t meant to be used by the user we would leave out `@export`.
+* `@keywords` - Initially use for increase the efficient of the searching process dealing with you package, if you add `@keywords internal` you will remove the function from the documentation index. It’s useful if you want to create a global documentation help when you write ?package_name in the R console.
+
+For bulding your documentation you can click on the section `Build` on the RStudio interface, `More` with the gear logo and `Document`. You can also launch the following code:
+
+```{r documentation, eval=FALSE, include=TRUE}
+devtools::document()
+```
+
+It's also advising configuring an update of the documentation when you compile your package. You have to configure that once through the `Configuration Build Tools` menu (section `Build` and subsection `More`) in the tab `Configure` near the ticked line `Generate documentation with Roxygen`.
+
+### Checking and testing
+
+Verify your package is one of the thing that you have to do many and many time, especially if you modify the code or add new functions. Run the process frequently should simplify your development and corrections should improve your code writing in the future. Typically, there are two kinds of verification, the checking and the testing.
+
+#### Checking
+
+Aim of this point is to check that your package don't have any mistake in term of structure and syntax. This is essential if you want to submit your package to CRAN because you must not have any errors or warnings. For doing that the most easier way is to launch the following code in the package directory:
+
+```{r devtools checks, eval=FALSE, include=TRUE}
+devtools::check()
+```
+
+You should saw several outputs with at the end a subdivision of three parts: errors, warnings and notes. The goals is to have 0 error or warning and less a possible notes. Errors happen when you code has broken and failed one of the checks. If errors are not fixed your package will not work correctly. Warnings are slightly less serious but should also be addressed. Your package will probably work without fixing thise but it is highly advised that you do. Notes are advice rather than problems. It can be up to you whether or not to address them but there is usally a good reason to. Keep in your mind that the checking process will stop if we encount an error. Information about the error will be display in the output, but the correction of it does not guarantee that you shouldn't have another error occur (this is a sequential process). Everything work fine when you have at the end only notes or in the best case nothing.
+
+#### Testing 
+
+Testing your package is the section kind of verification that you can do. The function `devtools::check()` verify that our package passes standard checks, like for the typing or code/package structure, but we don't verify that our functions work in the way that we expect. This is where unit tests highlight. One approach to writing unit tests is what is known as "test-driven development". The idea here is to write the tests before you write a function. This way you know exactly what a function is supposed to do and what problems there might be. While this is a good principle, it can take a lot of advance planning. A more common approach could be called “bug-driven testing”. For this approach whenever we come across a bug, we write a test for it before we fix it, that way the same bug should never happen an again. When combined with some tests for obvious problems, this is a good compromise better testing for every possible outcome and not testing at all.
+
+There are a few ways to write unit tests for R packages but one of the easier way is to use the [testthat](https://testthat.r-lib.org/) package. We can set everything up with the following command line:
+
+```{r testthat initialisation, eval=FALSE, include=TRUE}
+usethis::use_testthat()
+```
+
+
 
 ### 1. Git and GitHub
 

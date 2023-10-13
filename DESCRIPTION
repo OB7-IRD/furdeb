@@ -67,5 +67,5 @@ Suggests:
     markdown (>= 1.6),
     knitr (>= 1.42),
     rmarkdown
-Remotes: 
+Remotes:  
     OB7-IRD/codama
