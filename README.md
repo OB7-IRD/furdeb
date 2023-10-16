@@ -1,5 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file and click on Knit button at the end. -->
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # furdeb package <a href='https://ob7-ird.github.io/furdeb'><img src='man/figures/logo.png' align="right" /></a>
 
@@ -8,7 +8,6 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/furdeb)](https://cran.r-project.org/package=furdeb)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-
 [![R-CMD-check](https://github.com/OB7-IRD/furdeb/workflows/R-CMD-check/badge.svg)](https://github.com/OB7-IRD/furdeb/actions)
 <!-- badges: end -->
 

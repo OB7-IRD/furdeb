@@ -5,3 +5,6 @@ docs
 vignettes/*.html
 vignettes/*.md
 vignettes/*.R
+inst/doc
+/doc/
+/Meta/

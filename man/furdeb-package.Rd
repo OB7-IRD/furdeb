@@ -4,7 +4,7 @@
 \name{furdeb-package}
 \alias{furdeb}
 \alias{furdeb-package}
-\title{FUnctions for R DEvelopment and Beyond}
+\title{furdeb: FUnctions for R DEvelopment and Beyond!}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
