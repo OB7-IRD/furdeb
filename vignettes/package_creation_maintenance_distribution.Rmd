@@ -235,7 +235,7 @@ Each set of tests starts with the `test_that()` function. This function has two 
 
 To run our tests we use:
 
-```{r}
+```{r launch test, eval=FALSE, include=TRUE}
 devtools::test()
 ```
 
