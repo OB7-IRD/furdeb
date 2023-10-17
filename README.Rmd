@@ -31,7 +31,7 @@ Working in progress for this section. Be patient.
 ## Installation
 
 Working in progress for this section. Be patient.
-```{r, eval = FALSE}
+```{r, eval = FALSE, include=TRUE}
 devtools::install_github("https://github.com/OB7-IRD/furdeb",
                          INSTALL_opts=c("--no-multiarch"))
 ```
@@ -40,7 +40,7 @@ devtools::install_github("https://github.com/OB7-IRD/furdeb",
 
 To get a bug fix or to use a feature from the development version, you can install the development version of furdeb from GitHub.
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, include=TRUE}
 devtools::install_github("https://github.com/OB7-IRD/furdeb",
                          ref = "development",
                          INSTALL_opts=c("--no-multiarch"))
@@ -52,7 +52,7 @@ Working in progress for this section. Be patient.
 
 ## Usage
 
-```{r, message = FALSE}
+```{r, eval = FALSE, include=TRUE}
 library(furdeb)
 ```
 

@@ -28,6 +28,8 @@ Today, it's very easier to build a package and you will see that a lot of suppor
 
 # Package skeleton creation
 
+To do
+
 # Versioning
 
 Using the good practices in package development, like use an Integrated Development Environment (IDE, like RStudio), a version control system like Git or any process of CI, is useless if you don't have a good versioning system of your package. It's more important and relevant when it comes to things like solving user issues or deploy/share your work with others peoples.
