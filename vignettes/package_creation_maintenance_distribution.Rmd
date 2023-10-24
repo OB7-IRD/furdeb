@@ -30,56 +30,6 @@ Today, it's very easier to build a package and you will see that a lot of suppor
 
 To do
 
-# Versioning
-
-Using the good practices in package development, like use an Integrated Development Environment (IDE, like RStudio), a version control system like Git or any process of CI, is useless if you don't have a good versioning system of your package. It's more important and relevant when it comes to things like solving user issues or deploy/share your work with others peoples.
-
-For R developement, the version number follow the following format `major.minor.patch.dev`. Each part of the version represent different things:
-
-* `major` - A significant change to the package that would be expected to break users code.
-* `minor` - A minor version update means that new functionality has been added to the package. It might be new functions to improvements to existing functions that are compatible with most existing code.
-* `patch` - Patch updates are bug fixes. They solve existing issues but don’t do anything new.
-* `dev` - Dev versions are used during development and this part is missing from release versions (you will only find version number in the format `major.minor.patch`). For example you might use a dev version when you give someone a beta version to test. A package with a dev version can be expected to change rapidly or have undiscovered issues.
-
-In practice, the function `use_version()` (from the package `usethis`,  documentation associated [here](https://usethis.r-lib.org/reference/use_version.html)) can provide a clever support for updating your package version. If your package is associated with a Git repository, you can also prepare a commit for version updated.
-
-```{r use_version example, eval=FALSE, include=TRUE}
-# for interactive selection
-usethis::use_version()
-
-# for specify a level of increment. 
-# you can choose in the argument which between "major", "minor", "patch" or "dev".
-# the process will propose to you to create a commit associated with the updated version.
-# with the argument push = TRUE (by default FALSE) you can directly make a commit and push it on the repository associated.
-usethis::use_version(which = "dev",
-                     push = TRUE)
-```
-
-In addition to the update of your package version number, it's important to record what changes have been made. For that, good practices suggest to create a new markdown file, called NEWS.md, at the edge of your package directory. Another function, [`use_news_md`](https://usethis.r-lib.org/reference/use_news_md.html) can help you can create the initial file template. 
-
-```{r news file, eval=FALSE, include=TRUE}
-# creation of the NEWS.md file
-usethis::use_news_md()
-```
-
-You are free to structure your NEWS.md file like you want but we recommend at least to have this kind of structure (use only section useful for your release/dev version):
-
-```{r news file template, eval=FALSE, include=TRUE}
-# package_name major.minor.patch.dev - year-month-day
-
-## Added
-* Code added n°1
-* Code added n°x
-
-## Changed
-* Code changed n°1
-* Code changed n°x
-
-## Removed
-* Code removed n°1
-* Code removed n°x
-```
-
 # Dependencies
 
 Using functions from other packages can save you time and effort in development but it might make it more difficult to maintain your package. Deciding which packages (and how many) to depend on is a difficult and philosophical choice. Some things you might want to consider before depending on a package are:
@@ -245,6 +195,84 @@ If you want to see what parts of your code need testing you can run the `devtool
 
 # Lifecyle
 
+Managing the evolution of your package is one of the challenge that you will have to deal when you develop your package. Very few users complain when a package gains features or gets a bug fix. Instead, it's become more complicated when we begging to make some breaking changes, such as removing a function or narrowing the acceptable inputs for a function. Since change is inevitable and in most time benefit for your package, the best thing to do is to establish a clear communicate channel between all the users and help them to adapted to change.
+
+### Package version number
+
+During the life of your package, it will change many times. If you use a code sharing website like GitHub, the smallest increment of change that’s meaningful is probably a Git commit. However, even if this state is very useful for the maintainer and globally keep an history of your package evolution, the primary signal of meaningful change is to increment the package version number and release it.
+
+Using the good practices, is useless if you don't have a good versioning system of your package. It's more important and relevant when it comes to things like solving user issues or deploy/share your work with others peoples. Formally, an R package version is a sequence of at least two integers separated by either `.` or `-`. For example, `1.0` and `0.9.1-10` are valid versions, but `1` and `1.0-devel` are not. Furthermore, R considers that version like `1.9` to be equal to `1.9.0`, and by addition less than `1.9.2`. In the modern package of the tidyverse universe, several conventions are recommended in addition to managing your package version number:
+
+* Always use . as the separator, never -.
+* A released version number consists of three numbers, `major.minor.patch`. Never use versions like `1.0`. Always spell out the three components, `1.0.0`. For example version number `1.9.2`:
+  *   1 is the `major` number. This is a significant change to the package that would be expected to break users code, 
+  * 9 is the `minor` number. A minor version update means that new functionality has been added to the package. It might be new functions to improvements to existing functions that are compatible with most existing code.
+  * 2 is the `patch` number. Patch updates are bug fixes. They solve existing issues but don’t do anything new.
+* An in-development package has a fourth component, the development version. This should start at 9000. The number 9000 is arbitrary, but provides a clear signal that there’s something different about this version number. There are two reasons for this practice. First, the presence of a fourth component makes it easy to tell if you’re dealing with a released or in-development version. Also, the use of the fourth place means that you’re not limited to what the next released version will be. `0.0.1`, `0.1.0`, and `1.0.0` are all greater than `0.0.0.9000`.
+
+This kind of semantic is inspired in part by [Semantic Versioning](https://semver.org/) and by the [X.Org](https://www.x.org/releases/X11R7.7/doc/xorg-docs/Versions.html) versioning schemes. 
+
+Now we know the design of the version format, the next step is to decide which type of release you make. The transition from 0.3.1 to 0.3.2, which is a patch release, has a very different vibe from the transition from 0.3.2 to 1.0.0, which is a major release. A key concept to solve that is whether the associated changes are backward compatible, meaning that pre-existing code will still “work” with the new version. A change that is not backward compatible is often described as a breaking change. In practice, backward compatibility is not a clear-cut distinction. A good way to distinguish a breaking change is to answer the following question: does all the script create with functions of my package will running without any modifications if I update my package? Is the answer is no, your update is a breaking change and you need to update the major number of your version package.
+
+Here are some concrete examples of breaking change:
+
+* Removing a function,
+* Removing an argument,
+* Narrowing the set of valid inputs to a function.
+
+In opposition, these examples are usually not considered breaking:
+
+* Adding a function,
+* Adding an argument,
+* Increasing the set of valid inputs,
+* Changing the text of a print method or error,
+* Fixing a bug.
+
+All examples above are global case and of course some of your specification could change the breaking consideration associated.
+
+In addition, the figure below could help you when you will update your package version.
+
+<img style="display: block; margin-left: auto; margin-right: auto; width: 80%;" src='package_version_updating.png'/>
+
+In practice, the function `use_version()` (from the package `usethis`,  documentation associated [here](https://usethis.r-lib.org/reference/use_version.html)) can provide a clever support for updating your package version. If your package is associated with a Git repository, you can also prepare a commit for version updated.
+
+```{r use_version example, eval=FALSE, include=TRUE}
+# for interactive selection
+usethis::use_version()
+
+# for specify a level of increment. 
+# you can choose in the argument which between "major", "minor", "patch" or "dev".
+# the process will propose to you to create a commit associated with the updated version.
+# with the argument push = TRUE (by default FALSE) you can directly make a commit and push it on the repository associated.
+usethis::use_version(which = "dev",
+                     push = TRUE)
+```
+
+In addition to the update of your package version number, it's important to record what changes have been made. For that, good practices suggest to create a new markdown file, called NEWS.md, at the edge of your package directory. Another function, [`use_news_md`](https://usethis.r-lib.org/reference/use_news_md.html) can help you can create the initial file template. 
+
+```{r news file, eval=FALSE, include=TRUE}
+# creation of the NEWS.md file
+usethis::use_news_md()
+```
+
+You are free to structure your NEWS.md file like you want but we recommend at least to have this kind of structure (use only section useful for your release/dev version):
+
+```{r news file template, eval=FALSE, include=TRUE}
+# package_name major.minor.patch.dev - year-month-day
+
+## Added
+* Code added n°1
+* Code added n°x
+
+## Changed
+* Code changed n°1
+* Code changed n°x
+
+## Removed
+* Code removed n°1
+* Code removed n°x
+```
+
 ## Code sharing websites
 
 [Happy Git and GitHub for the useR ](https://happygitwithr.com/)
@@ -277,6 +305,6 @@ This vignette was made according to the guidelines and advises provided by sever
 
 [R package development workshop](https://combine-australia.github.io/r-pkg-dev/)
 
-[R Packagesp](https://r-pkgs.org/)
+[R Packages](https://r-pkgs.org/)
 
 </div>
