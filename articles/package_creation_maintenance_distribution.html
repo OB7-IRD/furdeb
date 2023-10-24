@@ -151,78 +151,6 @@ for building vignettes.</p>
 <p>To do</p>
 </div>
 <div class="section level2">
-<h2 id="versioning">Versioning<a class="anchor" aria-label="anchor" href="#versioning"></a>
-</h2>
-<p>Using the good practices in package development, like use an
-Integrated Development Environment (IDE, like RStudio), a version
-control system like Git or any process of CI, is useless if you don’t
-have a good versioning system of your package. It’s more important and
-relevant when it comes to things like solving user issues or
-deploy/share your work with others peoples.</p>
-<p>For R developement, the version number follow the following format
-<code>major.minor.patch.dev</code>. Each part of the version represent
-different things:</p>
-<ul>
-<li>
-<code>major</code> - A significant change to the package that would
-be expected to break users code.</li>
-<li>
-<code>minor</code> - A minor version update means that new
-functionality has been added to the package. It might be new functions
-to improvements to existing functions that are compatible with most
-existing code.</li>
-<li>
-<code>patch</code> - Patch updates are bug fixes. They solve
-existing issues but don’t do anything new.</li>
-<li>
-<code>dev</code> - Dev versions are used during development and this
-part is missing from release versions (you will only find version number
-in the format <code>major.minor.patch</code>). For example you might use
-a dev version when you give someone a beta version to test. A package
-with a dev version can be expected to change rapidly or have
-undiscovered issues.</li>
-</ul>
-<p>In practice, the function <code>use_version()</code> (from the
-package <code>usethis</code>, documentation associated <a href="https://usethis.r-lib.org/reference/use_version.html" class="external-link">here</a>)
-can provide a clever support for updating your package version. If your
-package is associated with a Git repository, you can also prepare a
-commit for version updated.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># for interactive selection</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># for specify a level of increment. </span></span>
-<span><span class="co"># you can choose in the argument which between "major", "minor", "patch" or "dev".</span></span>
-<span><span class="co"># the process will propose to you to create a commit associated with the updated version.</span></span>
-<span><span class="co"># with the argument push = TRUE (by default FALSE) you can directly make a commit and push it on the repository associated.</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span>which <span class="op">=</span> <span class="st">"dev"</span>,</span>
-<span>                     push <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>In addition to the update of your package version number, it’s
-important to record what changes have been made. For that, good
-practices suggest to create a new markdown file, called NEWS.md, at the
-edge of your package directory. Another function, <a href="https://usethis.r-lib.org/reference/use_news_md.html" class="external-link"><code>use_news_md</code></a>
-can help you can create the initial file template.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># creation of the NEWS.md file</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_news_md</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>You are free to structure your NEWS.md file like you want but we
-recommend at least to have this kind of structure (use only section
-useful for your release/dev version):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># package_name major.minor.patch.dev - year-month-day</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Added</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°<span class="dv">1</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°x</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Changed</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°<span class="dv">1</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°x</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Removed</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°<span class="dv">1</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°x</span></code></pre></div>
-</div>
-<div class="section level2">
 <h2 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
 </h2>
 <p>Using functions from other packages can save you time and effort in
@@ -266,7 +194,7 @@ min_version, which specify what is the minimum version of the package
 that you have to install, according to the version that you have on your
 computer. With that, you reduce the risk of incompatibility when you
 share your package to other people.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you want to add a package present on the CRAN</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"package_name"</span>,</span>
 <span>                     type <span class="op">=</span> <span class="st">"Imports"</span>,</span>
@@ -278,7 +206,7 @@ share your package to other people.</p>
 <span><span class="co"># for the remote syntax check the documentation here: https://remotes.r-lib.org/articles/dependencies.html</span></span></code></pre></div>
 <p>When you add a dependency through this process you should have a
 message like that:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Refer to functions with <span class="st">`</span><span class="at">package_name::fun()</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Refer to functions with <span class="st">`</span><span class="at">package_name::fun()</span><span class="st">`</span></span></code></pre></div>
 <p>In our code you have two solutions:</p>
 <ul>
 <li>when you call a function from another package, call with the syntax
@@ -383,7 +311,7 @@ documentation help when you write ?package_name in the R console.</li>
 <code>Build</code> on the RStudio interface, <code>More</code> with the
 gear logo and <code>Document</code>. You can also launch the following
 code:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>It’s also advising configuring an update of the documentation when
 you compile your package. You have to configure that once through the
@@ -399,7 +327,7 @@ the ticked line <code>Generate documentation with Roxygen</code>.</p>
 package itself? There is some information in the
 <code>DESCRIPTION</code> but that can be hard to access. Let’s add a
 help file for the package. Launch the following line:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_package_doc</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -412,10 +340,10 @@ functions can be used together. Usually, they are write in <a href="https://rmar
 you can click on the <code>Help</code> menu and
 <code>Markdown Quick Reference</code> for display a quick guide to how
 the R Markdown format work. To create your first vignette, use:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_vignette</span><span class="op">(</span><span class="st">"vignette_name"</span><span class="op">)</span></span></code></pre></div>
 <p>To see what the vignette looks like run:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">build_vignettes</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Asking <a href="https://devtools.r-lib.org/" class="external-link">devtools</a> to build
 the vignette rather than rendering it in another way (such as the Knit
@@ -434,7 +362,7 @@ planned to use GitHub, the README will be associated to the “welcome
 page” of the repository associated. Using R, the best way is to create a
 .Rmd for a rich intermingling of code and output (use .md for a basic
 README).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_readme_rmd</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Rmd will be automatically added to .Rbuildignore. Furtermore, if the
 current project is a Git repo, then <code>use_readme_rmd()</code>
@@ -461,7 +389,7 @@ sections before. Furthermore, it gives your users somewhere to go and
 helps your package appear in search results. for that task you can use
 the package <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>. If you
 have it installed, you can set it iu with the following line:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_pkgdown</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><a href="https://usethis.r-lib.org/reference/use_github_pages.html" class="external-link">usethis::use_pkgdown_github_pages()</a></p>
 </div>
@@ -482,7 +410,7 @@ mistake in term of structure and syntax. This is essential if you want
 to submit your package to CRAN because you must not have any errors or
 warnings. For doing that the most easier way is to launch the following
 code in the package directory:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You should saw several outputs with at the end a subdivision of three
 parts: errors, warnings and notes. The goals is to have 0 error or
@@ -519,13 +447,13 @@ testing for every possible outcome and not testing at all.</p>
 <p>There are a few ways to write unit tests for R packages but one of
 the easier way is to use the <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> package. We can set
 everything up with the following command line:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_testthat</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Now, when you run checking process through
 <code>devtools::check()</code>, all tests associated to our package will
 run too. For create a new test file you can use the following command
 line:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_test</span><span class="op">(</span><span class="st">"name_test_file"</span><span class="op">)</span></span></code></pre></div>
 <p>Each set of tests starts with the <code>test_that()</code> function.
 This function has two arguments, a description and the code with the
@@ -534,7 +462,7 @@ function. This function also has two parts, the thing we want to test
 and what we expect it to be. There are different <a href="https://testthat.r-lib.org/reference/index.html" class="external-link">functions</a> for
 different types of expectations.</p>
 <p>To run our tests we use:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>If you want to see what parts of your code need testing you can run
 the <code>devtools::test_coverage()</code> function (you might need to
@@ -546,6 +474,136 @@ code are covered by tests.</p>
 <div class="section level2">
 <h2 id="lifecyle">Lifecyle<a class="anchor" aria-label="anchor" href="#lifecyle"></a>
 </h2>
+<p>Managing the evolution of your package is one of the challenge that
+you will have to deal when you develop your package. Very few users
+complain when a package gains features or gets a bug fix. Instead, it’s
+become more complicated when we begging to make some breaking changes,
+such as removing a function or narrowing the acceptable inputs for a
+function. Since change is inevitable and in most time benefit for your
+package, the best thing to do is to establish a clear communicate
+channel between all the users and help them to adapted to change.</p>
+<div class="section level4">
+<h4 id="package-version-number">Package version number<a class="anchor" aria-label="anchor" href="#package-version-number"></a>
+</h4>
+<p>During the life of your package, it will change many times. If you
+use a code sharing website like GitHub, the smallest increment of change
+that’s meaningful is probably a Git commit. However, even if this state
+is very useful for the maintainer and globally keep an history of your
+package evolution, the primary signal of meaningful change is to
+increment the package version number and release it.</p>
+<p>Using the good practices, is useless if you don’t have a good
+versioning system of your package. It’s more important and relevant when
+it comes to things like solving user issues or deploy/share your work
+with others peoples. Formally, an R package version is a sequence of at
+least two integers separated by either <code>.</code> or <code>-</code>.
+For example, <code>1.0</code> and <code>0.9.1-10</code> are valid
+versions, but <code>1</code> and <code>1.0-devel</code> are not.
+Furthermore, R considers that version like <code>1.9</code> to be equal
+to <code>1.9.0</code>, and by addition less than <code>1.9.2</code>. In
+the modern package of the tidyverse universe, several conventions are
+recommended in addition to managing your package version number:</p>
+<ul>
+<li>Always use . as the separator, never -.</li>
+<li>A released version number consists of three numbers,
+<code>major.minor.patch</code>. Never use versions like
+<code>1.0</code>. Always spell out the three components,
+<code>1.0.0</code>. For example version number <code>1.9.2</code>:
+<ul>
+<li>1 is the <code>major</code> number. This is a significant change to
+the package that would be expected to break users code,</li>
+<li>9 is the <code>minor</code> number. A minor version update means
+that new functionality has been added to the package. It might be new
+functions to improvements to existing functions that are compatible with
+most existing code.</li>
+<li>2 is the <code>patch</code> number. Patch updates are bug fixes.
+They solve existing issues but don’t do anything new.</li>
+</ul>
+</li>
+<li>An in-development package has a fourth component, the development
+version. This should start at 9000. The number 9000 is arbitrary, but
+provides a clear signal that there’s something different about this
+version number. There are two reasons for this practice. First, the
+presence of a fourth component makes it easy to tell if you’re dealing
+with a released or in-development version. Also, the use of the fourth
+place means that you’re not limited to what the next released version
+will be. <code>0.0.1</code>, <code>0.1.0</code>, and <code>1.0.0</code>
+are all greater than <code>0.0.0.9000</code>.</li>
+</ul>
+<p>This kind of semantic is inspired in part by <a href="https://semver.org/" class="external-link">Semantic Versioning</a> and by the <a href="https://www.x.org/releases/X11R7.7/doc/xorg-docs/Versions.html" class="external-link">X.Org</a>
+versioning schemes.</p>
+<p>Now we know the design of the version format, the next step is to
+decide which type of release you make. The transition from 0.3.1 to
+0.3.2, which is a patch release, has a very different vibe from the
+transition from 0.3.2 to 1.0.0, which is a major release. A key concept
+to solve that is whether the associated changes are backward compatible,
+meaning that pre-existing code will still “work” with the new version. A
+change that is not backward compatible is often described as a breaking
+change. In practice, backward compatibility is not a clear-cut
+distinction. A good way to distinguish a breaking change is to answer
+the following question: does all the script create with functions of my
+package will running without any modifications if I update my package?
+Is the answer is no, your update is a breaking change and you need to
+update the major number of your version package.</p>
+<p>Here are some concrete examples of breaking change:</p>
+<ul>
+<li>Removing a function,</li>
+<li>Removing an argument,</li>
+<li>Narrowing the set of valid inputs to a function.</li>
+</ul>
+<p>In opposition, these examples are usually not considered
+breaking:</p>
+<ul>
+<li>Adding a function,</li>
+<li>Adding an argument,</li>
+<li>Increasing the set of valid inputs,</li>
+<li>Changing the text of a print method or error,</li>
+<li>Fixing a bug.</li>
+</ul>
+<p>All examples above are global case and of course some of your
+specification could change the breaking consideration associated.</p>
+<p>In addition, the figure below could help you when you will update
+your package version.</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto; width: 80%;" src="package_version_updating.png"></p>
+<p>In practice, the function <code>use_version()</code> (from the
+package <code>usethis</code>, documentation associated <a href="https://usethis.r-lib.org/reference/use_version.html" class="external-link">here</a>)
+can provide a clever support for updating your package version. If your
+package is associated with a Git repository, you can also prepare a
+commit for version updated.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># for interactive selection</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># for specify a level of increment. </span></span>
+<span><span class="co"># you can choose in the argument which between "major", "minor", "patch" or "dev".</span></span>
+<span><span class="co"># the process will propose to you to create a commit associated with the updated version.</span></span>
+<span><span class="co"># with the argument push = TRUE (by default FALSE) you can directly make a commit and push it on the repository associated.</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span>which <span class="op">=</span> <span class="st">"dev"</span>,</span>
+<span>                     push <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>In addition to the update of your package version number, it’s
+important to record what changes have been made. For that, good
+practices suggest to create a new markdown file, called NEWS.md, at the
+edge of your package directory. Another function, <a href="https://usethis.r-lib.org/reference/use_news_md.html" class="external-link"><code>use_news_md</code></a>
+can help you can create the initial file template.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># creation of the NEWS.md file</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_news_md</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>You are free to structure your NEWS.md file like you want but we
+recommend at least to have this kind of structure (use only section
+useful for your release/dev version):</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># package_name major.minor.patch.dev - year-month-day</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Added</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°<span class="dv">1</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code added n°x</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Changed</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°<span class="dv">1</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code changed n°x</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Removed</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°<span class="dv">1</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Code removed n°x</span></code></pre></div>
+</div>
 <div class="section level3">
 <h3 id="code-sharing-websites">Code sharing websites<a class="anchor" aria-label="anchor" href="#code-sharing-websites"></a>
 </h3>
@@ -604,7 +662,7 @@ provided by several resources (many thanks to them !). You will find
 below the identification and links (if available) associated.</p>
 <p><a href="https://combine-australia.github.io/r-pkg-dev/" class="external-link">R package
 development workshop</a></p>
-<p><a href="https://r-pkgs.org/" class="external-link">R Packagesp</a></p>
+<p><a href="https://r-pkgs.org/" class="external-link">R Packages</a></p>
 </div>
 </div>
   </div>
