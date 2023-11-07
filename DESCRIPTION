@@ -61,7 +61,8 @@ Imports:
     lubridate (>= 1.9.2),
     readr (>= 2.1.4),
     tibble (>= 3.2.1),
-    utils (>= 4.2.1)
+    utils (>= 4.2.1),
+    lifecycle
 Suggests:
     testthat (>= 3.0.4),
     markdown (>= 1.6),
@@ -69,3 +70,4 @@ Suggests:
     rmarkdown
 Remotes: 
     OB7-IRD/codama
+Roxygen: list(markdown = TRUE)

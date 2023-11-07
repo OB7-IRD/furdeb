@@ -1,10 +1,10 @@
 ---
-title: "Package creation, maintenance and distribution: from development to lifecycle"
+title: "Package maintenance, management and distribution: from development to lifecycle"
 output: rmarkdown::html_vignette
 description: |
   Description methodology, good practicies and lifecycle package creation and management".
 vignette: |
-  %\VignetteIndexEntry{Package creation, maintenance and distribution: from development to lifecycle}
+  %\VignetteIndexEntry{Package maintenance, management and distribution: from development to lifecycle}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,62 +17,6 @@ knitr::opts_chunk$set(
 ```
 
 <div style="text-align: justify">
-
-# What is a R package and what I should create one?
-
-An R package is a collection of functions that are bundled together in a way that lets them be easily shared. Usually these functions are designed to work together to complete a specific task such as analysing a particular kind of data. Packages can take various forms during their life cycle. For example the structure you use when writing package code is not exactly the same as what will be installed by somebody else. While you don’t need to know about these forms in detail to create a package it is useful to be aware of them.
-
-Write a R package is the best way to distribute code and documentation. Even if you never intend to share your package it is useful to have a place to store your commonly used functions. You may have heard the advice that if you find yourself reusing code then you should turn it into a function so that you don’t have to keep rewriting it (along with other benefits). The same applies to functions. If you have some functions you reuse in different projects then it probably makes sense to put those in a package. It’s a bit more effort now but it will save you a lot of time in the long run.
-
-Today, it's very easier to build a package and you will see that a lot of support are available to doing that. In simple work, you have packages for writing packages! (we're almost there Mr Cameron, but they won't call themselves terminators). The two main packages are [devtools](https://devtools.r-lib.org/) and [usethis](https://usethis.r-lib.org/). As you might gather from the name `devtools` contains functions that will help with development tasks such as checking, building and installing packages. The `usethis` package contains a range of templates and handy functions for making life easier, many of which were originally in devtools. All of the core parts of package development can be performed in other ways such as typing commands on the command line or clicking buttons in RStudio but we choose to use these packages because they provide a consistent workflow with sensible defaults. Through this article, you will find other useful package, like [roxygen2](https://roxygen2.r-lib.org/) for the documentation generation, [testthat](https://testthat.r-lib.org/) or [knitr](https://combine-australia.github.io/r-pkg-dev/introduction.html) for building vignettes.
-
-# Package skeleton creation
-
-To do
-
-# Dependencies
-
-Using functions from other packages can save you time and effort in development but it might make it more difficult to maintain your package. Deciding which packages (and how many) to depend on is a difficult and philosophical choice. Some things you might want to consider before depending on a package are:
-
-* How much of the functionality of the package do you want to use?
-* Could you easily reproduce that functionality?
-* How well maintained is the package?
-* How often is it updated? Packages that change a lot are more likely to break your code.
-* How many dependencies of it’s own does that package have?
-* Are you users likely to have the package installed already?
-
-When it's clear in your mind that the best solution is to use function(s) from other packages, you have to specify in your package what kind of dependency you have. There are three main types of dependencies:
-
-* `imports` - this means that we use functions from these packages and they must be installed when our pacakge is installed.
-* `suggests` - these are packages that we use in developing our package (such as [testthat](https://testthat.r-lib.org/)) or packages that provide some additional, optional functionality. These packages aren't usually installed and you need to do a check before using them.
-* `depends` - shouldn’t usually be used unless your package closely complements another package. For example, depends is necessary is if you package mainly operates on an object defined by another package.
-
-To declare a dependency, the best way is to use the function [use_package](https://usethis.r-lib.org/reference/use_package.html). In practice, we advise advice to an optionally argument of the function, min_version, which specify what is the minimum version of the package that you have to install, according to the version that you have on your computer. With that, you reduce the risk of incompatibility when you share your package to other people.
-
-```{r use_package, eval=FALSE, include=TRUE}
-# if you want to add a package present on the CRAN
-usethis::use_package(package = "package_name",
-                     type = "Imports",
-                     min_version = TRUE)
-# if you wan to add a package from an in-development package, from a Git repository for example
-usethis::use_dev_package(package = "package_name",
-                         type = "Imports",
-                         remote = "remote_path")
-# for the remote syntax check the documentation here: https://remotes.r-lib.org/articles/dependencies.html
-```
-
-When you add a dependency through this process you should have a message like that:
-
-```{r message use_package, eval=FALSE, include=TRUE}
-Refer to functions with `package_name::fun()`
-```
-
-In our code you have two solutions:
-
-* when you call a function from another package, call with the syntax `package_name::function_name()`
-* write the call of the function without package_name:: and add in NAMESPACE file the line `importFrom(package_name,function_name)`. You can add this line by hand in theory, but it's highly recommended to use the documentation generation of roxygen2 with the syntax `#' @importFrom package_name function_name` (take a look to the section X.X dedicates to the documentation generation). If a function has the same name in different packages, use the first codification to avoid any mistake.
-
-If the function associated to the explanation above appear several time in our package, you can only import it once. It doesn’t matter where we put the `@importFrom` line (or how many times) it will still be added to `NAMESPACE`. This means we can put all import in a central location. The advantage of this is that they only appear once and are all in one place but it makes it harder to know which of our functions have which imports and remove them if they are no longer needed. Which approach you take is up to you.
 
 # Documentation
 
@@ -193,6 +137,50 @@ devtools::test()
 
 If you want to see what parts of your code need testing you can run the `devtools::test_coverage()` function (you might need to install the `DT` package first). This function uses the `covr` package to make a report showing which lines of your code are covered by tests.
 
+# Dependencies
+
+Using functions from other packages can save you time and effort in development but it might make it more difficult to maintain your package. Deciding which packages (and how many) to depend on is a difficult and philosophical choice. Some things you might want to consider before depending on a package are:
+
+* How much of the functionality of the package do you want to use?
+* Could you easily reproduce that functionality?
+* How well maintained is the package?
+* How often is it updated? Packages that change a lot are more likely to break your code.
+* How many dependencies of it’s own does that package have?
+* Are you users likely to have the package installed already?
+
+When it's clear in your mind that the best solution is to use function(s) from other packages, you have to specify in your package what kind of dependency you have. There are three main types of dependencies:
+
+* `imports` - this means that we use functions from these packages and they must be installed when our pacakge is installed.
+* `suggests` - these are packages that we use in developing our package (such as [testthat](https://testthat.r-lib.org/)) or packages that provide some additional, optional functionality. These packages aren't usually installed and you need to do a check before using them.
+* `depends` - shouldn’t usually be used unless your package closely complements another package. For example, depends is necessary is if you package mainly operates on an object defined by another package.
+
+To declare a dependency, the best way is to use the function [use_package](https://usethis.r-lib.org/reference/use_package.html). In practice, we advise advice to an optionally argument of the function, min_version, which specify what is the minimum version of the package that you have to install, according to the version that you have on your computer. With that, you reduce the risk of incompatibility when you share your package to other people.
+
+```{r use_package, eval=FALSE, include=TRUE}
+# if you want to add a package present on the CRAN
+usethis::use_package(package = "package_name",
+                     type = "Imports",
+                     min_version = TRUE)
+# if you wan to add a package from an in-development package, from a Git repository for example
+usethis::use_dev_package(package = "package_name",
+                         type = "Imports",
+                         remote = "remote_path")
+# for the remote syntax check the documentation here: https://remotes.r-lib.org/articles/dependencies.html
+```
+
+When you add a dependency through this process you should have a message like that:
+
+```{r message use_package, eval=FALSE, include=TRUE}
+Refer to functions with `package_name::fun()`
+```
+
+In our code you have two solutions:
+
+* when you call a function from another package, call with the syntax `package_name::function_name()`
+* write the call of the function without package_name:: and add in NAMESPACE file the line `importFrom(package_name,function_name)`. You can add this line by hand in theory, but it's highly recommended to use the documentation generation of roxygen2 with the syntax `#' @importFrom package_name function_name` (take a look to the section X.X dedicates to the documentation generation). If a function has the same name in different packages, use the first codification to avoid any mistake.
+
+If the function associated to the explanation above appear several time in our package, you can only import it once. It doesn’t matter where we put the `@importFrom` line (or how many times) it will still be added to `NAMESPACE`. This means we can put all import in a central location. The advantage of this is that they only appear once and are all in one place but it makes it harder to know which of our functions have which imports and remove them if they are no longer needed. Which approach you take is up to you.
+
 # Lifecyle
 
 Managing the evolution of your package is one of the challenge that you will have to deal when you develop your package. Very few users complain when a package gains features or gets a bug fix. Instead, it's become more complicated when we begging to make some breaking changes, such as removing a function or narrowing the acceptable inputs for a function. Since change is inevitable and in most time benefit for your package, the best thing to do is to establish a clear communicate channel between all the users and help them to adapted to change.
@@ -232,7 +220,7 @@ All examples above are global case and of course some of your specification coul
 
 In addition, the figure below could help you when you will update your package version.
 
-<img style="display: block; margin-left: auto; margin-right: auto; width: 80%;" src='package_version_updating.png'/>
+<img style="display: block; margin-left: auto; margin-right: auto; width: 80%;" src='images/package_version_updating.png'/>
 
 In practice, the function `use_version()` (from the package `usethis`,  documentation associated [here](https://usethis.r-lib.org/reference/use_version.html)) can provide a clever support for updating your package version. If your package is associated with a Git repository, you can also prepare a commit for version updated.
 
@@ -272,6 +260,49 @@ You are free to structure your NEWS.md file like you want but we recommend at le
 * Code removed n°1
 * Code removed n°x
 ```
+
+### Lifecycle stages and supporting tools
+
+In the tidyverse universe, package evolution become more structured and deliberate over the years. The package [lifecycle](https://lifecycle.r-lib.org/) provide a succession of tools for support your work. There are tow major components:
+
+* Lifecycle stages, which can be applied at different levels. For example to an individual argument or function or to an entire package.
+* Conventions and functions to use when transitioning a function from one lifecycle stage to another. The deprecation process is the one that demands the most care.
+
+The figure below present to you the four primary stages of the tidyverse lifecycle.
+
+<img style="display: block; margin-left: auto; margin-right: auto; width: 55%;" src='images/lifecycle_stage.png'/>
+
+The four lifecycle stages are:
+
+* Stable: this is the default stage and signals that users should feel comfortable relying on a function or package. 
+* Experimental: this is appropriate when a function is first introduced and the maintainer reserves the right to change it without much of a deprecation process. This is the implied stage for any package with a major version of 0, i.e. that hasn’t had a 1.0.0 release yet.
+* Deprecated: this applies to functionality that is slated for removal. Initially, it still works, but triggers a deprecation warning with information about preferred alternatives. After a suitable amount of time and with an appropriate version change, such functions are typically removed.
+* Superseded: this is a softer version of deprecated, where legacy functionality is preserved as if in a time capsule. Superseded functions receive only minimal maintenance, such as critical bug fixes.
+
+#### Badges
+
+The lifecycle stage is often communicated through a badge. If you’d like to use lifecycle badges, call `usethis::use_lifecycle()` to do some one-time setup.
+
+Now, you have three options to use lifecycle badges:
+
+* For a function, include the badge in its `@description` block like that 
+```{r badgde function, eval=FALSE, include=TRUE}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' `function_name()` has been deprecated in favour of the new function `new_function_name()`
+```
+* for a function argument, include the badge in the `@param` tag
+```{r badgde argument, eval=FALSE, include=TRUE}
+#' @param parameter_name `r lifecycle::badge("deprecated")`. Use the `argument_name` argument instead.
+```
+* for you entire package (add in the `README` file)
+```{r badgde package, eval=FALSE, include=TRUE}
+usethis::use_lifecycle_badge()
+```
+
+#### Deprecating a function or an argument
+
+In addition to a lifecycle badge, 
 
 ## Code sharing websites
 

@@ -1,0 +1,55 @@
+---
+title: "Package creation: first development steps"
+output: rmarkdown::html_vignette
+description: |
+  Description methodology and good practicies for package creation".
+vignette: |
+  %\VignetteIndexEntry{Package creation: first development steps}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<div style="text-align: justify">
+
+# What is a R package and what I should create one?
+
+An R package is a collection of functions that are bundled together in a way that lets them be easily shared. Usually these functions are designed to work together to complete a specific task such as analysing a particular kind of data. Packages can take various forms during their life cycle. For example the structure you use when writing package code is not exactly the same as what will be installed by somebody else. While you don’t need to know about these forms in detail to create a package it is useful to be aware of them.
+
+Write a R package is the best way to distribute code and documentation. Even if you never intend to share your package it is useful to have a place to store your commonly used functions. You may have heard the advice that if you find yourself reusing code then you should turn it into a function so that you don’t have to keep rewriting it (along with other benefits). The same applies to functions. If you have some functions you reuse in different projects then it probably makes sense to put those in a package. It’s a bit more effort now but it will save you a lot of time in the long run.
+
+Today, it's very easier to build a package and you will see that a lot of support are available to doing that. In simple work, you have packages for writing packages! (we're almost there Mr Cameron, but they won't call themselves terminators). The two main packages are [devtools](https://devtools.r-lib.org/) and [usethis](https://usethis.r-lib.org/). As you might gather from the name `devtools` contains functions that will help with development tasks such as checking, building and installing packages. The `usethis` package contains a range of templates and handy functions for making life easier, many of which were originally in devtools. All of the core parts of package development can be performed in other ways such as typing commands on the command line or clicking buttons in RStudio but we choose to use these packages because they provide a consistent workflow with sensible defaults. Through this article, you will find other useful package, like [roxygen2](https://roxygen2.r-lib.org/) for the documentation generation, [testthat](https://testthat.r-lib.org/) or [knitr](https://combine-australia.github.io/r-pkg-dev/introduction.html) for building vignettes.
+
+# Package creation
+
+## Name of your package
+
+To do
+
+## Skeleton generation
+
+To do
+
+## Initialisation of the DESCRIPTION file
+
+To do
+
+# Adding and using function
+
+To do
+
+# References
+
+This vignette was made according to the guidelines and advises provided by several resources (many thanks to them !). You will find below the identification and links (if available) associated.
+
+[R package development workshop](https://combine-australia.github.io/r-pkg-dev/)
+
+[R Packages](https://r-pkgs.org/)
+
+</div>
