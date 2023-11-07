@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Latitude/longtitude - CWP manipulation function • furdeb</title>
+<title>Package creation: first development steps • furdeb</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -19,8 +19,8 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Latitude/longtitude - CWP manipulation function">
-<meta property="og:description" content='Description methodology and use of the function "latitude_longitude_cwp_manipulation".
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Package creation: first development steps">
+<meta property="og:description" content='Description methodology and good practicies for package creation".
 '>
 <meta property="og:image" content="https://ob7-ird.github.io/furdeb/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -100,12 +100,11 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Latitude/longtitude - CWP manipulation
-function</h1>
+      <h1 data-toc-skip>Package creation: first development steps</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/OB7-IRD/furdeb/blob/HEAD/vignettes/latitude_longitude_cwp_manipulation.Rmd" class="external-link"><code>vignettes/latitude_longitude_cwp_manipulation.Rmd</code></a></small>
-      <div class="hidden name"><code>latitude_longitude_cwp_manipulation.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/OB7-IRD/furdeb/blob/HEAD/vignettes/package_creation.Rmd" class="external-link"><code>vignettes/package_creation.Rmd</code></a></small>
+      <div class="hidden name"><code>package_creation.Rmd</code></div>
 
     </div>
 
@@ -113,62 +112,74 @@ function</h1>
     
 <div style="text-align: justify">
 <div class="section level2">
-<h2 id="global-aims">Global aims<a class="anchor" aria-label="anchor" href="#global-aims"></a>
+<h2 id="what-is-a-r-package-and-what-i-should-create-one">What is a R package and what I should create one?<a class="anchor" aria-label="anchor" href="#what-is-a-r-package-and-what-i-should-create-one"></a>
 </h2>
-<p>The function <a href="https://ob7-ird.github.io/furdeb/reference/latitude_longitude_cwp_manipulation.html">latitude_longitude_cwp_manipulation</a>
-was developed for manage and manipulate spatial coordinates with
-integration of several data conversion process. You can choose between
-two processes (through the argument “manipulation_process”).</p>
-<ul>
-<li><p>latitude_longitude_to_cwp: in that case you want to associate
-latitude and longitude data to a CWP.</p></li>
-<li><p>cwp_to_latitude_longitude: in that case you want to associate a
-CWP to combination of latitude and longitude.</p></li>
-</ul>
-<p>Globally, information and definition of CWP methodology and process
-was available on the <a href="https://www.fao.org/cwp-on-fishery-statistics/handbook/general-concepts/main-water-areas/en/#c737533" class="external-link">FAO
-website</a>. Furthermore, the function can manage and convert several
-kinds of data (for example conversion of latitude and longitude in
-degree/minute/seconde to decimal degree) and could use a different CWP
-scale grid. All the configuration process was explained below according
-to the two global processes cited above.</p>
-<p>Regarding the CWP grids (provide to the function through the argument
-“referential_grid_file_path”), you can find them into the <a href="https://data.apps.fao.org/map/catalog/srv/fre/catalog.search#/search?any=cwp" class="external-link">FAO
-Map Catalog</a>. We recommend using a furdeb call <a href="https://ob7-ird.github.io/furdeb/reference/fao_cwp_shape_manipulation.html">fao_cwp_shape_manipulation</a>
-the first time to optimise the shape file reading process on R and
-create for the second time a RData of the shape file.</p>
+<p>An R package is a collection of functions that are bundled together
+in a way that lets them be easily shared. Usually these functions are
+designed to work together to complete a specific task such as analysing
+a particular kind of data. Packages can take various forms during their
+life cycle. For example the structure you use when writing package code
+is not exactly the same as what will be installed by somebody else.
+While you don’t need to know about these forms in detail to create a
+package it is useful to be aware of them.</p>
+<p>Write a R package is the best way to distribute code and
+documentation. Even if you never intend to share your package it is
+useful to have a place to store your commonly used functions. You may
+have heard the advice that if you find yourself reusing code then you
+should turn it into a function so that you don’t have to keep rewriting
+it (along with other benefits). The same applies to functions. If you
+have some functions you reuse in different projects then it probably
+makes sense to put those in a package. It’s a bit more effort now but it
+will save you a lot of time in the long run.</p>
+<p>Today, it’s very easier to build a package and you will see that a
+lot of support are available to doing that. In simple work, you have
+packages for writing packages! (we’re almost there Mr Cameron, but they
+won’t call themselves terminators). The two main packages are <a href="https://devtools.r-lib.org/" class="external-link">devtools</a> and <a href="https://usethis.r-lib.org/" class="external-link">usethis</a>. As you might gather from
+the name <code>devtools</code> contains functions that will help with
+development tasks such as checking, building and installing packages.
+The <code>usethis</code> package contains a range of templates and handy
+functions for making life easier, many of which were originally in
+devtools. All of the core parts of package development can be performed
+in other ways such as typing commands on the command line or clicking
+buttons in RStudio but we choose to use these packages because they
+provide a consistent workflow with sensible defaults. Through this
+article, you will find other useful package, like <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a> for the documentation
+generation, <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> or <a href="https://combine-australia.github.io/r-pkg-dev/introduction.html" class="external-link">knitr</a>
+for building vignettes.</p>
 </div>
 <div class="section level2">
-<h2 id="latitudelongitude-to-cwp">Latitude/longitude to CWP<a class="anchor" aria-label="anchor" href="#latitudelongitude-to-cwp"></a>
+<h2 id="package-creation">Package creation<a class="anchor" aria-label="anchor" href="#package-creation"></a>
 </h2>
-<p>The aim of this process if to associate latitude and longitude data
-to a CWP. The global process is describe in the figure below.</p>
-<p><img style="display: block; margin-left: auto; margin-right: auto; width: 70%;" src="images/latitude_longitude_cwp_manipulation_process1.png"></p>
-<p>Some time, it happen that several CWP were associated to a single
-coordinate, for example when the position is located on the square grid
-line. When it appear, the function select the “best” CWP according to
-the following rules:</p>
-<ul>
-<li><p>if the squares are located in the same quadrant, the “best” CWP
-is the one closer to the position of latitude 0 and longitude 0. For the
-case of 4 squares concerned (the position associated is located on the
-square grid lines regarding latitude and longitude orientation) it’s
-easy to understand the selection. In the case of only 2 squares
-concerned (the position associated is located on the horizontal or
-vertical-square grid lines), the “best” CWP is the one closer to the
-Greenwich meridian or the equator.</p></li>
-<li><p>if the squares are located in several quadrant, the square
-associated with the first quadrant is the top priority, following by the
-second or the fourth.</p></li>
-</ul>
+<div class="section level3">
+<h3 id="name-of-your-package">Name of your package<a class="anchor" aria-label="anchor" href="#name-of-your-package"></a>
+</h3>
+<p>To do</p>
+</div>
+<div class="section level3">
+<h3 id="skeleton-generation">Skeleton generation<a class="anchor" aria-label="anchor" href="#skeleton-generation"></a>
+</h3>
+<p>To do</p>
+</div>
+<div class="section level3">
+<h3 id="initialisation-of-the-description-file">Initialisation of the DESCRIPTION file<a class="anchor" aria-label="anchor" href="#initialisation-of-the-description-file"></a>
+</h3>
+<p>To do</p>
+</div>
 </div>
 <div class="section level2">
-<h2 id="cwp-to-latitudelongitude">CWP to latitude/longitude<a class="anchor" aria-label="anchor" href="#cwp-to-latitudelongitude"></a>
+<h2 id="adding-and-using-function">Adding and using function<a class="anchor" aria-label="anchor" href="#adding-and-using-function"></a>
 </h2>
-<p>The aim of this process if to associate latitude and longitude data
-from a CWP. Just like before, the global process is describe in the
-figure below.</p>
-<p><img style="display: block; margin-left: auto; margin-right: auto; width: 70%;" src="images/latitude_longitude_cwp_manipulation_process2.png"></p>
+<p>To do</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>This vignette was made according to the guidelines and advises
+provided by several resources (many thanks to them !). You will find
+below the identification and links (if available) associated.</p>
+<p><a href="https://combine-australia.github.io/r-pkg-dev/" class="external-link">R package
+development workshop</a></p>
+<p><a href="https://r-pkgs.org/" class="external-link">R Packages</a></p>
 </div>
 </div>
   </div>
