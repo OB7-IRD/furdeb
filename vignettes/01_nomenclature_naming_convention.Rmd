@@ -1,0 +1,31 @@
+---
+title: "Nomenclature and naming convention"
+output: rmarkdown::html_vignette
+description: |
+  Description methodology and good practices for writing R scripts".
+vignette: |
+  %\VignetteIndexEntry{Nomenclature and naming convention}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<div style="text-align: justify">
+
+The present document regroups a list of rules and guidelines with the aim of proposing a standardised and common approach for writing R scripts. This proposal is the outcome of the global reflection of our teams associated with our specific thematic and subjects. Each point could be a balance between advantages and disadvantages and could be discussed related to each personal work. Don't hesitate to take what you like and don't forget that the best solution is the one which fit with your work.
+
+## Global nomenclature
+
+Regarding the aims of our packages, works and more globally our international collaborations, we only use English language for all our productions. Few processes could be coded in a different language but it's related to specific needs and can't be defined as a global approach. Furthermore, the use of the English limit  the use of special characters, like the accented letters (see below details on special characters).
+
+Concerning the question of special characters, the best solution is to avoid them. In many case, using this kind of character not break your code, but in several cases you could have some abnormal processes or error due to their utilisation. Globally, a character that does not fall under the category of the 26 letters of the Roman alpha or number from 0 to 9 is called a special character. Several exception will be described below, but directly in relation to a specific use and bounded by a strict context.
+
+In addition to 
+
+</div>
