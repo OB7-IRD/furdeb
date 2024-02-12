@@ -2,10 +2,11 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  latitude_longitude_cwp_manipulation: latitude_longitude_cwp_manipulation.html
-  package_creation: package_creation.html
-  package_maintenance_management_distribution: package_maintenance_management_distribution.html
-last_built: 2023-11-07T09:09Z
+  01_nomenclature_naming_convention: 01_nomenclature_naming_convention.html
+  02_package_creation: 02_package_creation.html
+  03_latitude_longitude_cwp_manipulation: 03_latitude_longitude_cwp_manipulation.html
+  03_package_maintenance_management_distribution: 03_package_maintenance_management_distribution.html
+last_built: 2024-02-12T15:06Z
 urls:
   reference: https://ob7-ird.github.io/furdeb/reference
   article: https://ob7-ird.github.io/furdeb/articles
