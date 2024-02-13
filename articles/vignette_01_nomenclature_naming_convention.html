@@ -140,7 +140,87 @@ under the category of the 26 letters of the Roman alpha or number from 0
 to 9 is called a special character. Several exception will be described
 below, but directly in relation to a specific use and bounded by a
 strict context.</p>
-<p>In addition to</p>
+<p>In a global way, we also suggest using a maximum of 30 characters for
+item naming. It’s possible to use more if it’s really necessary but keep
+that possibility as an exceptional one. Furterhmore, we choose to use
+the snake case typographical convention. That consisting of writing sets
+of words in lower case, separated by underscores (space character is
+considered as a special character and should be avoided). In addition,
+uppercase should not be used, according to the guideline describe so
+far. Furthermore, naming of items should represent and explain the
+subject and the context associated, without the necessary of the user to
+go deeper into the code or the process. For example, in the case of a
+sql file name or a function name, the user must understand what is the
+purposes associated without open the file or go inside the function
+process. In direct relation, avoid much as possible acronym or
+abbreviation in the naming (your shortening have maybe not the same
+signification for the others). At least, avoid as possible coordinating
+conjunctions (like for example “and” or “or”) or prepositions (for
+example “to”, “from”, “with”, ect.). Your name will be shorter and in
+the case majority of case you won’t lose out on understanding.</p>
+<p>Furthermore, we propose to use the plural when the item associated
+“could” return or include several information. This suggestion will be
+explain in detail through the dedicate section below and the examples
+associated.</p>
+<p>To conclude, avoid any use of R reserved words. Theses terms are
+internal used by R, like “TRUE”, “FALSE”, “Inf”, “c”, “max”, ect.</p>
+<div class="section level3">
+<h3 id="plural-using">Plural using<a class="anchor" aria-label="anchor" href="#plural-using"></a>
+</h3>
+<p>Like explain before, plural in the naming has to be used when the
+item associated should contain or return at the end several information.
+In the same guideline that a name should indicate, much as possible, the
+purposes and the aims associated, used plural form give a strong
+indication for the users of what is expected. If you have a doubt, a
+good solution is to verbalize what you trying to do and what is your
+output(s).</p>
+<p>As a concrete example, we would like to name a function argument
+which can contain several fleets codes. Here it’s clear that we can’t
+use a singular writing, like “fleet_code”, because if you see this
+argument, you’re first intuition could be to provide a single value
+instead of several. So the best solution is to use a plural form. One
+logic name candidate could be “fleets_codes” but it seems strange to use
+this kind of formulation, especially if you have some other experiences
+in coding. Other candidates “fleets_code” is worst because if you are
+trying to translate that into a sentence, users may think that you can
+provide only one item to this argument. At least, another candidate
+could be “fleet_codes”. Here plural of code express clearly that you can
+provide several codes, and in fact the fleet as singular form is not
+troubling because we can translate that into you can provide several
+codes, referring to one fleet each. So here the best solution could be
+to use “fleet_codes” as the name argument. The other proposition
+“fleets_codes” is not wrong in terms of what we would like to do, but
+could maybe be problematic if we are trying to generalise the thing. For
+example, if we are trying to apply this reflexion on other arguments
+like referring to several vessels types codes (with the same guideline
+as before), it’s better to have “vessel_type_codes” rather as
+“vessels_types_codes” or “vessel_types_codes” (you lower the level of
+ambiguity or personal interpretation).</p>
+<p>In any case, this example shows that personal interpretation (or even
+different) could bring complexity if you try to generalise the naming
+process. In fact, in the majority of cases it’s easier to find the best
+solution (for you) and it would very clear. If you have any doubt, a
+good solution is to open the discussion to your teams and find the best
+solution through a consensus way.</p>
+<p>By extension, in case of an application to R data.frame (or
+equivalent) or in the case of a sql query, you can use singular form for
+columns naming, expected is the content of each cell is not a unique
+element (a table or a list for example).</p>
+</div>
+<div class="section level3">
+<h3 id="sql-query-specifications">SQL query specifications<a class="anchor" aria-label="anchor" href="#sql-query-specifications"></a>
+</h3>
+<p>In case of SQL query all the previous advises should be apply. But,
+due to the strength link of a SQL query and a database, several
+additional guidelines should be follow. Focusing on the name of the SQL
+query file, the first word should be global database name associated. By
+global, and in the case of our work, that mean don’t use the specific
+name of the database (like “observe_test”) but more the global database
+schema (like “observe”).</p>
+</div>
+<div class="section level3">
+<h3 id="section"></h3>
+</div>
 </div>
 </div>
   </div>
