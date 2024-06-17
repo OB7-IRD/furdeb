@@ -170,8 +170,8 @@ usethis::use_dev_package(package = "package_name",
 
 When you add a dependency through this process you should have a message like that:
 
-```{r message use_package, eval=FALSE, include=TRUE}
-Refer to functions with `package_name::fun()`
+```{r message use_package, eval=TRUE, include=TRUE, echo=FALSE}
+message("Refer to functions with `package_name::fun()`")
 ```
 
 In our code you have two solutions:
@@ -245,20 +245,20 @@ usethis::use_news_md()
 
 You are free to structure your NEWS.md file like you want but we recommend at least to have this kind of structure (use only section useful for your release/dev version):
 
-```{r news file template, eval=FALSE, include=TRUE}
+```{r news file template, eval=FALSE, include=TRUE, echo=TRUE}
 # package_name major.minor.patch.dev - year-month-day
 
 ## Added
-* Code added n°1
-* Code added n°x
+#Code added n°1
+# Code added n°x
 
 ## Changed
-* Code changed n°1
-* Code changed n°x
+# Code changed n°1
+# Code changed n°x
 
 ## Removed
-* Code removed n°1
-* Code removed n°x
+# Code removed n°1
+# Code removed n°x
 ```
 
 ### Lifecycle stages and supporting tools

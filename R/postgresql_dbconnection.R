@@ -7,9 +7,6 @@
 #' @param db_host {\link[base]{character}} expected. Host adress of the database.
 #' @param db_port {\link[base]{integer}} expected. Identification of the port.
 #' @return The function return a list.
-#' @importFrom RPostgreSQL dbConnect
-#' @importFrom DBI dbDriver
-#' @importFrom codama r_type_checking
 #' @export
 postgresql_dbconnection <- function(db_user,
                                     db_password,
@@ -17,67 +14,37 @@ postgresql_dbconnection <- function(db_user,
                                     db_host,
                                     db_port) {
   # 1 - Arguments verification ----
-  # db_user argument checking
-  if (codama::r_type_checking(r_object = db_user,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = db_user,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # db_password argument checking
-  if (codama::r_type_checking(r_object = db_password,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = db_password,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # db_dbname argument checking
-  if (codama::r_type_checking(r_object = db_dbname,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = db_dbname,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # db_host argument checking
-  if (codama::r_type_checking(r_object = db_host,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = db_host,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # db_port argument checking
+  codama::r_type_checking(r_object = db_user,
+                          type = "character",
+                          length = 1L)
+  codama::r_type_checking(r_object = db_password,
+                          type = "character",
+                          length = 1L)
+  codama::r_type_checking(r_object = db_dbname,
+                          type = "character",
+                          length = 1L)
+  codama::r_type_checking(r_object = db_host,
+                          type = "character",
+                          length = 1L)
   if ((codama::r_type_checking(r_object = db_port,
                                type = "integer",
                                length = 1L,
                                output = "logical")
-       | codama::r_type_checking(r_object = db_port,
-                                 type = "numeric",
-                                 length = 1L,
-                                 output = "logical")) != TRUE) {
-    return(cat(format(x = Sys.time(),
-                      "%Y-%m-%d %H:%M:%S"),
-               " - Error, invalid \"db_port\", type integer or numeric expected.\n"))
+       || codama::r_type_checking(r_object = db_port,
+                                  type = "numeric",
+                                  length = 1L,
+                                  output = "logical")) != TRUE) {
+    stop(format(x = Sys.time(),
+                "%Y-%m-%d %H:%M:%S"),
+         " - Invalid \"db_port\", type integer or numeric expected.")
   }
   # 2 - Global process ----
-  # connection to PostgreSQL database
-  postgresql_db_connection <- list("database_name" <- db_dbname,
-                                   "connection_information" <- RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
-                                                                                      user = db_user,
-                                                                                      password = db_password,
-                                                                                      dbname = db_dbname,
-                                                                                      host = db_host,
-                                                                                      port = as.integer(x = db_port)))
+  postgresql_db_connection <- list("database_name" = db_dbname,
+                                   "connection_information" = RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
+                                                                                     user = db_user,
+                                                                                     password = db_password,
+                                                                                     dbname = db_dbname,
+                                                                                     host = db_host,
+                                                                                     port = as.integer(x = db_port)))
   return(postgresql_db_connection)
 }

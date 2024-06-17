@@ -11,7 +11,6 @@
 #' @param eval_promises {\link[base]{logical}} expected. Should objects which are promises be forced before saving?
 #' @details
 #' Under windows OS utilisation, download through this link (https://sourceforge.net/projects/pigz-for-windows/) the pigz executable file and place it in the System32 directory. The executable file is also available in the package directory (use the function system.file("pigz.zip", package = "furdeb") for located it).
-#' @importFrom parallel detectCores
 #' @export
 save_pigz <- function(...,
                       list = character(),
@@ -23,9 +22,10 @@ save_pigz <- function(...,
                       eval_promises = TRUE) {
   # 1 - Arguments verification ----
   if (.Platform$OS.type != "windows") {
-    return("function not developed yet for other systems than windows\ntake a look here for move forward https://github.com/barkasn/fastSave\n")
+    stop(format(x = Sys.time(),
+                "%Y-%m-%d %H:%M:%S"),
+         " - Function not developed yet for other systems than windows. Take a look here for move forward https://github.com/barkasn/fastSave.")
   }
-  # cores_utilisation argument checking
   if ((codama::r_type_checking(r_object = cores_utilisation,
                                type = "character",
                                length = 1L,
@@ -36,31 +36,17 @@ save_pigz <- function(...,
                                    length = 1L,
                                    output = "logical")
            && (cores_utilisation > 0
-               & cores_utilisation <= 1))) != TRUE) {
-    return(format(x = Sys.time(),
-                  "%Y-%m-%d %H:%M:%S"),
-           " - Error, invalid \"cores_utilisation\" argument.\n")
+               && cores_utilisation <= 1))) != TRUE) {
+    stop(format(x = Sys.time(),
+                "%Y-%m-%d %H:%M:%S"),
+         " - Invalid \"cores_utilisation\" argument.")
   }
-  # output_file_path argument checking
-  if (codama::r_type_checking(r_object = output_file_path,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = output_file_path,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # compression_level argument checking
-  if (codama::r_type_checking(r_object = compression_level,
-                              type = "integer",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = compression_level,
-                                   type = "integer",
-                                   length = 1L,
-                                   output = "message"))
-  }
+  codama::r_type_checking(r_object = output_file_path,
+                          type = "character",
+                          length = 1L)
+  codama::r_type_checking(r_object = compression_level,
+                          type = "integer",
+                          length = 1L)
   # 2 - Global process ----
   if (cores_utilisation == "auto") {
     cores_number <- parallel::detectCores() - 1
@@ -72,7 +58,7 @@ save_pigz <- function(...,
       && length(x = names) == 0) {
     stop(format(x = Sys.time(),
                 "%Y-%m-%d %H:%M:%S"),
-         " - Error, nothing specified to be saved.\n")
+         " - Nothing specified to be saved.")
   }
   list <- c(list,
             names)

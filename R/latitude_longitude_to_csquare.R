@@ -27,7 +27,6 @@
 #'                            grid_square = 0.5,
 #'                            latitude_name = "latitude",
 #'                            longitude_name = "longitude")}
-#' @importFrom codama r_type_checking
 #' @export
 latitude_longitude_to_csquare <- function(data,
                                           grid_square,
@@ -35,46 +34,20 @@ latitude_longitude_to_csquare <- function(data,
                                           longitude_name,
                                           boundary_ajustement_factor = 0.000001) {
   # 1 - Arguments verification ----
-  # data argument checking
   if (missing(x = data)) {
-    return(format(x = Sys.time(),
-                  "%Y-%m-%d %H:%M:%S"),
-           " - Error, invalid \"data\" argument.\n")
+    stop(format(x = Sys.time(),
+                "%Y-%m-%d %H:%M:%S"),
+         " - Invalid \"data\" argument.")
   }
-  # grid_square argument checking
-  if (codama::r_type_checking(r_object = grid_square,
-                              type = "numeric",
-                              allowed_value = c(10, 5, 1, 0.5, 0.1, 0.05, 0.01),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = grid_square,
-                                   type = "numeric",
-                                   allowed_value = c(10, 5, 1, 0.5, 0.1, 0.05, 0.01),
-                                   output = "message"))
-  }
-  # latitude_name argument checking
-  if (codama::r_type_checking(r_object = latitude_name,
-                              type = "character",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = latitude_name,
-                                   type = "character",
-                                   output = "message"))
-  }
-  # longitude_name argument checking
-  if (codama::r_type_checking(r_object = longitude_name,
-                              type = "character",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = longitude_name,
-                                   type = "character",
-                                   output = "message"))
-  }
-  # boundary_ajustement_factor argument checking
-  if (codama::r_type_checking(r_object = boundary_ajustement_factor,
-                              type = "numeric",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = boundary_ajustement_factor,
-                                   type = "numeric",
-                                   output = "message"))
-  }
+  codama::r_type_checking(r_object = grid_square,
+                          type = "numeric",
+                          allowed_value = c(10, 5, 1, 0.5, 0.1, 0.05, 0.01))
+  codama::r_type_checking(r_object = latitude_name,
+                          type = "character")
+  codama::r_type_checking(r_object = longitude_name,
+                          type = "character")
+  codama::r_type_checking(r_object = boundary_ajustement_factor,
+                          type = "numeric")
   # 2 - Process ----
   initial_length <- dim(x = data)[2]
   data <- as.data.frame(data)

@@ -10,14 +10,6 @@
 #' @param export_path_directory {\link[base]{character}} expected. Optional. By default NULL. Directory path associated for the export (in csv).
 #' @return The function return a tibble.
 #' @export
-#' @importFrom codama r_type_checking file_path_checking
-#' @importFrom dplyr last symdiff
-#' @importFrom readr read_delim problems
-#' @importFrom stringr str_extract_all str_which str_extract
-#' @importFrom DBI sqlInterpolate SQL dbGetQuery
-#' @importFrom lubridate is.Date
-#' @importFrom tibble as_tibble
-#' @importFrom utils write.csv2
 data_extraction <- function(type,
                             file_path,
                             database_connection = NULL,
@@ -29,86 +21,31 @@ data_extraction <- function(type,
                  format = "%Y-%m-%d %H:%M:%S"),
           " - Start process of data extraction.",
           sep = "")
-  # 0 - Local binding global variables ----
-
   # 1 - Arguments verifications ----
   message(format(x = Sys.time(),
                  format = "%Y-%m-%d %H:%M:%S"),
           " - Start arguments verifications.",
           sep = "")
-  # type verification
-  if (codama::r_type_checking(r_object = type,
+  codama::r_type_checking(r_object = type,
                               length = 1L,
                               type = "character",
                               allowed_value = c("csv_txt",
-                                                "database"),
-                              output = "logical") != TRUE) {
-    codama::r_type_checking(r_object = type,
-                            length = 1L,
-                            type = "character",
-                            allowed_value = c("csv",
-                                              "database"),
-                            output = "message")
-  }
-  # file_path verification
-  if (codama::file_path_checking(file_path = file_path,
+                                                "database"))
+  codama::file_path_checking(file_path = file_path,
                                  extension = c("csv",
                                                "sql",
-                                               "txt"),
-                                 output = "logical") != TRUE) {
-    codama::file_path_checking(file_path = file_path,
-                               extension = c("csv",
-                                             "sql",
-                                             "txt"),
-                               output = "message")
-  }
-  # database_connection verification
-  if ((! is.null(x = database_connection))
-      && codama::r_type_checking(r_object = database_connection,
+                                               "txt"))
+  codama::r_type_checking(r_object = database_connection,
                                  length = 2L,
-                                 type = "list",
-                                 output = "logical") != TRUE) {
-    codama::r_type_checking(r_object = database_connection,
-                            length = 2L,
-                            type = "list",
-                            output = "message")
-  }
-  # anchor verification
-  if ((! is.null(x = anchor))
-      && codama::r_type_checking(r_object = anchor,
-                                 type = "list",
-                                 output = "logical") != TRUE) {
-    codama::r_type_checking(r_object = anchor,
-                            type = "character",
-                            output = "message")
-  }
-  # column_name verification
-  if ((! is.null(x = column_name))
-      && codama::r_type_checking(r_object = column_name,
-                                 type = "character",
-                                 output = "logical") != TRUE) {
-    codama::r_type_checking(r_object = column_name,
-                            type = "character",
-                            output = "message")
-  }
-  # column_type verification
-  if ((! is.null(x = column_type))
-      && codama::r_type_checking(r_object = column_type,
-                                 type = "character",
-                                 output = "logical") != TRUE) {
-    codama::r_type_checking(r_object = column_type,
-                            type = "character",
-                            output = "message")
-  }
-  # export_path_directory verification
-  if ((! is.null(x = export_path_directory))
-      && codama::r_type_checking(r_object = export_path_directory,
-                                 type = "character",
-                                 output = "logical") != TRUE) {
-    codama::r_type_checking(r_object = export_path_directory,
-                            type = "character",
-                            output = "message")
-  }
+                                 type = "list")
+  codama::r_type_checking(r_object = anchor,
+                                 type = "list")
+  codama::r_type_checking(r_object = column_name,
+                                 type = "character")
+  codama::r_type_checking(r_object = column_type,
+                                 type = "character")
+  codama::r_type_checking(r_object = export_path_directory,
+                                 type = "character")
   message(format(x = Sys.time(),
                  format = "%Y-%m-%d %H:%M:%S"),
           " - Successful arguments verifications.",
@@ -125,12 +62,12 @@ data_extraction <- function(type,
                                                split = "[.]"))),
            "\" not valid for type \"",
            type,
-           "\".\n",
+           "\".",
            sep = "")
     }
     if ((! is.null(x = column_name)
-         & ! is.null(x = column_type))
-        | (! is.null(x = column_name))) {
+         && ! is.null(x = column_type))
+        || (! is.null(x = column_name))) {
       tryCatch(expr = data_extracted <- readr::read_delim(file = file_path,
                                                           show_col_types = FALSE,
                                                           col_names = column_name,
@@ -158,7 +95,7 @@ data_extraction <- function(type,
                                                          col_types = as.list(column_type))))
                  stop(format(x = Sys.time(),
                              format = "%Y-%m-%d %H:%M:%S"),
-                      " - One or more parsing issues, check details above",
+                      " - One or more parsing issues, check details above.",
                       sep = "")
                })
     } else {
@@ -169,15 +106,15 @@ data_extraction <- function(type,
                                                          show_col_types = FALSE)))
                  stop(format(x = Sys.time(),
                              format = "%Y-%m-%d %H:%M:%S"),
-                      " - One or more parsing issues, check details above",
+                      " - One or more parsing issues, check details above.",
                       sep = "")
                })
     }
     if (! is.null(x = column_name)
         && (length(x = data_extracted) != length(x = column_name))) {
-      message(format(x = Sys.time(),
+      warning(format(x = Sys.time(),
                      format = "%Y-%m-%d %H:%M:%S"),
-              " - Warning, the number of columns provided in the \"column_name\" argument is not equal to the number of variables available in the input file.",
+              " - The number of columns provided in the \"column_name\" argument is not equal to the number of variables available in the input file.",
               sep = "")
     }
     data_extracted_final <- data_extracted
@@ -192,17 +129,17 @@ data_extraction <- function(type,
                                     y = names(anchor))) != 0) {
         stop(format(x = Sys.time(),
                     format = "%Y-%m-%d %H:%M:%S"),
-             " - Value(s) in the \"anchor\" argument is different from anchor(s) in the sql query.\n",
+             " - Value(s) in the \"anchor\" argument is different from anchor(s) in the sql query.",
              sep = "")
       }
       sql_interpolate_query <- paste0("DBI::sqlInterpolate(conn = database_connection[[2]], sql = database_query, ")
       for (anchor_id in names(x = anchor)) {
         if (is.integer(x = anchor[[anchor_id]])
-            | is.numeric(x = anchor[[anchor_id]])) {
+            || is.numeric(x = anchor[[anchor_id]])) {
           anchor[[anchor_id]] <- DBI::SQL(paste0(anchor[[anchor_id]],
                                                  collapse = ", "))
         } else if (is.character(x = anchor[[anchor_id]])
-                   | lubridate::is.Date(x = anchor[[anchor_id]])) {
+                   || lubridate::is.Date(x = anchor[[anchor_id]])) {
           anchor[[anchor_id]] <- DBI::SQL(paste0("'",
                                                  paste0(anchor[[anchor_id]],
                                                         collapse = "', '"),
@@ -216,7 +153,7 @@ data_extraction <- function(type,
                "\" not integrated in the process yet.\n",
                "Check the anchor \"",
                anchor_id,
-               "\".\n",
+               "\".",
                sep = "")
         }
 

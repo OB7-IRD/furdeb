@@ -25,10 +25,6 @@
 #' }
 #' Specificity for fao fishing area parameters: all the items above your specification (thus contain it at higher levels) will be added in the output. For example, if you select "subarea", you will also have the information about the major area concerning.
 #' If you want more information visit http://www.fao.org/fishery/area/search/en
-#' @importFrom dplyr last inner_join rename
-#' @importFrom sf read_sf st_is_valid st_make_valid st_as_sf st_join st_intersects st_drop_geometry
-#' @importFrom utils read.csv2
-#' @importFrom codama r_type_checking file_path_checking
 #' @export
 marine_area_overlay <- function(data,
                                 overlay_expected,
@@ -51,158 +47,71 @@ marine_area_overlay <- function(data,
   ICESNAME <- NULL
   sub_region <- NULL
   # 1 - Arguments verifications ----
-  # data argument checking
-  if (missing(data)) {
-    stop(format(x = Sys.time(),
-                "%Y-%m-%d %H:%M:%S"),
-         " invalid \"data\" argument\n")
-  }
-  # overlay_expected checking
-  if (codama::r_type_checking(r_object = overlay_expected,
-                              type = "character",
-                              length = 1L,
-                              allowed_value = c("fao_area",
-                                                "eez_area",
-                                                "ices_area",
-                                                "fao_eez_area",
-                                                "all"),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = overlay_expected,
-                                   type = "character",
-                                   length = 1L,
-                                   allowed_value = c("fao_area",
-                                                     "eez_area",
-                                                     "ices_area",
-                                                     "fao_eez_area",
-                                                     "all"),
-                                   output = "message"))
-  }
-  # longitude_name checking
-  if (codama::r_type_checking(r_object = longitude_name,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = longitude_name,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # latitude_name checking
-  if (codama::r_type_checking(r_object = latitude_name,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = latitude_name,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # fao_area_file_path checking
-  if ((! is.null(x = fao_area_file_path))
-      && codama::file_path_checking(file_path =  fao_area_file_path,
-                                    extension = c("Rdata",
-                                                  "RData",
-                                                  "shp"),
-                                    output = "logical") != TRUE) {
-    return(codama::file_path_checking(file_path =  fao_area_file_path,
-                                      extension = c("Rdata",
-                                                    "RData",
-                                                    "shp"),
-                                      output = "message"))
-  }
-  # fao_overlay_level checking
-  if ((! is.null(x = fao_overlay_level))
-      && codama::r_type_checking(r_object = fao_overlay_level,
-                                 type = "character",
-                                 length = 1L,
-                                 allowed_value = c("ocean",
-                                                   "major",
-                                                   "subarea",
-                                                   "division",
-                                                   "subdivision",
-                                                   "subunit"),
-                                 output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = fao_overlay_level,
-                                   type = "character",
-                                   length = 1L,
-                                   allowed_value = c("ocean",
-                                                     "major",
-                                                     "subarea",
-                                                     "division",
-                                                     "subdivision",
-                                                     "subunit"),
-                                   output = "message"))
-  }
-  # auto_selection_fao checking
-  if (codama::r_type_checking(r_object = auto_selection_fao,
-                              type = "logical",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = auto_selection_fao,
-                                   type = "logical",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # eez_area_file_path checking
-  if ((! is.null(x = eez_area_file_path))
-      && codama::file_path_checking(file_path =  eez_area_file_path,
-                                    extension = c("Rdata",
-                                                  "RData",
-                                                  "shp"),
-                                    output = "logical") != TRUE) {
-    return(codama::file_path_checking(file_path =  eez_area_file_path,
-                                      extension = c("Rdata",
-                                                    "RData",
-                                                    "shp"),
-                                      output = "message"))
-  }
-  # for_fdi_use checking
-  if ((! is.null(x = for_fdi_use))
-      && codama::r_type_checking(r_object = for_fdi_use,
-                                 type = "logical",
-                                 length = 1L,
-                                 output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = for_fdi_use,
-                                   type = "logical",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  # ices_area_file_path checking
-  if ((! is.null(x = ices_area_file_path))
-      && codama::file_path_checking(file_path =  ices_area_file_path,
-                                    extension = c("Rdata",
-                                                  "RData",
-                                                  "shp"),
-                                    output = "logical") != TRUE) {
-    return(codama::file_path_checking(file_path =  ices_area_file_path,
-                                      extension = c("Rdata",
-                                                    "RData",
-                                                    "shp"),
-                                      output = "message"))
-  }
-  # silent checking
-  if (codama::r_type_checking(r_object = silent,
-                              type = "logical",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = silent,
-                                   type = "logical",
-                                   length = 1L,
-                                   output = "message"))
-  }
+  codama::r_type_checking(r_object = data,
+                          type = "data.frame",
+                          length = 1L,
+                          allowed_value = c("fao_area",
+                                            "eez_area",
+                                            "ices_area",
+                                            "fao_eez_area",
+                                            "all"))
+  codama::r_type_checking(r_object = overlay_expected,
+                          type = "character",
+                          length = 1L,
+                          allowed_value = c("fao_area",
+                                            "eez_area",
+                                            "ices_area",
+                                            "fao_eez_area",
+                                            "all"))
+  codama::r_type_checking(r_object = longitude_name,
+                          type = "character",
+                          length = 1L)
+  codama::r_type_checking(r_object = latitude_name,
+                          type = "character",
+                          length = 1L)
+  codama::file_path_checking(file_path =  fao_area_file_path,
+                             extension = c("Rdata",
+                                           "RData",
+                                           "shp"))
+  codama::r_type_checking(r_object = fao_overlay_level,
+                          type = "character",
+                          length = 1L,
+                          allowed_value = c("ocean",
+                                            "major",
+                                            "subarea",
+                                            "division",
+                                            "subdivision",
+                                            "subunit"))
+  codama::r_type_checking(r_object = auto_selection_fao,
+                          type = "logical",
+                          length = 1L)
+  codama::file_path_checking(file_path =  eez_area_file_path,
+                             extension = c("Rdata",
+                                           "RData",
+                                           "shp"))
+  codama::r_type_checking(r_object = for_fdi_use,
+                          type = "logical",
+                          length = 1L)
+  codama::file_path_checking(file_path =  ices_area_file_path,
+                             extension = c("Rdata",
+                                           "RData",
+                                           "shp"))
+  codama::r_type_checking(r_object = silent,
+                          type = "logical",
+                          length = 1L)
   if (silent == FALSE) {
-    cat("Be careful!\n",
-        "You're spatial coordinates have to be in WGS84 projection\n",
-        "Be patient! The function could be long\n")
+    message("Be careful!. ",
+            "You're spatial coordinates have to be in WGS84 projection. ",
+            "Be patient! The function could be long.")
   }
   # shapes imports ----
   # fao area
   if (overlay_expected %in% c("fao_area",
                               "fao_eez_area",
                               "all")
-      | (overlay_expected == "eez_area"
-         & (! is.null(for_fdi_use)
-            && for_fdi_use == TRUE))) {
+      || (overlay_expected == "eez_area"
+          && (! is.null(for_fdi_use)
+              && for_fdi_use == TRUE))) {
     fao_area_file_path_extension <- dplyr::last(x = unlist(strsplit(fao_area_file_path,
                                                                     "[.]")))
     if (fao_area_file_path_extension == "shp") {
@@ -216,12 +125,12 @@ marine_area_overlay <- function(data,
                 collapse = " ") != "sf tbl_df tbl data.frame") {
         stop(format(x = Sys.time(),
                     "%Y-%m-%d %H:%M:%S"),
-             " - Error, invalid fao shapefile, R object of class sf.\n")
+             " - Invalid fao shapefile, R object of class sf.")
       }
     } else {
       stop(format(x = Sys.time(),
                   "%Y-%m-%d %H:%M:%S"),
-           " - Error, invalid \"fao_area_file_path\" argument, shp or Rdata extensions expected.\n")
+           " - Invalid \"fao_area_file_path\" argument, shp or Rdata extensions expected.")
     }
   }
   # eez area
@@ -242,12 +151,12 @@ marine_area_overlay <- function(data,
                 collapse = " ") != "sf tbl_df tbl data.frame") {
         stop(format(x = Sys.time(),
                     "%Y-%m-%d %H:%M:%S"),
-             " - Error, invalid eez shapefile, R object of class sf.\n")
+             " - Invalid eez shapefile, R object of class sf.")
       }
     } else {
       stop(format(x = Sys.time(),
                   "%Y-%m-%d %H:%M:%S"),
-           " - Error, invalid \"eez_area_file_path\" argument, shp or Rdata extensions expected.\n")
+           " - Invalid \"eez_area_file_path\" argument, shp or Rdata extensions expected.")
     }
   }
   # ices area
@@ -266,12 +175,12 @@ marine_area_overlay <- function(data,
                 collapse = " ") != "sf tbl_df tbl data.frame") {
         stop(format(x = Sys.time(),
                     "%Y-%m-%d %H:%M:%S"),
-             " - Error, invalid ices shapefile, R object of class sf.\n")
+             " - Invalid ices shapefile, R object of class sf.")
       }
     } else {
       stop(format(x = Sys.time(),
                   "%Y-%m-%d %H:%M:%S"),
-           " - Error, invalid \"ices_area_file_path\" argument, shp or Rdata extensions expected.\n")
+           " - Invalid \"ices_area_file_path\" argument, shp or Rdata extensions expected.")
     }
   }
   # data design ----
@@ -332,10 +241,10 @@ marine_area_overlay <- function(data,
                                                join = sf::st_intersects,
                                                left = TRUE)
       if (nrow(x = data_sf) != nrow(x = sf_join_data_fao_area_sub)) {
-        cat(format(x = Sys.time(),
-                   format = "%Y-%m-%d %H:%M:%S"),
-            " - Warning, at least one position is associated with more than one fao area. Arbitrary selection of the first zone.\n",
-            sep = "")
+        warning(format(x = Sys.time(),
+                       format = "%Y-%m-%d %H:%M:%S"),
+                " - At least one position is associated with more than one fao area. Arbitrary selection of the first zone.",
+                sep = "")
         sf_join_data_fao_area_sub = sf_join_data_fao_area_sub[! duplicated(x = sf_join_data_fao_area_sub$data_id),  ]
       }
       join_data_fao_area_sub <- sf::st_drop_geometry(sf_join_data_fao_area_sub)
@@ -379,10 +288,10 @@ marine_area_overlay <- function(data,
                                          join = sf::st_intersects,
                                          left = TRUE)
     if (length(unique(x = sf_join_data_eez_area$data_id)) != nrow(x = sf_join_data_eez_area)) {
-      cat(format(x = Sys.time(),
-                 format = "%Y-%m-%d %H:%M:%S"),
-          " - Warning, at least one position is associated with more than one eez area. Output eez area will be NA.\n",
-          sep = "")
+      warning(format(x = Sys.time(),
+                     format = "%Y-%m-%d %H:%M:%S"),
+              " - At least one position is associated with more than one eez area. Output eez area will be NA.",
+              sep = "")
       data_id_duplicated <- unique(x = sf_join_data_eez_area[duplicated(sf_join_data_eez_area$data_id), ]$data_id)
       sf_join_data_eez_area <- sf_join_data_eez_area[! duplicated(x = sf_join_data_eez_area$data_id), ]
       for (data_id in data_id_duplicated) {
@@ -391,10 +300,10 @@ marine_area_overlay <- function(data,
       }
     }
     join_data_eez_area_sub <- sf::st_drop_geometry(sf_join_data_eez_area) %>%
-      select(data_id,
-             IHO_SEA,
-             EEZ,
-             ISO_TER1)
+      dplyr::select(data_id,
+                    IHO_SEA,
+                    EEZ,
+                    ISO_TER1)
     names(join_data_eez_area_sub) <- tolower(names(join_data_eez_area_sub))
     data_unique <- dplyr::inner_join(x = data_unique,
                                      y = join_data_eez_area_sub,
@@ -422,16 +331,16 @@ marine_area_overlay <- function(data,
       }
       for (data_unique_id in seq_len(length.out = nrow(data_unique))) {
         if (data_unique[data_unique_id, "division_fao"] %in% eez_indicator_referential$sub_region
-            | data_unique[data_unique_id, "subarea_fao"] %in% eez_indicator_referential$sub_region) {
+            || data_unique[data_unique_id, "subarea_fao"] %in% eez_indicator_referential$sub_region) {
           current_eez_indicator_referential <- dplyr::filter(.data = eez_indicator_referential,
                                                              sub_region %in% c(data_unique[data_unique_id, "division_fao"],
                                                                                data_unique[data_unique_id, "subarea_fao"]))
           if (nrow(x = current_eez_indicator_referential) != 1) {
             if (data_unique[data_unique_id, "iso_ter1"] %in% eu_countries$country_code
                 && "EU" %in% current_eez_indicator_referential$eez_indicator
-                | (is.na(x = data_unique[data_unique_id, "iso_ter1"])
-                   & all(current_eez_indicator_referential$eez_indicator %in% c("EU",
-                                                                                "UK")))) {
+                || (is.na(x = data_unique[data_unique_id, "iso_ter1"])
+                    && all(current_eez_indicator_referential$eez_indicator %in% c("EU",
+                                                                                  "UK")))) {
               data_unique[data_unique_id, "eez_indicator"] <- "EU"
             } else if (data_unique[data_unique_id, "iso_ter1"] %in% "GBR"
                        && "UK" %in% current_eez_indicator_referential$eez_indicator) {
@@ -452,8 +361,8 @@ marine_area_overlay <- function(data,
         }
       }
     }
-    data_unique <- select(.data = data_unique,
-                          -iho_sea) %>%
+    data_unique <- dplyr::select(.data = data_unique,
+                                 -iho_sea) %>%
       dplyr::rename(eez_country = iso_ter1)
     # setup
     suppressMessages(sf::sf_use_s2(use_s2 = value_s2_sf))
@@ -466,8 +375,8 @@ marine_area_overlay <- function(data,
                                           join = sf::st_intersects,
                                           left = TRUE)
     join_data_ices_area_sub <- sf::st_drop_geometry(sf_join_data_ices_area) %>%
-      select(data_id,
-             ICESNAME) %>%
+      dplyr::select(data_id,
+                    ICESNAME) %>%
       dplyr::rename("ices_area" = "ICESNAME")
     data_unique <- dplyr::inner_join(x = data_unique,
                                      y = join_data_ices_area_sub,

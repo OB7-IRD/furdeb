@@ -13,11 +13,6 @@ Authors@R:
               email = "oceane.bouhineau@ird.fr",
               role = c("aut"),
               comment = c(ORCID = "0000-0001-7418-2925")),
-       person(given = "Julien",
-              family = "Lebranchu",
-              email = "julien.lebranchu@ird.fr",
-              role = c("aut"),
-              comment = c(ORCID = "0000-0002-7759-0534")),
        person(given = "Clara",
               family = "Lerebourg",
               email = "clara.lerebourg@ird.fr",
@@ -45,29 +40,25 @@ RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 URL: https://github.com/OB7-IRD/furdeb
 BugReports: https://github.com/OB7-IRD/furdeb/issues
-Depends: 
-    R (>= 4.2.0)
-Imports:
-    RJDBC (>= 0.2.7.1),
-    RPostgreSQL (>= 0.6.2),
-    DBI (>= 1.0.0),
-    magrittr (>= 1.5),
-    dplyr (>= 0.8.1),
-    stringr (>= 1.4.0),
-    sf (>= 1.0.2),
-    yaml (>= 2.2.1),
+Roxygen: list(markdown = TRUE)
+Imports: 
     codama (>= 0.9.0),
-    parallel,
-    lubridate (>= 1.9.2),
-    readr (>= 2.1.4),
+    DBI (>= 1.2.2),
+    dplyr (>= 1.1.4),
+    lubridate (>= 1.9.3),
+    magrittr (>= 2.0.3),
+    parallel (>= 4.3.1),
+    readr (>= 2.1.5),
+    RJDBC (>= 0.2.10),
+    RPostgreSQL (>= 0.7.6),
+    sf (>= 1.0.16),
+    stringr (>= 1.5.1),
     tibble (>= 3.2.1),
-    utils (>= 4.2.1),
-    lifecycle
-Suggests:
-    testthat (>= 3.0.4),
-    markdown (>= 1.6),
-    knitr (>= 1.42),
-    rmarkdown
+    utils (>= 4.3.1),
+    yaml (>= 2.3.8)
 Remotes: 
     OB7-IRD/codama
-Roxygen: list(markdown = TRUE)
+Suggests: 
+    knitr (>= 1.46),
+    markdown (>= 1.12),
+    testthat (>= 3.2.1.1)

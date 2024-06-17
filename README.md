@@ -6,16 +6,17 @@
 <!-- badges: start -->
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/furdeb)](https://cran.r-project.org/package=furdeb)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/OB7-IRD/furdeb/workflows/R-CMD-check/badge.svg)](https://github.com/OB7-IRD/furdeb/actions)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 ***FUnctions for R DEvelopment and Beyond!***
 
 ## Overview
 
-Working in progress for this section. Be patient.
+This package aims to organise, standardise and share useful functions
+for many purposes (spatial manipulation, database connection, …).
 
 ## Installation
 

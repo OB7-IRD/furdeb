@@ -11,64 +11,28 @@
 #'  \item{"u_can_access": }{the main advantage is it's a free java JDBC driver. To understand briefly the process behind, the Access database is converted in HSQLDB system. This conversion could take a long time, especially if the database if large. Furthermore, after the conversion, queries should be faster than if there run on an Access database.}
 #'  \item{"access_jdbc42": }{this driver is paying. In opposition with the "u_can_access" driver, the Access database is not converted. The connection should be faster but the queries could be longer.}
 #' }
-#' @importFrom RJDBC JDBC dbConnect
-#' @importFrom codama r_type_checking file_path_checking
 #' @export
 access_dbconnection <- function(driver_name = "u_can_access",
                                 access_database_file_path,
                                 access_jdbc42_driver_file_path = NULL) {
   # 1 - Arguments verification ----
-  # driver_name argument
-  if (codama::r_type_checking(r_object = driver_name,
-                              type = "character",
-                              length = 1L,
-                              allowed_value = c("u_can_access",
-                                                "access_jdbc42"),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = driver_name,
-                                   type = "character",
-                                   length = 1L,
-                                   allowed_value = c("u_can_access",
-                                                     "access_jdbc42"),
-                                   output = "message"))
-  }
-  # access_database_file_path argument
-  if (codama::r_type_checking(r_object = access_database_file_path,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = access_database_file_path,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  if (codama::file_path_checking(file_path = access_database_file_path,
-                                 extension = c("mdb",
-                                               "accdb"),
-                                 output = "logical") != TRUE) {
-    return(codama::file_path_checking(file_path = access_database_file_path,
-                                      extension = c("mdb",
-                                                    "accdb"),
-                                      output = "message"))
-  }
-  # access_jdbc42_driver_file_path
+  codama::r_type_checking(r_object = driver_name,
+                          type = "character",
+                          length = 1L,
+                          allowed_value = c("u_can_access",
+                                            "access_jdbc42"))
+  codama::r_type_checking(r_object = access_database_file_path,
+                          type = "character",
+                          length = 1L)
+  codama::file_path_checking(file_path = access_database_file_path,
+                             extension = c("mdb",
+                                           "accdb"))
   if (driver_name == "access_jdbc42") {
-    if (codama::r_type_checking(r_object = access_jdbc42_driver_file_path,
-                                type = "character",
-                                length = 1L,
-                                output = "logical") != TRUE) {
-      return(codama::r_type_checking(r_object = access_jdbc42_driver_file_path,
-                                     type = "character",
-                                     length = 1L,
-                                     output = "message"))
-    }
-    if (codama::file_path_checking(file_path = access_jdbc42_driver_file_path,
-                                   extension = "jar",
-                                   output = "logical") != TRUE) {
-      return(codama::file_path_checking(file_path = access_jdbc42_driver_file_path,
-                                        extension = "jar",
-                                        output = "message"))
-    }
+    codama::r_type_checking(r_object = access_jdbc42_driver_file_path,
+                            type = "character",
+                            length = 1L)
+    codama::file_path_checking(file_path = access_jdbc42_driver_file_path,
+                               extension = "jar")
   }
   # 2 - Global process ----
   if (driver_name == "access_jdbc42") {
@@ -104,6 +68,6 @@ access_dbconnection <- function(driver_name = "u_can_access",
                                                paste0("jdbc:ucanaccess://",
                                                       access_database_file_path))
   }
-  return(list("database_name" <- "access_database",
-              "connection_information" <- access_jdbc_connection))
+  return(list("database_name" = "access_database",
+              "connection_information" = access_jdbc_connection))
 }

@@ -6,69 +6,43 @@
 #' @param longitude {\link[base]{character}} expected. Column name of longitude data.
 #' @param quadrant {\link[base]{character}} expected. Column name of quadrant data.
 #' @return This function add two column to the input data frame, longitude_dec and latitude_dec, with longitude and latitude data in decimal format.
-#' @importFrom codama r_type_checking
 #' @export
 avdth_position_conversion <- function(data,
                                       latitude,
                                       longitude,
                                       quadrant) {
   # 1 - Arguments verification ----
-  # data argument
-  if (missing(x = data)) {
-    stop(format(x = Sys.time(),
-                "%Y-%m-%d %H:%M:%S"),
-         " - Error, missing \"data\" argument.\n")
-  }
-  # latitude argument
-  if (codama::r_type_checking(r_object = latitude,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = latitude,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
+  codama::r_type_checking(r_object = data,
+                          type = "data.frame")
+  codama::r_type_checking(r_object = latitude,
+                          type = "character",
+                          length = 1L)
   if (! latitude %in% names(x = data)) {
     stop(format(x = Sys.time(),
                 "%Y-%m-%d %H:%M:%S"),
-         " - Error, column \"",
+         " - Column \"",
          latitude,
-         "\" not present in the input data.\n")
+         "\" not present in the input data.")
   }
-  # longitude argument
-  if (codama::r_type_checking(r_object = longitude,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = longitude,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
+  codama::r_type_checking(r_object = longitude,
+                          type = "character",
+                          length = 1L)
   if (! longitude %in% names(x = data)) {
     stop(format(x = Sys.time(),
                 "%Y-%m-%d %H:%M:%S"),
-         " - Error, column \"",
+         " - Column \"",
          longitude,
-         "\" not present in the input data.\n")
+         "\" not present in the input data.")
   }
-  # quadrant argument
-  if (codama::r_type_checking(r_object = quadrant,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = quadrant,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
+  codama::r_type_checking(r_object = quadrant,
+                          type = "character",
+                          length = 1L)
   if (! quadrant %in% names(data)) {
     stop(format(x = Sys.time(),
                 "%Y-%m-%d %H:%M:%S"),
-         " - Error, column \"",
+         " - Column \"",
          quadrant,
-         "\" not present in the input data.\n")
+         "\" not present in the input data.")
   }
   # 2 - Global process ----
   data[, "longitude_dec"] <- ifelse(data[, quadrant] %in% c(1, 2),

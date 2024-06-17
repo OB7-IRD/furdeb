@@ -24,7 +24,6 @@ Useful links:
 Authors:
 \itemize{
   \item Oceane Bouhineau \email{oceane.bouhineau@ird.fr} (\href{https://orcid.org/0000-0001-7418-2925}{ORCID})
-  \item Julien Lebranchu \email{julien.lebranchu@ird.fr} (\href{https://orcid.org/0000-0002-7759-0534}{ORCID})
   \item Clara Lerebourg \email{clara.lerebourg@ird.fr} (\href{https://orcid.org/0000-0003-0589-8932}{ORCID})
 }
 
