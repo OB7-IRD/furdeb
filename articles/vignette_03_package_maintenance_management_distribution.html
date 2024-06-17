@@ -411,7 +411,7 @@ share your package to other people.</p>
 <span><span class="co"># for the remote syntax check the documentation here: https://remotes.r-lib.org/articles/dependencies.html</span></span></code></pre></div>
 <p>When you add a dependency through this process you should have a
 message like that:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>Refer to functions with <span class="st">`</span><span class="at">package_name::fun()</span><span class="st">`</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Refer to functions with `package_name::fun()`</span></span></code></pre>
 <p>In our code you have two solutions:</p>
 <ul>
 <li>when you call a function from another package, call with the syntax
@@ -555,19 +555,20 @@ can help you can create the initial file template.</p>
 <p>You are free to structure your NEWS.md file like you want but we
 recommend at least to have this kind of structure (use only section
 useful for your release/dev version):</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># package_name major.minor.patch.dev - year-month-day</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="do">## Added</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="sc">*</span> Code added n°<span class="dv">1</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="sc">*</span> Code added n°x</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="do">## Changed</span></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="sc">*</span> Code changed n°<span class="dv">1</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="sc">*</span> Code changed n°x</span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="do">## Removed</span></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="sc">*</span> Code removed n°<span class="dv">1</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="sc">*</span> Code removed n°x</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># package_name major.minor.patch.dev - year-month-day</span></span>
+<span></span>
+<span><span class="co">## Added</span></span>
+<span><span class="co">#Code added n°1</span></span>
+<span><span class="co"># Code added n°x</span></span>
+<span></span>
+<span><span class="co">## Changed</span></span>
+<span><span class="co"># Code changed n°1</span></span>
+<span><span class="co"># Code changed n°x</span></span>
+<span></span>
+<span><span class="co">## Removed</span></span>
+<span><span class="co"># Code removed n°1</span></span>
+<span><span class="co"># Code removed n°x</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="lifecycle-stages-and-supporting-tools">Lifecycle stages and supporting tools<a class="anchor" aria-label="anchor" href="#lifecycle-stages-and-supporting-tools"></a>
@@ -710,12 +711,12 @@ development workshop</a></p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Mathieu Depetris, Oceane Bouhineau, Julien Lebranchu, Clara Lerebourg, IRD - Ob7 Observatory of Exploited Tropical Pelagic Ecosystems.</p>
+<p>Developed by Mathieu Depetris, Oceane Bouhineau, Clara Lerebourg, IRD - Ob7 Observatory of Exploited Tropical Pelagic Ecosystems.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
