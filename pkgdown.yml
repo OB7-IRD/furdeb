@@ -6,7 +6,7 @@ articles:
   vignette_02_package_creation: vignette_02_package_creation.html
   vignette_03_package_maintenance_management_distribution: vignette_03_package_maintenance_management_distribution.html
   vignette_04_latitude_longitude_cwp_manipulation: vignette_04_latitude_longitude_cwp_manipulation.html
-last_built: 2024-06-17T11:26Z
+last_built: 2024-06-17T12:35Z
 urls:
   reference: https://ob7-ird.github.io/furdeb/reference
   article: https://ob7-ird.github.io/furdeb/articles
