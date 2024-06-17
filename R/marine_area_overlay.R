@@ -48,13 +48,7 @@ marine_area_overlay <- function(data,
   sub_region <- NULL
   # 1 - Arguments verifications ----
   codama::r_type_checking(r_object = data,
-                          type = "data.frame",
-                          length = 1L,
-                          allowed_value = c("fao_area",
-                                            "eez_area",
-                                            "ices_area",
-                                            "fao_eez_area",
-                                            "all"))
+                          type = "data.frame")
   codama::r_type_checking(r_object = overlay_expected,
                           type = "character",
                           length = 1L,
@@ -69,10 +63,12 @@ marine_area_overlay <- function(data,
   codama::r_type_checking(r_object = latitude_name,
                           type = "character",
                           length = 1L)
-  codama::file_path_checking(file_path =  fao_area_file_path,
-                             extension = c("Rdata",
-                                           "RData",
-                                           "shp"))
+  if (! is.null(x = fao_area_file_path)) {
+    codama::file_path_checking(file_path =  fao_area_file_path,
+                               extension = c("Rdata",
+                                             "RData",
+                                             "shp"))
+  }
   codama::r_type_checking(r_object = fao_overlay_level,
                           type = "character",
                           length = 1L,
@@ -85,17 +81,21 @@ marine_area_overlay <- function(data,
   codama::r_type_checking(r_object = auto_selection_fao,
                           type = "logical",
                           length = 1L)
-  codama::file_path_checking(file_path =  eez_area_file_path,
-                             extension = c("Rdata",
-                                           "RData",
-                                           "shp"))
+  if (! is.null(x = fao_area_file_path)) {
+    codama::file_path_checking(file_path =  fao_area_file_path,
+                               extension = c("Rdata",
+                                             "RData",
+                                             "shp"))
+  }
   codama::r_type_checking(r_object = for_fdi_use,
                           type = "logical",
                           length = 1L)
-  codama::file_path_checking(file_path =  ices_area_file_path,
-                             extension = c("Rdata",
-                                           "RData",
-                                           "shp"))
+  if (! is.null(x = ices_area_file_path)) {
+    codama::file_path_checking(file_path =  ices_area_file_path,
+                               extension = c("Rdata",
+                                             "RData",
+                                             "shp"))
+  }
   codama::r_type_checking(r_object = silent,
                           type = "logical",
                           length = 1L)
