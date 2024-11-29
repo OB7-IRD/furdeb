@@ -1,78 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/404.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/articles/vignette_01_nomenclature_naming_convention.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/articles/vignette_02_package_creation.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/articles/vignette_03_package_maintenance_management_distribution.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/articles/vignette_04_latitude_longitude_cwp_manipulation.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/access_dbconnection.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/avdth_position_conversion.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/configuration_file.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/data_extraction.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/fao_cwp_shape_manipulation.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/fao_reference_grid_update.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/furdeb-package.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/latitude_longitude_cwp_manipulation.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/latitude_longitude_to_csquare.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/list_logical_merge.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/marine_area_overlay.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/postgresql_dbconnection.html</loc>
-  </url>
-  <url>
-    <loc>https://ob7-ird.github.io/furdeb/reference/save_pigz.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://ob7-ird.github.io/furdeb/404.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/LICENSE-text.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/articles/index.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/articles/vignette_01_nomenclature_naming_convention.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/articles/vignette_02_package_creation.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/articles/vignette_03_package_maintenance_management_distribution.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/articles/vignette_04_latitude_longitude_cwp_manipulation.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/authors.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/index.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/news/index.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/access_dbconnection.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/avdth_position_conversion.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/configuration_file.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/data_extraction.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/fao_cwp_shape_manipulation.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/fao_reference_grid_update.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/furdeb-package.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/index.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/latitude_longitude_cwp_manipulation.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/latitude_longitude_to_csquare.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/list_logical_merge.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/marine_area_overlay.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/pipe.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/postgresql_dbconnection.html</loc></url>
+<url><loc>https://ob7-ird.github.io/furdeb/reference/save_pigz.html</loc></url>
 </urlset>
+
