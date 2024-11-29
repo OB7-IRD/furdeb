@@ -1,4 +1,4 @@
-# furdeb 0.1.0 - 2024.11.29
+# furdeb 1.0.0 - 2024.11.29
 
 ## Added
 * time_allocation_activity_code_ref.csv : reference table for allocating fishing time and time at sea according to activity code
