@@ -1,0 +1,67 @@
+activity_code_avdth;activity_code_observe;set_success_status_code_observe;objectoperation_code_observe;schooltype_code_observe;time_at_sea;fishing_time;set_duration;activity_label_observe;activity_label_avdth; objectoperation_label_observe;schooltype_label_observe;status_active_observe;comment
+15;0;;;;0;0;0;At port;At port;;;1;
+4;1;;;;1;0;0;Transit (steaming without searching);Transit (steaming without searching);;;1;If no DCP delared in AVDTH database. (In AVDTH database, there are DCPs declared for activities that are not compatible with the use of a DCP in ObServe database).
+3;2;;;;1;1;0;Searching (in general);Searching;;;1;If no DCP delared in AVDTH database. (In AVDTH database, there are DCPs declared for activities that are not compatible with the use of a DCP in ObServe database).
+3;3;;;;1;1;0;Searching for floating objects (logs or FADs);Searching;;;0;
+3;4;;;;1;1;0;Steaming towards observed system associated to the tuna school;Searching;;;1;
+3;5;;;;0;0;0;Arrival of vessel at the observed system;Searching;;;1;
+0;6;0;99;1;1;1;1;Fishing (skiff is deployed);Null set ;Unknown;Object school type;1;fishing_time=set_duration
+0;6;0;;2;1;1;1;Fishing (skiff is deployed);Null set ;;Free school type;1;fishing_time=set_duration
+1;6;1;99;1;1;1;1;Fishing (skiff is deployed);Positive set;Unknown;Object school type;1;fishing_time=set_duration
+1;6;1;;2;1;1;1;Fishing (skiff is deployed);Positive set;;Free school type;1;fishing_time=set_duration
+2;6;2;99;1;1;1;1;Fishing (skiff is deployed);Unknown set;Unknown;Object school type;1;fishing_time=set_duration
+2;6;2;;2;1;1;1;Fishing (skiff is deployed);Unknown set;;Free school type;1;fishing_time=set_duration
+14;6;2;99;1;1;1;1;Fishing (skiff is deployed);Pocket capsizing;Unknown;Object school type;1;fishing_time=set_duration
+14;6;2;;2;1;1;1;Fishing (skiff is deployed);Pocket capsizing;;Free school type;1;fishing_time=set_duration
+99;7;;;;0;0;0;End of fishing (skiff is brought on board);Other non-fishing activities;;;0;
+3;8;;;;1;1;0;Drifting during the day near a tuna school, a log or a FAD;Searching;;;1;
+10;9;;;;1;0;0;Drifting during the night (engine stopped);Waiting;;;1;
+8;10;;;;1;0;0;Drifting due to bad weather;Heaving to ;;;1;
+7;11;;;;1;0;0;Drifting due to mechanical problems;Damage;;;1;
+11;12;;;;1;1;0;Transshipping at sea (equipment, FADs, crew member);Transshipping at sea ;;;1;
+1;13;;3;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Fishing on FOB;Fishing;;0;The time_at_sea, set_duration and fishing_time of fishing on FOB activity have already been taken into account via corresponding fishing activity (code 6 in observe and 0,1,2, or 14 in avdth database) and elementary catches associated.
+5;13;;1;;1;1;0;Operation on FOB only (visit, deployment, modification, retrieval);Deployment of FOB;Deployment;;1;
+6;13;;4;;1;1;0;Operation on FOB only (visit, deployment, modification, retrieval);Recovery of FOB;Removal;;1;
+6;13;;6;;1;1;0;Operation on FOB only (visit, deployment, modification, retrieval);Recovery of FOB;Destruction;;1;
+23;13;;9;;1;1;0;Operation on FOB only (visit, deployment, modification, retrieval);Redeployment of FOB with beacon;Replacement;;1;
+29;13;;2;;1;1;0;Operation on FOB only (visit, deployment, modification, retrieval);Visit to FOB equipped with beacon;Visit;;1;
+32;13;;8;;1;1;0;Operation on FOB only (visit, deployment, modification, retrieval);Reinforced of a FOB with beacon;Modified or reinforced;;1;
+33;13;;5;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Loss, end or controlled shutdown of FOB transmission;Abandonment (without beacon, not destroyed, not sunk);;1;
+33;13;;7;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Loss, end or controlled shutdown of FOB transmission;Sinking;;1;
+40;13;;11;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Loss of FOB;Loss;;1;
+98;13;;99;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Unknown operation on FOB;Unknown;;0;
+99;13;;10;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Unknown operation on FOB;Other (to be precised);;1;
+;13;;12;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);;Stranding;;1;
+6;14;;;;1;1;0;Recovering a floating object (log or FAD) belonging to the vessel;Recovery of FOB;;;0;
+6;15;;;;1;1;0;Recovering a floating object (log or FAD) that does not belong to the vessel;Recovery of FOB;;;0;
+3;16;;;;0;0;0;End of searching;Searching;;;1;
+10;17;;;;1;1;0;Anchorage on top of a seamount;Waiting;;;0;
+4;18;;;;1;0;0;Steaming at night towards a floating object;Transit (steaming without searching);;;1;
+3;19;;;;1;1;0;Continue steaming towards observed system associated to the tuna school;Searching;;;0;
+6;20;;;;1;1;0;Recovery of a floating object;Recovery of FOB;;;0;
+42;21;;;;0;0;0;FPA zone change;FPA zone change;;;1;
+7;22;;;;1;0;0;Damage;Damage;;;0;
+9;23;;;;1;1;0;Bait fishing;Bait ;;;1;
+10;24;;;;1;0;0;Waiting;Waiting;;;1;
+11;25;;;;1;1;0;Offshore transshipment (details unknown);Transshipping at sea ;;;1;
+12;26;;;;1;1;0;Transshipment from a purse seiner;Transshipment from a purse seiner;;;1;
+13;27;;;;1;1;0;Transshipment to a purse seiner;Transshipment to a purse seiner;;;1;
+19;29;;;;1;1;0;Transshipment to a bait boat;Transshipment to a bait boat;;;1;
+20;30;;;;1;1;0;Transshipment from a bait boat;Transshipment from a bait boat;;;1;
+35;31;;;;1;1;0;Fish discard;Discard;;;1;
+2;32;;;;1;0;1;Activity/set created from the well plan;Unknown set;;;0;fishing_time=set_duration
+36;36;;;;1;0;0;Refueling;Refueling;;;1;
+37;37;;;;1;0;0;Medical evacuation;Medical evacuation;;;1;
+38;38;;;;1;0;0;This vessel towed;Vessel towed;;;1;
+39;39;;;;1;0;0;Towing another vessel;Towing another vessel;;;1;
+99;50;;;;1;0;0;Training on board (priracy, fire, abandonment, etc);Other non-fishing activities;;;1;
+15;51;;;;0;0;0;Transfert at port of a crew member;At port;;;1;
+52;52;;;;0;0;0;Fake set, for hosting historical samples;Fake set, for hosting historical samples;;;0;
+99;99;;;;1;0;0;Other (to detail in the comments);Other non-fishing activities;;;1;
+4;101;;99;;1;0;0;[deprecated] Transit (steaming without searching);Transit (steaming without searching);;;0;If DCP delared in AVDTH database. (In AVDTH database, there are DCPs declared for activities that are not compatible with the use of a DCP in ObServe database).
+3;102;;99;;1;1;0;[deprecated] Searching (in general);Searching;;;0;If DCP delared in AVDTH database. (In AVDTH database, there are DCPs declared for activities that are not compatible with the use of a DCP in ObServe database).
+4;103;;;;1;0;0;Day without activity;Transit (steaming without searching);;;1;
+4;101;;;;1;0;0;[deprecated] Transit (steaming without searching);Transit (steaming without searching);;;0;
+3;102;;;;1;1;0;[deprecated] Searching (in general);Searching;;;0;
+;104;;;;1;0;0;Transit (added by t3R);;;;0;Activity added by t3R to allocate time at sea when no activity allows the time at sea declared on a given date to be allocated.
+;105;;;;1;1;0;Searching  (added by t3R);;;;0;Activity added by t3R to allocate fishing time when no activity allows the fishing time on a given date to be allocated.

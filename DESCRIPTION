@@ -1,7 +1,7 @@
 Package: furdeb
 Type: Package
 Title: FUnctions for R DEvelopment and Beyond!
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R:
     c(person(given = "Mathieu",
             family = "Depetris",
@@ -27,6 +27,11 @@ Authors@R:
               email = "philippe.sabarros@ird.fr",
               role = c("ctb"),
               comment = c(ORCID = "0000-0001-6135-9015")),
+       person(given = "Jeanne",
+           family = "Clément",
+           email = "jeanne.clement@ird.fr",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0002-5228-5015")),
        person(given = "IRD - Ob7",
               family = "Observatory of Exploited Tropical Pelagic Ecosystems",
               email = "ob7@ird.fr",

@@ -1,0 +1,33 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "furdeb" in publications use:'
+type: software
+license: GPL-3.0-only
+title: 'furdeb: FUnctions for R DEvelopment and Beyond!'
+version: 1.0.0
+abstract: Functions and processes for R development and beyond!
+authors:
+- family-names: Depetris
+  given-names: Mathieu
+  email: mathieu.depetris@ird.fr
+  orcid: https://orcid.org/0000-0001-8080-0531
+- family-names: Bouhineau
+  given-names: Oceane
+  email: oceane.bouhineau@ird.fr
+  orcid: https://orcid.org/0000-0001-7418-2925
+- family-names: Lerebourg
+  given-names: Clara
+  email: clara.lerebourg@ird.fr
+  orcid: https://orcid.org/0000-0003-0589-8932
+repository-code: https://github.com/OB7-IRD/furdeb
+url: https://github.com/OB7-IRD/furdeb
+contact:
+- family-names: Depetris
+  given-names: Mathieu
+  email: mathieu.depetris@ird.fr
+  orcid: https://orcid.org/0000-0001-8080-0531
+
