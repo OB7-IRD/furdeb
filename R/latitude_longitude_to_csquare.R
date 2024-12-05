@@ -10,13 +10,13 @@
 #' @details
 #' For the argument "grid_square", you can choose between 7 modalities:
 #' \itemize{
-#'  \item{10: }{for a grid with a resolution of 10x10 degrees}
-#'  \item{5: }{for a grid with a resolution of 5x5 degrees}
-#'  \item{1: }{for a grid with a resolution of 1x1 degrees}
-#'  \item{0.5: }{for a grid with a resolution of 0.5x0.5 degrees}
-#'  \item{0.1: }{for a grid with a resolution of 0.1x0.1 degrees}
-#'  \item{0.05: }{for a grid with a resolution of 0.05x0.05 degrees}
-#'  \item{0.01: }{for a grid with a resolution of 0.01x0.01 degrees}
+#'  \item{10: for a grid with a resolution of 10x10 degrees}
+#'  \item{5: for a grid with a resolution of 5x5 degrees}
+#'  \item{1: for a grid with a resolution of 1x1 degrees}
+#'  \item{0.5: for a grid with a resolution of 0.5x0.5 degrees}
+#'  \item{0.1: for a grid with a resolution of 0.1x0.1 degrees}
+#'  \item{0.05: for a grid with a resolution of 0.05x0.05 degrees}
+#'  \item{0.01: for a grid with a resolution of 0.01x0.01 degrees}
 #' }
 #' This function have been developped regarding a MS Excel worksheet of Tony Rees (Tony.Rees@@csiro.au).
 #' If you want more informations about C-square visit http://www.cmar.csiro.au/csquares/spec1-1.htm.

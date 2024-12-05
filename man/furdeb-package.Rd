@@ -19,10 +19,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Mathieu Depetris \email{mathieu.depetris@ird.fr} (\href{https://orcid.org/0000-0001-8080-0531}{ORCID})
+\strong{Maintainer}: Jeanne Clément \email{jeanne.clement@ird.fr} (\href{https://orcid.org/0000-0002-5228-5015}{ORCID})
 
 Authors:
 \itemize{
+  \item Mathieu Depetris \email{mathieu.depetris@ird.fr} (\href{https://orcid.org/0000-0001-8080-0531}{ORCID})
   \item Oceane Bouhineau \email{oceane.bouhineau@ird.fr} (\href{https://orcid.org/0000-0001-7418-2925}{ORCID})
   \item Clara Lerebourg \email{clara.lerebourg@ird.fr} (\href{https://orcid.org/0000-0003-0589-8932}{ORCID})
 }
