@@ -50,12 +50,12 @@ Consistent spatial marine area overlay for points, grids and polygons (related t
 \details{
 For the argument "fao_overlay_level", you can choose between 5 modalities (descending size classification):
 \itemize{
-\item{ocean: }{ocean area}
-\item{major: }{major fao fishing area}
-\item{subarea: }{sub fao fishing area}
-\item{division: }{division fao fishing area}
-\item{subdivision: }{sub-division fao fishing area}
-\item{subunit: }{sub-unit fao fishing area}
+\item{ocean: ocean area}
+\item{major: major fao fishing area}
+\item{subarea: sub fao fishing area}
+\item{division: division fao fishing area}
+\item{subdivision: sub-division fao fishing area}
+\item{subunit: sub-unit fao fishing area}
 }
 Specificity for fao fishing area parameters: all the items above your specification (thus contain it at higher levels) will be added in the output. For example, if you select "subarea", you will also have the information about the major area concerning.
 If you want more information visit http://www.fao.org/fishery/area/search/en
