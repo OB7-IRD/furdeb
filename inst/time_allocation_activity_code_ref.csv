@@ -5,6 +5,18 @@ activity_code_avdth;activity_code_observe;set_success_status_code_observe;object
 3;3;;;;1;1;0;Searching for floating objects (logs or FADs);Searching;;;0;
 3;4;;;;1;1;0;Steaming towards observed system associated to the tuna school;Searching;;;1;
 3;5;;;;0;0;0;Arrival of vessel at the observed system;Searching;;;1;
+;6;0,1,2;3;1;1;1;1;Fishing (skiff is deployed);;Fishing;Object school type;1;fishing_time=set_duration
+;6;0,1,2;1;1;1;1;1;Fishing (skiff is deployed);;Deployment;Object school type;1;fishing_time=set_duration
+;6;0,1,2;4;1;1;1;1;Fishing (skiff is deployed);;Removal;Object school type;1;fishing_time=set_duration
+;6;0,1,2;6;1;1;1;1;Fishing (skiff is deployed);;Destruction;Object school type;1;fishing_time=set_duration
+;6;0,1,2;9;1;1;1;1;Fishing (skiff is deployed);;Replacement;Object school type;1;fishing_time=set_duration
+;6;0,1,2;2;1;1;1;1;Fishing (skiff is deployed);;Visit;Object school type;1;fishing_time=set_duration
+;6;0,1,2;8;1;1;1;1;Fishing (skiff is deployed);;Modified or reinforced;Object school type;1;fishing_time=set_duration
+;6;0,1,2;5;1;1;1;1;Fishing (skiff is deployed);;Abandonment (without beacon, not destroyed, not sunk);Object school type;1;fishing_time=set_duration
+;6;0,1,2;7;1;1;1;1;Fishing (skiff is deployed);;Sinking;Object school type;1;fishing_time=set_duration
+;6;0,1,2;11;1;1;1;1;Fishing (skiff is deployed);;Loss;Object school type;1;fishing_time=set_duration
+;6;0,1,2;10;1;1;1;1;Fishing (skiff is deployed);;Other (to be precised);Object school type;1;fishing_time=set_duration
+;6;0,1,2;12;1;1;1;1;Fishing (skiff is deployed);;Stranding;Object school type;1;fishing_time=set_duration
 0;6;0;99;1;1;1;1;Fishing (skiff is deployed);Null set ;Unknown;Object school type;1;fishing_time=set_duration
 0;6;0;;2;1;1;1;Fishing (skiff is deployed);Null set ;;Free school type;1;fishing_time=set_duration
 1;6;1;99;1;1;1;1;Fishing (skiff is deployed);Positive set;Unknown;Object school type;1;fishing_time=set_duration
@@ -32,6 +44,7 @@ activity_code_avdth;activity_code_observe;set_success_status_code_observe;object
 98;13;;99;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Unknown operation on FOB;Unknown;;0;
 99;13;;10;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);Unknown operation on FOB;Other (to be precised);;1;
 ;13;;12;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);;Stranding;;1;
+;13;;;;0;0;0;Operation on FOB only (visit, deployment, modification, retrieval);;;;1;Activity with code 13 and no floating object operation associated, to be checked in codama.
 6;14;;;;1;1;0;Recovering a floating object (log or FAD) belonging to the vessel;Recovery of FOB;;;0;
 6;15;;;;1;1;0;Recovering a floating object (log or FAD) that does not belong to the vessel;Recovery of FOB;;;0;
 3;16;;;;0;0;0;End of searching;Searching;;;1;
