@@ -11,6 +11,10 @@ title: 'furdeb: FUnctions for R DEvelopment and Beyond!'
 version: 1.0.0
 abstract: Functions and processes for R development and beyond!
 authors:
+- family-names: Clément
+  given-names: Jeanne
+  email: jeanne.clement@ird.fr
+  orcid: https://orcid.org/0000-0002-5228-5015
 - family-names: Depetris
   given-names: Mathieu
   email: mathieu.depetris@ird.fr
@@ -26,8 +30,8 @@ authors:
 repository-code: https://github.com/OB7-IRD/furdeb
 url: https://github.com/OB7-IRD/furdeb
 contact:
-- family-names: Depetris
-  given-names: Mathieu
-  email: mathieu.depetris@ird.fr
-  orcid: https://orcid.org/0000-0001-8080-0531
+- family-names: Clément
+  given-names: Jeanne
+  email: jeanne.clement@ird.fr
+  orcid: https://orcid.org/0000-0002-5228-5015
 
