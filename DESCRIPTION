@@ -1,7 +1,7 @@
 Package: furdeb
 Type: Package
 Title: FUnctions for R DEvelopment and Beyond!
-Version: 1.0.0
+Version: 1.0.1
 Authors@R:
     c(person(given = "Jeanne",
            family = "Clément",
