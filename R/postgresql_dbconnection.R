@@ -40,11 +40,11 @@ postgresql_dbconnection <- function(db_user,
   }
   # 2 - Global process ----
   postgresql_db_connection <- list("database_name" = db_dbname,
-                                   "connection_information" = RPostgreSQL::dbConnect(DBI::dbDriver("PostgreSQL"),
-                                                                                     user = db_user,
-                                                                                     password = db_password,
-                                                                                     dbname = db_dbname,
-                                                                                     host = db_host,
-                                                                                     port = as.integer(x = db_port)))
+                                   "connection_information" = RPostgres::dbConnect(DBI::dbDriver("Postgres"),
+                                                                                   user = db_user,
+                                                                                   password = db_password,
+                                                                                   dbname = db_dbname,
+                                                                                   host = db_host,
+                                                                                   port = as.integer(x = db_port)))
   return(postgresql_db_connection)
 }
