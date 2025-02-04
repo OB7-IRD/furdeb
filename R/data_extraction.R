@@ -3,7 +3,7 @@
 #' @description Function for data extraction and design from a file (csv or txt) or a database.
 #' @param type {\link[base]{character}} expected. Mandatory. Type of process for data extration. You can choose between "csv_txt" or "database".
 #' @param file_path {\link[base]{character}} expected. Mandatory. File path of the csv, txt or sql file.
-#' @param database_connection {\link[base]{list}} expected. Mandatory for type "sql". By default NULL. Output list from the furdeb database connection functions (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).
+#' @param database_connection {\link[base]{list}} expected. Mandatory for type "sql". By default NULL. Output list of furdeb connection functions to one or more databases (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).
 #' @param anchor {\link[base]{list}} expected. Optional for type "sql". By default NULL. List of values to interpolate in a SQL string query. Each list element have to follow this format: name_anchor = values. Be aware that the values typing format influence the writing of the sql in the query. For example, an integer or numeric value doesn't have any quote, rather than a date or string value.
 #' @param column_name {\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column name(s).
 #' @param column_type {\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column type(s). You can use the same format that the argument "col_types" of the function {\link[readr]{read_delim}}.
@@ -36,8 +36,33 @@ data_extraction <- function(type,
                                                "sql",
                                                "txt"))
   codama::r_type_checking(r_object = database_connection,
-                                 length = 2L,
                                  type = "list")
+  if (type == "database") {
+    if (length(database_connection) == 2 && !is.list(database_connection[[2]])) {
+      # Specific argument verification for simple database
+      if (paste0(class(x = database_connection[[2]]),
+                 collapse = " ") != "PostgreSQLConnection" && paste0(class(x = database_connection[[2]]),
+                                                                     collapse = " ") != "JDBCConnection") {
+        stop(format(x = Sys.time(),
+                    format = "%Y-%m-%d %H:%M:%S"),
+             " - Invalid \"database_connection\" argument. Class \"PostgreSQLConnection\" or \"JDBCConnection\" expected for the second element of the connection")
+      }
+    } else {
+      # Specific argument verification for multiple database
+      for (number_database_connection in seq(from = 1, to = length(database_connection))){
+        codama::r_type_checking(r_object = database_connection[[number_database_connection]],
+                                length = 2L,
+                                type = "list")
+        if (paste0(class(x = database_connection[[number_database_connection]][[2]]),
+                   collapse = " ") != "PostgreSQLConnection" && paste0(class(x = database_connection[[number_database_connection]][[2]]),
+                                                                       collapse = " ") != "JDBCConnection") {
+          stop(format(x = Sys.time(),
+                      format = "%Y-%m-%d %H:%M:%S"),
+               " - Invalid \"database_connection\" argument. Class \"PostgreSQLConnection\" or \"JDBCConnection\" expected for the second element of the connection number ", number_database_connection)
+        }
+      }
+    }
+  }
   codama::r_type_checking(r_object = anchor,
                                  type = "list")
   codama::r_type_checking(r_object = column_name,
@@ -83,7 +108,6 @@ data_extraction <- function(type,
                              format = "%Y-%m-%d %H:%M:%S"),
                       " - One or more parsing issues, check details above.",
                       sep = "")
-
                })
     } else if (! is.null(x = column_type)) {
       tryCatch(expr = data_extracted <- readr::read_delim(file = file_path,
@@ -132,50 +156,86 @@ data_extraction <- function(type,
              " - Value(s) in the \"anchor\" argument is different from anchor(s) in the sql query.",
              sep = "")
       }
-      sql_interpolate_query <- paste0("DBI::sqlInterpolate(conn = database_connection[[2]], sql = database_query, ")
-      for (anchor_id in names(x = anchor)) {
-        if (is.integer(x = anchor[[anchor_id]])
-            || is.numeric(x = anchor[[anchor_id]])) {
-          anchor[[anchor_id]] <- DBI::SQL(paste0(anchor[[anchor_id]],
-                                                 collapse = ", "))
-        } else if (is.character(x = anchor[[anchor_id]])
-                   || lubridate::is.Date(x = anchor[[anchor_id]])) {
-          anchor[[anchor_id]] <- DBI::SQL(paste0("'",
-                                                 paste0(anchor[[anchor_id]],
-                                                        collapse = "', '"),
-                                                 "'"))
-        } else {
+    }
+    for (anchor_id in names(x = anchor)) {
+      if (is.integer(x = anchor[[anchor_id]])
+          || is.numeric(x = anchor[[anchor_id]])) {
+        anchor[[anchor_id]] <- DBI::SQL(paste0(anchor[[anchor_id]],
+                                               collapse = ", "))
+      } else if (is.character(x = anchor[[anchor_id]])
+                 || lubridate::is.Date(x = anchor[[anchor_id]])) {
+        anchor[[anchor_id]] <- DBI::SQL(paste0("'",
+                                               paste0(anchor[[anchor_id]],
+                                                      collapse = "', '"),
+                                               "'"))
+      } else {
+        stop(format(x = Sys.time(),
+                    format = "%Y-%m-%d %H:%M:%S"),
+             " - Anchor format \"",
+             paste0(class(x = anchor[[anchor_id]]),
+                    collapse = ", "),
+             "\" not integrated in the process yet.\n",
+             "Check the anchor \"",
+             anchor_id, "\".",
+             sep = "")
+      }
+    }
+    number_database_connection <- 1
+    while (number_database_connection <= length(database_connection)) {
+      if (length(database_connection) == 2 && !is.list(database_connection[[2]])) {
+        # Connection for simple database
+        database_conn <- database_connection
+      } else {
+        # Connection for multiple database
+        database_conn <- database_connection[[number_database_connection]]
+      }
+      if (!is.null(x = anchor)) {
+        if (length(x = dplyr::symdiff(x = stringr::str_extract_all(string = database_query,
+                                                                   pattern = "(?<=\\?)[^\\)|[:blank:]|[:space:]]+",
+                                                                   simplify = TRUE),
+                                      y = names(anchor))) != 0) {
           stop(format(x = Sys.time(),
                       format = "%Y-%m-%d %H:%M:%S"),
-               " - Anchor format \"",
-               paste0(class(x = anchor[[anchor_id]]),
-                      collapse = ", "),
-               "\" not integrated in the process yet.\n",
-               "Check the anchor \"",
-               anchor_id,
-               "\".",
+               " - Value(s) in the \"anchor\" argument is different from anchor(s) in the sql query.",
                sep = "")
         }
-
-
-        sql_interpolate_query <- paste0(sql_interpolate_query,
-                                        anchor_id,
-                                        " = anchor[[",
-                                        stringr::str_which(string = names(x = anchor),
-                                                           pattern = anchor_id),
-                                        "]], ")
+        sql_interpolate_query <- paste0("DBI::sqlInterpolate(conn = database_conn[[2]], sql = database_query, ")
+        for (anchor_id in names(x = anchor)) {
+          sql_interpolate_query <- paste0(sql_interpolate_query,
+                                          anchor_id,
+                                          " = anchor[[",
+                                          stringr::str_which(string = names(x = anchor),
+                                                             pattern = anchor_id), "]], ")
+        }
+        sql_interpolate_query <- paste0(stringr::str_extract(string = sql_interpolate_query,
+                                                             pattern = ".+(?=,[:blank:]$)"),
+                                        ")")
+        sql_interpolate_query_expression <- parse(text = sql_interpolate_query)
+        database_query_final <- eval(sql_interpolate_query_expression)
+      } else {
+        database_query_final <- database_query
       }
-      sql_interpolate_query <- paste0(stringr::str_extract(string = sql_interpolate_query,
-                                                           pattern = ".+(?=,[:blank:]$)"),
-                                      ")")
-      sql_interpolate_query_expression <- parse(text = sql_interpolate_query)
-      database_query_final <- eval(sql_interpolate_query_expression)
-    } else {
-      database_query_final <- database_query
+      data_extracted <- DBI::dbGetQuery(conn = database_conn[[2]],
+                                        statement = database_query_final)
+      if (nrow(data_extracted) > 0) {
+        if (exists("data_extracted_final")) {
+          data_extracted_final <- dplyr::full_join(data_extracted_final, data_extracted, by = colnames(data_extracted_final))
+        } else {
+          data_extracted_final <- data_extracted
+        }
+      }
+      if (length(database_connection) == 2 && !is.list(database_connection[[2]])) {
+        # Connection for simple database
+        number_database_connection <- number_database_connection + 2
+      } else {
+        # Connection for multiple database
+        number_database_connection <- number_database_connection + 1
+      }
     }
-    data_extracted <- DBI::dbGetQuery(conn = database_connection[[2]],
-                                      statement = database_query_final)
-    data_extracted_final <- data_extracted
+    # If all extractions have returned an empty array
+    if (!exists("data_extracted_final")) {
+      data_extracted_final <- data_extracted
+    }
   }
   data_extracted_final <- tibble::as_tibble(x = data_extracted_final)
   # 3 - Extraction ----
