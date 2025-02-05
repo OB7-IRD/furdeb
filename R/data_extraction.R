@@ -41,11 +41,11 @@ data_extraction <- function(type,
     if (length(database_connection) == 2 && !is.list(database_connection[[2]])) {
       # Specific argument verification for simple database
       if (paste0(class(x = database_connection[[2]]),
-                 collapse = " ") != "PostgreSQLConnection" && paste0(class(x = database_connection[[2]]),
+                 collapse = " ") != "PqConnection" && paste0(class(x = database_connection[[2]]),
                                                                      collapse = " ") != "JDBCConnection") {
         stop(format(x = Sys.time(),
                     format = "%Y-%m-%d %H:%M:%S"),
-             " - Invalid \"database_connection\" argument. Class \"PostgreSQLConnection\" or \"JDBCConnection\" expected for the second element of the connection")
+             " - Invalid \"database_connection\" argument. Class \"PqConnection\" or \"JDBCConnection\" expected for the second element of the connection")
       }
     } else {
       # Specific argument verification for multiple database
@@ -54,11 +54,11 @@ data_extraction <- function(type,
                                 length = 2L,
                                 type = "list")
         if (paste0(class(x = database_connection[[number_database_connection]][[2]]),
-                   collapse = " ") != "PostgreSQLConnection" && paste0(class(x = database_connection[[number_database_connection]][[2]]),
+                   collapse = " ") != "PqConnection" && paste0(class(x = database_connection[[number_database_connection]][[2]]),
                                                                        collapse = " ") != "JDBCConnection") {
           stop(format(x = Sys.time(),
                       format = "%Y-%m-%d %H:%M:%S"),
-               " - Invalid \"database_connection\" argument. Class \"PostgreSQLConnection\" or \"JDBCConnection\" expected for the second element of the connection number ", number_database_connection)
+               " - Invalid \"database_connection\" argument. Class \"PqConnection\" or \"JDBCConnection\" expected for the second element of the connection number ", number_database_connection)
         }
       }
     }
