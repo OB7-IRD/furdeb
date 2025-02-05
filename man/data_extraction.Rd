@@ -19,7 +19,7 @@ data_extraction(
 
 \item{file_path}{{\link[base]{character}} expected. Mandatory. File path of the csv, txt or sql file.}
 
-\item{database_connection}{{\link[base]{list}} expected. Mandatory for type "sql". By default NULL. Output list from the furdeb database connection functions (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).}
+\item{database_connection}{{\link[base]{list}} expected. Mandatory for type "sql". By default NULL. Output list of furdeb connection functions to one or more databases (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).}
 
 \item{anchor}{{\link[base]{list}} expected. Optional for type "sql". By default NULL. List of values to interpolate in a SQL string query. Each list element have to follow this format: name_anchor = values. Be aware that the values typing format influence the writing of the sql in the query. For example, an integer or numeric value doesn't have any quote, rather than a date or string value.}
 

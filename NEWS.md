@@ -1,5 +1,8 @@
 # furdeb 1.0.1- 2025.01.21
 
+## Added
+* Add connection to two or more databases in [`data_extraction()`](https://ob7-ird.github.io/furdeb/reference/data_extraction.html) for SQL.
+
 ## Changed
 * Use package [RPostgres](https://CRAN.R-project.org/package=RPostgres) instead of [RPostgreSQL](https://CRAN.R-project.org/package=RPostgreSQL) in [`postgresql_db_connection()`](https://ob7-ird.github.io/furdeb/reference/postgresql_dbconnection.html) function to fix connection issues.
 
