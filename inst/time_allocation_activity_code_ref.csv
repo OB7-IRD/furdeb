@@ -76,5 +76,5 @@ activity_code_avdth;activity_code_observe;set_success_status_code_observe;object
 4;103;;;;1;0;0;Day without activity;Transit (steaming without searching);;;1;
 4;101;;;;1;0;0;[deprecated] Transit (steaming without searching);Transit (steaming without searching);;;0;
 3;102;;;;1;1;0;[deprecated] Searching (in general);Searching;;;0;
-;104;;;;1;0;0;Transit (added by t3R);;;;0;Activity added by t3R to allocate time at sea when no activity allows the time at sea declared on a given date to be allocated.
-;105;;;;1;1;0;Searching  (added by t3R);;;;0;Activity added by t3R to allocate fishing time when no activity allows the fishing time on a given date to be allocated.
+104;104;;;;1;0;0;Transit (added by t3R);Transit (added by t3R);;;0;Activity added by t3R to allocate time at sea when no activity allows the time at sea declared on a given date to be allocated.
+105;105;;;;1;1;0;Searching  (added by t3R);Searching  (added by t3R);;;0;Activity added by t3R to allocate fishing time when no activity allows the fishing time on a given date to be allocated.
