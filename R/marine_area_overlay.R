@@ -81,8 +81,8 @@ marine_area_overlay <- function(data,
   codama::r_type_checking(r_object = auto_selection_fao,
                           type = "logical",
                           length = 1L)
-  if (! is.null(x = fao_area_file_path)) {
-    codama::file_path_checking(file_path =  fao_area_file_path,
+  if (! is.null(x = eez_area_file_path)) {
+    codama::file_path_checking(file_path =  eez_area_file_path,
                                extension = c("Rdata",
                                              "RData",
                                              "shp"))
@@ -119,7 +119,8 @@ marine_area_overlay <- function(data,
       if (! all(sf::st_is_valid(fao_area))) {
         fao_area <- sf::st_make_valid(fao_area)
       }
-    } else if (fao_area_file_path_extension == "Rdata") {
+    } else if (fao_area_file_path_extension %in% c("Rdata",
+                                                   "RData")) {
       fao_area <- get(x = load(file = fao_area_file_path))
       if (paste(class(fao_area),
                 collapse = " ") != "sf tbl_df tbl data.frame") {
@@ -169,7 +170,8 @@ marine_area_overlay <- function(data,
       if (! all(sf::st_is_valid(ices_area))) {
         ices_area <- sf::st_make_valid(ices_area)
       }
-    } else if (ices_area_file_path_extension == "Rdata") {
+    } else if (ices_area_file_path_extension %in% c("Rdata",
+                                                    "RData")) {
       ices_area <- get(x = load(file = ices_area_file_path))
       if (paste(class(ices_area),
                 collapse = " ") != "sf tbl_df tbl data.frame") {
