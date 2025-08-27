@@ -15,17 +15,22 @@ data_extraction(
 )
 }
 \arguments{
-\item{type}{{\link[base]{character}} expected. Mandatory. Type of process for data extration. You can choose between "csv_txt" or "database".}
+\item{type}{{\link[base]{character}} expected. Mandatory. Type of process for data extraction. You can choose between "csv_txt" or "database".}
 
 \item{file_path}{{\link[base]{character}} expected. Mandatory. File path of the csv, txt or sql file.}
 
-\item{database_connection}{{\link[base]{list}} expected. Mandatory for type "sql". By default NULL. Output list of furdeb connection functions to one or more databases (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).}
+\item{database_connection}{{\link[base]{list}} expected. Mandatory for type "sql". By default NULL.
+Output list of furdeb connection functions to one or more databases (like {\link[furdeb]{access_dbconnection}} or {\link[furdeb]{postgresql_dbconnection}}).}
 
-\item{anchor}{{\link[base]{list}} expected. Optional for type "sql". By default NULL. List of values to interpolate in a SQL string query. Each list element have to follow this format: name_anchor = values. Be aware that the values typing format influence the writing of the sql in the query. For example, an integer or numeric value doesn't have any quote, rather than a date or string value.}
+\item{anchor}{{\link[base]{list}} expected. Optional for type "sql". By default NULL. List of values to interpolate in a SQL string query.
+Each list element have to follow this format: \code{anchor=list(name_arg1 = value(s), names_arg2=value(s),...)}.
+Be aware that the values typing format influence the writing of the sql in the query.
+For example, an integer or numeric value doesn't have any quote, rather than a date or string value.}
 
 \item{column_name}{{\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column name(s).}
 
-\item{column_type}{{\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column type(s). You can use the same format that the argument "col_types" of the function {\link[readr]{read_delim}}.}
+\item{column_type}{{\link[base]{character}} expected. Optional for type csv_txt. By default NULL. Column type(s).
+You can use the same format that the argument "col_types" of the function {\link[readr]{read_delim}}.}
 
 \item{export_path_directory}{{\link[base]{character}} expected. Optional. By default NULL. Directory path associated for the export (in csv).}
 }

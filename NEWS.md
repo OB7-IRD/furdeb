@@ -1,4 +1,4 @@
-# furdeb 1.0.1- 2025.01.21
+# furdeb 1.0.1 - 2025.01.21
 
 ## Added
 * Add connection to two or more databases in [`data_extraction()`](https://ob7-ird.github.io/furdeb/reference/data_extraction.html) for SQL.
