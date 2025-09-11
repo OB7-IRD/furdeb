@@ -1,3 +1,9 @@
+# furdeb 1.0.2 - 2025.09.11
+
+## Added
+
+* Add the feature to use ".Rdata" or ".RData" extensions in the [`furdeb::marine_area_overlay()`](https://ob7-ird.github.io/furdeb/reference/marine_area_overlay.html) function.
+
 # furdeb 1.0.1 - 2025.01.21
 
 ## Added
